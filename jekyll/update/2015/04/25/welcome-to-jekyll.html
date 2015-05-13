@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Jumly integration</title>
-  <meta name="description" content="Attempting jumly.js integration into jekyll.
-">
+  <title>The first try of jumly integration</title>
+  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/">
+  <link rel="canonical" href="https://cat73220.github.io/jekyll/update/2015/04/25/welcome-to-jekyll.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -60,63 +59,80 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">The first try of jumly integration</h1>
+    <p class="post-meta">Apr 25, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">May 13, 2015</span>
+  <article class="post-content">
+    <p>You’ll find this post in your <code>_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code>jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
 
-        <h2>
-          <a class="post-link" href="/2015/05/13/mermaid-integration.html">Mermaid Integration</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 13, 2015</span>
+<p>To add new posts, simply add a file in the <code>_posts</code> directory that follows the convention <code>YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
 
-        <h2>
-          <a class="post-link" href="/2015/05/13/mermaid-gantt.html">Mermaid Gantt</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 11, 2015</span>
+<p>Jekyll also offers powerful support for code snippets:</p>
 
-        <h2>
-          <a class="post-link" href="/learning/2015/05/11/liquid.html">Liquidの探求</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 9, 2015</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">&quot;Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">&#39;Tom&#39;</span><span class="p">)</span>
+<span class="c1">#=&gt; prints &#39;Hi, Tom&#39; to STDOUT.</span></code></pre></div>
 
-        <h2>
-          <a class="post-link" href="/learning/2015/05/09/efforts_understanding_post_layout.html">Efforts to understand the layout of POST</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 8, 2015</span>
+<hr />
 
-        <h2>
-          <a class="post-link" href="/learning/2015/05/08/pics_layout_in_row.html">静止画を横n段組する例</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Apr 25, 2015</span>
+<h2 id="jumly-test">jumly test</h2>
+<div class="post-col-split2">
+	<script type="text/jumly+sequence">
+		@found "You", ->
+			@message "Think", ->
+				@message "Write your idea", "JUMLY", ->
+					@ref "Just created"
+					@message "Come", ->
+						@create "Diagram", ->
+							@message "Made","JUMLY"
+							@ref "...tear down"
+						@message "Made 'Diagram'", "You"
+						@note "...tear down"
+					@note "...tear down"
+				@note "...tear down"
+	</script>
+</div>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2015/04/25/welcome-to-jekyll.html">The first try of jumly integration</a>
-        </h2>
-      </li>
-    
-  </ul>
+<div class="post-col-split2">
+	<script type="text/jumly+sequence">
+		@found "You", ->
+			@alt
+				"[found]": ->
+					@loop ->
+						@message "request", "HTTP Server"
+						@note "NOTE: THis donesn't make sense :) just an example"
+				"[missing]": ->
+					@message "new", "HTTP Session"
+			@ref "respond resource"
+	</script>
+</div>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<div style="clear:both;"></div>
+
+<div class="post-col-split2">
+	<script type="text/jumly+sequence">
+		@actor "User" : -> @view "Browser"
+		@view "Browser" : -> @controller "Server"
+		@controller "Server" : -> @entity "Database"
+	</script>
+</div>
+
+<div class="post-col-split2">
+  Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll’s dedicated Help repository][jekyll-help].
+</div>
+
+<div style="clear:both;"></div>
+
+<p>Check out the <a href="http://jekyllrb.com">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://github.com/jekyll/jekyll-help">Jekyll’s dedicated Help repository</a>.</p>
+
+
+  </article>
 
 </div>
 
