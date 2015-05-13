@@ -1,0 +1,18 @@
+# Site settings
+title: Jumly integration
+email: nabe@logvox.jp
+description: > # this means to ignore newlines until "baseurl:"
+  Attempting jumly.js integration into jekyll.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "https://cat73220.github.io" # the base hostname & protocol for your site
+twitter_username: abekiyo
+github_username:  cat73220
+
+# Gems
+gems: [jekyll-mermaid]
+
+# Build settings
+markdown: kramdown
+
+mermaid:
+  src: '/plugins/mermaid.full.js'
