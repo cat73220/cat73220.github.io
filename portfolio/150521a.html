@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Protfolios 2015a</title>
+    <meta name="description" content="Attempting jumly.js integration into jekyll.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://cat73220.github.io/portfolio/150521a.html">
+    <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
+
+    <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
+    <script src='//coffeescript.org/extras/coffee-script.js'></script>
+    <script src='//jumly.tmtk.net/public/jumly.min.js'></script>
+
+  </head>
+
+  <body>
+
+    <header class="site-header">
+
+      <div class="wrapper">
+
+	<a class="site-title" href="/">Home</a>
+
+	<nav class="site-nav">
+	  <a href="#" class="menu-icon">
+            <svg viewBox="0 0 18 15">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+	  </a>
+
+	  <div class="trigger">
+            
+            
+            <a class="page-link" href="/portfolio/150521a.html">Protfolios 2015a</a>
+            
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+	  </div>
+	</nav>
+
+      </div>
+
+    </header>
+
+    <div class="page-content">
+      <div class="wrapper">
+
+	<div class="post">
+
+	  <article class="post-content">
+	    <h3 id="protfolios-2015a">Protfolios 2015a</h3>
+
+<hr />
+
+<h4 id="android-porting">Android Porting</h4>
+<p><img src="/images/android_porting.png" alt="" /></p>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>Ported Android 2.2 on to FMSL(Fujitsu Micro Semiconductor Limited) internal development board for evaluating their ARM Cortex-A9(Dual Core) SoC.</dd>
+  <dd>The touchscreen(Resistive) was choosed by me and baught it from Aitendo, Akihaba. And, write the device driver from scratch fit into Android input middle ware. It was painfully slow becasue it uses UART for the I/F.</dd>
+  <dd>The ARM CA9 is Dual Core but Android uses the single core. The other core is used uiTron as a camera driver. Those OSes communicate with the custome IPC which I designed. This is also painfully make Android slow. Android has to use least two cores.</dd>
+  <dd>The IPC uses two methods which were memory mapping for the camera frame data and issuing command and reciving the response by the mail box IP the SoC already had.</dd>
+  <dd>This project was done at aLab inc Japan as full time contractee.</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>800MHz CPU Clock, 512K DDRAM, 256MB FlashROM</li>
+  <li>Android input middle ware</li>
+  <li>custome IPC between uiTron and linux</li>
+  <li>Linux v3.0</li>
+  <li>micro iTron(proprietry iTron)</li>
+  <li>Android v2.2</li>
+</ul>
+
+<hr />
+
+<h4 id="musican">MusiCan</h4>
+<p><img src="/images/musican.png" alt="" /></p>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>This was made as the promotional item for selling much more their vevarages by their vending machine and used it as their company internal demonstration.</dd>
+  <dd>The idea was when consumer baught drinks by App(iPhone and Android) on vending machines they will get points and the points got limit to be able to have some thing, the vending machine electronicaly send it to this</dd>
+  <dd>This is a mp3 player so the prise of reaching the limit of points was a music into the consumers App.</dd>
+  <dd>This communicated by BLE for transmitting mp3 with App and by RFID for buying drink and getting points with vending machine.</dd>
+  <dd>This project was done at aLab inc Japan as full time contractee.</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>ARM Cortex-M3 SoC(Fujitsu FM3:MB89BF618T)</li>
+  <li>RFID transmitter/receiver
+    <ul>
+      <li>JR Suica or Eddy capablity</li>
+    </ul>
+  </li>
+  <li>BLE as Bluetooth Low Enagy with MFi crypting chip
+    <ul>
+      <li>Got MFi certificate as experimentation</li>
+      <li>Apple Protcol on BLE</li>
+    </ul>
+  </li>
+  <li>MP3 Player</li>
+</ul>
+
+<hr />
+
+<h4 id="understanding-android-accessory-development-kit">Understanding Android Accessory Development Kit</h4>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>Just intrested in it because I have few Android smart phone they alread ROM updated by CyanongeMod and these H/W looks like to have this capability.</dd>
+  <dd>The one of hardware was the old HTC03A which had no lack to work this after my research and try because of the USB I/F.</dd>
+  <dd>The other one of hardware was HTC Aria S31HT which works well as I expected and succeeded.</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>HTC03A(Failed)</li>
+  <li>HTC Aria S32HT(Succeeded)</li>
+  <li>CyanogenMod 7.10-RC1</li>
+  <li>Basic Accessory Demo for PIC24FJ64GB002</li>
+  <li>MPLAB</li>
+  <li>PICkit3</li>
+</ul>
+
+<hr />
+
+<h4 id="papipo">PaPiPo</h4>
+<p><img src="/images/papipo.jpg" alt="" /></p>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>Cellular-phone promoted and sold by Bandai Company as a toy phone and used public PHS network and functioned as actual phone.</dd>
+  <dd>Used OOVM as OS made <a href="http://en.wikipedia.org/wiki/Lars_Bak_%28computer_programmer%29">Lars Bak</a>, Denmark. Smalltalk language was used for system language on OOVM.</dd>
+  <dd>I believe this was the first and only device in the world used OOVM in public</dd>
+  <dd>This is the one of my favorite product ever I was involved developing mainly.</dd>
+  <dd>I developed the most of periperal device drivers on OOVM, graphics, setting UI/UX logics and booting OOVM as OS.</dd>
+  <dd>The hardware was designed and coding the ARM native device drivers with Cs company Japan.</dd>
+  <dd>The apps such as menu system, games were written in smalltalk</dd>
+  <dd>This project was done at eFlow inc Japan as employee.</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>ARM7TDMI</li>
+  <li>ARM SDT(old C Compiler, ARM Assmbler and linker set)</li>
+  <li>PHS-SIM by <a href="http://en.wikipedia.org/wiki/Willcom">willcom network</a></li>
+  <li>smalltalk</li>
+  <li>C++ was used for programming OOVM itself</li>
+</ul>
+
+<hr />
+
+<h4 id="a-badge-for-larning-4-bits-binary">a badge for larning 4 bits binary</h4>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>Understanding 4 bits binary be able to indicate 0 to 15 in decimal</dd>
+  <dd>Confirming soldering technique for my self</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>a 16 notch dial</li>
+  <li>4 red leds</li>
+  <li>a pin for it as badge</li>
+</ul>
+
+<hr />
+
+<h4 id="rederwriter-for-mk48t02">Reder/writer for MK48T02</h4>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>Hacking H/W tool for MK48T02 or DS1642</dd>
+  <dd>These ICs were battery backed up RTC and SRAM</dd>
+  <dd>For retrieving and updating the ethernet MAC address of SPARKstation of SUN Micro</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>z80 SoC(AKI80)</li>
+  <li>HEX Number keypad with extra 9 keys for functions</li>
+  <li>12seg LEDs</li>
+  <li>zero-pressure socket</li>
+  <li>Customized enclosure from an Akihabara case shop</li>
+  <li>remote controll by UART(RS232C) from PC</li>
+  <li>monitor program
+    <ul>
+      <li>memory dump/modify</li>
+      <li>load/save a program</li>
+      <li>read/write an IO</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h4 id="understanding-timertic-controll">Understanding timertic controll</h4>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>Type keyboard and simultainuously generate a voice the typed key and display on the 12seg LED</dd>
+  <dd>Understanding timertic ISR</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>z80 SoC(AKI80)</li>
+  <li>QUERTY matrix keyboard from Akihabara junk yard</li>
+  <li>12 columns 12seg. LED as display</li>
+  <li>TI Voice speech board</li>
+  <li>suceeded
+    <ul>
+      <li>Show once it to a person who run his own company, but not attracted</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h4 id="keyboard-converter-pcat-keyboard-on-nec-pc98-series">Keyboard converter PC/AT keyboard on NEC PC98 series</h4>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>Hacking keyboard signal and protocol both of them</dd>
+  <dd>Attempting sel at Akihabara</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>z80 SoC(AKI80)</li>
+  <li>bit cranching for analyzing and simulating the keyboard protols and signals both of them</li>
+  <li>z80 dev-env on System 7</li>
+  <li>partially suceeded but problems were remained. suspended</li>
+</ul>
+
+<hr />
+
+<h4 id="z80-development-environment-on-system-7">z80 development environment on System 7</h4>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>It was worked on Macintosh LC with System 7</dd>
+  <dd>ZASM as the assembler. ZASM was my best freind of engineer made for MS-DOS. I ported ZASM from MS-DOS to System 7</dd>
+  <dd>Includes the hand-made z80 monitor program</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>Macintosh LC with System 7</li>
+  <li>3 or 4 the big encyclopedia thickness reference books(Apple company)</li>
+  <li>the SDK</li>
+  <li>Apple C language</li>
+  <li>my z80 monitor program
+    <ul>
+      <li>disassembler</li>
+      <li>memory dump/modify</li>
+      <li>load/save a program</li>
+      <li>read/write an IO</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h4 id="romulator-adapter">ROMulator adapter</h4>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>It was used either in jobs and hobby</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>z80 + ROMulater board</li>
+  <li>in-circut emulator like device</li>
+  <li>it added on ROMulator with z80 and with wire for z80 socket</li>
+  <li>ROMulator eraser</li>
+  <li>z80 reset circuit</li>
+  <li>Small Monitor program was available</li>
+</ul>
+
+<hr />
+
+<h4 id="cpm-one-board-computer">CP/M one board computer</h4>
+
+<dl>
+  <dt><strong>memo</strong></dt>
+  <dd>Unfinished</dd>
+</dl>
+
+<p><strong>feature</strong></p>
+
+<ul>
+  <li>the project for graduating the high-school</li>
+  <li>z80(4MHz), 64Kbytes DRAM, DRAM Circuit, 12bits GPIO(8255), 1 UART(8215), 1 FDC(upd765), 1 VDC</li>
+</ul>
+
+
+	  </article>
+
+	</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+      <div class="wrapper">
+
+	<!-- h2 class="footer-heading">Portfolio</h2 -->
+
+	<div class="footer-col-wrapper">
+	  <div class="footer-col  footer-col-1">
+            <ul class="contact-list">
+              <li><a href="mailto:nabe@logvox.jp">nabe@logvox.jp</a></li>
+            </ul>
+	  </div>
+
+	  <div class="footer-col  footer-col-2">
+            <ul class="social-media-list">
+              
+              <li>
+		<a href="https://github.com/cat73220">
+		  <span class="icon  icon--github">
+                    <svg viewBox="0 0 16 16">
+                      <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                    </svg>
+		  </span>
+
+		  <span class="username">cat73220</span>
+		</a>
+              </li>
+              
+
+              
+              <li>
+		<a href="https://twitter.com/abekiyo">
+		  <span class="icon  icon--twitter">
+                    <svg viewBox="0 0 16 16">
+                      <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+					      c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                    </svg>
+		  </span>
+
+		  <span class="username">abekiyo</span>
+		</a>
+              </li>
+              
+            </ul>
+	  </div>
+
+	  <div class="footer-col  footer-col-3">
+            <p class="text"></p>
+	  </div>
+	</div>
+
+      </div>
+
+    </footer>
+
+  </body>
+
+</html>
