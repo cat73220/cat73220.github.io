@@ -6,8 +6,8 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 May 2015 16:12:25 +0900</pubDate>
-    <lastBuildDate>Thu, 21 May 2015 16:12:25 +0900</lastBuildDate>
+    <pubDate>Thu, 21 May 2015 16:25:05 +0900</pubDate>
+    <lastBuildDate>Thu, 21 May 2015 16:25:05 +0900</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -125,6 +125,9 @@
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/android_porting_2.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
@@ -248,7 +251,7 @@ gantt
 
 &lt;p&gt;Update = 2015-05-11 21:00:00 +0900&lt;/p&gt;
 
-&lt;p&gt;now = 2015-May-21 16:12:26&lt;/p&gt;
+&lt;p&gt;now = 2015-May-21 16:25:05&lt;/p&gt;
 
 &lt;p&gt;comment = what is  &lt;code&gt;comment&lt;/code&gt; ?&lt;/p&gt;
 
