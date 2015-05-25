@@ -6,9 +6,63 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 May 2015 16:56:19 +0900</pubDate>
-    <lastBuildDate>Thu, 21 May 2015 16:56:19 +0900</lastBuildDate>
+    <pubDate>Mon, 25 May 2015 10:44:13 +0900</pubDate>
+    <lastBuildDate>Mon, 25 May 2015 10:44:13 +0900</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Dot Emacs</title>
+        <description>&lt;h2 id=&quot;emacs&quot;&gt;.emacs&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(add-to-list &#39;load-path &quot;/usr/share/emacs/site-lisp/global&quot;)
+(add-to-list &#39;load-path &quot;~/.emacs.d/elisp&quot;)
+(autoload &#39;gtags-mode &quot;gtags&quot; &quot;&quot; t)
+(require &#39;gtags nil t)
+; (require &#39;migemo nil t)
+
+(when (require &#39;package)
+  (package-initialize)
+  (add-to-list &#39;package-archives &#39;(&quot;melpa&quot; . &quot;http://melpa.milkbox.net/packages/&quot;) t)
+  (add-to-list &#39;package-archives &#39;(&quot;marmalade&quot; . &quot;http://marmalade-repo.org/packages/&quot;) t)
+)
+
+(require &#39;e2wm)
+
+(require &#39;xcscope)
+(cscope-setup)
+(autoload &#39;markdonw-mode &quot;markdown-mode.el&quot; &quot;Major mode for editting Markdown files&quot; t)
+(setq auto-mode-alist (cons &#39;(&quot;\\.markdown&quot; . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist (cons &#39;(&quot;\\.md&quot; . markdown-mode) auto-mode-alist))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won&#39;t work right.
+ &#39;(dired-recursive-copies (quote always))
+ &#39;(dired-recursive-deletes (quote always))
+ &#39;(markdown-command &quot;kramdown&quot;)
+ &#39;(tab-width 8))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won&#39;t work right.
+ &#39;(default ((t (:family &quot;Takaoゴシック&quot; :foundry &quot;unknown&quot; :slant normal :weight normal :height 98 :width normal)))))
+(put &#39;narrow-to-region &#39;disabled nil)
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Mon, 25 May 2015 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/emacs/2015/05/25/dot-emacs.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/emacs/2015/05/25/dot-emacs.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>emacs</category>
+        
+      </item>
     
       <item>
         <title>Portfolio</title>
@@ -254,7 +308,7 @@ gantt
 
 &lt;p&gt;Update = 2015-05-11 21:00:00 +0900&lt;/p&gt;
 
-&lt;p&gt;now = 2015-May-21 16:56:19&lt;/p&gt;
+&lt;p&gt;now = 2015-May-25 10:44:14&lt;/p&gt;
 
 &lt;p&gt;comment = what is  &lt;code&gt;comment&lt;/code&gt; ?&lt;/p&gt;
 
@@ -365,84 +419,6 @@ gantt
         
         
         <category>learning</category>
-        
-      </item>
-    
-      <item>
-        <title>The first try of jumly integration</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
-
-&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
-
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;jumly-test&quot;&gt;jumly test&lt;/h2&gt;
-&lt;div class=&quot;post-col-split2&quot;&gt;
-	&lt;script type=&quot;text/jumly+sequence&quot;&gt;
-		@found &quot;You&quot;, -&gt;
-			@message &quot;Think&quot;, -&gt;
-				@message &quot;Write your idea&quot;, &quot;JUMLY&quot;, -&gt;
-					@ref &quot;Just created&quot;
-					@message &quot;Come&quot;, -&gt;
-						@create &quot;Diagram&quot;, -&gt;
-							@message &quot;Made&quot;,&quot;JUMLY&quot;
-							@ref &quot;...tear down&quot;
-						@message &quot;Made &#39;Diagram&#39;&quot;, &quot;You&quot;
-						@note &quot;...tear down&quot;
-					@note &quot;...tear down&quot;
-				@note &quot;...tear down&quot;
-	&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;post-col-split2&quot;&gt;
-	&lt;script type=&quot;text/jumly+sequence&quot;&gt;
-		@found &quot;You&quot;, -&gt;
-			@alt
-				&quot;[found]&quot;: -&gt;
-					@loop -&gt;
-						@message &quot;request&quot;, &quot;HTTP Server&quot;
-						@note &quot;NOTE: THis donesn&#39;t make sense :) just an example&quot;
-				&quot;[missing]&quot;: -&gt;
-					@message &quot;new&quot;, &quot;HTTP Session&quot;
-			@ref &quot;respond resource&quot;
-	&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
-
-&lt;div class=&quot;post-col-split2&quot;&gt;
-	&lt;script type=&quot;text/jumly+sequence&quot;&gt;
-		@actor &quot;User&quot; : -&gt; @view &quot;Browser&quot;
-		@view &quot;Browser&quot; : -&gt; @controller &quot;Server&quot;
-		@controller &quot;Server&quot; : -&gt; @entity &quot;Database&quot;
-	&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;post-col-split2&quot;&gt;
-  Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll’s dedicated Help repository][jekyll-help].
-&lt;/div&gt;
-
-&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 25 Apr 2015 01:02:37 +0900</pubDate>
-        <link>https://cat73220.github.io/jekyll/update/2015/04/25/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/jekyll/update/2015/04/25/welcome-to-jekyll.html</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     

@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Liquidの探求</title>
-  <meta name="description" content="Liquidの使い方あれこれ">
+  <title>Dot Emacs</title>
+  <meta name="description" content=".emacs">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html">
+  <link rel="canonical" href="https://cat73220.github.io/larning/emacs/2015/05/25/dot-emacs.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -102,32 +102,51 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Liquidの探求</h1>
-    <p class="post-meta">May 11, 2015</p>
+    <h1 class="post-title">Dot Emacs</h1>
+    <p class="post-meta">May 25, 2015</p>
   </header>
 
   <article class="post-content">
-    <h3 id="liquid">Liquidの使い方あれこれ</h3>
+    <h2 id="emacs">.emacs</h2>
 
-<p>Hello = 2015-05-11 21:00:00 +0900</p>
+<pre><code class="language-lisp">(add-to-list 'load-path "/usr/share/emacs/site-lisp/global")
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(autoload 'gtags-mode "gtags" "" t)
+(require 'gtags nil t)
+; (require 'migemo nil t)
 
-<p>Update = 2015-05-11 21:00:00 +0900</p>
+(when (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+)
 
-<p>now = 2015-May-25 10:44:14</p>
+(require 'e2wm)
 
-<p>comment = what is  <code>comment</code> ?</p>
+(require 'xcscope)
+(cscope-setup)
+(autoload 'markdonw-mode "markdown-mode.el" "Major mode for editting Markdown files" t)
+(setq auto-mode-alist (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
 
-<p>page.layout = post</p>
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(dired-recursive-copies (quote always))
+ '(dired-recursive-deletes (quote always))
+ '(markdown-command "kramdown")
+ '(tab-width 8))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Takaoゴシック" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
+(put 'narrow-to-region 'disabled nil)
 
-<p>page.categories = learninglucidgantt</p>
-
-<p>category = learning</p>
-
-<p>category = lucid</p>
-
-<p>category = gantt</p>
-
-<p>album =</p>
+</code></pre>
 
   </article>
 
