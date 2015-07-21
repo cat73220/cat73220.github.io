@@ -166,9 +166,13 @@
         <title>Thumbnail Test</title>
         <description>&lt;div class=&quot;image-set&quot;&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/papipo.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
+<<<<<<< HEAD
 &lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
@@ -176,33 +180,39 @@
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_1.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_2.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/musican1.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
+=======
+&lt;img src=&quot;/images/IMAG0033-ADK.jpg&quot; class=&quot;image&quot; /&gt;
+>>>>>>> 719f44a5735a1ab8d6e5a641a1914db2f98ab7f8
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/musican.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/android_porting_1.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/android_porting_2.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/musican1.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/IMG_15062014_225103.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -314,7 +324,11 @@ gantt
 
 &lt;p&gt;Update = 2015-05-11 21:00:00 +0900&lt;/p&gt;
 
+<<<<<<< HEAD
 &lt;p&gt;now = 2015-Jul-21 12:07:59&lt;/p&gt;
+=======
+&lt;p&gt;now = 2015-Jul-04 14:46:37&lt;/p&gt;
+>>>>>>> 719f44a5735a1ab8d6e5a641a1914db2f98ab7f8
 
 &lt;p&gt;comment = what is  &lt;code&gt;comment&lt;/code&gt; ?&lt;/p&gt;
 
@@ -328,7 +342,7 @@ gantt
 
 &lt;p&gt;category = gantt&lt;/p&gt;
 
-&lt;p&gt;album =&lt;/p&gt;
+&lt;p&gt;album = &lt;/p&gt;
 </description>
         <pubDate>Mon, 11 May 2015 21:00:00 +0900</pubDate>
         <link>https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html</link>
