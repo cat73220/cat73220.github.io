@@ -11,10 +11,11 @@
 
 <script>
 $(function() {
-   $("dchan").mousemove( function(ev) {
-   var str = "X:"+ev.pageX+" Y:"+ev.pageY;
-   $("p").text(str);
-})})
+   $("#dchan").mousemove( function(ev) {
+      var str = "X:"+ev.pageX+" Y:"+ev.pageY;
+      $("#pchan").text(str);
+   })
+})
 </script>
 </head>
 <body>
