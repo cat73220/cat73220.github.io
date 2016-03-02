@@ -21,7 +21,7 @@ $('#dchan').bind({
 
         // isTouch = "touch" === event.type.substring(0,4);
 
-        eventType = e.type;
+        eventType = e.type.substring(0,4);
          
         // 開始位置 X,Y 座標を覚えておく
         // （touchmove イベントを通らず終了したときのために必ず覚えておくこと）
@@ -35,7 +35,7 @@ $('#dchan').bind({
         // タッチ処理を開始したフラグをたてる
         this.touched = true;
 
-       $("#pchan").text(eventType.substring(0,4)+" Start X:"+this.pageX+" Y:"+this.pageY);
+       $("#pchan").text(eventType+" Start X:"+this.pageX+" Y:"+this.pageY);
     },
     /* タッチしながら移動、マウスのドラッグ */
     'touchmove mousemove': function(e) {
