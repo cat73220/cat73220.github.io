@@ -15,9 +15,13 @@
 <!-- Include the jQuery Mobile library -->
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
+<script>
+($p).on("vmousemove", function(ev) {
+  ($this).hide();
+})
+</script>
 </head>
 <body>
-<label for="points">Points:</label>
-<input type="range" name="points" id="points" value="50" min="0" max="100">
+
 </body>
 </html>
