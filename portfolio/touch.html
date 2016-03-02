@@ -8,6 +8,7 @@
 /* タッチできる環境なら true、そうでないなら false 。
    ここで先に判別しておきます。 */
 var isTouch = ('ontouchstart' in window);
+var eventType = "";
 
 $(function() { 
 /* hoge のイベントを jQuery.bind で捕獲します。 */
@@ -17,6 +18,8 @@ $('#dchan').bind({
     'touchstart mousedown': function(e) {
         // ページが動いたり、反応を止める
         e.preventDefault();
+
+        eventType = e.type;
          
         // 開始位置 X,Y 座標を覚えておく
         // （touchmove イベントを通らず終了したときのために必ず覚えておくこと）
@@ -30,7 +33,7 @@ $('#dchan').bind({
         // タッチ処理を開始したフラグをたてる
         this.touched = true;
 
-       $("#pchan").text(e.type+" Start X:"+this.pageX+" Y:"+this.pageY);
+       $("#pchan").text(eventType+" Start X:"+this.pageX+" Y:"+this.pageY);
     },
     /* タッチしながら移動、マウスのドラッグ */
     'touchmove mousemove': function(e) {
@@ -55,7 +58,7 @@ $('#dchan').bind({
         this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
         this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
 
-       $("#pchan").text("Move X:"+this.pageX+" Y:"+this.pageY);
+       $("#pchan").text(eventType+" Move X:"+this.pageX+" Y:"+this.pageY);
     },
     /* タッチの終了、マウスのドラッグの終了 */
     'touchend mouseup': function(e) {
@@ -69,7 +72,8 @@ $('#dchan').bind({
         // 必要なら以下で最終の hoge の位置を取得し何かに使う
         // this.pageX
         // this.pageY
-       $("#pchan").text("End X:"+this.pageX+" Y:"+this.pageY);
+       $("#pchan").text(eventType+" End X:"+this.pageX+" Y:"+this.pageY);
+       eventType = "";
     }
 });
 
