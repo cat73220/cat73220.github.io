@@ -9,7 +9,6 @@
    ここで先に判別しておきます。 */
 var isTouch = ('ontouchstart' in window);
  
-$(function() {
 /* hoge のイベントを jQuery.bind で捕獲します。 */
 $('#dchan').bind({
                  
@@ -30,7 +29,7 @@ $('#dchan').bind({
         // タッチ処理を開始したフラグをたてる
         this.touched = true;
 
-       $("#pchan").text("Start X:"+this.pageX+" Y:"this.pageY);
+       $("#pchan").text("Start X:"+this.pageX+" Y:"+this.pageY);
     },
     /* タッチしながら移動、マウスのドラッグ */
     'touchmove mousemove': function(e) {
@@ -55,7 +54,7 @@ $('#dchan').bind({
         this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
         this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
 
-       $("#pchan").text("Move X:"+this.pageX+" Y:"this.pageY);
+       $("#pchan").text("Move X:"+this.pageX+" Y:"+this.pageY);
     },
     /* タッチの終了、マウスのドラッグの終了 */
     'touchend mouseup': function(e) {
@@ -69,10 +68,8 @@ $('#dchan').bind({
         // 必要なら以下で最終の hoge の位置を取得し何かに使う
         // this.pageX
         // this.pageY
-       $("#pchan").text("End X:"+this.pageX+" Y:"this.pageY);
+       $("#pchan").text("End X:"+this.pageX+" Y:"+this.pageY);
     }
-});
-
 });
 </script>
 </head>
