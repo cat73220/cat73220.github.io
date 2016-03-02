@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Touch test - jQuery </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+/* タッチできる環境なら true、そうでないなら false 。
+   ここで先に判別しておきます。 */
+var isTouch = ('ontouchstart' in window);
+ 
+/* hoge のイベントを jQuery.bind で捕獲します。 */
+$('#dchan').bind({
+                 
+    /* タッチの開始、マウスボタンを押したとき */
+    'touchstart mousedown': function(e) {
+        // ページが動いたり、反応を止める
+        e.preventDefault();
+         
+        // 開始位置 X,Y 座標を覚えておく
+        // （touchmove イベントを通らず終了したときのために必ず覚えておくこと）
+        this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
+        this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
+ 
+        // 現在の hoge の場所を覚えておく
+        //this.left = $(this).position().left;
+        //this.top = $(this).position().top;
+         
+        // タッチ処理を開始したフラグをたてる
+        this.touched = true;
+
+       $("#pchan").text("Start X:"+this.pageX+" Y:"this.pageY);
+    },
+    /* タッチしながら移動、マウスのドラッグ */
+    'touchmove mousemove': function(e) {
+         
+        // 開始していない場合は動かないようにする
+        // 過剰動作の防止
+        if (!this.touched) {
+            return;
+        }
+         
+        // ページが動くのを止める
+        e.preventDefault();
+         
+        // 移動先の hoge の位置を取得する
+        //this.left = this.left - (this.pageX - (isTouch ? event.changedTouches[0].pageX : e.pageX) );
+        //this.top = this.top - (this.pageY - (isTouch ? event.changedTouches[0].pageY : e.pageY) );
+ 
+        // hoge を移動させる
+        //$(this).css({left:this.left, top:this.top});
+         
+        // 位置 X,Y 座標を覚えておく
+        this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
+        this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
+
+       $("#pchan").text("Move X:"+this.pageX+" Y:"this.pageY);
+    },
+    /* タッチの終了、マウスのドラッグの終了 */
+    'touchend mouseup': function(e) {
+        if (!this.touched) {
+            return;
+        }
+         
+        // タッチ処理は終了したため、フラグをたたむ
+        this.touched = false;
+         
+        // 必要なら以下で最終の hoge の位置を取得し何かに使う
+        // this.pageX
+        // this.pageY
+       $("#pchan").text("End X:"+this.pageX+" Y:"this.pageY);
+    }
+});
+</script>
+</head>
+<body>
+<div id="dchan" style="height:200px;background-color:#707"></div>
+<p id="pchan">hello</p>
+</body>
+</html>
