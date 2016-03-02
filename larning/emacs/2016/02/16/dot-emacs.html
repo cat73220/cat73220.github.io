@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Thumbnail Test</title>
-  <meta name="description" content="">
+  <title>Dot Emacs</title>
+  <meta name="description" content=".emacs">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/2015/05/15/thumbnail-test.html">
+  <link rel="canonical" href="https://cat73220.github.io/larning/emacs/2016/02/16/dot-emacs.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -102,53 +102,58 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Thumbnail Test</h1>
-    <p class="post-meta">May 15, 2015</p>
+    <h1 class="post-title">Dot Emacs</h1>
+    <p class="post-meta">Feb 16, 2016</p>
   </header>
 
   <article class="post-content">
-    <div class="image-set">
-<div class="post-col-split4">
-<img src="/images/IMAG0031-ADK.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/papipo.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMAG0033-ADK.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/musican.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_1.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_225132-30percent.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_224847-40percent.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_2.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/musican1.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_3.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_225103.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/picdemo_adk.png" class="image" />
-</div>
-</div>
+    <h2 id="emacs">.emacs</h2>
 
+<pre><code class="language-lisp">(package-initialize)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(require 'use-package)
+(use-package markdown-mode
+	     :mode (("\\.markdown\\'" . markdown-mode)
+		    ("\\.md\\'"       . markdown-mode))
+)
+(require 'whitespace)
+(add-hook 'c-mode-hook
+	  (lambda ()
+	    (whitespace-mode 1)))
+
+(require 'ispell)
+(add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
+                                              "[[:alpha:]]"
+                                              "[^[:alpha:]]"
+                                              "[']"
+                                              t
+                                              ("-d" "en_US")
+                                              nil
+                                              iso-8859-1))
+(setq ispell-program-name "hunspell"          ; Use hunspell to correct mistakes
+      ispell-dictionary   "english-hunspell") ; Default dictionary to use
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(display-time-24hr-format t)
+ '(display-time-day-and-date nil)
+ '(display-time-format "%G年%b%d日(%a) %H:%M")
+ '(display-time-mode t)
+ '(global-whitespace-mode nil)
+ '(menu-bar-mode nil)
+ '(scroll-bar-mode nil)
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+</code></pre>
 
   </article>
 

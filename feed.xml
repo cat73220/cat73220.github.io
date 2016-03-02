@@ -6,9 +6,183 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Sep 2015 17:41:46 +0900</pubDate>
-    <lastBuildDate>Wed, 09 Sep 2015 17:41:46 +0900</lastBuildDate>
+    <pubDate>Wed, 02 Mar 2016 12:18:40 +0900</pubDate>
+    <lastBuildDate>Wed, 02 Mar 2016 12:18:40 +0900</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>SSH github access</title>
+        <description>&lt;h3 id=&quot;githubcompushpull&quot;&gt;github.comにユーザ名／パスワードを入力せずにpush/pullする&lt;/h3&gt;
+
+&lt;h4 id=&quot;pc&quot;&gt;自分のPCの準備&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code&gt;ssh_keygen&lt;/code&gt;で&lt;code&gt;id_rsa/id_rsa.pub&lt;/code&gt;を作成する
+    &lt;ul&gt;
+      &lt;li&gt;後の手動入力をなくすためにパスフレーズは何も入力せずただ&lt;enter&gt;を入力する&lt;/enter&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;&amp;lt;home&amp;gt;/.ssh&lt;/code&gt;に生成される&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&amp;lt;home&amp;gt;/.ssh&lt;/code&gt;で&lt;code&gt;ssh_add id_rsa&lt;/code&gt;を実行して&lt;code&gt;&amp;lt;home&amp;gt;/.ssh/known_hosts&lt;/code&gt;を更新する&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&amp;lt;home&amp;gt;/.ssh/id_rsa.pub&lt;/code&gt;をクリップボードにコピーしておく&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;githubcom&quot;&gt;github.comの自分のアカウントの準備&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;github.comの自身のフロントページ右上端の’Edit Profile’を選んで’Public Profile’ページに移動する&lt;/li&gt;
+  &lt;li&gt;‘Public Profile’ページの左側ペーンの’SSH Keys’を選んで’SSH Keys’ページに移動する&lt;/li&gt;
+  &lt;li&gt;‘SSH Keys’ページ右上端の’New SSH Key’を選んでこのページをSSH鍵追加状態にする&lt;/li&gt;
+  &lt;li&gt;‘Title’に任意の文言を入力する。
+    &lt;ul&gt;
+      &lt;li&gt;後でこの鍵がどこのどのPCで生成したか特定できるようにしておくと良い&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;先の’自分のPCの準備’でクリップボードにコピーした&lt;home&gt;/.ssh/id_rsa.pubを&#39;Key&#39;欄にペーストする&lt;/home&gt;&lt;/li&gt;
+  &lt;li&gt;‘Add SSH Key’ボタンを押す&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;確認&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;作業PCのshell端末で&lt;code&gt;ssh git@github.com&lt;/code&gt;を実行し下記のメッセージ①を得る
+    &lt;ul&gt;
+      &lt;li&gt;WarningとPTYで始まる行は無視して’Hi cat73220!..’からの行に着目する。ログイン承認できたけどshellアクセスを提供していません。切断します。ということ。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;クローンしたローカルリポジトリのremoteを変更する
+    &lt;ul&gt;
+      &lt;li&gt;git remote set-url origin git@github.com:cat73220/cat73220.github.io.git&lt;/li&gt;
+      &lt;li&gt;git remote -v&lt;/li&gt;
+      &lt;li&gt;下の&lt;code&gt;git remote -vの結果&lt;/code&gt;が得られる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;ファイルをどれか修正・コミットして’git push origin master’して、ユーザー／パスワードが尋ねられないことを確認する&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;メッセージ①&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;  Warning: Permanently added the RSA host key for IP address &#39;192.30.252.128&#39; to the list of known hosts.
+  PTY allocation request failed on channel 0
+  Hi cat73220! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+  Connection to github.com closed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;git remote -vの結果&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;origin	git@github.com:cat73220/cat73220.github.io.git (fetch)
+origin	git@github.com:cat73220/cat73220.github.io.git (push)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Wed, 02 Mar 2016 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/github.com/2016/03/02/ssh_github_access.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/github.com/2016/03/02/ssh_github_access.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>github.com</category>
+        
+      </item>
+    
+      <item>
+        <title>Dot Emacs</title>
+        <description>&lt;h2 id=&quot;emacs&quot;&gt;.emacs&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(package-initialize)
+(add-to-list &#39;package-archives &#39;(&quot;marmalade&quot; . &quot;http://marmalade-repo.org/packages/&quot;))
+(add-to-list &#39;package-archives &#39;(&quot;melpa&quot; . &quot;http://melpa.milkbox.net/packages/&quot;) t)
+(require &#39;use-package)
+(use-package markdown-mode
+	     :mode ((&quot;\\.markdown\\&#39;&quot; . markdown-mode)
+		    (&quot;\\.md\\&#39;&quot;       . markdown-mode))
+)
+(require &#39;whitespace)
+(add-hook &#39;c-mode-hook
+	  (lambda ()
+	    (whitespace-mode 1)))
+
+(require &#39;ispell)
+(add-to-list &#39;ispell-local-dictionary-alist &#39;(&quot;english-hunspell&quot;
+                                              &quot;[[:alpha:]]&quot;
+                                              &quot;[^[:alpha:]]&quot;
+                                              &quot;[&#39;]&quot;
+                                              t
+                                              (&quot;-d&quot; &quot;en_US&quot;)
+                                              nil
+                                              iso-8859-1))
+(setq ispell-program-name &quot;hunspell&quot;          ; Use hunspell to correct mistakes
+      ispell-dictionary   &quot;english-hunspell&quot;) ; Default dictionary to use
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won&#39;t work right.
+ &#39;(display-time-24hr-format t)
+ &#39;(display-time-day-and-date nil)
+ &#39;(display-time-format &quot;%G年%b%d日(%a) %H:%M&quot;)
+ &#39;(display-time-mode t)
+ &#39;(global-whitespace-mode nil)
+ &#39;(menu-bar-mode nil)
+ &#39;(scroll-bar-mode nil)
+ &#39;(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won&#39;t work right.
+ )
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Tue, 16 Feb 2016 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/emacs/2016/02/16/dot-emacs.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/emacs/2016/02/16/dot-emacs.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>emacs</category>
+        
+      </item>
+    
+      <item>
+        <title>Report first impression</title>
+        <description>&lt;dl&gt;
+  &lt;dt&gt;Declaration&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;ul&gt;
+      &lt;li&gt;list1&lt;/li&gt;
+      &lt;li&gt;list2&lt;/li&gt;
+      &lt;li&gt;list3&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/dd&gt;
+  &lt;dt&gt;Work&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Have to be staylish and clean up&lt;/li&gt;
+      &lt;li&gt;To be DT(Device tree) device driver
+        &lt;ul&gt;
+          &lt;li&gt;to add to ‘RasPi dts file(bcm2XXX-rpi-XXX.dts) located at “arch/arm/boot/dts”’&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+</description>
+        <pubDate>Wed, 13 Jan 2016 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/learning/2016/01/13/report_first_impression.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/2016/01/13/report_first_impression.html</guid>
+        
+        
+        <category>learning</category>
+        
+      </item>
     
       <item>
         <title>Reminder for installing ruby and bundler</title>
@@ -240,31 +414,25 @@ ruby -v
         <title>Thumbnail Test</title>
         <description>&lt;div class=&quot;image-set&quot;&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/papipo.jpg&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/papipo.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/IMAG0033-ADK.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/musican.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/android_porting_1.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/musican.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/android_porting_2.png&quot; class=&quot;image&quot; /&gt;
@@ -273,10 +441,16 @@ ruby -v
 &lt;img src=&quot;/images/musican1.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -352,84 +526,6 @@ sequenceDiagram
         <link>https://cat73220.github.io/2015/05/13/mermaid-integration.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/2015/05/13/mermaid-integration.html</guid>
         
-        
-      </item>
-    
-      <item>
-        <title>Mermaid Gantt</title>
-        <description>&lt;h4 id=&quot;gantt&quot;&gt;Gantt&lt;/h4&gt;
-
-&lt;script src=&quot;/plugins/mermaid.full.js&quot;&gt;&lt;/script&gt;
-&lt;div class=&quot;mermaid&quot;&gt;
-gantt
-    title A Gantt Diagram
-
-    section Section
-	A task            :a1 , 2015-05-10 , 30d
-	B task            :after a1 , 20d
-
-    section Another
-	Task in sec       :2015-05-15 , 12d
-	another task      : 24d
-&lt;/div&gt;
-</description>
-        <pubDate>Wed, 13 May 2015 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/2015/05/13/mermaid-gantt.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/2015/05/13/mermaid-gantt.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Liquidの探求</title>
-        <description>&lt;h3 id=&quot;liquid&quot;&gt;Liquidの使い方あれこれ&lt;/h3&gt;
-
-&lt;p&gt;Hello = 2015-05-11 21:00:00 +0900&lt;/p&gt;
-
-&lt;p&gt;Update = 2015-05-11 21:00:00 +0900&lt;/p&gt;
-
-&lt;p&gt;now = 2015-Sep-09 17:41:46&lt;/p&gt;
-
-&lt;p&gt;comment = what is  &lt;code&gt;comment&lt;/code&gt; ?&lt;/p&gt;
-
-&lt;p&gt;page.layout = post&lt;/p&gt;
-
-&lt;p&gt;page.categories = learninglucidgantt&lt;/p&gt;
-
-&lt;p&gt;category = learning&lt;/p&gt;
-
-&lt;p&gt;category = lucid&lt;/p&gt;
-
-&lt;p&gt;category = gantt&lt;/p&gt;
-
-&lt;p&gt;album = &lt;/p&gt;
-</description>
-        <pubDate>Mon, 11 May 2015 21:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html</guid>
-        
-        
-        <category>learning</category>
-        
-        <category>lucid</category>
-        
-        <category>gantt</category>
-        
-      </item>
-    
-      <item>
-        <title>Efforts to understand the layout of POST</title>
-        <description>&lt;p&gt;&lt;code&gt;_posts&lt;/code&gt;ディレクトリに保存する&lt;code&gt;.markdownファイル&lt;/code&gt;冒頭の&lt;code&gt;&#39;layout: post&#39;&lt;/code&gt;は&lt;code&gt;_layouts&lt;/code&gt;ディレクトリの&lt;code&gt;post.html&lt;/code&gt;をテンプレートとすることの宣言と思う。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;_posts&lt;/code&gt;ディレクトリに&lt;code&gt;YYYY-MM-DD-title.markdown&lt;/code&gt;形式のファイル名で保存したmarkdownファイルがwebサイトに追加される。&lt;code&gt;_posts&lt;/code&gt;ディレクトリにファイルを追加したりそのディレクトリのファイルを変更すると&lt;code&gt;jekyll&lt;/code&gt;サーバーはそれらを自動検出して更新する。webブラウザでリロードすると更新結果を見ることができる。&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 09 May 2015 00:56:00 +0900</pubDate>
-        <link>https://cat73220.github.io/learning/2015/05/09/efforts_understanding_post_layout.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/2015/05/09/efforts_understanding_post_layout.html</guid>
-        
-        
-        <category>learning</category>
         
       </item>
     

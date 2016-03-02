@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Thumbnail Test</title>
-  <meta name="description" content="">
+  <title>SSH github access</title>
+  <meta name="description" content="github.comにユーザ名／パスワードを入力せずにpush/pullする">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/2015/05/15/thumbnail-test.html">
+  <link rel="canonical" href="https://cat73220.github.io/larning/github.com/2016/03/02/ssh_github_access.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -102,53 +102,76 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Thumbnail Test</h1>
-    <p class="post-meta">May 15, 2015</p>
+    <h1 class="post-title">SSH github access</h1>
+    <p class="post-meta">Mar 2, 2016</p>
   </header>
 
   <article class="post-content">
-    <div class="image-set">
-<div class="post-col-split4">
-<img src="/images/IMAG0031-ADK.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/papipo.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMAG0033-ADK.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/musican.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_1.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_225132-30percent.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_224847-40percent.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_2.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/musican1.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_3.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_225103.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/picdemo_adk.png" class="image" />
-</div>
-</div>
+    <h3 id="githubcompushpull">github.comにユーザ名／パスワードを入力せずにpush/pullする</h3>
 
+<h4 id="pc">自分のPCの準備</h4>
+
+<ol>
+  <li><code>ssh_keygen</code>で<code>id_rsa/id_rsa.pub</code>を作成する
+    <ul>
+      <li>後の手動入力をなくすためにパスフレーズは何も入力せずただ<enter>を入力する</enter></li>
+      <li><code>&lt;home&gt;/.ssh</code>に生成される</li>
+    </ul>
+  </li>
+  <li><code>&lt;home&gt;/.ssh</code>で<code>ssh_add id_rsa</code>を実行して<code>&lt;home&gt;/.ssh/known_hosts</code>を更新する</li>
+  <li><code>&lt;home&gt;/.ssh/id_rsa.pub</code>をクリップボードにコピーしておく</li>
+</ol>
+
+<h4 id="githubcom">github.comの自分のアカウントの準備</h4>
+
+<ol>
+  <li>github.comの自身のフロントページ右上端の’Edit Profile’を選んで’Public Profile’ページに移動する</li>
+  <li>‘Public Profile’ページの左側ペーンの’SSH Keys’を選んで’SSH Keys’ページに移動する</li>
+  <li>‘SSH Keys’ページ右上端の’New SSH Key’を選んでこのページをSSH鍵追加状態にする</li>
+  <li>‘Title’に任意の文言を入力する。
+    <ul>
+      <li>後でこの鍵がどこのどのPCで生成したか特定できるようにしておくと良い</li>
+    </ul>
+  </li>
+  <li>先の’自分のPCの準備’でクリップボードにコピーした<home>/.ssh/id_rsa.pubを'Key'欄にペーストする</home></li>
+  <li>‘Add SSH Key’ボタンを押す</li>
+</ol>
+
+<h4 id="section">確認</h4>
+
+<ol>
+  <li>作業PCのshell端末で<code>ssh git@github.com</code>を実行し下記のメッセージ①を得る
+    <ul>
+      <li>WarningとPTYで始まる行は無視して’Hi cat73220!..’からの行に着目する。ログイン承認できたけどshellアクセスを提供していません。切断します。ということ。</li>
+    </ul>
+  </li>
+  <li>クローンしたローカルリポジトリのremoteを変更する
+    <ul>
+      <li>git remote set-url origin git@github.com:cat73220/cat73220.github.io.git</li>
+      <li>git remote -v</li>
+      <li>下の<code>git remote -vの結果</code>が得られる</li>
+    </ul>
+  </li>
+  <li>ファイルをどれか修正・コミットして’git push origin master’して、ユーザー／パスワードが尋ねられないことを確認する</li>
+</ol>
+
+<ul>
+  <li>メッセージ①</li>
+</ul>
+
+<pre><code class="language-shell">  Warning: Permanently added the RSA host key for IP address '192.30.252.128' to the list of known hosts.
+  PTY allocation request failed on channel 0
+  Hi cat73220! You've successfully authenticated, but GitHub does not provide shell access.
+  Connection to github.com closed.
+</code></pre>
+
+<ul>
+  <li>git remote -vの結果</li>
+</ul>
+
+<pre><code class="language-shell">origin	git@github.com:cat73220/cat73220.github.io.git (fetch)
+origin	git@github.com:cat73220/cat73220.github.io.git (push)
+</code></pre>
 
   </article>
 
