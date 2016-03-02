@@ -19,6 +19,8 @@ $('#dchan').bind({
         // ページが動いたり、反応を止める
         e.preventDefault();
 
+        isTouch = "touch" === e.type.substring(0,4);
+
         eventType = e.type;
          
         // 開始位置 X,Y 座標を覚えておく
