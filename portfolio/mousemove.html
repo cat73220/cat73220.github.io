@@ -10,9 +10,13 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <script>
-$("p").mousemove( function(ev) {
-   $("p").text("X:"+ev.pageX+" Y:"+ev.pageY);
-});
+function mouseMove(ev) {
+   var str = "X:"+ev.pageX+" Y:"+ev.pageY;
+   $("p").text(str);
+}
+$(function() {
+   $("p").mousemove(mouseMove);
+})
 </script>
 </head>
 <body>
