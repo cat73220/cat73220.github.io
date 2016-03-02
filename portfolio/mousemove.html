@@ -10,12 +10,15 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <script>
+function pchanUpdate( ev ) {
+  var str = "X:"+ev.pageX+" Y:"+ev.pageY;
+  $("#pchan").text(str);
+}
+
 $(function() {
-   $("#dchan").mousemove( function(ev) {
-      var str = "X:"+ev.pageX+" Y:"+ev.pageY;
-      $("#pchan").text(str);
-   })
-})
+   $("#dchan").mousemove( pchanUpdate )
+   $("#dchan").vmousemove( pchanUpdate )
+});
 </script>
 </head>
 <body>
