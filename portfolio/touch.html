@@ -30,7 +30,7 @@ $('#dchan').bind({
         // タッチ処理を開始したフラグをたてる
         this.touched = true;
 
-       $("#pchan").text("Start X:"+this.pageX+" Y:"+this.pageY);
+       $("#pchan").text(e.type+" Start X:"+this.pageX+" Y:"+this.pageY);
     },
     /* タッチしながら移動、マウスのドラッグ */
     'touchmove mousemove': function(e) {
