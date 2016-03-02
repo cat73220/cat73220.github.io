@@ -16,9 +16,8 @@
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 <script>
-$(document).on("pagecreate", "#pageone", function() {
-  $(document).on("vmousemove", "#two", function(ev) {
-   $("one").hide();
+  $("p").on("vmousemove", , function(ev) {
+   $("span").text(ev);
   });
 });
 </script>
@@ -26,9 +25,7 @@ $(document).on("pagecreate", "#pageone", function() {
 <body>
 <div data-role="page" id="pageone">
 <p style="background-color:#555;"> hello </p>
-<button id="one">one</button>
-<button id="two">two</button>
-<button id="three">three</button>
+<span>ddd</span>
 </div>
 </body>
 </html>
