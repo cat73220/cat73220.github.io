@@ -16,8 +16,8 @@ function pchanUpdate( ev ) {
 }
 
 $(function() {
-   $("#dchan").mousemove( pchanUpdate )
-   $("#dchan").vmousemove( pchanUpdate )
+   $("#dchan").mousemove( pchanUpdate );
+   $("#dchan").on("vmousemove", pchanUpdate );
 });
 </script>
 </head>
