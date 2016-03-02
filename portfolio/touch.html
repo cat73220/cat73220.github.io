@@ -9,6 +9,7 @@
    ここで先に判別しておきます。 */
 var isTouch = ('ontouchstart' in window);
  
+$(function() {
 /* hoge のイベントを jQuery.bind で捕獲します。 */
 $('#dchan').bind({
                  
@@ -71,10 +72,12 @@ $('#dchan').bind({
        $("#pchan").text("End X:"+this.pageX+" Y:"this.pageY);
     }
 });
+
+});
 </script>
 </head>
 <body>
-<div id="dchan" style="height:200px;background-color:#707"></div>
+<div id="dchan" style="height:200px;background-color:#707;"></div>
 <p id="pchan">hello</p>
 </body>
 </html>
