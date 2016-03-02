@@ -11,6 +11,7 @@
 
 <script>
 function pchanUpdate( ev ) {
+  ev.preventDefault();
   var str = "X:"+ev.pageX+" Y:"+ev.pageY;
   $("#pchan").text(str);
 }
