@@ -6,9 +6,83 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Jul 2015 12:07:59 +0900</pubDate>
-    <lastBuildDate>Tue, 21 Jul 2015 12:07:59 +0900</lastBuildDate>
-    <generator>Jekyll v2.5.3</generator>
+    <pubDate>Wed, 09 Sep 2015 17:41:46 +0900</pubDate>
+    <lastBuildDate>Wed, 09 Sep 2015 17:41:46 +0900</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Reminder for installing ruby and bundler</title>
+        <description>&lt;p&gt;Ubuntuでsudoとapt-getを使わずに、ローカルユーザディレクトリにrubyをインストールする方法を示します。&lt;/p&gt;
+
+&lt;p&gt;rbenvというrubyシステムインストーラを使い、その後にbundlerをインストールします。&lt;/p&gt;
+
+&lt;h2 id=&quot;rbenv&quot;&gt;rbenvのインストール&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;準備&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最後の&lt;code&gt;apt-get install&lt;/code&gt;の実行前に&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dpkg -l | grep &quot;autoconf\|bison\|build-essential\|libssl-dev\|libyaml-dev\|libreadline6-dev\|zlib1g-dev\|libncurses5-dev\|libffi-dev\|libgdbm3\|libgdm-dev\|nodejs\|libsqlite3-dev&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;のように&lt;code&gt;dpkg -l | grep &quot;...&quot;&lt;/code&gt;を実行して既にインストールされているubuntuパッケージの一覧を得て、まだされていないubuntuパッケージを調べて、&lt;code&gt;sudo apt-get install -y &lt;/code&gt;にそれらのパッケージを与えて実行します。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;実行できるようにする&lt;/h3&gt;
+
+&lt;p&gt;.bashrcに下記シェルスクリプトを追加します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[[ -d ~/.rbenv  ]] &amp;amp;&amp;amp; \
+    export PATH=${HOME}/.rbenv/bin:${PATH} &amp;amp;&amp;amp; \
+	eval &quot;$(rbenv init -&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;~/.rbenv&lt;/code&gt;ディレクトリの存在確認を検査し存在した場合&lt;code&gt;PATH&lt;/code&gt;シェル環境変数に&lt;code&gt;~/.rbenv/bin&lt;/code&gt;を追加、および&lt;code&gt;rbenv init -&lt;/code&gt;を実行します。&lt;/p&gt;
+
+&lt;h3 id=&quot;ruby&quot;&gt;rubyのインストール&lt;/h3&gt;
+
+&lt;p&gt;いよいよ&lt;code&gt;rbenv&lt;/code&gt;で&lt;code&gt;ruby&lt;/code&gt;をインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rbenv install 2.2.2
+rbenv global 2.2.2
+ruby -v
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最初の&lt;code&gt;rbenv install&lt;/code&gt;によりソースコードがダウンロードされビルド、そして、インストールされます。インストール先は~/.rbenv配下のディレクトリでインストール完了時に詳細が出力されますので確認してください。尚この操作はPCの性能に左右されます。Core-i7 3960Xで3分ほどかかりました。&lt;/p&gt;
+
+&lt;p&gt;次の&lt;code&gt;rbenv global&lt;/code&gt;でインストールしてあるバージョンを選びます。つまり、複数バージョンの&lt;code&gt;ruby&lt;/code&gt;を切り替えて利用できるのです。今回は2.2.2を使いたいので&lt;code&gt;2.2.2&lt;/code&gt;を与えました。&lt;/p&gt;
+
+&lt;p&gt;最後の&lt;code&gt;ruby -v&lt;/code&gt;で実行PATH上の&lt;code&gt;ruby&lt;/code&gt;のバージョンを確認します。&lt;/p&gt;
+
+&lt;h2 id=&quot;bundler&quot;&gt;bundlerのインストール&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;ruby&lt;/code&gt;のインストールが済んでしまえば&lt;code&gt;gem&lt;/code&gt;コマンドを使うだけなので簡単です。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem install bundler
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで使えるようになります。&lt;/p&gt;
+
+&lt;p&gt;Gemfilesがあるディレクトリに移動して&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;を実行すればそのGemfilesに記述してある&lt;code&gt;RubyGem&lt;/code&gt;を&lt;code&gt;bundler&lt;/code&gt;がインストールしてくれます。インストール先は&lt;code&gt;rbenv&lt;/code&gt;がインストールしてある&lt;code&gt;~/.rbenv&lt;/code&gt;(この説明通りに操作した場合)配下のディレクトリになります。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 10 Sep 2015 01:33:00 +0900</pubDate>
+        <link>https://cat73220.github.io/learning/2015/09/10/reminding_installing_ruby_and_bundler.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/2015/09/10/reminding_installing_ruby_and_bundler.html</guid>
+        
+        
+        <category>learning</category>
+        
+      </item>
     
       <item>
         <title>Dot Emacs</title>
@@ -166,35 +240,31 @@
         <title>Thumbnail Test</title>
         <description>&lt;div class=&quot;image-set&quot;&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/papipo.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-<<<<<<< HEAD
 &lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/IMAG0033-ADK.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
-=======
-&lt;img src=&quot;/images/IMAG0033-ADK.jpg&quot; class=&quot;image&quot; /&gt;
->>>>>>> 719f44a5735a1ab8d6e5a641a1914db2f98ab7f8
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/musican.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/android_porting_1.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/musican.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/android_porting_2.png&quot; class=&quot;image&quot; /&gt;
@@ -203,16 +273,10 @@
 &lt;img src=&quot;/images/musican1.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -324,11 +388,7 @@ gantt
 
 &lt;p&gt;Update = 2015-05-11 21:00:00 +0900&lt;/p&gt;
 
-<<<<<<< HEAD
-&lt;p&gt;now = 2015-Jul-21 12:07:59&lt;/p&gt;
-=======
-&lt;p&gt;now = 2015-Jul-04 14:46:37&lt;/p&gt;
->>>>>>> 719f44a5735a1ab8d6e5a641a1914db2f98ab7f8
+&lt;p&gt;now = 2015-Sep-09 17:41:46&lt;/p&gt;
 
 &lt;p&gt;comment = what is  &lt;code&gt;comment&lt;/code&gt; ?&lt;/p&gt;
 
@@ -367,75 +427,6 @@ gantt
         <pubDate>Sat, 09 May 2015 00:56:00 +0900</pubDate>
         <link>https://cat73220.github.io/learning/2015/05/09/efforts_understanding_post_layout.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/learning/2015/05/09/efforts_understanding_post_layout.html</guid>
-        
-        
-        <category>learning</category>
-        
-      </item>
-    
-      <item>
-        <title>静止画を横n段組する例</title>
-        <description>&lt;h3 id=&quot;section&quot;&gt;キャメルバッグ&lt;/h3&gt;
-
-&lt;p&gt;登山･ハイキングで背負う水袋のこと。ストローがついていて口元で飲めるようになっています。&lt;/p&gt;
-
-&lt;h4 id=&quot;markdown&quot;&gt;Markdownで配置した例&lt;/h4&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; alt=&quot;備え付けた様子&quot; title=&quot;備え付けた様子&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; alt=&quot;単体品&quot; title=&quot;単体品&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;divimg&quot;&gt;div/imgタグで配置した例（横２段組の例）&lt;/h4&gt;
-
-&lt;div class=&quot;post-col-split2&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; title=&quot;内蔵型&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split2&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; title=&quot;単体品&quot; /&gt;
-&lt;/div&gt;
-&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;divimg3&quot;&gt;div/imgタグで配置した例（横3段組の例）&lt;/h4&gt;
-
-&lt;div class=&quot;post-col-split3&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; title=&quot;内蔵型&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split3&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; title=&quot;内蔵型を備えたバックパック&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split3&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; title=&quot;単体品&quot; /&gt;
-&lt;/div&gt;
-&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;divimg4&quot;&gt;div/imgタグで配置した例（横4段組の例）&lt;/h4&gt;
-
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; title=&quot;内蔵型&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;p class=&quot;text&quot;&gt;内蔵型&lt;br /&gt;
-バックパックに内蔵して使います。バックパックを選べば専用のポケットが装備されていて仕込むことができバックパックと一体となるり良いし心地が得られます。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; title=&quot;単体品&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;p class=&quot;text&quot;&gt;単体型&lt;br /&gt;
-バックパックと単体型の２つを背負って使います。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
-
-</description>
-        <pubDate>Fri, 08 May 2015 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/learning/2015/05/08/pics_layout_in_row.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/2015/05/08/pics_layout_in_row.html</guid>
         
         
         <category>learning</category>
