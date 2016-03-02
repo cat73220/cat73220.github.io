@@ -14,6 +14,8 @@ function pchanUpdate( ev ) {
   ev.preventDefault();
   var str = "X:"+ev.pageX+" Y:"+ev.pageY;
   $("#pchan").text(str);
+  $("#pkun").text("screen X:"+ev.screenX+" Y:"+ev.exreenY);
+  $("#psan").text("client X:"+ev.clientX+" Y:"+ev.clientY);
 }
 
 $(function() {
@@ -25,6 +27,8 @@ $(function() {
 <body>
 <div id="dchan" style="height:200px;background-color:#E09"></div>
 <p id="pchan"> hello </p>
+<p id="pkun"> hello </p>
+<p id="psan"> hello </p>
 </div>
 </body>
 </html>
