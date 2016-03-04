@@ -1,4 +1,5 @@
 var isTouch = 'ontouchstart' in window;
+var duration = 1000;
 
 $(function()
 {
@@ -129,8 +130,10 @@ function uiColorLuminanceSwipeDrag(ev)
     v = 255;
   }
 
-  $('#debug').text( "h:"+h+" v:"+v+" width:"+width+" height:"+height+" this.page(X,Y):("+this.pageX+","+this.pageY+")" );
-  $('#uxuiColorLuminanceDiv').css('background-color', hsvtorgb(h,255,v));
+  /* $('#debug').text( "h:"+h+" v:"+v+" width:"+width+" height:"+height+" this.page(X,Y):("+this.pageX+","+this.pageY+")" ); */
+  var htmlRGB = hsvtorgb(h,255,v);
+  $('#uxuiColorLuminanceDiv').css('background-color', htmlRGB);
+  $('#uxuiDurationIndicator').css('background-color', htmlRGB);
 }
 
 $('#uxuiColorLuminanceDiv').bind({
@@ -158,23 +161,14 @@ $('#uxuiColorLuminanceDiv').bind({
 function uiLEDQtyDrag(ev)
 {
   var width = $('#uxuiLEDQtyDiv').width(),
-      qty = Math.round(this.pageX / width * 32) % 32 + 1,
+      qty = Math.ceil(this.pageX / width * 32) % 32,
       preSpace = " ";
-/*
-  if (qty < 1) {
-    qty = 1;
-  }
 
-  if (qty > 31) {
+  if (qty < 1 ) {
     qty = 32;
   }
-*/
 
-  if (qty < 10) {
-      preSpace = "  ";
-  }
-
-  $('#uxuiLEDQtySpan').text(preSpace+qty);
+  $('#uxuiLEDQtyIndicator').text(preSpace+qty);
 }
 
 $('#uxuiLEDQtyDiv').bind({
@@ -194,5 +188,33 @@ $('#uxuiLEDQtyDiv').bind({
     uiLEDQtyDrag(ev);
   }
 });
+
+var lightOn = false;
+var updateDurationArray = new Array();
+
+function blinkDurationIndicator() {
+  if (lightOn) {
+    $('#uxuiDurationIndicator').css('background-color', $('#uxuiDurationDiv').css('background-color'));
+  }
+  else {
+    $('#uxuiDurationIndicator').css('background-color', $('#uxuiColorLuminanceDiv').css('background-color'));
+  }
+  lightOn = !lightOn;
+}
+
+function updateDuration() {
+  while (updateDurationArray.length > 0) {
+    clearInterval(updateDurationArray.pop());
+  }
+  updateDurationArray.push(
+    setInterval( function() {
+      blinkDurationIndicator();
+    }, duration / 2)
+  );
+}
+
+updateDuration();
+
+$('#debug').text( "Math.log10(10) = "+Math.log10(10));
 
 })

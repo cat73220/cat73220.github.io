@@ -12,10 +12,17 @@ input.ipaddr {
   height:30%;
 }
 
-.uxuiLEDQtyStyle {
-  white-space: pre;
+.uxuiLEDQtyIndicatorStyle {
+  text-align: center;
+  vertical-align: middle;
   font: bold 100% Arial;
   font-size: 1200%;
+}
+
+.uxuiDurationIndicatorStyle{
+  width: 20%;
+  height: 100%;
+  background-color: #DDFFDD;
 }
 </style>
 <head><body>
@@ -29,8 +36,8 @@ ESP8266 IP:
 <div id="uxuiDiv" style="width:100%;height:100%;background-color:#EEEEEE;">
 <p id="debug"></p>
 <div id="uxuiColorLuminanceDiv" class="uxuiSwipableDraggable"></div>
-<div id="uxuiLEDQtyDiv" class="uxuiSwipableDraggable"><span id="uxuiLEDQtySpan" class="uxuiLEDQtyStyle">  1</span></div>
-<div id="uxuiDurationDiv" class="uxuiSwipableDraggable"></div>
+<div id="uxuiLEDQtyDiv" class="uxuiSwipableDraggable"><div id="uxuiLEDQtyIndicator" class="uxuiLEDQtyIndicatorStyle">  1</div></div>
+<div id="uxuiDurationDiv" class="uxuiSwipableDraggable"><div id="uxuiDurationIndicator" class="uxuiDurationIndicatorStyle"></div></div>
 </div>
 </a>
 </body><html>
