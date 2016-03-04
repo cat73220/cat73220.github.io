@@ -5,16 +5,66 @@ $(function()
 
 // $('#debug').text( "Window height :"+$(window).height() );
 
+/**
+ * uxui.js general
+ */
 $('#uxuiDiv').css( 'height', $(window).height() );
 
+/**
+ * ipaddrDiv scope
+ */
+
+/**
+ * Connecting to an ESP Device
+ */
 function connect()
 {
   $('#ipaddrLocationButton').text( $('#col1').val()+"."+$('#col2').val()+"."+$('#col3').val()+"."+$('#col4').val() );
   location.href = "#uxui";
 }
 
+/**
+ * Triggering to connect to an ESP device
+ */
 $('#ipaddrLocationButton').click( connect );
 
+/**
+ * uxuiDiv general
+ */
+
+function uiSetupSwipeDrag(ev)
+{
+  ev.preventDefault();
+  isTouch = "touch" === event.type.substring(0,5);
+  this.pageX = (isTouch ? event.changedTouches[0].pageX : ev.pageX);
+  this.pageY = (isTouch ? event.changedTouches[0].pageY : ev.pageY);
+  this.touched = true;
+}
+
+function uiSwipingDragging(ev)
+{
+  if (!this.touched) {
+    return;
+  }
+
+  ev.preventDefault();
+
+  this.pageX = (isTouch ? event.changedTouches[0].pageX : ev.pageX);
+  this.pageY = (isTouch ? event.changedTouches[0].pageY : ev.pageY);
+}
+
+function uiTeardownSwipeDrag(ev)
+{
+  if (!this.touched) {
+    return;
+  }
+
+  this.touched = false;
+}
+
+/**
+ * Color and Luminuce of uxuiDiv scope
+ */
 function toHex(dec)
 {
   if (dec < 16) {
@@ -64,36 +114,6 @@ function hsvtorgb(h, s, v)
   return "#"+toHex( Math.round(r) )+toHex( Math.round(g) )+toHex( Math.round(b) );
 }
 
-function uiSetupSwipeDrag(ev)
-{
-  ev.preventDefault();
-  isTouch = "touch" === event.type.substring(0,5);
-  this.pageX = (isTouch ? event.changedTouches[0].pageX : ev.pageX);
-  this.pageY = (isTouch ? event.changedTouches[0].pageY : ev.pageY);
-  this.touched = true;
-}
-
-function uiSwipingDragging(ev)
-{
-  if (!this.touched) {
-    return;
-  }
-
-  ev.preventDefault();
-
-  this.pageX = (isTouch ? event.changedTouches[0].pageX : ev.pageX);
-  this.pageY = (isTouch ? event.changedTouches[0].pageY : ev.pageY);
-}
-
-function uiTeardownSwipeDrag(ev)
-{
-  if (!this.touched) {
-    return;
-  }
-
-  this.touched = false;
-}
-
 function uiColorLuminanceSwipeDrag(ev)
 {
   var width = $('#uxuiColorLuminanceDiv').width(),
@@ -131,14 +151,42 @@ $('#uxuiColorLuminanceDiv').bind({
   }
 });
 
+/**
+ * LED Quantity of uxuiDiv scope
+ */
+
+function uiLEDQtyDrag(ev)
+{
+  var width = $('#uxuiLEDQtyDiv').width(),
+      qty = Math.round(this.pageX / width * 32) % 32 + 1,
+      preSpace = " ";
+/*
+  if (qty < 1) {
+    qty = 1;
+  }
+
+  if (qty > 31) {
+    qty = 32;
+  }
+*/
+
+  if (qty < 10) {
+      preSpace = "  ";
+  }
+
+  $('#uxuiLEDQtySpan').text(preSpace+qty);
+}
+
 $('#uxuiLEDQtyDiv').bind({
   'touchstart mousedown' : function(ev)
   {
     uiSetupSwipeDrag(ev);
+    uiLEDQtyDrag(ev);
   },
   'touchmove mousemove' : function(ev)
   {
     uiSwipingDragging(ev);
+    uiLEDQtyDrag(ev);
   },
   'touchend mouseup' : function(ev)
   {

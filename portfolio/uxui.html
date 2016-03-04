@@ -4,8 +4,19 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="uxui.js"></script>
 <style>
-input.ipaddr{ width:10%; }
-div.uxuiSwipableDraggable{ height:30%; }
+input.ipaddr {
+  width:10%;
+}
+
+.uxuiSwipableDraggable {
+  height:30%;
+}
+
+.uxuiLEDQtyStyle {
+  white-space: pre;
+  font: bold 100% Arial;
+  font-size: 1200%;
+}
 </style>
 <head><body>
 <div id="ipaddrDiv">
@@ -18,7 +29,7 @@ ESP8266 IP:
 <div id="uxuiDiv" style="width:100%;height:100%;background-color:#EEEEEE;">
 <p id="debug"></p>
 <div id="uxuiColorLuminanceDiv" class="uxuiSwipableDraggable"></div>
-<div id="uxuiLEDQtyDiv" class="uxuiSwipableDraggable"></div>
+<div id="uxuiLEDQtyDiv" class="uxuiSwipableDraggable"><span id="uxuiLEDQtySpan" class="uxuiLEDQtyStyle">  1</span></div>
 <div id="uxuiDurationDiv" class="uxuiSwipableDraggable"></div>
 </div>
 </a>
