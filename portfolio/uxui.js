@@ -189,10 +189,15 @@ $('#uxuiLEDQtyDiv').bind({
   }
 });
 
+/**
+ * Duration update of uxuiDiv scope
+ */
+
 var lightOn = false;
 var updateDurationArray = new Array();
 
-function blinkDurationIndicator() {
+function blinkDurationIndicator()
+{
   if (lightOn) {
     $('#uxuiDurationIndicator').css('background-color', $('#uxuiDurationDiv').css('background-color'));
   }
@@ -202,7 +207,12 @@ function blinkDurationIndicator() {
   lightOn = !lightOn;
 }
 
-function updateDuration() {
+function updateDuration(ev)
+{
+  var width = $('#uxuiLEDQtyDiv').width(),
+      v = (this.pageX / width) * 50;
+
+  duration = v * v;
   while (updateDurationArray.length > 0) {
     clearInterval(updateDurationArray.pop());
   }
@@ -213,8 +223,25 @@ function updateDuration() {
   );
 }
 
+$('#uxuiDurationDiv').bind({
+  'touchstart mousedown' : function(ev)
+  {
+    uiSetupSwipeDrag(ev);
+  },
+  'touchmove mousemove' : function(ev)
+  {
+    uiSwipingDragging(ev);
+  },
+  'touchend mouseup' : function(ev)
+  {
+    uiTeardownSwipeDrag(ev);
+    updateDuration(ev);
+  }
+});
+
+/**
+ * General main part
+ */
+
 updateDuration();
-
-$('#debug').text( "Math.log10(10) = "+Math.log10(10));
-
 })
