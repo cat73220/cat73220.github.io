@@ -12,6 +12,10 @@ input.ipaddr {
   height:30%;
 }
 
+.uxuiColorLuminanceDivStyle {
+  background-color: #DDFFDD;
+}
+
 .uxuiLEDQtyIndicatorStyle {
   text-align: center;
   vertical-align: middle;
@@ -24,6 +28,7 @@ input.ipaddr {
   height: 100%;
   background-color: #DDFFDD;
 }
+
 </style>
 <head><body>
 <div id="ipaddrDiv">
@@ -35,7 +40,7 @@ ESP8266 IP:
 <a name="uxui">
 <div id="uxuiDiv" style="width:100%;height:100%;background-color:#EEEEEE;">
 <p id="debug"></p>
-<div id="uxuiColorLuminanceDiv" class="uxuiSwipableDraggable"></div>
+<div id="uxuiColorLuminanceDiv" class="uxuiSwipableDraggable uxuiColorLuminanceDivStyle"></div>
 <div id="uxuiLEDQtyDiv" class="uxuiSwipableDraggable"><div id="uxuiLEDQtyIndicator" class="uxuiLEDQtyIndicatorStyle">  1</div></div>
 <div id="uxuiDurationDiv" class="uxuiSwipableDraggable"><div id="uxuiDurationIndicator" class="uxuiDurationIndicatorStyle"></div></div>
 </div>

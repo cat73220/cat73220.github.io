@@ -1,8 +1,32 @@
+/**
+ *
+ *
+ */
+
+// temporaly detecting touchscreen or mouse
 var isTouch = 'ontouchstart' in window;
-var duration = 1000;
+
+// roundtrip time in msec for LED Tape
+var duration;
+
+// number of turn on LED on LED Tape
+var LEDQty;
+
+// color and luminance for turn on LED
+var ColorLuminanceRGB;
 
 $(function()
 {
+
+// initializatioin
+var clHtmlRGB = $('#uxuiColorLuminanceDiv').css('background-color');
+
+// reading from uxui.html
+ColorLuminanceRGB = { r : parseInt(clHtmlRGB.substring(1,4)), g : parseInt(clHtmlRGB.substring(3,5)), b : parseInt(clHtmlRGB.substring(6,8)) };
+LEDQty = parseInt( $('#uxuiLEDQtyIndicator').text(), 10 );
+
+// this is only exceptional not to read from uxui.html because html cannot express duration
+duration = 2000;
 
 // $('#debug').text( "Window height :"+$(window).height() );
 
@@ -25,7 +49,44 @@ function connect()
 }
 
 /**
- * Triggering to connect to an ESP device
+ * Making strings for command LED Tape
+ */
+
+function ESPCommandUpdateDuration()
+{
+  cmd = "D"+parseInt(duration)+"\r\n";
+  $('#debug').text(cmd);
+}
+
+function ESPCommandUpdateColorLuminance()
+{
+  var cmd = "C",
+      total = 32,
+      totalHalf = total / 2,
+      halfQty = parseFloat(LEDQty) / 2,
+      firstHalf = totalHalf - Math.ceil(halfQty),
+      secondHalf = totalHalf + Math.floor(halfQty),
+      i;
+
+  for (i = 0; i < firstHalf; i++) {
+    cmd += toHex(0) + toHex(0) + toHex(0);
+  }
+
+  for ( ; i < secondHalf; i++) {
+    cmd += toHex(ColorLuminanceRGB.r)+toHex(ColorLuminanceRGB.g)+toHex(ColorLuminanceRGB.b);
+  }
+  
+  for ( ; i < total; i++) {
+    cmd += toHex(0) + toHex(0) + toHex(0);
+  }
+
+  cmd += "\r\n";
+
+  $('#debug').text("fH:"+firstHalf+",sH:"+secondHalf+",ceil:"+Math.ceil(halfQty)+",floor:"+Math.floor(halfQty)+" "+cmd);
+}
+
+/**
+ * Pressing button triggering to connect to an ESP device
  */
 $('#ipaddrLocationButton').click( connect );
 
@@ -112,7 +173,7 @@ function hsvtorgb(h, s, v)
       r = v; g = p; b = q; break;
   }
 
-  return "#"+toHex( Math.round(r) )+toHex( Math.round(g) )+toHex( Math.round(b) );
+  return { r: Math.round(r), g : Math.round(g), b: Math.round(b) };
 }
 
 function uiColorLuminanceSwipeDrag(ev)
@@ -131,7 +192,8 @@ function uiColorLuminanceSwipeDrag(ev)
   }
 
   /* $('#debug').text( "h:"+h+" v:"+v+" width:"+width+" height:"+height+" this.page(X,Y):("+this.pageX+","+this.pageY+")" ); */
-  var htmlRGB = hsvtorgb(h,255,v);
+  ColorLuminanceRGB = hsvtorgb(h,255,v);
+  var htmlRGB = "#"+toHex(ColorLuminanceRGB.r)+toHex(ColorLuminanceRGB.g)+toHex(ColorLuminanceRGB.b);
   $('#uxuiColorLuminanceDiv').css('background-color', htmlRGB);
   $('#uxuiDurationIndicator').css('background-color', htmlRGB);
 }
@@ -151,6 +213,7 @@ $('#uxuiColorLuminanceDiv').bind({
   {
     uiTeardownSwipeDrag(ev);
     uiColorLuminanceSwipeDrag(ev);
+    ESPCommandUpdateColorLuminance();
   }
 });
 
@@ -161,14 +224,17 @@ $('#uxuiColorLuminanceDiv').bind({
 function uiLEDQtyDrag(ev)
 {
   var width = $('#uxuiLEDQtyDiv').width(),
-      qty = Math.ceil(this.pageX / width * 32) % 32,
-      preSpace = " ";
+      qty = Math.ceil(this.pageX / width * 32) % 32;
 
-  if (qty < 1 ) {
-    qty = 32;
+  if (!isNaN(qty)) {
+    LEDQty = qty;
   }
 
-  $('#uxuiLEDQtyIndicator').text(preSpace+qty);
+  if (LEDQty < 1 ) {
+    LEDQty = 32;
+  }
+
+  $('#uxuiLEDQtyIndicator').text(LEDQty);
 }
 
 $('#uxuiLEDQtyDiv').bind({
@@ -186,6 +252,7 @@ $('#uxuiLEDQtyDiv').bind({
   {
     uiTeardownSwipeDrag(ev);
     uiLEDQtyDrag(ev);
+    ESPCommandUpdateColorLuminance();
   }
 });
 
@@ -193,7 +260,7 @@ $('#uxuiLEDQtyDiv').bind({
  * Duration update of uxuiDiv scope
  */
 
-var lightOn = false;
+var lightOn = true;
 var updateDurationArray = new Array();
 
 function blinkDurationIndicator()
@@ -207,15 +274,19 @@ function blinkDurationIndicator()
   lightOn = !lightOn;
 }
 
-function updateDuration(ev)
+function updateDuration()
 {
   var width = $('#uxuiLEDQtyDiv').width(),
       v = (this.pageX / width) * 50;
 
-  duration = v * v;
+  if (!isNaN(v)) {
+    duration = v * v;
+  }
+
   while (updateDurationArray.length > 0) {
     clearInterval(updateDurationArray.pop());
   }
+
   updateDurationArray.push(
     setInterval( function() {
       blinkDurationIndicator();
@@ -235,7 +306,8 @@ $('#uxuiDurationDiv').bind({
   'touchend mouseup' : function(ev)
   {
     uiTeardownSwipeDrag(ev);
-    updateDuration(ev);
+    updateDuration();
+    ESPCommandUpdateDuration();
   }
 });
 
@@ -244,4 +316,5 @@ $('#uxuiDurationDiv').bind({
  */
 
 updateDuration();
+ESPCommandUpdateDuration();
 })
