@@ -15,6 +15,9 @@ var LEDQty;
 // color and luminance for turn on LED
 var ColorLuminanceRGB;
 
+// WebSocket
+var websocket = null;
+
 $(function()
 {
 
@@ -44,8 +47,29 @@ $('#uxuiDiv').css( 'height', $(window).height() );
  */
 function connect()
 {
-  $('#ipaddrLocationButton').text( $('#col1').val()+"."+$('#col2').val()+"."+$('#col3').val()+"."+$('#col4').val() );
+  var ipaddr = $('#ipaddrCol1Number').val()+"."+$('#ipaddrCol2Number').val()+"."+$('#ipaddrCol3Number').val()+"."+$('#ipaddrCol4Number').val();
+  $('#debug').text( ipaddr );
   location.href = "#uxui";
+  websocket = new WebSocket("ws://"+ipaddr+"/");
+
+  websocket.onclose = function()
+  {
+    location.href = "";
+    websocket = null;
+    alert("接続期限に達しました。操作する際は再度接続してください。");
+  }
+
+  websocket.onerror = function()
+  {
+    location.href = "";
+    websocket = null;
+    alert("不具合が起きました。再接続してみてください。");
+  }
+
+  websocket.onmessage = function(message)
+  {
+    $("#ipaddrLogDiv").prepend("ESPログ"+message);
+  }
 }
 
 /**
@@ -56,6 +80,9 @@ function ESPCommandUpdateDuration()
 {
   cmd = "D"+parseInt(duration)+"\r\n";
   $('#debug').text(cmd);
+  if (websocket != null) {
+    websocket.send(cmd);
+  }
 }
 
 function ESPCommandUpdateColorLuminance()
@@ -83,6 +110,9 @@ function ESPCommandUpdateColorLuminance()
   cmd += "\r\n";
 
   $('#debug').text("fH:"+firstHalf+",sH:"+secondHalf+",ceil:"+Math.ceil(halfQty)+",floor:"+Math.floor(halfQty)+" "+cmd);
+  if (websocket != null) {
+    websocket.send(cmd);
+  }
 }
 
 /**
@@ -314,6 +344,11 @@ $('#uxuiDurationDiv').bind({
 /**
  * General main part
  */
+
+$(window).unload( function()
+{
+  websocket.onclose();
+});
 
 updateDuration();
 ESPCommandUpdateDuration();
