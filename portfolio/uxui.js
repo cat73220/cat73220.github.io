@@ -379,9 +379,10 @@ $('#uxuiDurationDiv').bind({
  * General main part
  */
 
-$(window).unload( function()
-{
-  websocket.onclose();
+$(window).unload( function() {
+    if (websocket) {
+	websocket.onclose();
+    }
 });
 
 updateDuration();
