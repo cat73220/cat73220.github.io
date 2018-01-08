@@ -6,23 +6,26 @@
 // temporaly detecting touchscreen or mouse
 var isTouch = 'ontouchstart' in window;
 
-// roundtrip time in msec for LED Tape
+// roundtrip time in msec for LED Strip
 var duration;
 
-// number of turn on LED on LED Tape
+// number of turn on LED on LED Strip
 var LEDQty;
 
 // color and luminance for turn on LED
 var ColorLuminanceRGB;
 
+// WebSocket
+var websocket = null;
+
 $(function()
 {
 
 // initializatioin
-var clHtmlRGB = $('#uxuiColorLuminanceDiv').css('background-color');
+var clHtmlRGB = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/.exec($('#uxuiColorLuminanceDiv').css('background-color').toString());
 
 // reading from uxui.html
-ColorLuminanceRGB = { r : parseInt(clHtmlRGB.substring(1,4)), g : parseInt(clHtmlRGB.substring(3,5)), b : parseInt(clHtmlRGB.substring(6,8)) };
+ColorLuminanceRGB = { r : parseInt(clHtmlRGB[1]), g : parseInt(clHtmlRGB[2]), b : parseInt(clHtmlRGB[3]) };
 LEDQty = parseInt( $('#uxuiLEDQtyIndicator').text(), 10 );
 
 // this is only exceptional not to read from uxui.html because html cannot express duration
@@ -44,18 +47,76 @@ $('#uxuiDiv').css( 'height', $(window).height() );
  */
 function connect()
 {
-  $('#ipaddrLocationButton').text( $('#col1').val()+"."+$('#col2').val()+"."+$('#col3').val()+"."+$('#col4').val() );
+  var ipaddr = $('#ipaddrCol1Number').val()+"."+$('#ipaddrCol2Number').val()+"."+$('#ipaddrCol3Number').val()+"."+$('#ipaddrCol4Number').val();
+  $('#debug').text( ipaddr );
   location.href = "#uxui";
+  websocket = new WebSocket("ws://"+ipaddr+"/");
+
+  websocket.onclose = function()
+  {
+    location.href = "";
+    websocket = null;
+    alert("接続期限に達しました。操作する際は再度接続してください。");
+  }
+
+  websocket.onerror = function()
+  {
+    location.href = "";
+    websocket = null;
+    alert("不具合が起きました。再接続してみてください。");
+  }
+
+  websocket.onmessage = function(message)
+  {
+      if (message.data.substring(0,5) === "ready") {
+	  clHtmlRGB = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/.exec($('#uxuiColorLuminanceDiv').css('background-color').toString());
+	  ColorLuminanceRGB = { r : parseInt(clHtmlRGB[1]), g : parseInt(clHtmlRGB[2]), b : parseInt(clHtmlRGB[3]) };
+	  ESPCommandInitialize();
+      }
+      $("#ipaddrLogDiv").prepend("ESPログ:"+message.data);
+  }
 }
 
 /**
- * Making strings for command LED Tape
+ * Making strings for command LED Strip
  */
+
+function ESPCommandInitialize()
+{
+  var cmd = "D"+parseInt(duration)+"C",
+      total = 32,
+      totalHalf = total / 2,
+      halfQty = parseFloat(LEDQty) / 2,
+      firstHalf = totalHalf - Math.ceil(halfQty),
+      secondHalf = totalHalf + Math.floor(halfQty),
+      i;
+
+  for (i = 0; i < firstHalf; i++) {
+    cmd += toHex(0) + toHex(0) + toHex(0);
+  }
+
+  for ( ; i < secondHalf; i++) {
+    cmd += toHex(ColorLuminanceRGB.r)+toHex(ColorLuminanceRGB.g)+toHex(ColorLuminanceRGB.b);
+  }
+  
+  for ( ; i < total; i++) {
+    cmd += toHex(0) + toHex(0) + toHex(0);
+  }
+
+  cmd += "\r\n";
+
+  if (websocket != null) {
+    websocket.send(cmd);
+  }
+}
 
 function ESPCommandUpdateDuration()
 {
-  cmd = "D"+parseInt(duration)+"\r\n";
+  var cmd = "D"+parseInt(duration)+"\r\n";
   $('#debug').text(cmd);
+  if (websocket != null) {
+    websocket.send(cmd);
+  }
 }
 
 function ESPCommandUpdateColorLuminance()
@@ -83,6 +144,9 @@ function ESPCommandUpdateColorLuminance()
   cmd += "\r\n";
 
   $('#debug').text("fH:"+firstHalf+",sH:"+secondHalf+",ceil:"+Math.ceil(halfQty)+",floor:"+Math.floor(halfQty)+" "+cmd);
+  if (websocket != null) {
+    websocket.send(cmd);
+  }
 }
 
 /**
@@ -314,6 +378,12 @@ $('#uxuiDurationDiv').bind({
 /**
  * General main part
  */
+
+$(window).unload( function() {
+    if (websocket) {
+	websocket.onclose();
+    }
+});
 
 updateDuration();
 ESPCommandUpdateDuration();
