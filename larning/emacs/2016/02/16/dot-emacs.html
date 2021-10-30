@@ -109,51 +109,51 @@
   <article class="post-content">
     <h2 id="emacs">.emacs</h2>
 
-<pre><code class="language-lisp">(package-initialize)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(require 'use-package)
-(use-package markdown-mode
-	     :mode (("\\.markdown\\'" . markdown-mode)
-		    ("\\.md\\'"       . markdown-mode))
-)
-(require 'whitespace)
-(add-hook 'c-mode-hook
-	  (lambda ()
-	    (whitespace-mode 1)))
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'package-archives</span> <span class="o">'</span><span class="p">(</span><span class="s">"marmalade"</span> <span class="o">.</span> <span class="s">"http://marmalade-repo.org/packages/"</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'package-archives</span> <span class="o">'</span><span class="p">(</span><span class="s">"melpa"</span> <span class="o">.</span> <span class="s">"http://melpa.milkbox.net/packages/"</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'use-package</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">markdown-mode</span>
+	     <span class="ss">:mode</span> <span class="p">((</span><span class="s">"\\.markdown\\'"</span> <span class="o">.</span> <span class="nv">markdown-mode</span><span class="p">)</span>
+		    <span class="p">(</span><span class="s">"\\.md\\'"</span>       <span class="o">.</span> <span class="nv">markdown-mode</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'whitespace</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'c-mode-hook</span>
+	  <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+	    <span class="p">(</span><span class="nv">whitespace-mode</span> <span class="mi">1</span><span class="p">)))</span>
 
-(require 'ispell)
-(add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
-                                              "[[:alpha:]]"
-                                              "[^[:alpha:]]"
-                                              "[']"
-                                              t
-                                              ("-d" "en_US")
-                                              nil
-                                              iso-8859-1))
-(setq ispell-program-name "hunspell"          ; Use hunspell to correct mistakes
-      ispell-dictionary   "english-hunspell") ; Default dictionary to use
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'ispell</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'ispell-local-dictionary-alist</span> <span class="o">'</span><span class="p">(</span><span class="s">"english-hunspell"</span>
+                                              <span class="s">"[[:alpha:]]"</span>
+                                              <span class="s">"[^[:alpha:]]"</span>
+                                              <span class="s">"[']"</span>
+                                              <span class="no">t</span>
+                                              <span class="p">(</span><span class="s">"-d"</span> <span class="s">"en_US"</span><span class="p">)</span>
+                                              <span class="no">nil</span>
+                                              <span class="nv">iso-8859-1</span><span class="p">))</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">ispell-program-name</span> <span class="s">"hunspell"</span>          <span class="c1">; Use hunspell to correct mistakes</span>
+      <span class="nv">ispell-dictionary</span>   <span class="s">"english-hunspell"</span><span class="p">)</span> <span class="c1">; Default dictionary to use</span>
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(display-time-24hr-format t)
- '(display-time-day-and-date nil)
- '(display-time-format "%G年%b%d日(%a) %H:%M")
- '(display-time-mode t)
- '(global-whitespace-mode nil)
- '(menu-bar-mode nil)
- '(scroll-bar-mode nil)
- '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-</code></pre>
+<span class="p">(</span><span class="nv">custom-set-variables</span>
+ <span class="c1">;; custom-set-variables was added by Custom.</span>
+ <span class="c1">;; If you edit it by hand, you could mess it up, so be careful.</span>
+ <span class="c1">;; Your init file should contain only one such instance.</span>
+ <span class="c1">;; If there is more than one, they won't work right.</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">display-time-24hr-format</span> <span class="no">t</span><span class="p">)</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">display-time-day-and-date</span> <span class="no">nil</span><span class="p">)</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">display-time-format</span> <span class="s">"%G年%b%d日(%a) %H:%M"</span><span class="p">)</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">display-time-mode</span> <span class="no">t</span><span class="p">)</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">global-whitespace-mode</span> <span class="no">nil</span><span class="p">)</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">menu-bar-mode</span> <span class="no">nil</span><span class="p">)</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">scroll-bar-mode</span> <span class="no">nil</span><span class="p">)</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">tool-bar-mode</span> <span class="no">nil</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">custom-set-faces</span>
+ <span class="c1">;; custom-set-faces was added by Custom.</span>
+ <span class="c1">;; If you edit it by hand, you could mess it up, so be careful.</span>
+ <span class="c1">;; Your init file should contain only one such instance.</span>
+ <span class="c1">;; If there is more than one, they won't work right.</span>
+ <span class="p">)</span>
+</code></pre></div></div>
 
   </article>
 

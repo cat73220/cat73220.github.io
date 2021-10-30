@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Efforts to understand the layout of POST</title>
-  <meta name="description" content="_postsディレクトリに保存する.markdownファイル冒頭の'layout: post'は_layoutsディレクトリのpost.htmlをテンプレートとすることの宣言と思う。">
+  <title>LED Tape UX/UI</title>
+  <meta name="description" content="LED Tape UX/UI">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/2015/05/09/efforts_understanding_post_layout.html">
+  <link rel="canonical" href="https://cat73220.github.io/specification/summary/2016/03/03/LEDTapeUxUi.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -102,15 +102,65 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Efforts to understand the layout of POST</h1>
-    <p class="post-meta">May 9, 2015</p>
+    <h1 class="post-title">LED Tape UX/UI</h1>
+    <p class="post-meta">Mar 3, 2016</p>
   </header>
 
   <article class="post-content">
-    <p><code class="language-plaintext highlighter-rouge">_posts</code>ディレクトリに保存する<code class="language-plaintext highlighter-rouge">.markdownファイル</code>冒頭の<code class="language-plaintext highlighter-rouge">'layout: post'</code>は<code class="language-plaintext highlighter-rouge">_layouts</code>ディレクトリの<code class="language-plaintext highlighter-rouge">post.html</code>をテンプレートとすることの宣言と思う。</p>
+    <h1 id="led-tape-uxui">LED Tape UX/UI</h1>
 
-<p><code class="language-plaintext highlighter-rouge">_posts</code>ディレクトリに<code class="language-plaintext highlighter-rouge">YYYY-MM-DD-title.markdown</code>形式のファイル名で保存したmarkdownファイルがwebサイトに追加される。<code class="language-plaintext highlighter-rouge">_posts</code>ディレクトリにファイルを追加したりそのディレクトリのファイルを変更すると<code class="language-plaintext highlighter-rouge">jekyll</code>サーバーはそれらを自動検出して更新する。webブラウザでリロードすると更新結果を見ることができる。</p>
+<h2 id="画面構成">画面構成</h2>
 
+<p>２ページで構成される。</p>
+
+<p>各ページは画面全体を占めるように意匠する。</p>
+
+<h2 id="ipアドレスページ">IPアドレスページ</h2>
+
+<p>１ページ目はESP装置のIPアドレス入力画面。</p>
+
+<p>IPv4アドレスを入力する、４数値入力欄と、決定ボタンで構成される。</p>
+
+<p>アドレス入力はキーボードまたはキーパッドによって行う。</p>
+
+<p>決定ボタンにより２ページ目に遷移する。
+決定ボタン押し下げによりESP装置との対話が行われ接続の合否を調べる。
+接続に成功すれば２ページ目に遷移する。
+失敗した場合はその旨を知らせて同画面に留まる。</p>
+
+<h2 id="ledテープアップデートページ">LEDテープアップデートページ</h2>
+
+<p>２ページ目はLEDテープ動作変更ページ。</p>
+
+<p>ページ上、上から３箇所に別れる。上から、色と輝度選択、点灯個数、移動速度。</p>
+
+<p>いずれの箇所も操作は横方向のスワイプまたはドラッグで値を決定する。なお、色と輝度選択は上下ドラッグまたはスワイプで輝度の設定となる。</p>
+
+<p>１ページ目から遷移してくると、つまり２ページ目が始まると、LEDはデフォルト値を用いて動作を開始する。</p>
+
+<p>LEDテープ動作中に３箇所の操作が可能で、LEDテープの動作を停止したり開始したりと行った操作はなく、上３箇所の操作が直ちにLEDテープに伝わり、動作が変更される。</p>
+
+<p>LEDテープの動作とは、点灯個数個の色と輝度のLEDをLEDテープ上で進行と逆行を繰り返すものである。</p>
+
+<ol>
+  <li>色と輝度選択
+    <ul>
+      <li>色：左から右に…彩度で変化？どうしよう…RGBの帯を作るか…三箇所別にスワイプは面倒だ…</li>
+      <li>輝度：上下に0~255を変更。下端が255で明るく、上端が0で真っ暗…逆がいいか？255だと明るすぎだが…たしか、15くらいで十分な輝度だったはず</li>
+    </ul>
+  </li>
+  <li>点灯個数
+    <ul>
+      <li>最低個数：1</li>
+      <li>最大個数：32</li>
+    </ul>
+  </li>
+  <li>移動速度
+    <ul>
+      <li>左が一番遅くて、右が一番早い</li>
+    </ul>
+  </li>
+</ol>
 
   </article>
 

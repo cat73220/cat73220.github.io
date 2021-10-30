@@ -107,22 +107,22 @@
   </header>
 
   <article class="post-content">
-    <h3 id="githubcompushpull">github.comにユーザ名／パスワードを入力せずにpush/pullする</h3>
+    <h3 id="githubcomにユーザ名パスワードを入力せずにpushpullする">github.comにユーザ名／パスワードを入力せずにpush/pullする</h3>
 
-<h4 id="pc">自分のPCの準備</h4>
+<h4 id="自分のpcの準備">自分のPCの準備</h4>
 
 <ol>
-  <li><code>ssh_keygen</code>で<code>id_rsa/id_rsa.pub</code>を作成する
+  <li><code class="language-plaintext highlighter-rouge">ssh_keygen</code>で<code class="language-plaintext highlighter-rouge">id_rsa/id_rsa.pub</code>を作成する
     <ul>
-      <li>後の手動入力をなくすためにパスフレーズは何も入力せずただ<enter>を入力する</enter></li>
-      <li><code>&lt;home&gt;/.ssh</code>に生成される</li>
+      <li>後の手動入力をなくすためにパスフレーズは何も入力せずただ<code class="language-plaintext highlighter-rouge">&lt;enter&gt;</code>を入力する</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;home&gt;/.ssh</code>に生成される</li>
     </ul>
   </li>
-  <li><code>&lt;home&gt;/.ssh</code>で<code>ssh_add id_rsa</code>を実行して<code>&lt;home&gt;/.ssh/known_hosts</code>を更新する</li>
-  <li><code>&lt;home&gt;/.ssh/id_rsa.pub</code>をクリップボードにコピーしておく</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;home&gt;/.ssh</code>で<code class="language-plaintext highlighter-rouge">ssh_add id_rsa</code>を実行して<code class="language-plaintext highlighter-rouge">&lt;home&gt;/.ssh/known_hosts</code>を更新する</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;home&gt;/.ssh/id_rsa.pub</code>をクリップボードにコピーしておく</li>
 </ol>
 
-<h4 id="githubcom">github.comの自分のアカウントの準備</h4>
+<h4 id="githubcomの自分のアカウントの準備">github.comの自分のアカウントの準備</h4>
 
 <ol>
   <li>github.comの自身のフロントページ右上端の’Edit Profile’を選んで’Public Profile’ページに移動する</li>
@@ -133,14 +133,14 @@
       <li>後でこの鍵がどこのどのPCで生成したか特定できるようにしておくと良い</li>
     </ul>
   </li>
-  <li>先の’自分のPCの準備’でクリップボードにコピーした<home>/.ssh/id_rsa.pubを'Key'欄にペーストする</home></li>
+  <li>先の’自分のPCの準備’でクリップボードにコピーした<code class="language-plaintext highlighter-rouge">&lt;home&gt;/.ssh/id_rsa.pub</code>を’Key’欄にペーストする</li>
   <li>‘Add SSH Key’ボタンを押す</li>
 </ol>
 
-<h4 id="section">確認</h4>
+<h4 id="確認">確認</h4>
 
 <ol>
-  <li>作業PCのshell端末で<code>ssh git@github.com</code>を実行し下記のメッセージ①を得る
+  <li>作業PCのshell端末で<code class="language-plaintext highlighter-rouge">ssh git@github.com</code>を実行し下記のメッセージ①を得る
     <ul>
       <li>WarningとPTYで始まる行は無視して’Hi cat73220!..’からの行に着目する。ログイン承認できたけどshellアクセスを提供していません。切断します。ということ。</li>
     </ul>
@@ -149,7 +149,7 @@
     <ul>
       <li>git remote set-url origin git@github.com:cat73220/cat73220.github.io.git</li>
       <li>git remote -v</li>
-      <li>下の<code>git remote -vの結果</code>が得られる</li>
+      <li>下の<code class="language-plaintext highlighter-rouge">git remote -vの結果</code>が得られる</li>
     </ul>
   </li>
   <li>ファイルをどれか修正・コミットして’git push origin master’して、ユーザー／パスワードが尋ねられないことを確認する</li>
@@ -159,19 +159,19 @@
   <li>メッセージ①</li>
 </ul>
 
-<pre><code class="language-shell">  Warning: Permanently added the RSA host key for IP address '192.30.252.128' to the list of known hosts.
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Warning: Permanently added the RSA host key <span class="k">for </span>IP address <span class="s1">'192.30.252.128'</span> to the list of known hosts.
   PTY allocation request failed on channel 0
-  Hi cat73220! You've successfully authenticated, but GitHub does not provide shell access.
+  Hi cat73220! You<span class="s1">'ve successfully authenticated, but GitHub does not provide shell access.
   Connection to github.com closed.
-</code></pre>
+</span></code></pre></div></div>
 
 <ul>
   <li>git remote -vの結果</li>
 </ul>
 
-<pre><code class="language-shell">origin	git@github.com:cat73220/cat73220.github.io.git (fetch)
-origin	git@github.com:cat73220/cat73220.github.io.git (push)
-</code></pre>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>origin	git@github.com:cat73220/cat73220.github.io.git <span class="o">(</span>fetch<span class="o">)</span>
+origin	git@github.com:cat73220/cat73220.github.io.git <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div></div>
 
   </article>
 

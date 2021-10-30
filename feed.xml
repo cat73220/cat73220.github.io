@@ -6,28 +6,478 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Mar 2016 12:18:40 +0900</pubDate>
-    <lastBuildDate>Wed, 02 Mar 2016 12:18:40 +0900</lastBuildDate>
-    <generator>Jekyll v2.4.0</generator>
+    <pubDate>Sat, 30 Oct 2021 12:08:04 +0900</pubDate>
+    <lastBuildDate>Sat, 30 Oct 2021 12:08:04 +0900</lastBuildDate>
+    <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>jekyllの再開で躓いたこととその解法</title>
+        <description>&lt;h3 id=&quot;rubyのインストール&quot;&gt;rubyのインストール&lt;/h3&gt;
+
+&lt;h4 id=&quot;rbenvのインストールから始めた&quot;&gt;rbenvのインストールから始めた&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;rbenvでバージョンを手軽に切り替えることを覚えていたため&lt;/li&gt;
+  &lt;li&gt;jekyllがruby 3.0で動作しなかったような記憶があったため…最後に2016年8月頃だから、もう、動作するかも、と思った&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;rbenvrubyでrubyが動作するまで&quot;&gt;rbenv+rubyでrubyが動作するまで&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;qiita に&lt;a href=&quot;https://qiita.com/Kodak_tmo/items/73147ed4f0eec54d6e94&quot;&gt;記事その１&lt;/a&gt;を見つけた。&lt;/li&gt;
+  &lt;li&gt;… installはこと無く完了（とても時間がかかる３〜５分位の体感）したが、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby -v&lt;/code&gt;でshellが ruby Not Found とエラーを起こす&lt;/li&gt;
+  &lt;li&gt;rbenvのドキュメントをよく読まなかったためだろう（最後までドキュメントを読まず）、また qiita &lt;a href=&quot;https://qiita.com/opiyo_taku/items/3312a75d5916f6cd32b1&quot;&gt;記事その２&lt;/a&gt; の世話になる
+    &lt;ul&gt;
+      &lt;li&gt;.bash_profileはログインシェルで読み込まれる。このまま作業するにはログアウト／ログインしないとならない&lt;/li&gt;
+      &lt;li&gt;ログアウト／ログインがめんどくさかったので &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;export PATH = &quot;~/.rbenv/shims:$PATH&quot;&lt;/code&gt; とした&lt;/li&gt;
+      &lt;li&gt;.bash_profileには &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$(rbenv init -)&lt;/code&gt; まで追記したので、後日、その成果が確認できる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;qiita 記事その１&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 1.初期化設定
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'eval &quot;$(rbenv init -)&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.bash_profile
+// 2.初期化設定の反映
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bash_profile
+// 3.rbenvのインストール：
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;rbenv ruby-build
+// 4.インストール可能なRubyのバージョン一覧の表示
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rbenv &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+// 5.指定したRubyのバージョンをインストール
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rbenv &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;2.3.5
+// 6.インストールしたRubyを使用可能な状態にする⇒shimsへの反映
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rbenv rehash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;qiita 記事その２&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vi ~/.bash_profile
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;~/.rbenv/shims:/usr/local/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;rbenv init -&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bash_profile &lt;span class=&quot;c&quot;&gt;# 変更をPCに反映させる&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;jekyllの動作を確認する&quot;&gt;jekyllの動作を確認する&lt;/h4&gt;
+
+&lt;p&gt;ここまで実行してきたコマンドを並べておこう&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 2031  &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;~/.rbenv/shims:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+ 2032  ruby &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ 2033  gem &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ 2034  gem &lt;span class=&quot;nt&quot;&gt;-V&lt;/span&gt;
+ 2035  gcc &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ 2036  gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jekyll bundler
+ 2037  &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;HW
+ 2038  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ 2039  bundle &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ 2040  &lt;span class=&quot;nb&quot;&gt;ls
+ &lt;/span&gt;2041  bundle update
+ 2042  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ 2043  &lt;span class=&quot;nb&quot;&gt;ls &lt;/span&gt;blog
+ 2044  bundle &lt;span class=&quot;nb&quot;&gt;install
+ &lt;/span&gt;2045  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ 2046  bundle update github-pages
+ 2047  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ 2048  rbenv versions
+ 2049  rbenv &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+ 2050  rbenv &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;2.7.4
+ 2051  rbenv which
+ 2052  rbenv which ruby
+ 2053  rbenv global 2.7.4
+ 2054  rbenv which ruby
+ 2055  ruby &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ 2056  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ 2057  bundler &lt;span class=&quot;nb&quot;&gt;install
+ &lt;/span&gt;2058  jekyll
+ 2059  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ 2060  &lt;span class=&quot;nb&quot;&gt;ls
+ &lt;/span&gt;2061  &lt;span class=&quot;nb&quot;&gt;ls &lt;/span&gt;blog
+ 2062  &lt;span class=&quot;nb&quot;&gt;ls
+ &lt;/span&gt;2063  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ 2064  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve blog
+ 2065  &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;blog
+ 2066  bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve blog
+ 2067  &lt;span class=&quot;nb&quot;&gt;history&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;2038-bundler-exec-jekyll-server-がエラーを起こす&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2038 bundler exec jekyll server&lt;/code&gt; がエラーを起こす&lt;/h4&gt;
+
+&lt;p&gt;案の定、rubyのバージョンが災いした…が、まず&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle install&lt;/code&gt;が必要だった&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://talk.jekyllrb.com/t/error-no-implicit-conversion-of-hash-into-integer/5890/10&quot;&gt;オフィシャル&lt;/a&gt;の投稿&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+Could not find github-pages-171, jekyll-mermaid-1.0.0, memprof2-0.1.1, activesupport-4.2.9, github-pages-health-check-1.3.5, jekyll-3.6.2, jekyll-avatar-0.5.0, jekyll-coffeescript-1.0.2, jekyll-default-layout-0.1.4, jekyll-feed-0.9.2, jekyll-gist-1.4.1, jekyll-github-metadata-2.9.3, jekyll-mentions-1.2.0, jekyll-optional-front-matter-0.3.0, jekyll-paginate-1.1.0, jekyll-readme-index-0.2.0, jekyll-redirect-from-0.12.1, jekyll-relative-links-0.5.2, jekyll-remote-theme-0.2.3, jekyll-sass-converter-1.5.0, jekyll-seo-tag-2.3.0, jekyll-sitemap-1.1.1, jekyll-swiss-0.4.0, jekyll-theme-architect-0.1.0, jekyll-theme-cayman-0.1.0, jekyll-theme-dinky-0.1.0, jekyll-theme-hacker-0.1.0, jekyll-theme-leap-day-0.1.0, jekyll-theme-merlot-0.1.0, jekyll-theme-midnight-0.1.0, jekyll-theme-minimal-0.1.0, jekyll-theme-modernist-0.1.0, jekyll-theme-primer-0.5.2, jekyll-theme-slate-0.1.0, jekyll-theme-tactile-0.1.0, jekyll-theme-time-machine-0.1.0, jekyll-titles-from-headings-0.5.0, jemoji-0.8.1, kramdown-1.14.0, liquid-4.0.0, listen-3.0.6, mercenary-0.3.6, minima-2.1.1, rouge-2.2.1, terminal-table-1.8.0, i18n-0.9.1, minitest-5.10.3, thread_safe-0.3.6, tzinfo-1.2.4, addressable-2.5.2, net-dns-0.8.0, octokit-4.7.0, public_suffix-2.0.5, typhoeus-0.8.0, jekyll-watch-1.5.0, pathutil-0.16.0, safe_yaml-1.0.4, coffee-script-2.4.1, coffee-script-source-1.11.1, html-pipeline-2.7.1, rubyzip-1.2.1, sass-3.5.3, gemoji-3.0.0, rb-fsevent-0.10.2, rb-inotify-0.9.10, unicode-display_width-1.3.0, concurrent-ruby-1.0.5, sawyer-0.8.1, ethon-0.11.0, execjs-2.7.0, nokogiri-1.8.1, sass-listen-4.0.0, ffi-1.9.18, faraday-0.13.1, mini_portile2-2.3.0, multipart-post-2.0.0 &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;any of the sources                                                                                                                                                                                                                                   
+Run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; to &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;missing gems.
+nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls &lt;/span&gt;blog
+_album  _config.yml  _includes  _layouts  _plugins  _posts  _sass  about.md  css  feed.xml  images  index.html  plugins  portfolio  resume
+nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;install
+&lt;/span&gt;Fetching gem metadata from https://rubygems.org/.........
+Using bundler 2.2.30
+.. &amp;lt;&lt;span class=&quot;nb&quot;&gt;cut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ..
+Post-install message from html-pipeline:
+&lt;span class=&quot;nt&quot;&gt;-------------------------------------------------&lt;/span&gt;
+Thank you &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;installing html-pipeline!
+You must bundle Filter gem dependencies.
+See html-pipeline README.md &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;more details.
+https://github.com/jch/html-pipeline#dependencies
+&lt;span class=&quot;nt&quot;&gt;-------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;まだ他のエラーが生じる&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+bundler: failed to load &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;: jekyll &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/home/nabe/.rbenv/versions/3.0.2/bin/jekyll&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+/home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/html.rb:10:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;': cannot load such file -- rexml/parsers/baseparser (LoadError)
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/html.rb:10:in `&amp;lt;top (required)&amp;gt;'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown/html.rb:10:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown/html.rb:10:in `&amp;lt;top (required)&amp;gt;'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown/paragraph.rb:14:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown/paragraph.rb:14:in `&amp;lt;top (required)&amp;gt;'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown.rb:342:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;require&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown.rb:342:in `&amp;lt;class:Kramdown&amp;gt;'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown.rb:60:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;module:Parser&amp;gt;&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown.rb:19:in `&amp;lt;module:Kramdown&amp;gt;'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/kramdown-1.14.0/lib/kramdown/parser/kramdown.rb:17:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/jekyll-3.6.2/lib/jekyll/converters/smartypants.rb:3:in `require'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/jekyll-3.6.2/lib/jekyll/converters/smartypants.rb:3:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/jekyll-3.6.2/lib/jekyll.rb:13:in `require'&lt;/span&gt;
+... &amp;lt;&lt;span class=&quot;nb&quot;&gt;cut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ...
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/bundler-2.2.30/lib/bundler/friendly_errors.rb:103:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;with_friendly_errors&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/bundler-2.2.30/exe/bundle:37:in `&amp;lt;top (required)&amp;gt;'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/bin/bundle:23:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;load&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/bin/bundle:23:in `&amp;lt;main&amp;gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;github-page&lt;/code&gt;の&lt;a href=&quot;https://docs.github.com/ja/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll#&quot;&gt;アップデートが必要&lt;/a&gt;らしい&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle update github-pages
+Fetching gem metadata from https://rubygems.org/.........
+Resolving dependencies...
+... &amp;lt;&lt;span class=&quot;nb&quot;&gt;cut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ...
+Fetching github-pages 221 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;was 171&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Installing github-pages 221 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;was 171&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Bundle updated!
+Post-install message from dnsruby:
+Installing dnsruby...
+  For issues and &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;code: https://github.com/alexdalitz/dnsruby
+  For general discussion &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;please tell us how you use dnsruby&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: https://groups.google.com/forum/#!forum/dnsruby
+Post-install message from sass:
+
+Ruby Sass has reached end-of-life and should no longer be used.
+
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; If you use Sass as a command-line tool, we recommend using Dart Sass, the new
+  primary implementation: https://sass-lang.com/install
+
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; If you use Sass as a plug-in &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a Ruby web framework, we recommend using the
+  sassc gem: https://github.com/sass/sassc-ruby#readme
+
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; For more details, please refer to the Sass blog:
+  https://sass-lang.com/blog/posts/7828841
+
+Post-install message from html-pipeline:
+&lt;span class=&quot;nt&quot;&gt;-------------------------------------------------&lt;/span&gt;
+Thank you &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;installing html-pipeline!
+You must bundle Filter gem dependencies.
+See html-pipeline README.md &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;more details.
+https://github.com/jch/html-pipeline#dependencies
+&lt;span class=&quot;nt&quot;&gt;-------------------------------------------------&lt;/span&gt;
+Post-install message from rubyzip:
+RubyZip 3.0 is coming!
+&lt;span class=&quot;k&quot;&gt;**********************&lt;/span&gt;
+
+The public API of some Rubyzip classes has been modernized to use named
+parameters &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;optional arguments. Please check your usage of the
+following classes:
+  &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;Zip::File&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;Zip::Entry&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;Zip::InputStream&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;Zip::OutputStream&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+
+Please ensure that your Gemfiles and .gemspecs are suitably restrictive
+to avoid an unexpected breakage when 3.0 is released &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e.g. ~&amp;gt; 2.3.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+See https://github.com/rubyzip/rubyzip &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;details. The Changelog also
+lists other enhancements and bugfixes that have been implemented since
+version 2.3.0.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;サーバーを起動しようとして、’Hash into Integer’のエラーが生じる。これが rubyバージョン に依るエラーである。jekyllがruby 3.Xに対応していないことに依る。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve  
+Configuration file: /home/nabe/HW/_config.yml
+            Source: /home/nabe/HW
+       Destination: /home/nabe/HW/_site
+ Incremental build: disabled. Enable with &lt;span class=&quot;nt&quot;&gt;--incremental&lt;/span&gt;
+      Generating... 
+                    &lt;span class=&quot;k&quot;&gt;done in &lt;/span&gt;0.019 seconds.
+jekyll 3.9.0 | Error:  no implicit conversion of Hash into Integer
+/home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/pathutil-0.16.2/lib/pathutil.rb:502:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;': no implicit conversion of Hash into Integer (TypeError)
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/pathutil-0.16.2/lib/pathutil.rb:502:in `read'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/utils/platforms.rb:75:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;proc_version&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/utils/platforms.rb:40:in `bash_on_windows?'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/build.rb:77:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;watch&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/build.rb:43:in `process'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/jekyll-3.9.0/lib/jekyll/commands/serve.rb:93:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;block &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;start&lt;span class=&quot;s1&quot;&gt;'
+... &amp;lt;cut&amp;gt; ...
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/bundler-2.2.30/lib/bundler/cli.rb:25:in `start'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/bundler-2.2.30/exe/bundle:49:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;block &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/bundler-2.2.30/lib/bundler/friendly_errors.rb:103:in `with_friendly_errors'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/bundler-2.2.30/exe/bundle:37:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+        from /home/nabe/.rbenv/versions/3.0.2/bin/bundle:23:in `load'&lt;/span&gt;
+        from /home/nabe/.rbenv/versions/3.0.2/bin/bundle:23:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&amp;lt;main&amp;gt;&lt;span class=&quot;s1&quot;&gt;'
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv install -l&lt;/code&gt;で最新の 2.7.x が 2.7.4 であることを確認。 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv install 2.7.4&lt;/code&gt;でrubyバージョンを古くする。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rbenv &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;2.7.4
+Downloading ruby-2.7.4.tar.bz2...
+-&amp;gt; https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.4.tar.bz2
+Installing ruby-2.7.4...
+Installed ruby-2.7.4 to /home/nabe/.rbenv/versions/2.7.4
+
+nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rbenv which
+Usage: rbenv which &amp;lt;&lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;%&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rbenv which ruby
+/home/nabe/.rbenv/versions/3.0.2/bin/ruby
+nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;%&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rbenv global 2.7.4
+nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;%&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rbenv which ruby  
+/home/nabe/.rbenv/versions/2.7.4/bin/ruby
+nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;%&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ruby 2.7.4p191 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2021-07-07 revision a21a3b7d23&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x86_64-linux]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;改めてサーバーを起動すると…jekyllが無い。バージョンごとにインストールが必要なのだな。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundelr install&lt;/code&gt;を実行&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;%&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+rbenv: jekyll: &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;not found
+
+The &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;jekyll&lt;span class=&quot;s1&quot;&gt;' command exists in these Ruby versions:
+  3.0.2
+
+nabe@zakuro:~/HW (master *%=)
+$ bundler install
+Warning: the running version of Bundler (2.1.4) is older than the version that created the lockfile (2.2.30). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.2.30`.
+Fetching gem metadata from https://rubygems.org/.........
+Fetching concurrent-ruby 1.1.9
+Installing concurrent-ruby 1.1.9
+Fetching i18n 0.9.5
+... &amp;lt;cut&amp;gt; ...
+Bundle complete! 3 Gemfile dependencies, 102 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+Post-install message from dnsruby:
+Installing dnsruby...
+  For issues and source code: https://github.com/alexdalitz/dnsruby
+  For general discussion (please tell us how you use dnsruby): https://groups.google.com/forum/#!forum/dnsruby
+Post-install message from sass:
+
+Ruby Sass has reached end-of-life and should no longer be used.
+
+* If you use Sass as a command-line tool, we recommend using Dart Sass, the new
+  primary implementation: https://sass-lang.com/install
+
+* If you use Sass as a plug-in for a Ruby web framework, we recommend using the
+  sassc gem: https://github.com/sass/sassc-ruby#readme
+
+* For more details, please refer to the Sass blog:
+  https://sass-lang.com/blog/posts/7828841
+
+Post-install message from html-pipeline:
+-------------------------------------------------
+Thank you for installing html-pipeline!
+You must bundle Filter gem dependencies.
+See html-pipeline README.md for more details.
+https://github.com/jch/html-pipeline#dependencies
+-------------------------------------------------
+Post-install message from rubyzip:
+RubyZip 3.0 is coming!
+**********************
+
+The public API of some Rubyzip classes has been modernized to use named
+parameters for optional arguments. Please check your usage of the
+following classes:
+  * `Zip::File`
+  * `Zip::Entry`
+  * `Zip::InputStream`
+  * `Zip::OutputStream`
+
+Please ensure that your Gemfiles and .gemspecs are suitably restrictive
+to avoid an unexpected breakage when 3.0 is released (e.g. ~&amp;gt; 2.3.0).
+See https://github.com/rubyzip/rubyzip for details. The Changelog also
+lists other enhancements and bugfixes that have been implemented since
+version 2.3.0.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;jekyllの起動確認とサーバーの起動&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;%&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jekyll
+Warning: the running version of Bundler &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.1.4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is older than the version that created the lockfile &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.2.30&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; We suggest you to upgrade to the version that created the lockfile by running &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bundler:2.2.30&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+A subcommand is required. 
+jekyll 3.9.0 &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; Jekyll is a blog-aware, static site generator &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;Ruby
+
+Usage:
+
+  jekyll &amp;lt;subcommand&amp;gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;options]
+
+Options:
+        &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;, &lt;span class=&quot;nt&quot;&gt;--source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;DIR]  Source directory &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;defaults to ./&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;, &lt;span class=&quot;nt&quot;&gt;--destination&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;DIR]  Destination directory &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;defaults to ./_site&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;--safe&lt;/span&gt;         Safe mode &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;defaults to &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;, &lt;span class=&quot;nt&quot;&gt;--plugins&lt;/span&gt; PLUGINS_DIR1[,PLUGINS_DIR2[,...]]  Plugins directory &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;defaults to ./_plugins&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;--layouts&lt;/span&gt; DIR  Layouts directory &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;defaults to ./_layouts&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;--profile&lt;/span&gt;      Generate a Liquid rendering profile
+        &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;, &lt;span class=&quot;nt&quot;&gt;--help&lt;/span&gt;         Show this message
+        &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;, &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;      Print the name and version
+        &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt;, &lt;span class=&quot;nt&quot;&gt;--trace&lt;/span&gt;        Show the full backtrace when an error occurs
+
+Subcommands:
+  docs                  
+  import                
+  build, b              Build your site
+  clean                 Clean the site &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;removes site output and metadata file&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; without building.
+  doctor, hyde          Search site and print specific deprecation warnings
+  &lt;span class=&quot;nb&quot;&gt;help                  &lt;/span&gt;Show the &lt;span class=&quot;nb&quot;&gt;help &lt;/span&gt;message, optionally &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a given subcommand.
+  new                   Creates a new Jekyll site scaffold &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;PATH
+  new-theme             Creates a new Jekyll theme scaffold
+  serve, server, s      Serve your site locally
+nabe@zakuro:~/HW &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;%&lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+Configuration file: /home/nabe/HW/_config.yml
+            Source: /home/nabe/HW
+       Destination: /home/nabe/HW/_site
+ Incremental build: disabled. Enable with &lt;span class=&quot;nt&quot;&gt;--incremental&lt;/span&gt;
+      Generating... 
+                    &lt;span class=&quot;k&quot;&gt;done in &lt;/span&gt;0.026 seconds.
+/home/nabe/.rbenv/versions/2.7.4/lib/ruby/gems/2.7.0/gems/pathutil-0.16.2/lib/pathutil.rb:502: warning: Using the last argument as keyword parameters is deprecated
+ Auto-regeneration: enabled &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/home/nabe/HW'&lt;/span&gt;
+    Server address: http://127.0.0.1:4000
+  Server running... press ctrl-c to stop.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;一旦、動作するとあっけない。&lt;/p&gt;
+
+&lt;p&gt;追加したこの記事も問題なくhtmlに変換された。これでportfolioとresumeの更新の下準備ができた。急がないでマイペースで参りましょう。…自分ブラックカンパニーに留意して…
+あ、思い出すことがもう一つあった。cat73220.github.ioの更新方法を調べないと。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 29 Oct 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/rbenv/bundler/ruby/jekyll/2021/10/29/resume-jekyll-but-didnt-go-well.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/rbenv/bundler/ruby/jekyll/2021/10/29/resume-jekyll-but-didnt-go-well.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>rbenv</category>
+        
+        <category>bundler</category>
+        
+        <category>ruby</category>
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+      <item>
+        <title>LED Tape UX/UI</title>
+        <description>&lt;h1 id=&quot;led-tape-uxui&quot;&gt;LED Tape UX/UI&lt;/h1&gt;
+
+&lt;h2 id=&quot;画面構成&quot;&gt;画面構成&lt;/h2&gt;
+
+&lt;p&gt;２ページで構成される。&lt;/p&gt;
+
+&lt;p&gt;各ページは画面全体を占めるように意匠する。&lt;/p&gt;
+
+&lt;h2 id=&quot;ipアドレスページ&quot;&gt;IPアドレスページ&lt;/h2&gt;
+
+&lt;p&gt;１ページ目はESP装置のIPアドレス入力画面。&lt;/p&gt;
+
+&lt;p&gt;IPv4アドレスを入力する、４数値入力欄と、決定ボタンで構成される。&lt;/p&gt;
+
+&lt;p&gt;アドレス入力はキーボードまたはキーパッドによって行う。&lt;/p&gt;
+
+&lt;p&gt;決定ボタンにより２ページ目に遷移する。
+決定ボタン押し下げによりESP装置との対話が行われ接続の合否を調べる。
+接続に成功すれば２ページ目に遷移する。
+失敗した場合はその旨を知らせて同画面に留まる。&lt;/p&gt;
+
+&lt;h2 id=&quot;ledテープアップデートページ&quot;&gt;LEDテープアップデートページ&lt;/h2&gt;
+
+&lt;p&gt;２ページ目はLEDテープ動作変更ページ。&lt;/p&gt;
+
+&lt;p&gt;ページ上、上から３箇所に別れる。上から、色と輝度選択、点灯個数、移動速度。&lt;/p&gt;
+
+&lt;p&gt;いずれの箇所も操作は横方向のスワイプまたはドラッグで値を決定する。なお、色と輝度選択は上下ドラッグまたはスワイプで輝度の設定となる。&lt;/p&gt;
+
+&lt;p&gt;１ページ目から遷移してくると、つまり２ページ目が始まると、LEDはデフォルト値を用いて動作を開始する。&lt;/p&gt;
+
+&lt;p&gt;LEDテープ動作中に３箇所の操作が可能で、LEDテープの動作を停止したり開始したりと行った操作はなく、上３箇所の操作が直ちにLEDテープに伝わり、動作が変更される。&lt;/p&gt;
+
+&lt;p&gt;LEDテープの動作とは、点灯個数個の色と輝度のLEDをLEDテープ上で進行と逆行を繰り返すものである。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;色と輝度選択
+    &lt;ul&gt;
+      &lt;li&gt;色：左から右に…彩度で変化？どうしよう…RGBの帯を作るか…三箇所別にスワイプは面倒だ…&lt;/li&gt;
+      &lt;li&gt;輝度：上下に0~255を変更。下端が255で明るく、上端が0で真っ暗…逆がいいか？255だと明るすぎだが…たしか、15くらいで十分な輝度だったはず&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;点灯個数
+    &lt;ul&gt;
+      &lt;li&gt;最低個数：1&lt;/li&gt;
+      &lt;li&gt;最大個数：32&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;移動速度
+    &lt;ul&gt;
+      &lt;li&gt;左が一番遅くて、右が一番早い&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 03 Mar 2016 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/specification/summary/2016/03/03/LEDTapeUxUi.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/specification/summary/2016/03/03/LEDTapeUxUi.html</guid>
+        
+        
+        <category>specification</category>
+        
+        <category>summary</category>
+        
+      </item>
     
       <item>
         <title>SSH github access</title>
-        <description>&lt;h3 id=&quot;githubcompushpull&quot;&gt;github.comにユーザ名／パスワードを入力せずにpush/pullする&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;githubcomにユーザ名パスワードを入力せずにpushpullする&quot;&gt;github.comにユーザ名／パスワードを入力せずにpush/pullする&lt;/h3&gt;
 
-&lt;h4 id=&quot;pc&quot;&gt;自分のPCの準備&lt;/h4&gt;
+&lt;h4 id=&quot;自分のpcの準備&quot;&gt;自分のPCの準備&lt;/h4&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;ssh_keygen&lt;/code&gt;で&lt;code&gt;id_rsa/id_rsa.pub&lt;/code&gt;を作成する
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh_keygen&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;id_rsa/id_rsa.pub&lt;/code&gt;を作成する
     &lt;ul&gt;
-      &lt;li&gt;後の手動入力をなくすためにパスフレーズは何も入力せずただ&lt;enter&gt;を入力する&lt;/enter&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;&amp;lt;home&amp;gt;/.ssh&lt;/code&gt;に生成される&lt;/li&gt;
+      &lt;li&gt;後の手動入力をなくすためにパスフレーズは何も入力せずただ&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;enter&amp;gt;&lt;/code&gt;を入力する&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh&lt;/code&gt;に生成される&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;&amp;lt;home&amp;gt;/.ssh&lt;/code&gt;で&lt;code&gt;ssh_add id_rsa&lt;/code&gt;を実行して&lt;code&gt;&amp;lt;home&amp;gt;/.ssh/known_hosts&lt;/code&gt;を更新する&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;&amp;lt;home&amp;gt;/.ssh/id_rsa.pub&lt;/code&gt;をクリップボードにコピーしておく&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh_add id_rsa&lt;/code&gt;を実行して&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh/known_hosts&lt;/code&gt;を更新する&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh/id_rsa.pub&lt;/code&gt;をクリップボードにコピーしておく&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;githubcom&quot;&gt;github.comの自分のアカウントの準備&lt;/h4&gt;
+&lt;h4 id=&quot;githubcomの自分のアカウントの準備&quot;&gt;github.comの自分のアカウントの準備&lt;/h4&gt;
 
 &lt;ol&gt;
   &lt;li&gt;github.comの自身のフロントページ右上端の’Edit Profile’を選んで’Public Profile’ページに移動する&lt;/li&gt;
@@ -38,14 +488,14 @@
       &lt;li&gt;後でこの鍵がどこのどのPCで生成したか特定できるようにしておくと良い&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;先の’自分のPCの準備’でクリップボードにコピーした&lt;home&gt;/.ssh/id_rsa.pubを&#39;Key&#39;欄にペーストする&lt;/home&gt;&lt;/li&gt;
+  &lt;li&gt;先の’自分のPCの準備’でクリップボードにコピーした&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh/id_rsa.pub&lt;/code&gt;を’Key’欄にペーストする&lt;/li&gt;
   &lt;li&gt;‘Add SSH Key’ボタンを押す&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;section&quot;&gt;確認&lt;/h4&gt;
+&lt;h4 id=&quot;確認&quot;&gt;確認&lt;/h4&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;作業PCのshell端末で&lt;code&gt;ssh git@github.com&lt;/code&gt;を実行し下記のメッセージ①を得る
+  &lt;li&gt;作業PCのshell端末で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh git@github.com&lt;/code&gt;を実行し下記のメッセージ①を得る
     &lt;ul&gt;
       &lt;li&gt;WarningとPTYで始まる行は無視して’Hi cat73220!..’からの行に着目する。ログイン承認できたけどshellアクセスを提供していません。切断します。ということ。&lt;/li&gt;
     &lt;/ul&gt;
@@ -54,7 +504,7 @@
     &lt;ul&gt;
       &lt;li&gt;git remote set-url origin git@github.com:cat73220/cat73220.github.io.git&lt;/li&gt;
       &lt;li&gt;git remote -v&lt;/li&gt;
-      &lt;li&gt;下の&lt;code&gt;git remote -vの結果&lt;/code&gt;が得られる&lt;/li&gt;
+      &lt;li&gt;下の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git remote -vの結果&lt;/code&gt;が得られる&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;ファイルをどれか修正・コミットして’git push origin master’して、ユーザー／パスワードが尋ねられないことを確認する&lt;/li&gt;
@@ -64,19 +514,19 @@
   &lt;li&gt;メッセージ①&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;  Warning: Permanently added the RSA host key for IP address &#39;192.30.252.128&#39; to the list of known hosts.
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Warning: Permanently added the RSA host key &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;IP address &lt;span class=&quot;s1&quot;&gt;'192.30.252.128'&lt;/span&gt; to the list of known hosts.
   PTY allocation request failed on channel 0
-  Hi cat73220! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+  Hi cat73220! You&lt;span class=&quot;s1&quot;&gt;'ve successfully authenticated, but GitHub does not provide shell access.
   Connection to github.com closed.
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;git remote -vの結果&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;origin	git@github.com:cat73220/cat73220.github.io.git (fetch)
-origin	git@github.com:cat73220/cat73220.github.io.git (push)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;origin	git@github.com:cat73220/cat73220.github.io.git &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fetch&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+origin	git@github.com:cat73220/cat73220.github.io.git &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;push&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 02 Mar 2016 00:00:00 +0900</pubDate>
         <link>https://cat73220.github.io/larning/github.com/2016/03/02/ssh_github_access.html</link>
@@ -93,51 +543,51 @@ origin	git@github.com:cat73220/cat73220.github.io.git (push)
         <title>Dot Emacs</title>
         <description>&lt;h2 id=&quot;emacs&quot;&gt;.emacs&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(package-initialize)
-(add-to-list &#39;package-archives &#39;(&quot;marmalade&quot; . &quot;http://marmalade-repo.org/packages/&quot;))
-(add-to-list &#39;package-archives &#39;(&quot;melpa&quot; . &quot;http://melpa.milkbox.net/packages/&quot;) t)
-(require &#39;use-package)
-(use-package markdown-mode
-	     :mode ((&quot;\\.markdown\\&#39;&quot; . markdown-mode)
-		    (&quot;\\.md\\&#39;&quot;       . markdown-mode))
-)
-(require &#39;whitespace)
-(add-hook &#39;c-mode-hook
-	  (lambda ()
-	    (whitespace-mode 1)))
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;package-initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package-archives&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;marmalade&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://marmalade-repo.org/packages/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package-archives&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;melpa&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://melpa.milkbox.net/packages/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'use-package&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;
+	     &lt;span class=&quot;ss&quot;&gt;:mode&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\\.markdown\\'&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\\.md\\'&quot;&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'whitespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-hook&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'c-mode-hook&lt;/span&gt;
+	  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+	    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;whitespace-mode&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
 
-(require &#39;ispell)
-(add-to-list &#39;ispell-local-dictionary-alist &#39;(&quot;english-hunspell&quot;
-                                              &quot;[[:alpha:]]&quot;
-                                              &quot;[^[:alpha:]]&quot;
-                                              &quot;[&#39;]&quot;
-                                              t
-                                              (&quot;-d&quot; &quot;en_US&quot;)
-                                              nil
-                                              iso-8859-1))
-(setq ispell-program-name &quot;hunspell&quot;          ; Use hunspell to correct mistakes
-      ispell-dictionary   &quot;english-hunspell&quot;) ; Default dictionary to use
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'ispell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'ispell-local-dictionary-alist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;english-hunspell&quot;&lt;/span&gt;
+                                              &lt;span class=&quot;s&quot;&gt;&quot;[[:alpha:]]&quot;&lt;/span&gt;
+                                              &lt;span class=&quot;s&quot;&gt;&quot;[^[:alpha:]]&quot;&lt;/span&gt;
+                                              &lt;span class=&quot;s&quot;&gt;&quot;[']&quot;&lt;/span&gt;
+                                              &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;
+                                              &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-d&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;en_US&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                                              &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;
+                                              &lt;span class=&quot;nv&quot;&gt;iso-8859-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;setq&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ispell-program-name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;hunspell&quot;&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;; Use hunspell to correct mistakes&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;ispell-dictionary&lt;/span&gt;   &lt;span class=&quot;s&quot;&gt;&quot;english-hunspell&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; Default dictionary to use&lt;/span&gt;
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won&#39;t work right.
- &#39;(display-time-24hr-format t)
- &#39;(display-time-day-and-date nil)
- &#39;(display-time-format &quot;%G年%b%d日(%a) %H:%M&quot;)
- &#39;(display-time-mode t)
- &#39;(global-whitespace-mode nil)
- &#39;(menu-bar-mode nil)
- &#39;(scroll-bar-mode nil)
- &#39;(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won&#39;t work right.
- )
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;custom-set-variables&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; custom-set-variables was added by Custom.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; If you edit it by hand, you could mess it up, so be careful.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; Your init file should contain only one such instance.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; If there is more than one, they won't work right.&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;display-time-24hr-format&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;display-time-day-and-date&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;display-time-format&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;%G年%b%d日(%a) %H:%M&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;display-time-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;global-whitespace-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;menu-bar-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;scroll-bar-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tool-bar-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;custom-set-faces&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; custom-set-faces was added by Custom.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; If you edit it by hand, you could mess it up, so be careful.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; Your init file should contain only one such instance.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; If there is more than one, they won't work right.&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Tue, 16 Feb 2016 00:00:00 +0900</pubDate>
         <link>https://cat73220.github.io/larning/emacs/2016/02/16/dot-emacs.html</link>
@@ -180,7 +630,7 @@ origin	git@github.com:cat73220/cat73220.github.io.git (push)
         <guid isPermaLink="true">https://cat73220.github.io/learning/2016/01/13/report_first_impression.html</guid>
         
         
-        <category>learning</category>
+        <category>Learning</category>
         
       </item>
     
@@ -190,63 +640,63 @@ origin	git@github.com:cat73220/cat73220.github.io.git (push)
 
 &lt;p&gt;rbenvというrubyシステムインストーラを使い、その後にbundlerをインストールします。&lt;/p&gt;
 
-&lt;h2 id=&quot;rbenv&quot;&gt;rbenvのインストール&lt;/h2&gt;
+&lt;h2 id=&quot;rbenvのインストール&quot;&gt;rbenvのインストール&lt;/h2&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;準備&lt;/h3&gt;
+&lt;h3 id=&quot;準備&quot;&gt;準備&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;最後の&lt;code&gt;apt-get install&lt;/code&gt;の実行前に&lt;/p&gt;
+&lt;p&gt;最後の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-get install&lt;/code&gt;の実行前に&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;dpkg -l | grep &quot;autoconf\|bison\|build-essential\|libssl-dev\|libyaml-dev\|libreadline6-dev\|zlib1g-dev\|libncurses5-dev\|libffi-dev\|libgdbm3\|libgdm-dev\|nodejs\|libsqlite3-dev&quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dpkg -l | grep &quot;autoconf\|bison\|build-essential\|libssl-dev\|libyaml-dev\|libreadline6-dev\|zlib1g-dev\|libncurses5-dev\|libffi-dev\|libgdbm3\|libgdm-dev\|nodejs\|libsqlite3-dev&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;のように&lt;code&gt;dpkg -l | grep &quot;...&quot;&lt;/code&gt;を実行して既にインストールされているubuntuパッケージの一覧を得て、まだされていないubuntuパッケージを調べて、&lt;code&gt;sudo apt-get install -y &lt;/code&gt;にそれらのパッケージを与えて実行します。&lt;/p&gt;
+&lt;p&gt;のように&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dpkg -l | grep &quot;...&quot;&lt;/code&gt;を実行して既にインストールされているubuntuパッケージの一覧を得て、まだされていないubuntuパッケージを調べて、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt-get install -y &lt;/code&gt;にそれらのパッケージを与えて実行します。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;実行できるようにする&lt;/h3&gt;
+&lt;h3 id=&quot;実行できるようにする&quot;&gt;実行できるようにする&lt;/h3&gt;
 
 &lt;p&gt;.bashrcに下記シェルスクリプトを追加します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;[[ -d ~/.rbenv  ]] &amp;amp;&amp;amp; \
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[ -d ~/.rbenv  ]] &amp;amp;&amp;amp; \
     export PATH=${HOME}/.rbenv/bin:${PATH} &amp;amp;&amp;amp; \
 	eval &quot;$(rbenv init -&quot;)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;~/.rbenv&lt;/code&gt;ディレクトリの存在確認を検査し存在した場合&lt;code&gt;PATH&lt;/code&gt;シェル環境変数に&lt;code&gt;~/.rbenv/bin&lt;/code&gt;を追加、および&lt;code&gt;rbenv init -&lt;/code&gt;を実行します。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.rbenv&lt;/code&gt;ディレクトリの存在確認を検査し存在した場合&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATH&lt;/code&gt;シェル環境変数に&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.rbenv/bin&lt;/code&gt;を追加、および&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv init -&lt;/code&gt;を実行します。&lt;/p&gt;
 
-&lt;h3 id=&quot;ruby&quot;&gt;rubyのインストール&lt;/h3&gt;
+&lt;h3 id=&quot;rubyのインストール&quot;&gt;rubyのインストール&lt;/h3&gt;
 
-&lt;p&gt;いよいよ&lt;code&gt;rbenv&lt;/code&gt;で&lt;code&gt;ruby&lt;/code&gt;をインストールします。&lt;/p&gt;
+&lt;p&gt;いよいよ&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby&lt;/code&gt;をインストールします。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;rbenv install 2.2.2
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rbenv install 2.2.2
 rbenv global 2.2.2
 ruby -v
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;最初の&lt;code&gt;rbenv install&lt;/code&gt;によりソースコードがダウンロードされビルド、そして、インストールされます。インストール先は~/.rbenv配下のディレクトリでインストール完了時に詳細が出力されますので確認してください。尚この操作はPCの性能に左右されます。Core-i7 3960Xで3分ほどかかりました。&lt;/p&gt;
+&lt;p&gt;最初の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv install&lt;/code&gt;によりソースコードがダウンロードされビルド、そして、インストールされます。インストール先は~/.rbenv配下のディレクトリでインストール完了時に詳細が出力されますので確認してください。尚この操作はPCの性能に左右されます。Core-i7 3960Xで3分ほどかかりました。&lt;/p&gt;
 
-&lt;p&gt;次の&lt;code&gt;rbenv global&lt;/code&gt;でインストールしてあるバージョンを選びます。つまり、複数バージョンの&lt;code&gt;ruby&lt;/code&gt;を切り替えて利用できるのです。今回は2.2.2を使いたいので&lt;code&gt;2.2.2&lt;/code&gt;を与えました。&lt;/p&gt;
+&lt;p&gt;次の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv global&lt;/code&gt;でインストールしてあるバージョンを選びます。つまり、複数バージョンの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby&lt;/code&gt;を切り替えて利用できるのです。今回は2.2.2を使いたいので&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2.2.2&lt;/code&gt;を与えました。&lt;/p&gt;
 
-&lt;p&gt;最後の&lt;code&gt;ruby -v&lt;/code&gt;で実行PATH上の&lt;code&gt;ruby&lt;/code&gt;のバージョンを確認します。&lt;/p&gt;
+&lt;p&gt;最後の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby -v&lt;/code&gt;で実行PATH上の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby&lt;/code&gt;のバージョンを確認します。&lt;/p&gt;
 
-&lt;h2 id=&quot;bundler&quot;&gt;bundlerのインストール&lt;/h2&gt;
+&lt;h2 id=&quot;bundlerのインストール&quot;&gt;bundlerのインストール&lt;/h2&gt;
 
-&lt;p&gt;&lt;code&gt;ruby&lt;/code&gt;のインストールが済んでしまえば&lt;code&gt;gem&lt;/code&gt;コマンドを使うだけなので簡単です。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby&lt;/code&gt;のインストールが済んでしまえば&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem&lt;/code&gt;コマンドを使うだけなので簡単です。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;gem install bundler
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install bundler
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;これで使えるようになります。&lt;/p&gt;
 
 &lt;p&gt;Gemfilesがあるディレクトリに移動して&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;bundle install
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;を実行すればそのGemfilesに記述してある&lt;code&gt;RubyGem&lt;/code&gt;を&lt;code&gt;bundler&lt;/code&gt;がインストールしてくれます。インストール先は&lt;code&gt;rbenv&lt;/code&gt;がインストールしてある&lt;code&gt;~/.rbenv&lt;/code&gt;(この説明通りに操作した場合)配下のディレクトリになります。&lt;/p&gt;
+&lt;p&gt;を実行すればそのGemfilesに記述してある&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RubyGem&lt;/code&gt;を&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundler&lt;/code&gt;がインストールしてくれます。インストール先は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv&lt;/code&gt;がインストールしてある&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.rbenv&lt;/code&gt;(この説明通りに操作した場合)配下のディレクトリになります。&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 10 Sep 2015 01:33:00 +0900</pubDate>
@@ -254,7 +704,7 @@ ruby -v
         <guid isPermaLink="true">https://cat73220.github.io/learning/2015/09/10/reminding_installing_ruby_and_bundler.html</guid>
         
         
-        <category>learning</category>
+        <category>Learning</category>
         
       </item>
     
@@ -262,44 +712,44 @@ ruby -v
         <title>Dot Emacs</title>
         <description>&lt;h2 id=&quot;emacs&quot;&gt;.emacs&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(add-to-list &#39;load-path &quot;/usr/share/emacs/site-lisp/global&quot;)
-(add-to-list &#39;load-path &quot;~/.emacs.d/elisp&quot;)
-(autoload &#39;gtags-mode &quot;gtags&quot; &quot;&quot; t)
-(require &#39;gtags nil t)
-; (require &#39;migemo nil t)
+&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'load-path&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/usr/share/emacs/site-lisp/global&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'load-path&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;~/.emacs.d/elisp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;autoload&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'gtags-mode&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;gtags&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'gtags&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;; (require 'migemo nil t)&lt;/span&gt;
 
-(when (require &#39;package)
-  (package-initialize)
-  (add-to-list &#39;package-archives &#39;(&quot;melpa&quot; . &quot;http://melpa.milkbox.net/packages/&quot;) t)
-  (add-to-list &#39;package-archives &#39;(&quot;marmalade&quot; . &quot;http://marmalade-repo.org/packages/&quot;) t)
-)
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;package-initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package-archives&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;melpa&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://melpa.milkbox.net/packages/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package-archives&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;marmalade&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://marmalade-repo.org/packages/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-(require &#39;e2wm)
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'e2wm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-(require &#39;xcscope)
-(cscope-setup)
-(autoload &#39;markdonw-mode &quot;markdown-mode.el&quot; &quot;Major mode for editting Markdown files&quot; t)
-(setq auto-mode-alist (cons &#39;(&quot;\\.markdown&quot; . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist (cons &#39;(&quot;\\.md&quot; . markdown-mode) auto-mode-alist))
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'xcscope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cscope-setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;autoload&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'markdonw-mode&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;markdown-mode.el&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Major mode for editting Markdown files&quot;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;setq&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;auto-mode-alist&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cons&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\\.markdown&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;auto-mode-alist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;setq&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;auto-mode-alist&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cons&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\\.md&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;auto-mode-alist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won&#39;t work right.
- &#39;(dired-recursive-copies (quote always))
- &#39;(dired-recursive-deletes (quote always))
- &#39;(markdown-command &quot;kramdown&quot;)
- &#39;(tab-width 8))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won&#39;t work right.
- &#39;(default ((t (:family &quot;Takaoゴシック&quot; :foundry &quot;unknown&quot; :slant normal :weight normal :height 98 :width normal)))))
-(put &#39;narrow-to-region &#39;disabled nil)
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;custom-set-variables&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; custom-set-variables was added by Custom.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; If you edit it by hand, you could mess it up, so be careful.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; Your init file should contain only one such instance.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; If there is more than one, they won't work right.&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dired-recursive-copies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;always&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dired-recursive-deletes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;always&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;markdown-command&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;kramdown&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tab-width&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;custom-set-faces&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; custom-set-faces was added by Custom.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; If you edit it by hand, you could mess it up, so be careful.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; Your init file should contain only one such instance.&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;;; If there is more than one, they won't work right.&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:family&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Takaoゴシック&quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:foundry&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;unknown&quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:slant&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:weight&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:height&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;98&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:width&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;put&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'narrow-to-region&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'disabled&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Mon, 25 May 2015 00:00:00 +0900</pubDate>
         <link>https://cat73220.github.io/larning/emacs/2015/05/25/dot-emacs.html</link>
@@ -314,7 +764,7 @@ ruby -v
     
       <item>
         <title>Portfolio</title>
-        <description>&lt;h3 id=&quot;portfolio-150521aportfolio150521ahtml&quot;&gt;&lt;a href=&quot;/portfolio/150521a.html&quot;&gt;Portfolio 150521a&lt;/a&gt;&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;portfolio-150521a&quot;&gt;&lt;a href=&quot;/portfolio/150521a.html&quot;&gt;Portfolio 150521a&lt;/a&gt;&lt;/h3&gt;
 </description>
         <pubDate>Wed, 20 May 2015 00:00:00 +0900</pubDate>
         <link>https://cat73220.github.io/portfolio/2015/05/20/portfolio.html</link>
@@ -335,23 +785,23 @@ ruby -v
 
 &lt;p&gt;They started to sell their own painting software on workstations, Neozoic at the first. They also helped to develop a custom 3D modeling by semi-meta objects software with Polygon pictures. They released their application by their knowledge of computer graphics to the many computer software sceanes.&lt;/p&gt;
 
-&lt;h4 id=&quot;a-fabric-cutting-layout-software-for-toray-on-sgiirisresumenemesysnemesys09html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_09.html&quot;&gt;a fabric cutting layout software for Toray on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-fabric-cutting-layout-software-for-toray-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_09.html&quot;&gt;a fabric cutting layout software for Toray on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-plugin-software-for-painting-simulation-of-cars-in-maya-on-sgiirisresumenemesysnemesys08html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_08.html&quot;&gt;a plugin software for painting simulation of cars in Maya on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-plugin-software-for-painting-simulation-of-cars-in-maya-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_08.html&quot;&gt;a plugin software for painting simulation of cars in Maya on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-plugin-software-for-manupilating-skeletons-as-a-human-in-3d-max-on-sgiirisresumenemesysnemesys07html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_07.html&quot;&gt;a plugin software for manupilating skeletons as a human in 3D-Max on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-plugin-software-for-manupilating-skeletons-as-a-human-in-3d-max-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_07.html&quot;&gt;a plugin software for manupilating skeletons as a human in 3D-Max on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-cgi-of-decorated-recycable-one-time-film-camera-on-netscape-navigatorresumenemesysnemesys06html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_06.html&quot;&gt;a cgi of decorated recycable one-time film camera on Netscape Navigator&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-cgi-of-decorated-recycable-one-time-film-camera-on-netscape-navigator&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_06.html&quot;&gt;a cgi of decorated recycable one-time film camera on Netscape Navigator&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-gui-of-dvd-authoring-software-on-windowsresumenemesysnemesys05html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_05.html&quot;&gt;a GUI of DVD authoring software on Windows&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-gui-of-dvd-authoring-software-on-windows&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_05.html&quot;&gt;a GUI of DVD authoring software on Windows&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-custom-3d-modeling-software-by-semi-meta-objects-for-polygon-pictures-on-sgiirisresumenemesysnemesys04html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_04.html&quot;&gt;a custom 3D modeling software by semi-meta objects for Polygon pictures on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-custom-3d-modeling-software-by-semi-meta-objects-for-polygon-pictures-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_04.html&quot;&gt;a custom 3D modeling software by semi-meta objects for Polygon pictures on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-glasses-shop-software-for-customizing-glasses-on-necews4800resumenemesysnemesys03html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_03.html&quot;&gt;a glasses shop software for customizing glasses on NEC/EWS4800&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-glasses-shop-software-for-customizing-glasses-on-necews4800&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_03.html&quot;&gt;a glasses shop software for customizing glasses on NEC/EWS4800&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-custom-paint-software-for-a-tv-station-equipment-on-sonynewsresumenemesysnemesys02html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_02.html&quot;&gt;a custom paint software for a TV station equipment on SONY/NEWS&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-custom-paint-software-for-a-tv-station-equipment-on-sonynews&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_02.html&quot;&gt;a custom paint software for a TV station equipment on SONY/NEWS&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;neozoic-paint-on-sgiirisresumenemesysnemesys01html&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_01.html&quot;&gt;Neozoic paint on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;neozoic-paint-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_01.html&quot;&gt;Neozoic paint on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
 
 &lt;hr /&gt;
 
@@ -367,15 +817,15 @@ ruby -v
 
 &lt;p&gt;They made many peripherals for several platforms. ex. Laser printe I/F for SUN3/4 for ASCII Corp. as hardware R&amp;amp;D, software R&amp;amp;D were a window syste for DTP on SPARDStation, a JPEG compression software using DSP for Mitsubishi corp., a renderer from 3D geometric data using OpenGL, a camera apps, TrigonScope and SFX Camera of iPhone Apps,&lt;/p&gt;
 
-&lt;h4 id=&quot;a-pcb-bom-management-software-on-emacsresumec-creatorsc-creators05html&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_05.html&quot;&gt;a PCB BOM management software on emacs&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-pcb-bom-management-software-on-emacs&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_05.html&quot;&gt;a PCB BOM management software on emacs&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-3d-wireframe-study-on-sun3sunviewresumec-creatorsc-creators04html&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_04.html&quot;&gt;a 3D wireframe study on SUN3/Sunview&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-3d-wireframe-study-on-sun3sunview&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_04.html&quot;&gt;a 3D wireframe study on SUN3/Sunview&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;the-device-driver-for-cd-rom-if-board-on-ps2-for-chinon-kkresumec-creatorsc-creators03html&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_03.html&quot;&gt;the device driver for CD-ROM I/F board on PS/2 for CHINON K.K.&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;the-device-driver-for-cd-rom-if-board-on-ps2-for-chinon-kk&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_03.html&quot;&gt;the device driver for CD-ROM I/F board on PS/2 for CHINON K.K.&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;the-device-driver-for-cd-rom-if-board-on-pc-dos-for-chinon-kkresumec-creatorsc-creators02html&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_02.html&quot;&gt;the device driver for CD-ROM I/F board on PC-DOS for CHINON K.K.&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;the-device-driver-for-cd-rom-if-board-on-pc-dos-for-chinon-kk&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_02.html&quot;&gt;the device driver for CD-ROM I/F board on PC-DOS for CHINON K.K.&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-custom-built-3d-computer-graphics-on-pc-compatible-with-transputerresumec-creatorsc-creators01html&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_01.html&quot;&gt;a custom built 3D computer graphics on PC-Compatible with Transputer&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-custom-built-3d-computer-graphics-on-pc-compatible-with-transputer&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_01.html&quot;&gt;a custom built 3D computer graphics on PC-Compatible with Transputer&lt;/a&gt;&lt;/h4&gt;
 
 &lt;hr /&gt;
 
@@ -393,13 +843,13 @@ ruby -v
 
 &lt;p&gt;Based on the above, I larned the most of knowledges about developping and manufacturing computer devices along their senior engineers.&lt;/p&gt;
 
-&lt;h4 id=&quot;audio-digital-filters-of-fisibility-study-for-sega-corpresumetritechtritech04html&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_04.html&quot;&gt;audio digital filters of fisibility study for SEGA Corp.&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;audio-digital-filters-of-fisibility-study-for-sega-corp&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_04.html&quot;&gt;audio digital filters of fisibility study for SEGA Corp.&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-ntsc-if-for-plasma-panel-display-of-dixy-corpresumetritechtritech03html&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_03.html&quot;&gt;a NTSC I/F for plasma panel display of DIXY Corp&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-ntsc-if-for-plasma-panel-display-of-dixy-corp&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_03.html&quot;&gt;a NTSC I/F for plasma panel display of DIXY Corp&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-custom-multi-peripheral-board-for-early-laundry-shop-pos-of-kk-bicresumetritechtritech02html&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_02.html&quot;&gt;a custom multi-peripheral board for early laundry shop POS of K.K. BIC&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-custom-multi-peripheral-board-for-early-laundry-shop-pos-of-kk-bic&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_02.html&quot;&gt;a custom multi-peripheral board for early laundry shop POS of K.K. BIC&lt;/a&gt;&lt;/h4&gt;
 
-&lt;h4 id=&quot;a-test-jig-for-analog-vhfuhf-tuner-television-set-of-korean-manufacturerresumetritechtritech01html&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_01.html&quot;&gt;a test jig for analog VHF/UHF tuner television set of Korean manufacturer&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;a-test-jig-for-analog-vhfuhf-tuner-television-set-of-korean-manufacturer&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_01.html&quot;&gt;a test jig for analog VHF/UHF tuner television set of Korean manufacturer&lt;/a&gt;&lt;/h4&gt;
 </description>
         <pubDate>Tue, 19 May 2015 00:00:00 +0900</pubDate>
         <link>https://cat73220.github.io/resume/2015/05/19/resume.html</link>
@@ -414,25 +864,31 @@ ruby -v
         <title>Thumbnail Test</title>
         <description>&lt;div class=&quot;image-set&quot;&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/papipo.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/papipo.jpg&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/IMAG0033-ADK.jpg&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/musican.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/android_porting_1.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;post-col-split4&quot;&gt;
+&lt;img src=&quot;/images/musican.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
 &lt;img src=&quot;/images/android_porting_2.png&quot; class=&quot;image&quot; /&gt;
@@ -441,16 +897,10 @@ ruby -v
 &lt;img src=&quot;/images/musican1.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
+&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -460,72 +910,7 @@ ruby -v
         <guid isPermaLink="true">https://cat73220.github.io/learning/2015/05/15/thumbnail-test.html</guid>
         
         
-        <category>learning</category>
-        
-      </item>
-    
-      <item>
-        <title>Collection Test</title>
-        <description>&lt;h3 id=&quot;embedded-images&quot;&gt;embedded images&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;sitealbumcontent&quot;&gt;site.album.content&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;{“title”=&amp;gt;”Root of YAML data”, “child_one”=&amp;gt;[{“title”=&amp;gt;”内蔵型”, “image”=&amp;gt;”/images/IMG_15062014_224847-40percent.png”}, {“title”=&amp;gt;”内蔵可能バックパック”, “image”=&amp;gt;”/images/IMG_15062014_225103.png”}, {“title”=&amp;gt;”単体型”, “image”=&amp;gt;”/images/IMG_15062014_225132-30percent.png”}]}&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 14 May 2015 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/2015/05/14/collection-test.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/2015/05/14/collection-test.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Mermaid Integration</title>
-        <description>&lt;h4 id=&quot;flowchart&quot;&gt;Flowchart&lt;/h4&gt;
-
-&lt;script src=&quot;/plugins/mermaid.full.js&quot;&gt;&lt;/script&gt;
-&lt;div class=&quot;mermaid&quot;&gt;
-graph LR
-    A[Start] -- note for a line --&amp;gt; B((a path))
-	A --&amp;gt; C(The other path)
-	B --&amp;gt; D{END}
-	C --&amp;gt; D
-&lt;/div&gt;
-
-&lt;h4 id=&quot;sequence&quot;&gt;Sequence&lt;/h4&gt;
-
-&lt;script src=&quot;/plugins/mermaid.full.js&quot;&gt;&lt;/script&gt;
-&lt;div class=&quot;mermaid&quot;&gt;
-sequenceDiagram
-    participant Alice
-	participant Bob
-	Alice-&amp;gt;&amp;gt;John: Hello John, how are you?
-	loop Healthcheck
-	    John-&amp;gt;&amp;gt;John: Fight against hypochondria
-	end
-	Note right of John: Rational thoughts&lt;br /&gt;prevail...
-	John--&amp;gt;&amp;gt;Alice: Great!
-	John-&amp;gt;&amp;gt;Bob: How about you?
-	Bob--&amp;gt;&amp;gt;John: Pretty Good!
-&lt;/div&gt;
-</description>
-        <pubDate>Wed, 13 May 2015 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/2015/05/13/mermaid-integration.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/2015/05/13/mermaid-integration.html</guid>
-        
+        <category>Learning</category>
         
       </item>
     

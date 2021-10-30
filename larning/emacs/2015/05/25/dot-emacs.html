@@ -109,44 +109,44 @@
   <article class="post-content">
     <h2 id="emacs">.emacs</h2>
 
-<pre><code class="language-lisp">(add-to-list 'load-path "/usr/share/emacs/site-lisp/global")
-(add-to-list 'load-path "~/.emacs.d/elisp")
-(autoload 'gtags-mode "gtags" "" t)
-(require 'gtags nil t)
-; (require 'migemo nil t)
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'load-path</span> <span class="s">"/usr/share/emacs/site-lisp/global"</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'load-path</span> <span class="s">"~/.emacs.d/elisp"</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">'gtags-mode</span> <span class="s">"gtags"</span> <span class="s">""</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'gtags</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+<span class="c1">; (require 'migemo nil t)</span>
 
-(when (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-)
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">require</span> <span class="ss">'package</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'package-archives</span> <span class="o">'</span><span class="p">(</span><span class="s">"melpa"</span> <span class="o">.</span> <span class="s">"http://melpa.milkbox.net/packages/"</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'package-archives</span> <span class="o">'</span><span class="p">(</span><span class="s">"marmalade"</span> <span class="o">.</span> <span class="s">"http://marmalade-repo.org/packages/"</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">)</span>
 
-(require 'e2wm)
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'e2wm</span><span class="p">)</span>
 
-(require 'xcscope)
-(cscope-setup)
-(autoload 'markdonw-mode "markdown-mode.el" "Major mode for editting Markdown files" t)
-(setq auto-mode-alist (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'xcscope</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">cscope-setup</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">autoload</span> <span class="ss">'markdonw-mode</span> <span class="s">"markdown-mode.el"</span> <span class="s">"Major mode for editting Markdown files"</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">auto-mode-alist</span> <span class="p">(</span><span class="nb">cons</span> <span class="o">'</span><span class="p">(</span><span class="s">"\\.markdown"</span> <span class="o">.</span> <span class="nv">markdown-mode</span><span class="p">)</span> <span class="nv">auto-mode-alist</span><span class="p">))</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">auto-mode-alist</span> <span class="p">(</span><span class="nb">cons</span> <span class="o">'</span><span class="p">(</span><span class="s">"\\.md"</span> <span class="o">.</span> <span class="nv">markdown-mode</span><span class="p">)</span> <span class="nv">auto-mode-alist</span><span class="p">))</span>
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(dired-recursive-copies (quote always))
- '(dired-recursive-deletes (quote always))
- '(markdown-command "kramdown")
- '(tab-width 8))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Takaoゴシック" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
-(put 'narrow-to-region 'disabled nil)
+<span class="p">(</span><span class="nv">custom-set-variables</span>
+ <span class="c1">;; custom-set-variables was added by Custom.</span>
+ <span class="c1">;; If you edit it by hand, you could mess it up, so be careful.</span>
+ <span class="c1">;; Your init file should contain only one such instance.</span>
+ <span class="c1">;; If there is more than one, they won't work right.</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">dired-recursive-copies</span> <span class="p">(</span><span class="k">quote</span> <span class="nv">always</span><span class="p">))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">dired-recursive-deletes</span> <span class="p">(</span><span class="k">quote</span> <span class="nv">always</span><span class="p">))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">markdown-command</span> <span class="s">"kramdown"</span><span class="p">)</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">tab-width</span> <span class="mi">8</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">custom-set-faces</span>
+ <span class="c1">;; custom-set-faces was added by Custom.</span>
+ <span class="c1">;; If you edit it by hand, you could mess it up, so be careful.</span>
+ <span class="c1">;; Your init file should contain only one such instance.</span>
+ <span class="c1">;; If there is more than one, they won't work right.</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">default</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:family</span> <span class="s">"Takaoゴシック"</span> <span class="ss">:foundry</span> <span class="s">"unknown"</span> <span class="ss">:slant</span> <span class="nv">normal</span> <span class="ss">:weight</span> <span class="nv">normal</span> <span class="ss">:height</span> <span class="mi">98</span> <span class="ss">:width</span> <span class="nv">normal</span><span class="p">)))))</span>
+<span class="p">(</span><span class="nv">put</span> <span class="ss">'narrow-to-region</span> <span class="ss">'disabled</span> <span class="no">nil</span><span class="p">)</span>
 
-</code></pre>
+</code></pre></div></div>
 
   </article>
 

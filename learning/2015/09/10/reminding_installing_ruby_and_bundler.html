@@ -111,63 +111,63 @@
 
 <p>rbenvというrubyシステムインストーラを使い、その後にbundlerをインストールします。</p>
 
-<h2 id="rbenv">rbenvのインストール</h2>
+<h2 id="rbenvのインストール">rbenvのインストール</h2>
 
-<h3 id="section">準備</h3>
+<h3 id="準備">準備</h3>
 
-<pre><code>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
-</code></pre>
+</code></pre></div></div>
 
-<p>最後の<code>apt-get install</code>の実行前に</p>
+<p>最後の<code class="language-plaintext highlighter-rouge">apt-get install</code>の実行前に</p>
 
-<pre><code>dpkg -l | grep "autoconf\|bison\|build-essential\|libssl-dev\|libyaml-dev\|libreadline6-dev\|zlib1g-dev\|libncurses5-dev\|libffi-dev\|libgdbm3\|libgdm-dev\|nodejs\|libsqlite3-dev"
-</code></pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dpkg -l | grep "autoconf\|bison\|build-essential\|libssl-dev\|libyaml-dev\|libreadline6-dev\|zlib1g-dev\|libncurses5-dev\|libffi-dev\|libgdbm3\|libgdm-dev\|nodejs\|libsqlite3-dev"
+</code></pre></div></div>
 
-<p>のように<code>dpkg -l | grep "..."</code>を実行して既にインストールされているubuntuパッケージの一覧を得て、まだされていないubuntuパッケージを調べて、<code>sudo apt-get install -y </code>にそれらのパッケージを与えて実行します。</p>
+<p>のように<code class="language-plaintext highlighter-rouge">dpkg -l | grep "..."</code>を実行して既にインストールされているubuntuパッケージの一覧を得て、まだされていないubuntuパッケージを調べて、<code class="language-plaintext highlighter-rouge">sudo apt-get install -y </code>にそれらのパッケージを与えて実行します。</p>
 
-<h3 id="section-1">実行できるようにする</h3>
+<h3 id="実行できるようにする">実行できるようにする</h3>
 
 <p>.bashrcに下記シェルスクリプトを追加します。</p>
 
-<pre><code>[[ -d ~/.rbenv  ]] &amp;&amp; \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ -d ~/.rbenv  ]] &amp;&amp; \
     export PATH=${HOME}/.rbenv/bin:${PATH} &amp;&amp; \
 	eval "$(rbenv init -")
-</code></pre>
+</code></pre></div></div>
 
-<p><code>~/.rbenv</code>ディレクトリの存在確認を検査し存在した場合<code>PATH</code>シェル環境変数に<code>~/.rbenv/bin</code>を追加、および<code>rbenv init -</code>を実行します。</p>
+<p><code class="language-plaintext highlighter-rouge">~/.rbenv</code>ディレクトリの存在確認を検査し存在した場合<code class="language-plaintext highlighter-rouge">PATH</code>シェル環境変数に<code class="language-plaintext highlighter-rouge">~/.rbenv/bin</code>を追加、および<code class="language-plaintext highlighter-rouge">rbenv init -</code>を実行します。</p>
 
-<h3 id="ruby">rubyのインストール</h3>
+<h3 id="rubyのインストール">rubyのインストール</h3>
 
-<p>いよいよ<code>rbenv</code>で<code>ruby</code>をインストールします。</p>
+<p>いよいよ<code class="language-plaintext highlighter-rouge">rbenv</code>で<code class="language-plaintext highlighter-rouge">ruby</code>をインストールします。</p>
 
-<pre><code>rbenv install 2.2.2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rbenv install 2.2.2
 rbenv global 2.2.2
 ruby -v
-</code></pre>
+</code></pre></div></div>
 
-<p>最初の<code>rbenv install</code>によりソースコードがダウンロードされビルド、そして、インストールされます。インストール先は~/.rbenv配下のディレクトリでインストール完了時に詳細が出力されますので確認してください。尚この操作はPCの性能に左右されます。Core-i7 3960Xで3分ほどかかりました。</p>
+<p>最初の<code class="language-plaintext highlighter-rouge">rbenv install</code>によりソースコードがダウンロードされビルド、そして、インストールされます。インストール先は~/.rbenv配下のディレクトリでインストール完了時に詳細が出力されますので確認してください。尚この操作はPCの性能に左右されます。Core-i7 3960Xで3分ほどかかりました。</p>
 
-<p>次の<code>rbenv global</code>でインストールしてあるバージョンを選びます。つまり、複数バージョンの<code>ruby</code>を切り替えて利用できるのです。今回は2.2.2を使いたいので<code>2.2.2</code>を与えました。</p>
+<p>次の<code class="language-plaintext highlighter-rouge">rbenv global</code>でインストールしてあるバージョンを選びます。つまり、複数バージョンの<code class="language-plaintext highlighter-rouge">ruby</code>を切り替えて利用できるのです。今回は2.2.2を使いたいので<code class="language-plaintext highlighter-rouge">2.2.2</code>を与えました。</p>
 
-<p>最後の<code>ruby -v</code>で実行PATH上の<code>ruby</code>のバージョンを確認します。</p>
+<p>最後の<code class="language-plaintext highlighter-rouge">ruby -v</code>で実行PATH上の<code class="language-plaintext highlighter-rouge">ruby</code>のバージョンを確認します。</p>
 
-<h2 id="bundler">bundlerのインストール</h2>
+<h2 id="bundlerのインストール">bundlerのインストール</h2>
 
-<p><code>ruby</code>のインストールが済んでしまえば<code>gem</code>コマンドを使うだけなので簡単です。</p>
+<p><code class="language-plaintext highlighter-rouge">ruby</code>のインストールが済んでしまえば<code class="language-plaintext highlighter-rouge">gem</code>コマンドを使うだけなので簡単です。</p>
 
-<pre><code>gem install bundler
-</code></pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install bundler
+</code></pre></div></div>
 
 <p>これで使えるようになります。</p>
 
 <p>Gemfilesがあるディレクトリに移動して</p>
 
-<pre><code>bundle install
-</code></pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle install
+</code></pre></div></div>
 
-<p>を実行すればそのGemfilesに記述してある<code>RubyGem</code>を<code>bundler</code>がインストールしてくれます。インストール先は<code>rbenv</code>がインストールしてある<code>~/.rbenv</code>(この説明通りに操作した場合)配下のディレクトリになります。</p>
+<p>を実行すればそのGemfilesに記述してある<code class="language-plaintext highlighter-rouge">RubyGem</code>を<code class="language-plaintext highlighter-rouge">bundler</code>がインストールしてくれます。インストール先は<code class="language-plaintext highlighter-rouge">rbenv</code>がインストールしてある<code class="language-plaintext highlighter-rouge">~/.rbenv</code>(この説明通りに操作した場合)配下のディレクトリになります。</p>
 
 
   </article>
