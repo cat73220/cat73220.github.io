@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Liquidの探求</title>
-  <meta name="description" content="Liquidの使い方あれこれ">
+  <title>github.io の更新手順備忘録</title>
+  <meta name="description" content="github.io の更新手順備忘録">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html">
+  <link rel="canonical" href="https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -102,32 +102,42 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Liquidの探求</h1>
-    <p class="post-meta">May 11, 2015</p>
+    <h1 class="post-title">github.io の更新手順備忘録</h1>
+    <p class="post-meta">Oct 30, 2021</p>
   </header>
 
   <article class="post-content">
-    <h3 id="liquidの使い方あれこれ">Liquidの使い方あれこれ</h3>
+    <h3 id="githubio-の更新手順備忘録">github.io の更新手順備忘録</h3>
 
-<p>Hello = 2015-05-11 21:00:00 +0900</p>
+<p>独自…なのだろうか、皆普通にこの手順なのかもしれない…の更新手順</p>
 
-<p>Update = 2015-05-11 21:00:00 +0900</p>
-
-<p>now = 2021-Oct-30 12:36:57</p>
-
-<p>comment = what is  <code class="language-plaintext highlighter-rouge">comment</code> ?</p>
-
-<p>page.layout = post</p>
-
-<p>page.categories = LearningLucidGantt</p>
-
-<p>category = Learning</p>
-
-<p>category = Lucid</p>
-
-<p>category = Gantt</p>
-
-<p>album =</p>
+<ol>
+  <li>blogディレクトリに移動</li>
+  <li><code class="language-plaintext highlighter-rouge">bundler exec jekyll b</code> (最後の b は build の省略形： bundler exec jekyll -help でサブコマンドが一覧できる)
+    <ul>
+      <li>ただ単にbuildするだけで、hrefやimgタグのURLがgithub.ioに置き換わる</li>
+      <li>serve(ローカル確認)したまま、下述の tar を実行しないように。 上述URLが localhost のままである</li>
+    </ul>
+  </li>
+  <li>blog/_siteディレクトリに移動
+    <ul>
+      <li>tarするコピー元ディレクトリはこちらにする。一番目のtarオプションに’*‘を与えているため。コピー先には新規追加したファイルが存在せず、想定している <strong>全コピー</strong> が行われない。</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">tar cf - * | tar -C &lt;github.ioをクローンしたローカルリポジトリ&gt; -tvf -</code> で tar の動作を確認
+    <ul>
+      <li>-Cオプションに与えるパスは、相対パスではなく、ホームディレクトリからのパスが安全でしょう</li>
+    </ul>
+  </li>
+  <li>動作に問題なさそうなら<code class="language-plaintext highlighter-rouge">tar cf - * | tar -C &lt;github.ioをクローンしたローカルリポジトリ&gt; -xvf - #(２番めのtarオプションをxvfに変更：eXtract)</code>を実行</li>
+  <li>gitでdiffを確認する
+    <ul>
+      <li>気に入らなかったら、<code class="language-plaintext highlighter-rouge">git reset --hard</code>と<code class="language-plaintext highlighter-rouge">git clean -fd</code>で元に戻して、発見した気に入らない箇所への対応に戻る</li>
+    </ul>
+  </li>
+  <li>git diff の結果に満足したら <code class="language-plaintext highlighter-rouge">blog/_site</code>ディレクトリで<code class="language-plaintext highlighter-rouge">git push origin master</code>を実行</li>
+  <li>すこーし待って github.io にwebブラウザでアクセス…反映されてなかったら、スーパーリロードしてみる</li>
+</ol>
 
   </article>
 

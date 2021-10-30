@@ -6,9 +6,54 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Oct 2021 12:08:04 +0900</pubDate>
-    <lastBuildDate>Sat, 30 Oct 2021 12:08:04 +0900</lastBuildDate>
+    <pubDate>Sat, 30 Oct 2021 12:36:56 +0900</pubDate>
+    <lastBuildDate>Sat, 30 Oct 2021 12:36:56 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>github.io の更新手順備忘録</title>
+        <description>&lt;h3 id=&quot;githubio-の更新手順備忘録&quot;&gt;github.io の更新手順備忘録&lt;/h3&gt;
+
+&lt;p&gt;独自…なのだろうか、皆普通にこの手順なのかもしれない…の更新手順&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;blogディレクトリに移動&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundler exec jekyll b&lt;/code&gt; (最後の b は build の省略形： bundler exec jekyll -help でサブコマンドが一覧できる)
+    &lt;ul&gt;
+      &lt;li&gt;ただ単にbuildするだけで、hrefやimgタグのURLがgithub.ioに置き換わる&lt;/li&gt;
+      &lt;li&gt;serve(ローカル確認)したまま、下述の tar を実行しないように。 上述URLが localhost のままである&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;blog/_siteディレクトリに移動
+    &lt;ul&gt;
+      &lt;li&gt;tarするコピー元ディレクトリはこちらにする。一番目のtarオプションに’*‘を与えているため。コピー先には新規追加したファイルが存在せず、想定している &lt;strong&gt;全コピー&lt;/strong&gt; が行われない。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar cf - * | tar -C &amp;lt;github.ioをクローンしたローカルリポジトリ&amp;gt; -tvf -&lt;/code&gt; で tar の動作を確認
+    &lt;ul&gt;
+      &lt;li&gt;-Cオプションに与えるパスは、相対パスではなく、ホームディレクトリからのパスが安全でしょう&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;動作に問題なさそうなら&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar cf - * | tar -C &amp;lt;github.ioをクローンしたローカルリポジトリ&amp;gt; -xvf - #(２番めのtarオプションをxvfに変更：eXtract)&lt;/code&gt;を実行&lt;/li&gt;
+  &lt;li&gt;gitでdiffを確認する
+    &lt;ul&gt;
+      &lt;li&gt;気に入らなかったら、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset --hard&lt;/code&gt;と&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clean -fd&lt;/code&gt;で元に戻して、発見した気に入らない箇所への対応に戻る&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;git diff の結果に満足したら &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog/_site&lt;/code&gt;ディレクトリで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;を実行&lt;/li&gt;
+  &lt;li&gt;すこーし待って github.io にwebブラウザでアクセス…反映されてなかったら、スーパーリロードしてみる&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 30 Oct 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>jekyll</category>
+        
+      </item>
     
       <item>
         <title>jekyllの再開で躓いたこととその解法</title>
@@ -857,60 +902,6 @@ ruby -v
         
         
         <category>resume</category>
-        
-      </item>
-    
-      <item>
-        <title>Thumbnail Test</title>
-        <description>&lt;div class=&quot;image-set&quot;&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/papipo.jpg&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMAG0031-ADK.jpg&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMAG0033-ADK.jpg&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/picdemo_adk.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_1.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225103.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_3.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/musican.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/android_porting_2.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/musican1.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_224847-40percent.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;post-col-split4&quot;&gt;
-&lt;img src=&quot;/images/IMG_15062014_225132-30percent.png&quot; class=&quot;image&quot; /&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-</description>
-        <pubDate>Fri, 15 May 2015 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/learning/2015/05/15/thumbnail-test.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/2015/05/15/thumbnail-test.html</guid>
-        
-        
-        <category>Learning</category>
         
       </item>
     
