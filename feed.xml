@@ -6,8 +6,8 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 12 Nov 2021 04:09:41 +0000</pubDate>
-    <lastBuildDate>Fri, 12 Nov 2021 04:09:41 +0000</lastBuildDate>
+    <pubDate>Fri, 12 Nov 2021 04:15:05 +0000</pubDate>
+    <lastBuildDate>Fri, 12 Nov 2021 04:15:05 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -22,13 +22,16 @@
 
 &lt;h3 id=&quot;ssh--i-の与え方など&quot;&gt;ssh -i の与え方など&lt;/h3&gt;
 
-&lt;p&gt;どの git サブコマンド が ssh通信するのか、よく調べていないのと、git -cをgitコマンド毎に記述するのは可読性が落ちるのとで、デプロイ(commit/push)のステップでは環境変数にした。&lt;/p&gt;
+&lt;p&gt;どの git サブコマンド が ssh通信するのか、よく調べていないのと、git -cをgitコマンド毎に記述するのは可読性が落ちることとが大きな理由で、デプロイ(commit/push)のステップでは環境変数(GIT_SSH_COMMAND)にした。&lt;/p&gt;
 
 &lt;p&gt;手元でローカルに clone するのと少し違っているみたいで、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remote.origin.url&lt;/code&gt; が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.git/config&lt;/code&gt; に記録されなかった。 …まだ、調べたりないな… 毎回 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config retmote...&lt;/code&gt; を実行するようにした。&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pull/push&lt;/code&gt; のタイミングと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;commit&lt;/code&gt; の仕方に手を入れたら、最後まで通るようになった。&lt;/p&gt;
 
-&lt;p&gt;このポストが、後悔ページで見られたら、一応、完成ってことだな。&lt;/p&gt;
+&lt;p&gt;このポストが、公開ページで見られたら、一応、完成ってことだな。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;追記&lt;/strong&gt; 完成したよ！&lt;/p&gt;
+
 </description>
         <pubDate>Fri, 12 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/github/2021/11/12/github-action-succeeded.html</link>

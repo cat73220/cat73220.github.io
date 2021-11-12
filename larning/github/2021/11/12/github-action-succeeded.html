@@ -121,13 +121,16 @@
 
 <h3 id="ssh--i-の与え方など">ssh -i の与え方など</h3>
 
-<p>どの git サブコマンド が ssh通信するのか、よく調べていないのと、git -cをgitコマンド毎に記述するのは可読性が落ちるのとで、デプロイ(commit/push)のステップでは環境変数にした。</p>
+<p>どの git サブコマンド が ssh通信するのか、よく調べていないのと、git -cをgitコマンド毎に記述するのは可読性が落ちることとが大きな理由で、デプロイ(commit/push)のステップでは環境変数(GIT_SSH_COMMAND)にした。</p>
 
 <p>手元でローカルに clone するのと少し違っているみたいで、 <code class="language-plaintext highlighter-rouge">remote.origin.url</code> が <code class="language-plaintext highlighter-rouge">.git/config</code> に記録されなかった。 …まだ、調べたりないな… 毎回 <code class="language-plaintext highlighter-rouge">config retmote...</code> を実行するようにした。</p>
 
 <p><code class="language-plaintext highlighter-rouge">pull/push</code> のタイミングと <code class="language-plaintext highlighter-rouge">commit</code> の仕方に手を入れたら、最後まで通るようになった。</p>
 
-<p>このポストが、後悔ページで見られたら、一応、完成ってことだな。</p>
+<p>このポストが、公開ページで見られたら、一応、完成ってことだな。</p>
+
+<p><strong>追記</strong> 完成したよ！</p>
+
 
   </article>
 
