@@ -6,9 +6,448 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Oct 2021 12:36:56 +0900</pubDate>
-    <lastBuildDate>Sat, 30 Oct 2021 12:36:56 +0900</lastBuildDate>
+    <pubDate>Fri, 12 Nov 2021 12:33:34 +0900</pubDate>
+    <lastBuildDate>Fri, 12 Nov 2021 12:33:34 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Github actionsを試めしてみた</title>
+        <description>&lt;h3 id=&quot;ほとんどこのガイドの１章目だけでできてしまうのだな&quot;&gt;ほとんど、この&lt;a href=&quot;https://docs.github.com/ja/actions/learn-github-actions/understanding-github-actions&quot;&gt;ガイドの１章目&lt;/a&gt;だけで、できてしまうのだな&lt;/h3&gt;
+
+&lt;p&gt;test.ymlを&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HW/.github/workflows&lt;/code&gt;に作って、pullした空の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;github.io&lt;/code&gt;リポジトリGITHUBIOディレクトリに&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog&lt;/code&gt;を生成して、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls -l&lt;/code&gt;と&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls -laF GITHBUIO&lt;/code&gt;を実行する&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Test&lt;/code&gt;アクションを作ってみた。&lt;/p&gt;
+
+&lt;p&gt;pushすると、GithubのHW・Actionsページの左ペーンに、作ったばかりの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Test&lt;/code&gt;アクションの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name:&lt;/code&gt;欄が&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;All workflows&lt;/code&gt;の下に表示された。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;All workflows&lt;/code&gt;がデフォルトで、全てのアクションの実行結果がコミットを１単位として行で並ぶ。TestアクションをクリックするとTestアクションの実行結果だけに絞られる。&lt;/p&gt;
+
+&lt;p&gt;実行結果の行をクリックすると、まんまですね。実行結果がアクション図のアクティビティ単位で確認できた。いわゆるデバックプリントが得られた。&lt;/p&gt;
+
+&lt;p&gt;Testアクションの不備、些細なタイポや確認ミス、等を直してコミットし直すと、実行結果行のコミット名左のアイコンが赤バツか緑チェックに変わる。&lt;/p&gt;
+
+&lt;p&gt;lsくらいならさっさとできてしまった。cloneと生成は問題なく実行できた。まんま、Dockerでshellプログラミングしてるのと同じだ。&lt;/p&gt;
+
+&lt;p&gt;あまりのあっけなさに、感動した&lt;/p&gt;
+
+&lt;p&gt;…次に進むために頭を冷やさねば&lt;/p&gt;
+
+&lt;h3 id=&quot;デプロイをしてみる&quot;&gt;デプロイをしてみる&lt;/h3&gt;
+
+&lt;p&gt;頭も冷めないまま、deploy.ymlを作成しpushした。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 1 Run &lt;span class=&quot;nv&quot;&gt;SOURCE_COMMIT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;%an: %B&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GITHUB_SHA&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+20 remote: Permission to cat73220/cat73220.github.io.git denied to github-actions[bot].
+21 fatal: unable to access &lt;span class=&quot;s1&quot;&gt;'https://github.com/cat73220/cat73220.github.io.git/'&lt;/span&gt;: The requested URL returned error: 403
+22 Error: Process completed with &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;code 128.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;エラーが出ました。 &lt;strong&gt;github.ioにコミットするための権限がありません&lt;/strong&gt; だそうな。&lt;/p&gt;
+
+&lt;p&gt;さて。&lt;/p&gt;
+
+&lt;p&gt;Googling by 「githubアクション 他のレポジトリにpushするための権限」&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://3nan3.github.io/post/2019122201_github_actions/&quot; target=&quot;_blank&quot;&gt;GitHub Actions で別のリポジトリに git push する&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://qiita.com/HeRo/items/935d5e268208d411ab5a&quot; target=&quot;_blank&quot;&gt;Github Actionsの使い方メモ - Qiita&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;沢山、ヒットした中から 上２リンク を選択。 …初めから読んでみるか…&lt;/p&gt;
+
+&lt;p&gt;1で当たりっぽい。 tl;dr にしたいことが書いてあるね&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;tldr&quot;&gt;tl;dr&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;push先のレポジトリで、Settingsから Deploy keys （公開鍵）を登録&lt;/li&gt;
+    &lt;li&gt;GitHub Actionsを設定するレポジトリで、Settingsの Secrets にDeploy keysに対応するの秘密鍵を登録&lt;/li&gt;
+    &lt;li&gt;GitHub Actions用のymlをいい感じに書いてpushする&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;心配してたこともここで解消された。２行目「Actions…Settings…秘密鍵を登録」。これで、大丈夫でしょう。…一応、全部に目を通してみた。&lt;/p&gt;
+
+&lt;p&gt;別リポジトリの権限周りが 想定外に複雑に実装されている。リポジトリ指定に登録した秘密鍵環境変数を渡すだけで良さそうな気が…&lt;/p&gt;
+
+&lt;p&gt;… 環境変数名をリポジトリURLに当てはめるだけじゃダメだった… 環境変数名がシークレットに直接置き換わってリポジトリURLとしてエラーになってしまう。&lt;/p&gt;
+
+&lt;p&gt;1の実装のように、gitを実行する際のsshでシークレットを参照するようにしないと、みたい。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 11 Nov 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/github/2021/11/11/testing-github-action.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/11/testing-github-action.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>github</category>
+        
+      </item>
+    
+      <item>
+        <title>【続き2】git pushをトリガーにGithub actionsでbuildとdeployする</title>
+        <description>&lt;h3 id=&quot;先週の不明点&quot;&gt;先週の不明点&lt;/h3&gt;
+
+&lt;p&gt;不明点だった、&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;このスクリプト&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(.github/workflow/&amp;lt;..&amp;gt;.yml)&lt;/code&gt;のデバッグの仕方&lt;/li&gt;
+  &lt;li&gt;「gh-pagesブランチにデプロイ」とあるが、別のgithub pagesリポジトリにデプロイできないのか？&lt;/li&gt;
+  &lt;li&gt;github pagesリポジトリでサブディレクトリで階層が別れていることに対応&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1も判明した。ついでに、2は訂正がある。&lt;/p&gt;
+
+&lt;h4 id=&quot;このスクリプトgithubworkflowymlのデバッグの仕方&quot;&gt;「このスクリプト&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(.github/workflow/&amp;lt;..&amp;gt;.yml)&lt;/code&gt;のデバッグの仕方」&lt;/h4&gt;
+
+&lt;p&gt;先週の「次は、&lt;a href=&quot;https://docs.github.com/ja/actions&quot;&gt;ここ&lt;/a&gt;を読まないと」を初めから読むと書いてあった…ドキュメントは初めから読むものなのかねぇ…どーも、後から読んでしまう 😁。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.github.com/ja/actions/learn-github-actions/understanding-github-actions#viewing-the-jobs-activity&quot;&gt;ジョブのアクティビティを表示&lt;/a&gt;…つまり、usesとか、runとか、の動作とその出力を「アクティビティ」として、「アクティビティを表示」と表現してた。 &lt;strong&gt;デバッグ&lt;/strong&gt; なんて言わないんだね。&lt;/p&gt;
+
+&lt;h4 id=&quot;gh-pagesブランチにデプロイとあるが別のgithub-pagesリポジトリにデプロイできないのか&quot;&gt;「gh-pagesブランチにデプロイ」とあるが、別のgithub pagesリポジトリにデプロイできないのか？&lt;/h4&gt;
+
+&lt;p&gt;対象リポジトリのgithub・setting・pagesでgithub-pageの対象にするブランチを決めることが出来る。このブランチを「gh-pagesブランチ」に設定ということであった。&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;つまり、必ずgh-pagesブランチ ということではなく、任意である。&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;Github pages側の取り決めで、「gh-pages」ブランチにpushした内容が &amp;lt;…&amp;gt;.github.io のコンテンツとなる。かな。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 11 Nov 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/github/2021/11/11/continued-build-deploy-by-github-action.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/11/continued-build-deploy-by-github-action.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>github</category>
+        
+      </item>
+    
+      <item>
+        <title>【続き】git pushをトリガーにGithub actionsでbuildとdeployする</title>
+        <description>&lt;h3 id=&quot;昨日の不明点&quot;&gt;昨日の不明点&lt;/h3&gt;
+
+&lt;p&gt;不明点だった、&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;このスクリプト&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(.github/workflow/&amp;lt;..&amp;gt;.yml)&lt;/code&gt;のデバッグの仕方&lt;/li&gt;
+  &lt;li&gt;「gh-pagesブランチにデプロイ」とあるが、別のgithub pagesリポジトリにデプロイできないのか？&lt;/li&gt;
+  &lt;li&gt;github pagesリポジトリでサブディレクトリで階層が別れていることに対応&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;このうち、2、3が判明した。&lt;/p&gt;
+
+&lt;h4 id=&quot;gh-pagesブランチにデプロイとあるが別のgithub-pagesリポジトリにデプロイできないのか&quot;&gt;「gh-pagesブランチにデプロイ」とあるが、別のgithub pagesリポジトリにデプロイできないのか？&lt;/h4&gt;
+
+&lt;p&gt;対象リポジトリのgithub・setting・pagesでgithub-pageの対象にするブランチを決めることが出来る。このブランチを「gh-pagesブランチ」に設定ということであった。&lt;/p&gt;
+
+&lt;p&gt;つまり、必ずgh-pagesブランチ ということではなく、任意である。&lt;/p&gt;
+
+&lt;h4 id=&quot;github-pagesリポジトリでサブディレクトリで階層が別れていることに対応&quot;&gt;github pagesリポジトリでサブディレクトリで階層が別れていることに対応&lt;/h4&gt;
+
+&lt;p&gt;actionsのyamlスクリプトの run節で可能である。また、uses節で指定するスクリプトの引数に存在すれば可能である。&lt;/p&gt;
+
+&lt;p&gt;actionsで利用するdockerコンテナは おおよそubuntu等 linux系 を選ぶだろう、慣れてるからね。そこに構築する（されている）コマンド群は、手元のコマンド群と似たようなものにするだろう、なので、可能である。&lt;/p&gt;
+
+&lt;h3 id=&quot;新たな課題&quot;&gt;新たな課題&lt;/h3&gt;
+
+&lt;p&gt;ymlスクリプトのデバッグは、printfデバッグの方法を調べるだけなので、課題を纏めてみる。&lt;/p&gt;
+
+&lt;p&gt;したいことは、&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;ローカル&lt;/strong&gt; のソースリポジトリで、成果物を &lt;strong&gt;ローカル&lt;/strong&gt; のgithub.ioリポジトリを生成先に指定して、ビルド&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ローカル&lt;/strong&gt; のgithub.ioリポジトリでgit push&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;の２点。&lt;/p&gt;
+
+&lt;p&gt;説明中「 &lt;strong&gt;ローカル&lt;/strong&gt; 」部分が「actions上のdockerコンテナ」に置き換わる。&lt;/p&gt;
+
+&lt;p&gt;「actions上のdockerコンテナ」上には、ソースリポジトリとgithub.ioリポジトリをcloneするのだな。ここまでできればruns節で``bundle exec…`と記述すればよいだろう。&lt;/p&gt;
+
+&lt;p&gt;次に「actions上のdockerコンテナ」上でリモート(github上)のgithub.ioリポジトリにpushするのだな。&lt;/p&gt;
+
+&lt;p&gt;「actions上のdockerコンテナ」にローカルのgit(秘密鍵：~/.sshディレクトリ)+bundlerの環境を作れば出来るのか…&lt;/p&gt;
+
+&lt;p&gt;必要なファイル群を選択してコピーするのか…めんどくさいなぁ&lt;/p&gt;
+
+&lt;p&gt;参考にしているyamlファイルを眺めていると gitコマンドやbundler,jekyll(つまりrubyも) は&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;actions/checkout@2&lt;/li&gt;
+  &lt;li&gt;actions/setup-ruby@1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;をuses節で指定するだけのようである…それほど面倒くさくないかも&lt;/p&gt;
+
+&lt;p&gt;煮詰まったのでキーワード「github-pages」を纏めてみることにした&lt;/p&gt;
+
+&lt;h4 id=&quot;github-pagesについて&quot;&gt;github-pagesについて&lt;/h4&gt;
+
+&lt;p&gt;このキーワードで２系統&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Githubが提供している「pages」機能&lt;/li&gt;
+  &lt;li&gt;Github「pages」機能を便利に使うためのRuby Gemの名称&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;過去に、このGemをインストールしていて、インストールした理由を完全に忘れていて、解釈をごちゃ混ぜにしていた^^;）&lt;/p&gt;
+
+&lt;p&gt;「pages」で想定している運用方法があって、それを Gem github-pages は容易にするように設計されている。&lt;/p&gt;
+
+&lt;p&gt;ここで採ったgithub.ioでは「pages」の設定が存在しているが、これもまた、過去に設定した際の使い方を忘れている。&lt;/p&gt;
+
+&lt;p&gt;実は「pages」を利用しなくて良いのでは… 再度「Github pages」で検索&lt;/p&gt;
+
+&lt;p&gt;Githubの「pages」のドキュメントの冒頭に「GitHub Pages サンプル集」リンクがあって、何の気なしにクリックして、一覧ページに移動。Jekyllをクリックして、やはり、なんとなく&lt;a href=&quot;https://github.com/jekyll/jekyll/blob/master/.github/workflows/docs.yml&quot;&gt;「.github/workflows/docs.yml」&lt;/a&gt;と辿ってみると…ズバリの答えが出てきてしまった…自分が採っているgithub.ioと同じ運用方法でdocsを生成している。スクリプトで使ってるコマンドやその実行順序がスンナリと解釈できるの。問題を感じない。&lt;/p&gt;
+
+&lt;p&gt;説明の各所に出てきたCNAMEの使い方はreactのgh-pagesブランチを見たらなんか、判ったかも。って思った。&lt;/p&gt;
+
+&lt;p&gt;次は、&lt;a href=&quot;https://docs.github.com/ja/actions&quot;&gt;ここ&lt;/a&gt;を読まないと&lt;/p&gt;
+</description>
+        <pubDate>Sat, 06 Nov 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/github/2021/11/06/continued-build-deploy-by-github-action.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/06/continued-build-deploy-by-github-action.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>github</category>
+        
+      </item>
+    
+      <item>
+        <title>git pushをトリガーにGithub actionsでbuildとdeployする</title>
+        <description>&lt;h3 id=&quot;デプロイまでを自動化&quot;&gt;デプロイまでを自動化&lt;/h3&gt;
+
+&lt;p&gt;makefileとか色々と古風な方法を思いついたのだが、検索すると circle ci/cd とか github actions 等がよくヒットした。勉強のため色々読んでみると、github-actionsでできそうな気配…基本以下のyamlファイルを&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.github/workflow/&amp;lt;job名&amp;gt;.yml&lt;/code&gt;(job名は下の例で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gh-pages-deploy&lt;/code&gt;のこと)で記述して、このリポジトリにgit pushするだけで済むらしい。&lt;/p&gt;
+
+&lt;p&gt;以下のyamlは&lt;a href=&quot;https://blog.toshimaru.net/jekyll-deploy-with-github-actions/&quot;&gt;この記事&lt;/a&gt;から拝借した。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;on:
+  push:
+    branches:
+      - master
+&lt;span class=&quot;nb&quot;&gt;jobs&lt;/span&gt;:
+  gh-pages-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+    - name: bundle &lt;span class=&quot;nb&quot;&gt;install
+      &lt;/span&gt;run: |
+        bundle config &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;path &lt;span class=&quot;s1&quot;&gt;'vendor/bundle'&lt;/span&gt;
+        bundle &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+    - name: Jekyll Build
+      run: bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll build
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;
+        publish_dir: ./_site
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;不明点は&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;このスクリプトのデバッグの仕方&lt;/li&gt;
+  &lt;li&gt;「gh-pagesブランチにデプロイ」とあるが、別のgithub pagesリポジトリにデプロイできないのか？&lt;/li&gt;
+  &lt;li&gt;github pagesリポジトリでサブディレクトリで階層が別れていることに対応&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これらが明確になれば、導入だな&lt;/p&gt;
+</description>
+        <pubDate>Fri, 05 Nov 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/github/2021/11/05/build-deploy-by-github-action.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/05/build-deploy-by-github-action.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>github</category>
+        
+      </item>
+    
+      <item>
+        <title>github.ioの運用</title>
+        <description>&lt;h3 id=&quot;githubioの運用&quot;&gt;github.ioの運用&lt;/h3&gt;
+
+&lt;p&gt;サブディレクトリ型URLで&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;github.io/直
+    &lt;ul&gt;
+      &lt;li&gt;ポータル&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;github.io/portfolio
+    &lt;ul&gt;
+      &lt;li&gt;スキル紹介ページ
+        &lt;ul&gt;
+          &lt;li&gt;組み込みスキルページ&lt;/li&gt;
+          &lt;li&gt;Webページ作成スキルページ&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;github.io/blog
+    &lt;ul&gt;
+      &lt;li&gt;ブログ&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;の様に構成してみよう。&lt;/p&gt;
+
+&lt;h3 id=&quot;githubioへのデプロイ&quot;&gt;github.ioへのデプロイ&lt;/h3&gt;
+
+&lt;p&gt;現状の手作業&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/&amp;lt;...&amp;gt;/&amp;lt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll b
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/&amp;lt;...&amp;gt;/_site
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;cv - &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; github.io &lt;span class=&quot;nt&quot;&gt;-xvf&lt;/span&gt; -
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/&amp;lt;...&amp;gt;/github.io/&amp;lt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;で、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;*&amp;gt;&lt;/code&gt; を それぞれ&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;直下&lt;/li&gt;
+  &lt;li&gt;/blog&lt;/li&gt;
+  &lt;li&gt;/portfolio&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;と三通りに分けて手動で実行しているのを&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/&amp;lt;...&amp;gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt;ビルドコマンド&amp;gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt;デプロイコマンド&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;の様に、ビルドコマンドとデプロイコマンドの２つに纏めよう。&lt;/p&gt;
+
+&lt;p&gt;現状の手作業は、手順が多すぎで、更新と更新の期間が開くとこの手順を順番ごと全て忘れるため。&lt;/p&gt;
+
+&lt;h3 id=&quot;開発ディレクトリの整理&quot;&gt;開発ディレクトリの整理&lt;/h3&gt;
+
+&lt;p&gt;ビルドコマンドとデプロイコマンドに纏めるために、開発ディレクトリも構成し直そう。&lt;/p&gt;
+
+&lt;p&gt;HW/blog、HW/blog/portfolioとHW/portalを&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HW/portal&lt;/li&gt;
+  &lt;li&gt;HW/portfolio&lt;/li&gt;
+  &lt;li&gt;HW/blog&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;にして、既存の blog と portal は&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HW/portal-by-2111&lt;/li&gt;
+  &lt;li&gt;HW/blog-by-2111&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;と名前変更して保持する。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 04 Nov 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/githubio/operation/2021/11/04/the-githubio-operation.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/githubio/operation/2021/11/04/the-githubio-operation.html</guid>
+        
+        
+        <category>githubio</category>
+        
+        <category>operation</category>
+        
+      </item>
+    
+      <item>
+        <title>Jekyllのサブコマンド</title>
+        <description>&lt;h3 id=&quot;jekyllのサブコマンド&quot;&gt;jekyllのサブコマンド&lt;/h3&gt;
+
+&lt;p&gt;サブコマンド s(serve)、b(build) 等に -s(–source)、-d(–destination) オプションを与えられる。&lt;/p&gt;
+
+&lt;h4 id=&quot;-ssourceオプション&quot;&gt;-s(–source)オプション&lt;/h4&gt;
+
+&lt;p&gt;jekyllソースディレクトリの指定。ソースディレクトリとは離れたディレクトリから上述のサブコマンドを実行できる&lt;/p&gt;
+
+&lt;h4 id=&quot;-ddestinationオプション&quot;&gt;-d(–destination)オプション&lt;/h4&gt;
+
+&lt;p&gt;生成先ディレクトリの指定。&lt;a href=&quot;/githubio/operation/2021/11/04/the-githubio-operation.html&quot;&gt;github.ioの運用&lt;/a&gt; で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;...&amp;gt;github.io&amp;lt;*&amp;gt;&lt;/code&gt; を与えれば、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar cf ...&lt;/code&gt;が省ける&lt;/p&gt;
+
+&lt;h4 id=&quot;実行例&quot;&gt;実行例&lt;/h4&gt;
+
+&lt;p&gt;-sと-dは一緒に使うことが多いでしょう。-sだけで使うと作業ディレクトリに _site ディレクトリが自動生成されてしまう。別に構わないか…&lt;/p&gt;
+
+&lt;p&gt;sサブコマンドであれば&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+blog
+..
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; blog &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; blog/_site
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;の様にソースディレクトリ内に_siteディレクトリを生成させて、作業ディレクトリを汚染しないようにしたほうが気持ちいいかな。&lt;/p&gt;
+
+&lt;p&gt;bサブコマンドでは&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll b &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; blog &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; ~/&amp;lt;...&amp;gt;githbu.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;の様に github.io 用のローカルレポジトリに生成させて、上述の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar cf ...&lt;/code&gt;を省くために使う。&lt;/p&gt;
+
+&lt;p&gt;何方のオプションもサブコマンドの後に記述しないとならない。jekyllの仕様である。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 04 Nov 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/jekyll-theme/2021/11/04/jekyll-subcommands.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll-theme/2021/11/04/jekyll-subcommands.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>jekyll-theme</category>
+        
+      </item>
+    
+      <item>
+        <title>テーマの適用</title>
+        <description>&lt;h3 id=&quot;jekyllのサイト&quot;&gt;jekyllの「サイト」&lt;/h3&gt;
+
+&lt;p&gt;サイトはWebページのことで、_siteディレクトリに生成される一群のWebページのファイル群のこと&lt;/p&gt;
+
+&lt;p&gt;サイトは、jekyllコマンドをダイレクトに&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jekyll new portal
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;のように実行する。newコマンドのあとの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portal&lt;/code&gt;がサイト名となる&lt;/p&gt;
+
+&lt;p&gt;上の実行ではデフォルトで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;minima&lt;/code&gt;テーマが選ばれる&lt;/p&gt;
+
+&lt;h3 id=&quot;テーマの変更gemfile版&quot;&gt;テーマの変更(Gemfile版)&lt;/h3&gt;
+
+&lt;p&gt;Gemfile の &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem &quot;minima&quot;&lt;/code&gt; を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem &quot;jekyll-agency&lt;/code&gt; に変更&lt;/p&gt;
+
+&lt;p&gt;_config.yml の &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;theme: minima&lt;/code&gt; を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;theme: jekyll-agency&lt;/code&gt; に変更&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;portal
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;で jekyll-agench をインストールする&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;を実行して&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4000&lt;/code&gt;をwebブラウザでアクセスすると、jekyll-agencyテーマで home ページが現れる&lt;/p&gt;
+
+&lt;p&gt;この状態ではhomeページは空っぽでなんとも捉えようのない状態である&lt;/p&gt;
+</description>
+        <pubDate>Sun, 31 Oct 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/jekyll-theme/2021/10/31/jekyll-themes.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll-theme/2021/10/31/jekyll-themes.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>jekyll-theme</category>
+        
+      </item>
     
       <item>
         <title>github.io の更新手順備忘録</title>
@@ -47,6 +486,48 @@
         <pubDate>Sat, 30 Oct 2021 00:00:00 +0900</pubDate>
         <link>https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html</guid>
+        
+        
+        <category>larning</category>
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+      <item>
+        <title>そろそろテーマを変えてみようか…</title>
+        <description>&lt;h3 id=&quot;jekyllテーマの候補&quot;&gt;Jekyllテーマの候補&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyllテーマ一覧&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;画面が横に広いので、コンテンツが中央に寄るテーマを探している&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://raviriley.github.io/agency-jekyll-theme-starter/&quot;&gt;agency&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;コーポレイトサイトのポータル用。かっこいい&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://golas.blog/&quot;&gt;simplex&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;blog用。かっこいい&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://yamt.netlify.app/&quot;&gt;YAMT&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;blog用だけど、色々、使い方を応用できそう&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://artemsheludko.com/zolan/&quot;&gt;Zolan&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;これ又、blog用だけど、これも又、色々、使い方を応用できそう&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 30 Oct 2021 00:00:00 +0900</pubDate>
+        <link>https://cat73220.github.io/larning/jekyll/2021/10/30/themes.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll/2021/10/30/themes.html</guid>
         
         
         <category>larning</category>
@@ -434,474 +915,6 @@ Configuration file: /home/nabe/HW/_config.yml
         <category>ruby</category>
         
         <category>jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>LED Tape UX/UI</title>
-        <description>&lt;h1 id=&quot;led-tape-uxui&quot;&gt;LED Tape UX/UI&lt;/h1&gt;
-
-&lt;h2 id=&quot;画面構成&quot;&gt;画面構成&lt;/h2&gt;
-
-&lt;p&gt;２ページで構成される。&lt;/p&gt;
-
-&lt;p&gt;各ページは画面全体を占めるように意匠する。&lt;/p&gt;
-
-&lt;h2 id=&quot;ipアドレスページ&quot;&gt;IPアドレスページ&lt;/h2&gt;
-
-&lt;p&gt;１ページ目はESP装置のIPアドレス入力画面。&lt;/p&gt;
-
-&lt;p&gt;IPv4アドレスを入力する、４数値入力欄と、決定ボタンで構成される。&lt;/p&gt;
-
-&lt;p&gt;アドレス入力はキーボードまたはキーパッドによって行う。&lt;/p&gt;
-
-&lt;p&gt;決定ボタンにより２ページ目に遷移する。
-決定ボタン押し下げによりESP装置との対話が行われ接続の合否を調べる。
-接続に成功すれば２ページ目に遷移する。
-失敗した場合はその旨を知らせて同画面に留まる。&lt;/p&gt;
-
-&lt;h2 id=&quot;ledテープアップデートページ&quot;&gt;LEDテープアップデートページ&lt;/h2&gt;
-
-&lt;p&gt;２ページ目はLEDテープ動作変更ページ。&lt;/p&gt;
-
-&lt;p&gt;ページ上、上から３箇所に別れる。上から、色と輝度選択、点灯個数、移動速度。&lt;/p&gt;
-
-&lt;p&gt;いずれの箇所も操作は横方向のスワイプまたはドラッグで値を決定する。なお、色と輝度選択は上下ドラッグまたはスワイプで輝度の設定となる。&lt;/p&gt;
-
-&lt;p&gt;１ページ目から遷移してくると、つまり２ページ目が始まると、LEDはデフォルト値を用いて動作を開始する。&lt;/p&gt;
-
-&lt;p&gt;LEDテープ動作中に３箇所の操作が可能で、LEDテープの動作を停止したり開始したりと行った操作はなく、上３箇所の操作が直ちにLEDテープに伝わり、動作が変更される。&lt;/p&gt;
-
-&lt;p&gt;LEDテープの動作とは、点灯個数個の色と輝度のLEDをLEDテープ上で進行と逆行を繰り返すものである。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;色と輝度選択
-    &lt;ul&gt;
-      &lt;li&gt;色：左から右に…彩度で変化？どうしよう…RGBの帯を作るか…三箇所別にスワイプは面倒だ…&lt;/li&gt;
-      &lt;li&gt;輝度：上下に0~255を変更。下端が255で明るく、上端が0で真っ暗…逆がいいか？255だと明るすぎだが…たしか、15くらいで十分な輝度だったはず&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;点灯個数
-    &lt;ul&gt;
-      &lt;li&gt;最低個数：1&lt;/li&gt;
-      &lt;li&gt;最大個数：32&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;移動速度
-    &lt;ul&gt;
-      &lt;li&gt;左が一番遅くて、右が一番早い&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 03 Mar 2016 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/specification/summary/2016/03/03/LEDTapeUxUi.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/specification/summary/2016/03/03/LEDTapeUxUi.html</guid>
-        
-        
-        <category>specification</category>
-        
-        <category>summary</category>
-        
-      </item>
-    
-      <item>
-        <title>SSH github access</title>
-        <description>&lt;h3 id=&quot;githubcomにユーザ名パスワードを入力せずにpushpullする&quot;&gt;github.comにユーザ名／パスワードを入力せずにpush/pullする&lt;/h3&gt;
-
-&lt;h4 id=&quot;自分のpcの準備&quot;&gt;自分のPCの準備&lt;/h4&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh_keygen&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;id_rsa/id_rsa.pub&lt;/code&gt;を作成する
-    &lt;ul&gt;
-      &lt;li&gt;後の手動入力をなくすためにパスフレーズは何も入力せずただ&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;enter&amp;gt;&lt;/code&gt;を入力する&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh&lt;/code&gt;に生成される&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh_add id_rsa&lt;/code&gt;を実行して&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh/known_hosts&lt;/code&gt;を更新する&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh/id_rsa.pub&lt;/code&gt;をクリップボードにコピーしておく&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;githubcomの自分のアカウントの準備&quot;&gt;github.comの自分のアカウントの準備&lt;/h4&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;github.comの自身のフロントページ右上端の’Edit Profile’を選んで’Public Profile’ページに移動する&lt;/li&gt;
-  &lt;li&gt;‘Public Profile’ページの左側ペーンの’SSH Keys’を選んで’SSH Keys’ページに移動する&lt;/li&gt;
-  &lt;li&gt;‘SSH Keys’ページ右上端の’New SSH Key’を選んでこのページをSSH鍵追加状態にする&lt;/li&gt;
-  &lt;li&gt;‘Title’に任意の文言を入力する。
-    &lt;ul&gt;
-      &lt;li&gt;後でこの鍵がどこのどのPCで生成したか特定できるようにしておくと良い&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;先の’自分のPCの準備’でクリップボードにコピーした&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;home&amp;gt;/.ssh/id_rsa.pub&lt;/code&gt;を’Key’欄にペーストする&lt;/li&gt;
-  &lt;li&gt;‘Add SSH Key’ボタンを押す&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;確認&quot;&gt;確認&lt;/h4&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;作業PCのshell端末で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh git@github.com&lt;/code&gt;を実行し下記のメッセージ①を得る
-    &lt;ul&gt;
-      &lt;li&gt;WarningとPTYで始まる行は無視して’Hi cat73220!..’からの行に着目する。ログイン承認できたけどshellアクセスを提供していません。切断します。ということ。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;クローンしたローカルリポジトリのremoteを変更する
-    &lt;ul&gt;
-      &lt;li&gt;git remote set-url origin git@github.com:cat73220/cat73220.github.io.git&lt;/li&gt;
-      &lt;li&gt;git remote -v&lt;/li&gt;
-      &lt;li&gt;下の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git remote -vの結果&lt;/code&gt;が得られる&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;ファイルをどれか修正・コミットして’git push origin master’して、ユーザー／パスワードが尋ねられないことを確認する&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;メッセージ①&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Warning: Permanently added the RSA host key &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;IP address &lt;span class=&quot;s1&quot;&gt;'192.30.252.128'&lt;/span&gt; to the list of known hosts.
-  PTY allocation request failed on channel 0
-  Hi cat73220! You&lt;span class=&quot;s1&quot;&gt;'ve successfully authenticated, but GitHub does not provide shell access.
-  Connection to github.com closed.
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;git remote -vの結果&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;origin	git@github.com:cat73220/cat73220.github.io.git &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fetch&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-origin	git@github.com:cat73220/cat73220.github.io.git &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;push&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Wed, 02 Mar 2016 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/larning/github.com/2016/03/02/ssh_github_access.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/github.com/2016/03/02/ssh_github_access.html</guid>
-        
-        
-        <category>larning</category>
-        
-        <category>github.com</category>
-        
-      </item>
-    
-      <item>
-        <title>Dot Emacs</title>
-        <description>&lt;h2 id=&quot;emacs&quot;&gt;.emacs&lt;/h2&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;package-initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package-archives&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;marmalade&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://marmalade-repo.org/packages/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package-archives&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;melpa&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://melpa.milkbox.net/packages/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'use-package&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;
-	     &lt;span class=&quot;ss&quot;&gt;:mode&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\\.markdown\\'&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-		    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\\.md\\'&quot;&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'whitespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-hook&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'c-mode-hook&lt;/span&gt;
-	  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-	    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;whitespace-mode&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'ispell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'ispell-local-dictionary-alist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;english-hunspell&quot;&lt;/span&gt;
-                                              &lt;span class=&quot;s&quot;&gt;&quot;[[:alpha:]]&quot;&lt;/span&gt;
-                                              &lt;span class=&quot;s&quot;&gt;&quot;[^[:alpha:]]&quot;&lt;/span&gt;
-                                              &lt;span class=&quot;s&quot;&gt;&quot;[']&quot;&lt;/span&gt;
-                                              &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;
-                                              &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-d&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;en_US&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-                                              &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;
-                                              &lt;span class=&quot;nv&quot;&gt;iso-8859-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;setq&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ispell-program-name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;hunspell&quot;&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;; Use hunspell to correct mistakes&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;ispell-dictionary&lt;/span&gt;   &lt;span class=&quot;s&quot;&gt;&quot;english-hunspell&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; Default dictionary to use&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;custom-set-variables&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; custom-set-variables was added by Custom.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; If you edit it by hand, you could mess it up, so be careful.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; Your init file should contain only one such instance.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; If there is more than one, they won't work right.&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;display-time-24hr-format&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;display-time-day-and-date&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;display-time-format&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;%G年%b%d日(%a) %H:%M&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;display-time-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;global-whitespace-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;menu-bar-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;scroll-bar-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tool-bar-mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;custom-set-faces&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; custom-set-faces was added by Custom.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; If you edit it by hand, you could mess it up, so be careful.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; Your init file should contain only one such instance.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; If there is more than one, they won't work right.&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Tue, 16 Feb 2016 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/larning/emacs/2016/02/16/dot-emacs.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/emacs/2016/02/16/dot-emacs.html</guid>
-        
-        
-        <category>larning</category>
-        
-        <category>emacs</category>
-        
-      </item>
-    
-      <item>
-        <title>Report first impression</title>
-        <description>&lt;dl&gt;
-  &lt;dt&gt;Declaration&lt;/dt&gt;
-  &lt;dd&gt;
-    &lt;ul&gt;
-      &lt;li&gt;list1&lt;/li&gt;
-      &lt;li&gt;list2&lt;/li&gt;
-      &lt;li&gt;list3&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/dd&gt;
-  &lt;dt&gt;Work&lt;/dt&gt;
-  &lt;dd&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Have to be staylish and clean up&lt;/li&gt;
-      &lt;li&gt;To be DT(Device tree) device driver
-        &lt;ul&gt;
-          &lt;li&gt;to add to ‘RasPi dts file(bcm2XXX-rpi-XXX.dts) located at “arch/arm/boot/dts”’&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/dd&gt;
-&lt;/dl&gt;
-
-</description>
-        <pubDate>Wed, 13 Jan 2016 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/learning/2016/01/13/report_first_impression.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/2016/01/13/report_first_impression.html</guid>
-        
-        
-        <category>Learning</category>
-        
-      </item>
-    
-      <item>
-        <title>Reminder for installing ruby and bundler</title>
-        <description>&lt;p&gt;Ubuntuでsudoとapt-getを使わずに、ローカルユーザディレクトリにrubyをインストールする方法を示します。&lt;/p&gt;
-
-&lt;p&gt;rbenvというrubyシステムインストーラを使い、その後にbundlerをインストールします。&lt;/p&gt;
-
-&lt;h2 id=&quot;rbenvのインストール&quot;&gt;rbenvのインストール&lt;/h2&gt;
-
-&lt;h3 id=&quot;準備&quot;&gt;準備&lt;/h3&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;最後の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-get install&lt;/code&gt;の実行前に&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dpkg -l | grep &quot;autoconf\|bison\|build-essential\|libssl-dev\|libyaml-dev\|libreadline6-dev\|zlib1g-dev\|libncurses5-dev\|libffi-dev\|libgdbm3\|libgdm-dev\|nodejs\|libsqlite3-dev&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;のように&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dpkg -l | grep &quot;...&quot;&lt;/code&gt;を実行して既にインストールされているubuntuパッケージの一覧を得て、まだされていないubuntuパッケージを調べて、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt-get install -y &lt;/code&gt;にそれらのパッケージを与えて実行します。&lt;/p&gt;
-
-&lt;h3 id=&quot;実行できるようにする&quot;&gt;実行できるようにする&lt;/h3&gt;
-
-&lt;p&gt;.bashrcに下記シェルスクリプトを追加します。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[ -d ~/.rbenv  ]] &amp;amp;&amp;amp; \
-    export PATH=${HOME}/.rbenv/bin:${PATH} &amp;amp;&amp;amp; \
-	eval &quot;$(rbenv init -&quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.rbenv&lt;/code&gt;ディレクトリの存在確認を検査し存在した場合&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATH&lt;/code&gt;シェル環境変数に&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.rbenv/bin&lt;/code&gt;を追加、および&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv init -&lt;/code&gt;を実行します。&lt;/p&gt;
-
-&lt;h3 id=&quot;rubyのインストール&quot;&gt;rubyのインストール&lt;/h3&gt;
-
-&lt;p&gt;いよいよ&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby&lt;/code&gt;をインストールします。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rbenv install 2.2.2
-rbenv global 2.2.2
-ruby -v
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;最初の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv install&lt;/code&gt;によりソースコードがダウンロードされビルド、そして、インストールされます。インストール先は~/.rbenv配下のディレクトリでインストール完了時に詳細が出力されますので確認してください。尚この操作はPCの性能に左右されます。Core-i7 3960Xで3分ほどかかりました。&lt;/p&gt;
-
-&lt;p&gt;次の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv global&lt;/code&gt;でインストールしてあるバージョンを選びます。つまり、複数バージョンの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby&lt;/code&gt;を切り替えて利用できるのです。今回は2.2.2を使いたいので&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2.2.2&lt;/code&gt;を与えました。&lt;/p&gt;
-
-&lt;p&gt;最後の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby -v&lt;/code&gt;で実行PATH上の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby&lt;/code&gt;のバージョンを確認します。&lt;/p&gt;
-
-&lt;h2 id=&quot;bundlerのインストール&quot;&gt;bundlerのインストール&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby&lt;/code&gt;のインストールが済んでしまえば&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem&lt;/code&gt;コマンドを使うだけなので簡単です。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install bundler
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;これで使えるようになります。&lt;/p&gt;
-
-&lt;p&gt;Gemfilesがあるディレクトリに移動して&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle install
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;を実行すればそのGemfilesに記述してある&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RubyGem&lt;/code&gt;を&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundler&lt;/code&gt;がインストールしてくれます。インストール先は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbenv&lt;/code&gt;がインストールしてある&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.rbenv&lt;/code&gt;(この説明通りに操作した場合)配下のディレクトリになります。&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 10 Sep 2015 01:33:00 +0900</pubDate>
-        <link>https://cat73220.github.io/learning/2015/09/10/reminding_installing_ruby_and_bundler.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/2015/09/10/reminding_installing_ruby_and_bundler.html</guid>
-        
-        
-        <category>Learning</category>
-        
-      </item>
-    
-      <item>
-        <title>Dot Emacs</title>
-        <description>&lt;h2 id=&quot;emacs&quot;&gt;.emacs&lt;/h2&gt;
-
-&lt;div class=&quot;language-lisp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'load-path&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/usr/share/emacs/site-lisp/global&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'load-path&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;~/.emacs.d/elisp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;autoload&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'gtags-mode&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;gtags&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'gtags&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;; (require 'migemo nil t)&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;package-initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package-archives&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;melpa&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://melpa.milkbox.net/packages/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-to-list&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'package-archives&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;marmalade&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://marmalade-repo.org/packages/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'e2wm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'xcscope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cscope-setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;autoload&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'markdonw-mode&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;markdown-mode.el&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Major mode for editting Markdown files&quot;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;setq&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;auto-mode-alist&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cons&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\\.markdown&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;auto-mode-alist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;setq&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;auto-mode-alist&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cons&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;\\.md&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;markdown-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;auto-mode-alist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;custom-set-variables&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; custom-set-variables was added by Custom.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; If you edit it by hand, you could mess it up, so be careful.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; Your init file should contain only one such instance.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; If there is more than one, they won't work right.&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dired-recursive-copies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;always&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dired-recursive-deletes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;always&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;markdown-command&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;kramdown&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tab-width&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;custom-set-faces&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; custom-set-faces was added by Custom.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; If you edit it by hand, you could mess it up, so be careful.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; Your init file should contain only one such instance.&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;;; If there is more than one, they won't work right.&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:family&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Takaoゴシック&quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:foundry&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;unknown&quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:slant&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:weight&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:height&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;98&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:width&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;put&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'narrow-to-region&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;'disabled&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Mon, 25 May 2015 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/larning/emacs/2015/05/25/dot-emacs.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/emacs/2015/05/25/dot-emacs.html</guid>
-        
-        
-        <category>larning</category>
-        
-        <category>emacs</category>
-        
-      </item>
-    
-      <item>
-        <title>Portfolio</title>
-        <description>&lt;h3 id=&quot;portfolio-150521a&quot;&gt;&lt;a href=&quot;/portfolio/150521a.html&quot;&gt;Portfolio 150521a&lt;/a&gt;&lt;/h3&gt;
-</description>
-        <pubDate>Wed, 20 May 2015 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/portfolio/2015/05/20/portfolio.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/portfolio/2015/05/20/portfolio.html</guid>
-        
-        
-        <category>portfolio</category>
-        
-      </item>
-    
-      <item>
-        <title>Resume</title>
-        <description>&lt;h2 id=&quot;nemesys&quot;&gt;Nemesys&lt;/h2&gt;
-
-&lt;p&gt;1992 - 2002&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://nemesys.co.jp&quot;&gt;Nemesys&lt;/a&gt; is developing software company by 2D/3D computer graphics.&lt;/p&gt;
-
-&lt;p&gt;They started to sell their own painting software on workstations, Neozoic at the first. They also helped to develop a custom 3D modeling by semi-meta objects software with Polygon pictures. They released their application by their knowledge of computer graphics to the many computer software sceanes.&lt;/p&gt;
-
-&lt;h4 id=&quot;a-fabric-cutting-layout-software-for-toray-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_09.html&quot;&gt;a fabric cutting layout software for Toray on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-plugin-software-for-painting-simulation-of-cars-in-maya-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_08.html&quot;&gt;a plugin software for painting simulation of cars in Maya on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-plugin-software-for-manupilating-skeletons-as-a-human-in-3d-max-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_07.html&quot;&gt;a plugin software for manupilating skeletons as a human in 3D-Max on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-cgi-of-decorated-recycable-one-time-film-camera-on-netscape-navigator&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_06.html&quot;&gt;a cgi of decorated recycable one-time film camera on Netscape Navigator&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-gui-of-dvd-authoring-software-on-windows&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_05.html&quot;&gt;a GUI of DVD authoring software on Windows&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-custom-3d-modeling-software-by-semi-meta-objects-for-polygon-pictures-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_04.html&quot;&gt;a custom 3D modeling software by semi-meta objects for Polygon pictures on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-glasses-shop-software-for-customizing-glasses-on-necews4800&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_03.html&quot;&gt;a glasses shop software for customizing glasses on NEC/EWS4800&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-custom-paint-software-for-a-tv-station-equipment-on-sonynews&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_02.html&quot;&gt;a custom paint software for a TV station equipment on SONY/NEWS&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;neozoic-paint-on-sgiiris&quot;&gt;&lt;a href=&quot;/resume/nemesys/nemesys_01.html&quot;&gt;Neozoic paint on SGI/IRIS&lt;/a&gt;&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;computer-creators&quot;&gt;Computer Creators&lt;/h2&gt;
-
-&lt;p&gt;1988 - 1992&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.c-creators.co.jp&quot;&gt;Computer Creators&lt;/a&gt; were started from 2 young people as nowaday’s start-up. It was placed on Suginami Tokyo so many years. Now, it is existed in Nagoya by 1 person.&lt;/p&gt;
-
-&lt;p&gt;This company mainly takes research and development as a job. They got consultant from customers and realized their idea into actual.&lt;/p&gt;
-
-&lt;p&gt;The intresting project was a ISDN modem for Macintosh, named TimeLiner which was developed by this single company as their own project. And, then sold it to public as actual commercial product.&lt;/p&gt;
-
-&lt;p&gt;They made many peripherals for several platforms. ex. Laser printe I/F for SUN3/4 for ASCII Corp. as hardware R&amp;amp;D, software R&amp;amp;D were a window syste for DTP on SPARDStation, a JPEG compression software using DSP for Mitsubishi corp., a renderer from 3D geometric data using OpenGL, a camera apps, TrigonScope and SFX Camera of iPhone Apps,&lt;/p&gt;
-
-&lt;h4 id=&quot;a-pcb-bom-management-software-on-emacs&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_05.html&quot;&gt;a PCB BOM management software on emacs&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-3d-wireframe-study-on-sun3sunview&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_04.html&quot;&gt;a 3D wireframe study on SUN3/Sunview&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;the-device-driver-for-cd-rom-if-board-on-ps2-for-chinon-kk&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_03.html&quot;&gt;the device driver for CD-ROM I/F board on PS/2 for CHINON K.K.&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;the-device-driver-for-cd-rom-if-board-on-pc-dos-for-chinon-kk&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_02.html&quot;&gt;the device driver for CD-ROM I/F board on PC-DOS for CHINON K.K.&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-custom-built-3d-computer-graphics-on-pc-compatible-with-transputer&quot;&gt;&lt;a href=&quot;/resume/c-creators/c-creators_01.html&quot;&gt;a custom built 3D computer graphics on PC-Compatible with Transputer&lt;/a&gt;&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;tritech&quot;&gt;Tritech&lt;/h2&gt;
-
-&lt;p&gt;1985 - 1988&lt;/p&gt;
-
-&lt;p&gt;This company was founded by 3 people and moved several place such Shibuya, Setagaya and Machida for getting bigger number of employee. And, it then closed around 1990s.&lt;/p&gt;
-
-&lt;p&gt;They were inventing a rom emulater, named ROMulater for reducing time of debugging their firmware instead of using EPROM avoiding using a UV eraser which was had a battery backed up Static-RAM, programmed by EPROM burner, used as a typical EPROM on circuits and sold in Akihabara and mail-order. When releasing into public in soon after, it was succeeded, but soon later, people copied and order was got reduced.&lt;/p&gt;
-
-&lt;p&gt;So, ROMulater was just one of their project. The company mainly did ODM. For example, developping high acculate computerized timer for a TV station, Developping semi-automatic remote controling a road roller, Developping and manufacturing multi frequency generater for LEADER K.K. as industrial mesurement equipment manufacturer, e.t.c.&lt;/p&gt;
-
-&lt;p&gt;As well as ODM companies, a project starts from researching, designing, making BOM, mass production, testing, releaseing and maintaining. This company did them as one-stop for the customers.&lt;/p&gt;
-
-&lt;p&gt;Based on the above, I larned the most of knowledges about developping and manufacturing computer devices along their senior engineers.&lt;/p&gt;
-
-&lt;h4 id=&quot;audio-digital-filters-of-fisibility-study-for-sega-corp&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_04.html&quot;&gt;audio digital filters of fisibility study for SEGA Corp.&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-ntsc-if-for-plasma-panel-display-of-dixy-corp&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_03.html&quot;&gt;a NTSC I/F for plasma panel display of DIXY Corp&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-custom-multi-peripheral-board-for-early-laundry-shop-pos-of-kk-bic&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_02.html&quot;&gt;a custom multi-peripheral board for early laundry shop POS of K.K. BIC&lt;/a&gt;&lt;/h4&gt;
-
-&lt;h4 id=&quot;a-test-jig-for-analog-vhfuhf-tuner-television-set-of-korean-manufacturer&quot;&gt;&lt;a href=&quot;/resume/tritech/tritech_01.html&quot;&gt;a test jig for analog VHF/UHF tuner television set of Korean manufacturer&lt;/a&gt;&lt;/h4&gt;
-</description>
-        <pubDate>Tue, 19 May 2015 00:00:00 +0900</pubDate>
-        <link>https://cat73220.github.io/resume/2015/05/19/resume.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/resume/2015/05/19/resume.html</guid>
-        
-        
-        <category>resume</category>
         
       </item>
     

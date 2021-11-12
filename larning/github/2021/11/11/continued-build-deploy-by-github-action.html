@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Liquidの探求</title>
-  <meta name="description" content="Liquidの使い方あれこれ">
+  <title>【続き2】git pushをトリガーにGithub actionsでbuildとdeployする</title>
+  <meta name="description" content="先週の不明点">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/2015/05/11/liquid.html">
+  <link rel="canonical" href="https://cat73220.github.io/larning/github/2021/11/11/continued-build-deploy-by-github-action.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -40,7 +40,51 @@
       <div class="trigger">
         
           
+          <a class="page-link" href="/portfolio/150521a.html">Portfolios 2015a</a>
+          
+        
+          
+          <a class="page-link" href="/portfolio/211030a.html">Portfolios 2021a</a>
+          
+        
+          
           <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
           
         
           
@@ -62,21 +106,35 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Liquidの探求</h1>
-    <p class="post-meta">May 11, 2015</p>
+    <h1 class="post-title">【続き2】git pushをトリガーにGithub actionsでbuildとdeployする</h1>
+    <p class="post-meta">Nov 11, 2021</p>
   </header>
 
   <article class="post-content">
-    <h3 id="liquid">Liquidの使い方あれこれ</h3>
+    <h3 id="先週の不明点">先週の不明点</h3>
 
-<p>Hello 2015-05-11 21:00:00 +0900</p>
+<p>不明点だった、</p>
+<ol>
+  <li>このスクリプト<code class="language-plaintext highlighter-rouge">(.github/workflow/&lt;..&gt;.yml)</code>のデバッグの仕方</li>
+  <li>「gh-pagesブランチにデプロイ」とあるが、別のgithub pagesリポジトリにデプロイできないのか？</li>
+  <li>github pagesリポジトリでサブディレクトリで階層が別れていることに対応</li>
+</ol>
 
-<p>Update 2015-05-11 21:00:00 +0900</p>
+<p>1も判明した。ついでに、2は訂正がある。</p>
 
-<p>now 2015-May-13 16:53:11</p>
+<h4 id="このスクリプトgithubworkflowymlのデバッグの仕方">「このスクリプト<code class="language-plaintext highlighter-rouge">(.github/workflow/&lt;..&gt;.yml)</code>のデバッグの仕方」</h4>
 
-<p>comment what is  ?</p>
+<p>先週の「次は、<a href="https://docs.github.com/ja/actions">ここ</a>を読まないと」を初めから読むと書いてあった…ドキュメントは初めから読むものなのかねぇ…どーも、後から読んでしまう 😁。</p>
 
+<p><a href="https://docs.github.com/ja/actions/learn-github-actions/understanding-github-actions#viewing-the-jobs-activity">ジョブのアクティビティを表示</a>…つまり、usesとか、runとか、の動作とその出力を「アクティビティ」として、「アクティビティを表示」と表現してた。 <strong>デバッグ</strong> なんて言わないんだね。</p>
+
+<h4 id="gh-pagesブランチにデプロイとあるが別のgithub-pagesリポジトリにデプロイできないのか">「gh-pagesブランチにデプロイ」とあるが、別のgithub pagesリポジトリにデプロイできないのか？</h4>
+
+<p>対象リポジトリのgithub・setting・pagesでgithub-pageの対象にするブランチを決めることが出来る。このブランチを「gh-pagesブランチ」に設定ということであった。</p>
+
+<p><del>つまり、必ずgh-pagesブランチ ということではなく、任意である。</del></p>
+
+<p>Github pages側の取り決めで、「gh-pages」ブランチにpushした内容が &lt;…&gt;.github.io のコンテンツとなる。かな。</p>
 
   </article>
 
@@ -95,7 +153,7 @@
       <div class="footer-col  footer-col-1">
         <ul class="contact-list">
           <li>Jumly integration</li>
-          <li><a href="mailto:nabe@logvox.jp">nabe@logvox.jp</a></li>
+          <li><a href="mailto:nabe1112@mail.goo.ne.jp">nabe1112@mail.goo.ne.jp</a></li>
         </ul>
       </div>
 
