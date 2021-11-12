@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Liquidの探求</title>
-  <meta name="description" content="Liquidの使い方あれこれ">
+  <title>Github actions 完了</title>
+  <meta name="description" content="エディタの構文検証機能は大事だ">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html">
+  <link rel="canonical" href="https://cat73220.github.io/larning/github/2021/11/12/github-action-succeeded.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
   <script src='//code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -106,32 +106,28 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Liquidの探求</h1>
-    <p class="post-meta">May 11, 2015</p>
+    <h1 class="post-title">Github actions 完了</h1>
+    <p class="post-meta">Nov 12, 2021</p>
   </header>
 
   <article class="post-content">
-    <h3 id="liquidの使い方あれこれ">Liquidの使い方あれこれ</h3>
+    <h3 id="エディタの構文検証機能は大事だ">エディタの構文検証機能は大事だ</h3>
 
-<p>Hello = 2015-05-11 12:00:00 +0000</p>
+<p>gitコマンド実行でssh通信にシークレットを渡すシェルスクリプトには直ぐに行きあたれたのだが、いざ、Github Actionsで実行するとエラーが生じる。</p>
 
-<p>Update = 2015-05-11 12:00:00 +0000</p>
+<p>手元で実行しても問題ないが、Github Actionsは追加した行で<code class="language-plaintext highlighter-rouge">Invalid workflow file</code>をエラーを起こす… yamlファイル構文でインデント文字の統一 に気がつくのに思いの外時間を費やしてしまった。</p>
 
-<p>now = 2021-Nov-12 04:09:41</p>
+<p>エディタで意識せずにタブキーを使っていたのと構文検証機能を yamlファイル に設定していなかったため、気にも停めていなかったことだった。追加の２行のインデントがタブ文字だったため、Github Actionsでエラーとなっていた（泣）。</p>
 
-<p>comment = what is  <code class="language-plaintext highlighter-rouge">comment</code> ?</p>
+<h3 id="ssh--i-の与え方など">ssh -i の与え方など</h3>
 
-<p>page.layout = post</p>
+<p>どの git サブコマンド が ssh通信するのか、よく調べていないのと、git -cをgitコマンド毎に記述するのは可読性が落ちるのとで、デプロイ(commit/push)のステップでは環境変数にした。</p>
 
-<p>page.categories = LearningLucidGantt</p>
+<p>手元でローカルに clone するのと少し違っているみたいで、 <code class="language-plaintext highlighter-rouge">remote.origin.url</code> が <code class="language-plaintext highlighter-rouge">.git/config</code> に記録されなかった。 …まだ、調べたりないな… 毎回 <code class="language-plaintext highlighter-rouge">config retmote...</code> を実行するようにした。</p>
 
-<p>category = Learning</p>
+<p><code class="language-plaintext highlighter-rouge">pull/push</code> のタイミングと <code class="language-plaintext highlighter-rouge">commit</code> の仕方に手を入れたら、最後まで通るようになった。</p>
 
-<p>category = Lucid</p>
-
-<p>category = Gantt</p>
-
-<p>album =</p>
+<p>このポストが、後悔ページで見られたら、一応、完成ってことだな。</p>
 
   </article>
 
