@@ -6,8 +6,8 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 12 Nov 2021 12:33:34 +0900</pubDate>
-    <lastBuildDate>Fri, 12 Nov 2021 12:33:34 +0900</lastBuildDate>
+    <pubDate>Fri, 12 Nov 2021 03:48:44 +0000</pubDate>
+    <lastBuildDate>Fri, 12 Nov 2021 03:48:44 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -73,7 +73,7 @@
 
 &lt;p&gt;1の実装のように、gitを実行する際のsshでシークレットを参照するようにしないと、みたい。&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Nov 2021 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 11 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/github/2021/11/11/testing-github-action.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/11/testing-github-action.html</guid>
         
@@ -111,7 +111,7 @@
 
 &lt;p&gt;Github pages側の取り決めで、「gh-pages」ブランチにpushした内容が &amp;lt;…&amp;gt;.github.io のコンテンツとなる。かな。&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Nov 2021 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 11 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/github/2021/11/11/continued-build-deploy-by-github-action.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/11/continued-build-deploy-by-github-action.html</guid>
         
@@ -201,7 +201,7 @@
 
 &lt;p&gt;次は、&lt;a href=&quot;https://docs.github.com/ja/actions&quot;&gt;ここ&lt;/a&gt;を読まないと&lt;/p&gt;
 </description>
-        <pubDate>Sat, 06 Nov 2021 00:00:00 +0900</pubDate>
+        <pubDate>Sat, 06 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/github/2021/11/06/continued-build-deploy-by-github-action.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/06/continued-build-deploy-by-github-action.html</guid>
         
@@ -254,7 +254,7 @@
 
 &lt;p&gt;これらが明確になれば、導入だな&lt;/p&gt;
 </description>
-        <pubDate>Fri, 05 Nov 2021 00:00:00 +0900</pubDate>
+        <pubDate>Fri, 05 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/github/2021/11/05/build-deploy-by-github-action.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/05/build-deploy-by-github-action.html</guid>
         
@@ -349,7 +349,7 @@
 &lt;p&gt;と名前変更して保持する。&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 04 Nov 2021 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/githubio/operation/2021/11/04/the-githubio-operation.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/githubio/operation/2021/11/04/the-githubio-operation.html</guid>
         
@@ -393,7 +393,7 @@ blog
 
 &lt;p&gt;何方のオプションもサブコマンドの後に記述しないとならない。jekyllの仕様である。&lt;/p&gt;
 </description>
-        <pubDate>Thu, 04 Nov 2021 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/jekyll-theme/2021/11/04/jekyll-subcommands.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll-theme/2021/11/04/jekyll-subcommands.html</guid>
         
@@ -438,7 +438,7 @@ blog
 
 &lt;p&gt;この状態ではhomeページは空っぽでなんとも捉えようのない状態である&lt;/p&gt;
 </description>
-        <pubDate>Sun, 31 Oct 2021 00:00:00 +0900</pubDate>
+        <pubDate>Sun, 31 Oct 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/jekyll-theme/2021/10/31/jekyll-themes.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll-theme/2021/10/31/jekyll-themes.html</guid>
         
@@ -483,7 +483,7 @@ blog
   &lt;li&gt;すこーし待って github.io にwebブラウザでアクセス…反映されてなかったら、スーパーリロードしてみる&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Sat, 30 Oct 2021 00:00:00 +0900</pubDate>
+        <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html</guid>
         
@@ -525,7 +525,7 @@ blog
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Sat, 30 Oct 2021 00:00:00 +0900</pubDate>
+        <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/jekyll/2021/10/30/themes.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll/2021/10/30/themes.html</guid>
         
@@ -901,7 +901,7 @@ Configuration file: /home/nabe/HW/_config.yml
 &lt;p&gt;追加したこの記事も問題なくhtmlに変換された。これでportfolioとresumeの更新の下準備ができた。急がないでマイペースで参りましょう。…自分ブラックカンパニーに留意して…
 あ、思い出すことがもう一つあった。cat73220.github.ioの更新方法を調べないと。&lt;/p&gt;
 </description>
-        <pubDate>Fri, 29 Oct 2021 00:00:00 +0900</pubDate>
+        <pubDate>Fri, 29 Oct 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/larning/rbenv/bundler/ruby/jekyll/2021/10/29/resume-jekyll-but-didnt-go-well.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/larning/rbenv/bundler/ruby/jekyll/2021/10/29/resume-jekyll-but-didnt-go-well.html</guid>
         
