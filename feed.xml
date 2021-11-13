@@ -6,9 +6,84 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 12 Nov 2021 04:15:05 +0000</pubDate>
-    <lastBuildDate>Fri, 12 Nov 2021 04:15:05 +0000</lastBuildDate>
+    <pubDate>Sat, 13 Nov 2021 03:01:04 +0000</pubDate>
+    <lastBuildDate>Sat, 13 Nov 2021 03:01:04 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>ポータルとポートフォリオの見通し</title>
+        <description>&lt;p&gt;git push→github.ioデプロイ の自動化が済んだ。以前よりも使い心地が良くなったので、気軽に、このWebサイトを全体的に再構成しよう。&lt;/p&gt;
+
+&lt;p&gt;サイトタイトルの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jumly integration&lt;/code&gt;は…はて、なんだったんだろ〜…この辺りから整理・整頓していこう。&lt;/p&gt;
+
+&lt;h3 id=&quot;タイトルjumly-integrationを思い出す&quot;&gt;タイトル「Jumly integration」を思い出す&lt;/h3&gt;
+
+&lt;p&gt;思い出した&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;UMLダイアグラムを埋め込むjavascriptライブラリだった&lt;/li&gt;
+  &lt;li&gt;mermaid 採用の前に jumly.js を見つけて、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include/head.html&lt;/code&gt; に直に記述して利用してたのだ&lt;/li&gt;
+  &lt;li&gt;配布元の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jumly.tmtk.net&lt;/code&gt;が閉鎖されたのと、これに必要な&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;coffee-script.js&lt;/code&gt;へのURLが変更？閉鎖？されたことで使えなくなったのだな&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jumly.tmtk.net&lt;/code&gt;でGooglingしたら&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog.tmtk.net&lt;/code&gt;に作者を見つけた。2013年くらいまではJumlyをメンテしてたけど、その後、一切触れなくなった。やめちゃったかな…Twitter@tmtk75で尋ねてみようか…&lt;/li&gt;
+  &lt;li&gt;タイトルを変更しよう→考える&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;githubioの構成&quot;&gt;github.ioの構成&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;github.io&lt;/strong&gt;：root：ここは現portalとする
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;blog&lt;/strong&gt;：ここに今のルートを配置&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;portfolio&lt;/strong&gt;：ポートフォリオ:blogリポジトリからportalリポジトリに引っ越しだ
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;resume&lt;/strong&gt;：現resumeを配置。最近のものもここに追加：これも引っ越し&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;portfolioの整理&quot;&gt;portfolioの整理&lt;/h3&gt;
+
+&lt;p&gt;portalのportfolioに合わせて整理しよう&lt;/p&gt;
+
+&lt;p&gt;_portfolioディレクトリに一件ごとのマークダウンファイルを作成…多いな&lt;/p&gt;
+
+&lt;p&gt;ポータルに並ぶポートフォリオを&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/portfolio_grid.html&lt;/code&gt;で選んで表示されるようにする&lt;/p&gt;
+
+&lt;p&gt;どこかに全ポートフォリオをアクセスできるように、一覧ページを作る、かな&lt;/p&gt;
+
+&lt;h3 id=&quot;雑多なこと&quot;&gt;雑多なこと&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;favicon.ico&lt;/code&gt;が&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;not found&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;portal用にフォントを選ぶか&lt;/li&gt;
+  &lt;li&gt;フッターや水平段組みした時、偶数個、奇数個、でセンタリングするようにしたい&lt;/li&gt;
+  &lt;li&gt;kramdownの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inline code&lt;/code&gt;と&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;code block&lt;/code&gt;は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;highlight&lt;/code&gt;タグのほうが良いか？ → 使い分ける…highlightを常用するようにしたほうがいいかな
+    &lt;ul&gt;
+      &lt;li&gt;highlightの書式指定サフィックス&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{ruby, html, etc}&lt;/code&gt;がどれくらい揃っているか、に依るか&lt;/li&gt;
+      &lt;li&gt;…違った
+        &lt;ul&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;code block&lt;/code&gt;記述は htmlを直書きしたとき 途中で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;code block&lt;/code&gt;にできない&lt;/li&gt;
+          &lt;li&gt;highlightはhtml直書き中でも code block にできる&lt;/li&gt;
+          &lt;li&gt;書式指定は何方も同じものが使えて、同じ様に色付けされる←気にしないでいいね&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sat, 13 Nov 2021 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/remind/mymind/2021/11/13/resolution-for-portal-and-portfolios.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/remind/mymind/2021/11/13/resolution-for-portal-and-portfolios.html</guid>
+        
+        
+        <category>remind</category>
+        
+        <category>mymind</category>
+        
+      </item>
     
       <item>
         <title>Github actions 完了</title>
@@ -34,11 +109,11 @@
 
 </description>
         <pubDate>Fri, 12 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/github/2021/11/12/github-action-succeeded.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/12/github-action-succeeded.html</guid>
+        <link>https://cat73220.github.io/learning/github/2021/11/12/github-action-succeeded.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2021/11/12/github-action-succeeded.html</guid>
         
         
-        <category>larning</category>
+        <category>learning</category>
         
         <category>github</category>
         
@@ -108,11 +183,11 @@
 &lt;p&gt;1の実装のように、gitを実行する際のsshでシークレットを参照するようにしないと、みたい。&lt;/p&gt;
 </description>
         <pubDate>Thu, 11 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/github/2021/11/11/testing-github-action.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/11/testing-github-action.html</guid>
+        <link>https://cat73220.github.io/learning/github/2021/11/11/testing-github-action.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2021/11/11/testing-github-action.html</guid>
         
         
-        <category>larning</category>
+        <category>learning</category>
         
         <category>github</category>
         
@@ -146,11 +221,11 @@
 &lt;p&gt;Github pages側の取り決めで、「gh-pages」ブランチにpushした内容が &amp;lt;…&amp;gt;.github.io のコンテンツとなる。かな。&lt;/p&gt;
 </description>
         <pubDate>Thu, 11 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/github/2021/11/11/continued-build-deploy-by-github-action.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/11/continued-build-deploy-by-github-action.html</guid>
+        <link>https://cat73220.github.io/learning/github/2021/11/11/continued-build-deploy-by-github-action.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2021/11/11/continued-build-deploy-by-github-action.html</guid>
         
         
-        <category>larning</category>
+        <category>learning</category>
         
         <category>github</category>
         
@@ -236,11 +311,11 @@
 &lt;p&gt;次は、&lt;a href=&quot;https://docs.github.com/ja/actions&quot;&gt;ここ&lt;/a&gt;を読まないと&lt;/p&gt;
 </description>
         <pubDate>Sat, 06 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/github/2021/11/06/continued-build-deploy-by-github-action.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/06/continued-build-deploy-by-github-action.html</guid>
+        <link>https://cat73220.github.io/learning/github/2021/11/06/continued-build-deploy-by-github-action.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2021/11/06/continued-build-deploy-by-github-action.html</guid>
         
         
-        <category>larning</category>
+        <category>learning</category>
         
         <category>github</category>
         
@@ -289,11 +364,11 @@
 &lt;p&gt;これらが明確になれば、導入だな&lt;/p&gt;
 </description>
         <pubDate>Fri, 05 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/github/2021/11/05/build-deploy-by-github-action.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/github/2021/11/05/build-deploy-by-github-action.html</guid>
+        <link>https://cat73220.github.io/learning/github/2021/11/05/build-deploy-by-github-action.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2021/11/05/build-deploy-by-github-action.html</guid>
         
         
-        <category>larning</category>
+        <category>learning</category>
         
         <category>github</category>
         
@@ -428,11 +503,11 @@ blog
 &lt;p&gt;何方のオプションもサブコマンドの後に記述しないとならない。jekyllの仕様である。&lt;/p&gt;
 </description>
         <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/jekyll-theme/2021/11/04/jekyll-subcommands.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll-theme/2021/11/04/jekyll-subcommands.html</guid>
+        <link>https://cat73220.github.io/learning/jekyll-theme/2021/11/04/jekyll-subcommands.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll-theme/2021/11/04/jekyll-subcommands.html</guid>
         
         
-        <category>larning</category>
+        <category>learning</category>
         
         <category>jekyll-theme</category>
         
@@ -473,11 +548,11 @@ blog
 &lt;p&gt;この状態ではhomeページは空っぽでなんとも捉えようのない状態である&lt;/p&gt;
 </description>
         <pubDate>Sun, 31 Oct 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/jekyll-theme/2021/10/31/jekyll-themes.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll-theme/2021/10/31/jekyll-themes.html</guid>
+        <link>https://cat73220.github.io/learning/jekyll-theme/2021/10/31/jekyll-themes.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll-theme/2021/10/31/jekyll-themes.html</guid>
         
         
-        <category>larning</category>
+        <category>learning</category>
         
         <category>jekyll-theme</category>
         
@@ -518,53 +593,11 @@ blog
 &lt;/ol&gt;
 </description>
         <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll/2021/10/30/update-posts-reminder.html</guid>
+        <link>https://cat73220.github.io/learning/jekyll/2021/10/30/update-posts-reminder.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2021/10/30/update-posts-reminder.html</guid>
         
         
-        <category>larning</category>
-        
-        <category>jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>そろそろテーマを変えてみようか…</title>
-        <description>&lt;h3 id=&quot;jekyllテーマの候補&quot;&gt;Jekyllテーマの候補&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyllテーマ一覧&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;画面が横に広いので、コンテンツが中央に寄るテーマを探している&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://raviriley.github.io/agency-jekyll-theme-starter/&quot;&gt;agency&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;コーポレイトサイトのポータル用。かっこいい&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://golas.blog/&quot;&gt;simplex&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;blog用。かっこいい&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://yamt.netlify.app/&quot;&gt;YAMT&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;blog用だけど、色々、使い方を応用できそう&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://artemsheludko.com/zolan/&quot;&gt;Zolan&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;これ又、blog用だけど、これも又、色々、使い方を応用できそう&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/larning/jekyll/2021/10/30/themes.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/larning/jekyll/2021/10/30/themes.html</guid>
-        
-        
-        <category>larning</category>
+        <category>learning</category>
         
         <category>jekyll</category>
         
