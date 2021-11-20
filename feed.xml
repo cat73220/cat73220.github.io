@@ -6,9 +6,166 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 14 Nov 2021 01:42:52 +0000</pubDate>
-    <lastBuildDate>Sun, 14 Nov 2021 01:42:52 +0000</lastBuildDate>
+    <pubDate>Sat, 20 Nov 2021 03:23:57 +0000</pubDate>
+    <lastBuildDate>Sat, 20 Nov 2021 03:23:57 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>ポータルの文章</title>
+        <description>&lt;p&gt;ポータルに載せる文章を考えてみよう…取り掛かってみたら、直ぐに文章は浮かんでこず…方針を立てることにした。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_data/sitetext.yml&lt;/code&gt;の対応セクションを順に書き込んでいく。&lt;/p&gt;
+
+&lt;p&gt;尚、このファイル&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_data&lt;/code&gt;ディレクトリ配下のためか&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.yml&lt;/code&gt;のため(こっちだな：設定ファイルだからだ)か、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--incremental --watch&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll&lt;/code&gt;を動作させても、自動ビルドされない。都度、コマンドラインでビルドすることにする。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;header.title &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Welcome to our Studio!&lt;/code&gt;→&lt;/li&gt;
+  &lt;li&gt;header.text &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;It's nice to meet you&lt;/code&gt;→&lt;/li&gt;
+  &lt;li&gt;header.button &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tell me more&lt;/code&gt;→
+    &lt;ul&gt;
+      &lt;li&gt;link先は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Services&lt;/code&gt;セクション→このままでいいな。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Services&lt;/code&gt;セクションに導く文章にしよう&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;services.title &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Services&lt;/code&gt;→
+    &lt;ul&gt;
+      &lt;li&gt;興味を持ってくれた人（クライアント…だけど、この言葉はあまり好きじゃないな）に、提供できるスキル…知識…とか、そお言う言葉だな&lt;/li&gt;
+      &lt;li&gt;「クライアント」は「お客様」だよな…つまり &lt;strong&gt;必ず&lt;/strong&gt; お金のやり取りが生じると思うのだが… 受け取る対価はお金だけじゃないことを伝えたいな&lt;/li&gt;
+      &lt;li&gt;日本語の他の言葉より&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;サービス&lt;/code&gt;の方が伝わりやすいのか…&lt;/li&gt;
+      &lt;li&gt;大半の日本人の「サービス」の意味するところは「無料でXXを受けられる」と解釈することが多いような気がする…&lt;/li&gt;
+      &lt;li&gt;対価はいただきたいので「サービス」は使いたくないかも&lt;/li&gt;
+      &lt;li&gt;このセクションに、それらを並べるので、並べてから「題」を付けるのがいいかな…&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;services.text &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Lorem ipsum&lt;/code&gt;→
+    &lt;ul&gt;
+      &lt;li&gt;上述の通り、ごちゃごちゃ考えたことを纏めた文章かな&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;services.list[0].&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;E-Commerce&lt;/code&gt;→ワンストップ試作
+    &lt;ul&gt;
+      &lt;li&gt;WebサービスもIoT装置も、左両方を組み合わせても、全てカバーします…みたいな&lt;/li&gt;
+      &lt;li&gt;フルスタックを試作…かな&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;services.list[1].&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Responsive Design&lt;/code&gt;→
+    &lt;ul&gt;
+      &lt;li&gt;「E-Commerce」も「Responsive Design」も具体的な気もするけど「フルスタック試作」とかよりは抽象的か…&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;services.list[2].&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Markdown(へのリンク)&lt;/code&gt;→
+    &lt;ul&gt;
+      &lt;li&gt;これは技術語だな…あまり気にしなくていいかも&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;services.list[*].icon&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fa fa-xxx&lt;/code&gt;→
+    &lt;ul&gt;
+      &lt;li&gt;Fontawesomeで対応する言葉を探すのもありだね&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;内容を考えていくのはこのまま続ければいいけど何時までも文章が決まらないな…　トップダウンだと具体的なものにし辛いか…　ゴールが遠く感じるのは作業を続けられなくなるので避けねば。&lt;/p&gt;
+
+&lt;h4 id=&quot;具体的に挙げられるスキルを並べてみるか&quot;&gt;具体的に挙げられるスキルを並べてみるか…&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;職歴からボトムアップに整えたほうが具体性を保てるな…
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th style=&quot;text-align: right&quot;&gt;&lt;strong&gt;社名&lt;/strong&gt;&lt;/th&gt;
+              &lt;th&gt; &lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;トライテック&lt;/td&gt;
+              &lt;td&gt;組み込み&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;コンピュータークリエーターズ&lt;/td&gt;
+              &lt;td&gt;基礎研究・保守・3DCG&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;ネメシス&lt;/td&gt;
+              &lt;td&gt;Unixアプリケーション・3DCG&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;eValley&lt;/td&gt;
+              &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;エスマテックエンジニアリング&lt;/td&gt;
+              &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;eFlow&lt;/td&gt;
+              &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;aLab&lt;/td&gt;
+              &lt;td&gt;組み込み&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;esp8266&lt;/td&gt;
+              &lt;td&gt;IoT&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;Adafruits&lt;/td&gt;
+              &lt;td&gt;Unixデバイスドライバ&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;スペナビ&lt;/td&gt;
+              &lt;td&gt;Webシステム&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;Linero&lt;/td&gt;
+              &lt;td&gt;Unixデバイスドライバ&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;Plus-C&lt;/td&gt;
+              &lt;td&gt;Webシステム&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;Delarco&lt;/td&gt;
+              &lt;td&gt;組み込み&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;ImageMill&lt;/td&gt;
+              &lt;td&gt;Webシステム&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;bizplace&lt;/td&gt;
+              &lt;td&gt;Webシステム&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: right&quot;&gt;3D着せ替え&lt;/td&gt;
+              &lt;td&gt;Webシステム・3DCG&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+      &lt;li&gt;トライテック、コンピュータークリエーターズ、ネメシス、eValley、エスマテックエンジニアリング、eFlow、aLab、esp8266、Adafruits、スペナビ、Linero、Plus-C、Delarco、ImageMill、bizplace、3D着せ替え&lt;/li&gt;
+      &lt;li&gt;これらの&lt;strong&gt;担当作業&lt;/strong&gt;と、 &lt;strong&gt;コンピュータースキル&lt;/strong&gt;にブレークダウンする&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;担当作業&lt;/strong&gt;から、提供可能サービスを概略出来るかな…方向性を幾つかに絞れば&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;serices.list[*].title&lt;/code&gt;にできそうだ&lt;/li&gt;
+      &lt;li&gt;ここで整理したことはそのまま、portfolioやresumeに出来るな…というか、resume→portfolioの順に作ればいいね&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;resumeportfolioの順につくろう&quot;&gt;resume→portfolioの順につくろう&lt;/h4&gt;
+</description>
+        <pubDate>Sat, 20 Nov 2021 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/remind/mymind/2021/11/20/portal-senteces.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/remind/mymind/2021/11/20/portal-senteces.html</guid>
+        
+        
+        <category>remind</category>
+        
+        <category>mymind</category>
+        
+      </item>
     
       <item>
         <title>ポータルとポートフォリオの見通し</title>
@@ -555,51 +712,6 @@ blog
         <category>learning</category>
         
         <category>jekyll-theme</category>
-        
-      </item>
-    
-      <item>
-        <title>github.io の更新手順備忘録</title>
-        <description>&lt;h3 id=&quot;githubio-の更新手順備忘録&quot;&gt;github.io の更新手順備忘録&lt;/h3&gt;
-
-&lt;p&gt;独自…なのだろうか、皆普通にこの手順なのかもしれない…の更新手順&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;blogディレクトリに移動&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundler exec jekyll b&lt;/code&gt; (最後の b は build の省略形： bundler exec jekyll -help でサブコマンドが一覧できる)
-    &lt;ul&gt;
-      &lt;li&gt;ただ単にbuildするだけで、hrefやimgタグのURLがgithub.ioに置き換わる&lt;/li&gt;
-      &lt;li&gt;serve(ローカル確認)したまま、下述の tar を実行しないように。 上述URLが localhost のままである&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;blog/_siteディレクトリに移動
-    &lt;ul&gt;
-      &lt;li&gt;tarするコピー元ディレクトリはこちらにする。一番目のtarオプションに’*‘を与えているため。コピー先には新規追加したファイルが存在せず、想定している &lt;strong&gt;全コピー&lt;/strong&gt; が行われない。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar cf - * | tar -C &amp;lt;github.ioをクローンしたローカルリポジトリ&amp;gt; -tvf -&lt;/code&gt; で tar の動作を確認
-    &lt;ul&gt;
-      &lt;li&gt;-Cオプションに与えるパスは、相対パスではなく、ホームディレクトリからのパスが安全でしょう&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;動作に問題なさそうなら&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar cf - * | tar -C &amp;lt;github.ioをクローンしたローカルリポジトリ&amp;gt; -xvf - #(２番めのtarオプションをxvfに変更：eXtract)&lt;/code&gt;を実行&lt;/li&gt;
-  &lt;li&gt;gitでdiffを確認する
-    &lt;ul&gt;
-      &lt;li&gt;気に入らなかったら、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset --hard&lt;/code&gt;と&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clean -fd&lt;/code&gt;で元に戻して、発見した気に入らない箇所への対応に戻る&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;git diff の結果に満足したら &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog/_site&lt;/code&gt;ディレクトリで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;を実行&lt;/li&gt;
-  &lt;li&gt;すこーし待って github.io にwebブラウザでアクセス…反映されてなかったら、スーパーリロードしてみる&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/jekyll/2021/10/30/update-posts-reminder.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2021/10/30/update-posts-reminder.html</guid>
-        
-        
-        <category>learning</category>
-        
-        <category>jekyll</category>
         
       </item>
     
