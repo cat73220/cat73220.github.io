@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Liquidの探求</title>
-  <meta name="description" content="Liquidの使い方あれこれ">
+  <title>履歴のスタイル</title>
+  <meta name="description" content="resume(職歴)のポータルへの移動を開始した。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html">
+  <link rel="canonical" href="https://cat73220.github.io/learning/jekyll-scss/2021/11/21/portal-resumes.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
 
@@ -104,32 +104,51 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Liquidの探求</h1>
-    <p class="post-meta">May 11, 2015</p>
+    <h1 class="post-title">履歴のスタイル</h1>
+    <p class="post-meta">Nov 21, 2021</p>
   </header>
 
   <article class="post-content">
-    <h3 id="liquidの使い方あれこれ">Liquidの使い方あれこれ</h3>
+    <p>resume(職歴)のポータルへの移動を開始した。</p>
 
-<p>Hello = 2015-05-11 12:00:00 +0000</p>
+<p>ポータルはテーマに<code class="language-plaintext highlighter-rouge">jekyll-agency</code>を使っている。そのディレクトリ構造はドラスティックに変更してある。jekyllの標準のそれとは程遠く、scssファイルを新たに設けるのさえも戸惑った（笑）。</p>
 
-<p>Update = 2015-05-11 12:00:00 +0000</p>
+<p>jekyllの<a href="https://jekyllrb.com/docs/assets/">ドキュメント</a>も不明瞭で、トライアンドエラーとなってしまったので、後学のためにメモを残しておこう。</p>
 
-<p>now = 2021-Nov-21 03:45:45</p>
+<h4 id="どこにscssファイルを置くのだろう">どこにscssファイルを置くのだろう…</h4>
 
-<p>comment = what is  <code class="language-plaintext highlighter-rouge">comment</code> ?</p>
+<p>「<code class="language-plaintext highlighter-rouge">css/styles.scss</code>とscssファイルを作成すれば<code class="language-plaintext highlighter-rouge">css/style.css</code>に出力される」とあるが、なんの事やらさっぱりわからない。</p>
 
-<p>page.layout = post</p>
+<p>scssファイルだから、<code class="language-plaintext highlighter-rouge">_layout</code>とか<code class="language-plaintext highlighter-rouge">_include</code>に置くべきだろう（「だろう」←これ思い込みの印）、ということで、</p>
 
-<p>page.categories = LearningLucidGantt</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">_layout/resume.scss</code></li>
+  <li><code class="language-plaintext highlighter-rouge">_include/resume.scss</code></li>
+</ul>
 
-<p>category = Learning</p>
+<p>として、<code class="language-plaintext highlighter-rouge">_layout/resume.html</code>テンプレートで</p>
 
-<p>category = Lucid</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">% include resume.css %</code></li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;link href="/asset/css/resume.css" role="stylesheet" /&gt;</code></li>
+</ul>
 
-<p>category = Gantt</p>
+<p>と記述するのだが、どの組み合わせもコンパイルでエラーとなる … 上↑の思い込みには気づいているのだが、自分の考えの間違いを総当りで確かめたい（笑）。性分ですな。…試す過程で色々調べるので学びも多い（笑）</p>
 
-<p>album =</p>
+<h4 id="ドキュメントの通りだ">ドキュメントの通りだ</h4>
+
+<p><code class="language-plaintext highlighter-rouge">resume/css/resume.scss</code>に記述すれば<code class="language-plaintext highlighter-rouge">_site/resume/css/resume.css</code>に出力される（笑）。ドキュメントのとおりだね…例が欲しかったなぁ。</p>
+
+<p>ここにおいておけば<code class="language-plaintext highlighter-rouge">resume</code>のスタイルだねってすぐ分かると思う。未来の自分にも優しいはず。</p>
+
+<p><code class="language-plaintext highlighter-rouge">_layout/resume.html</code>テンプレート冒頭で<code class="language-plaintext highlighter-rouge">&lt;link href="css/resume.css" role="stylesheet" /&gt;</code>とすればスタイルが効くようになった。</p>
+
+<p><code class="language-plaintext highlighter-rouge">liquid</code>の<code class="language-plaintext highlighter-rouge">page.title</code>とかはそのまま問題なく利用可能。<code class="language-plaintext highlighter-rouge">page</code>を接頭するから<code class="language-plaintext highlighter-rouge">resume</code>に変えるのかな〜と思ったけどハズレた。スタイルの名称とは切り離されている。</p>
+
+<p>linkタグに与えるパスは相対パスじゃダメだな… <code class="language-plaintext highlighter-rouge">resume</code>レイアウトはあちこちから利用するからサイトURLの絶対パスにしないと</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;link rel="stylesheet" href="/resume/css/resume.css" &gt;</code>とした。<code class="language-plaintext highlighter-rouge">blog/_layout/portfolio.html</code>を参考にした。</p>
+
 
   </article>
 

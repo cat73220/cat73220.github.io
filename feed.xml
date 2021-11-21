@@ -6,9 +6,63 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 20 Nov 2021 03:23:57 +0000</pubDate>
-    <lastBuildDate>Sat, 20 Nov 2021 03:23:57 +0000</lastBuildDate>
+    <pubDate>Sun, 21 Nov 2021 03:45:45 +0000</pubDate>
+    <lastBuildDate>Sun, 21 Nov 2021 03:45:45 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>履歴のスタイル</title>
+        <description>&lt;p&gt;resume(職歴)のポータルへの移動を開始した。&lt;/p&gt;
+
+&lt;p&gt;ポータルはテーマに&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll-agency&lt;/code&gt;を使っている。そのディレクトリ構造はドラスティックに変更してある。jekyllの標準のそれとは程遠く、scssファイルを新たに設けるのさえも戸惑った（笑）。&lt;/p&gt;
+
+&lt;p&gt;jekyllの&lt;a href=&quot;https://jekyllrb.com/docs/assets/&quot;&gt;ドキュメント&lt;/a&gt;も不明瞭で、トライアンドエラーとなってしまったので、後学のためにメモを残しておこう。&lt;/p&gt;
+
+&lt;h4 id=&quot;どこにscssファイルを置くのだろう&quot;&gt;どこにscssファイルを置くのだろう…&lt;/h4&gt;
+
+&lt;p&gt;「&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;css/styles.scss&lt;/code&gt;とscssファイルを作成すれば&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;css/style.css&lt;/code&gt;に出力される」とあるが、なんの事やらさっぱりわからない。&lt;/p&gt;
+
+&lt;p&gt;scssファイルだから、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layout&lt;/code&gt;とか&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_include&lt;/code&gt;に置くべきだろう（「だろう」←これ思い込みの印）、ということで、&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layout/resume.scss&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_include/resume.scss&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;として、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layout/resume.html&lt;/code&gt;テンプレートで&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;% include resume.css %&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;link href=&quot;/asset/css/resume.css&quot; role=&quot;stylesheet&quot; /&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;と記述するのだが、どの組み合わせもコンパイルでエラーとなる … 上↑の思い込みには気づいているのだが、自分の考えの間違いを総当りで確かめたい（笑）。性分ですな。…試す過程で色々調べるので学びも多い（笑）&lt;/p&gt;
+
+&lt;h4 id=&quot;ドキュメントの通りだ&quot;&gt;ドキュメントの通りだ&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume/css/resume.scss&lt;/code&gt;に記述すれば&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site/resume/css/resume.css&lt;/code&gt;に出力される（笑）。ドキュメントのとおりだね…例が欲しかったなぁ。&lt;/p&gt;
+
+&lt;p&gt;ここにおいておけば&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume&lt;/code&gt;のスタイルだねってすぐ分かると思う。未来の自分にも優しいはず。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layout/resume.html&lt;/code&gt;テンプレート冒頭で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;link href=&quot;css/resume.css&quot; role=&quot;stylesheet&quot; /&amp;gt;&lt;/code&gt;とすればスタイルが効くようになった。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;liquid&lt;/code&gt;の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page.title&lt;/code&gt;とかはそのまま問題なく利用可能。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page&lt;/code&gt;を接頭するから&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume&lt;/code&gt;に変えるのかな〜と思ったけどハズレた。スタイルの名称とは切り離されている。&lt;/p&gt;
+
+&lt;p&gt;linkタグに与えるパスは相対パスじゃダメだな… &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume&lt;/code&gt;レイアウトはあちこちから利用するからサイトURLの絶対パスにしないと&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;link rel=&quot;stylesheet&quot; href=&quot;/resume/css/resume.css&quot; &amp;gt;&lt;/code&gt;とした。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog/_layout/portfolio.html&lt;/code&gt;を参考にした。&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 21 Nov 2021 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/jekyll-scss/2021/11/21/portal-resumes.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll-scss/2021/11/21/portal-resumes.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>jekyll-scss</category>
+        
+      </item>
     
       <item>
         <title>ポータルの文章</title>
@@ -74,73 +128,73 @@
         &lt;table&gt;
           &lt;thead&gt;
             &lt;tr&gt;
-              &lt;th style=&quot;text-align: right&quot;&gt;&lt;strong&gt;社名&lt;/strong&gt;&lt;/th&gt;
+              &lt;th&gt;&lt;strong&gt;社名&lt;/strong&gt;&lt;/th&gt;
               &lt;th&gt; &lt;/th&gt;
             &lt;/tr&gt;
           &lt;/thead&gt;
           &lt;tbody&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;トライテック&lt;/td&gt;
+              &lt;td&gt;トライテック&lt;/td&gt;
               &lt;td&gt;組み込み&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;コンピュータークリエーターズ&lt;/td&gt;
+              &lt;td&gt;コンピュータークリエーターズ&lt;/td&gt;
               &lt;td&gt;基礎研究・保守・3DCG&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;ネメシス&lt;/td&gt;
+              &lt;td&gt;ネメシス&lt;/td&gt;
               &lt;td&gt;Unixアプリケーション・3DCG&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;eValley&lt;/td&gt;
+              &lt;td&gt;eValley&lt;/td&gt;
               &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;エスマテックエンジニアリング&lt;/td&gt;
+              &lt;td&gt;エスマテックエンジニアリング&lt;/td&gt;
               &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;eFlow&lt;/td&gt;
+              &lt;td&gt;eFlow&lt;/td&gt;
               &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;aLab&lt;/td&gt;
+              &lt;td&gt;aLab&lt;/td&gt;
               &lt;td&gt;組み込み&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;esp8266&lt;/td&gt;
+              &lt;td&gt;esp8266&lt;/td&gt;
               &lt;td&gt;IoT&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;Adafruits&lt;/td&gt;
+              &lt;td&gt;Adafruits&lt;/td&gt;
               &lt;td&gt;Unixデバイスドライバ&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;スペナビ&lt;/td&gt;
+              &lt;td&gt;スペナビ&lt;/td&gt;
               &lt;td&gt;Webシステム&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;Linero&lt;/td&gt;
+              &lt;td&gt;Linero&lt;/td&gt;
               &lt;td&gt;Unixデバイスドライバ&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;Plus-C&lt;/td&gt;
+              &lt;td&gt;Plus-C&lt;/td&gt;
               &lt;td&gt;Webシステム&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;Delarco&lt;/td&gt;
+              &lt;td&gt;Delarco&lt;/td&gt;
               &lt;td&gt;組み込み&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;ImageMill&lt;/td&gt;
+              &lt;td&gt;ImageMill&lt;/td&gt;
               &lt;td&gt;Webシステム&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;bizplace&lt;/td&gt;
+              &lt;td&gt;bizplace&lt;/td&gt;
               &lt;td&gt;Webシステム&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
-              &lt;td style=&quot;text-align: right&quot;&gt;3D着せ替え&lt;/td&gt;
+              &lt;td&gt;3D着せ替え&lt;/td&gt;
               &lt;td&gt;Webシステム・3DCG&lt;/td&gt;
             &lt;/tr&gt;
           &lt;/tbody&gt;
@@ -662,51 +716,6 @@ blog
         <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/learning/jekyll-theme/2021/11/04/jekyll-subcommands.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll-theme/2021/11/04/jekyll-subcommands.html</guid>
-        
-        
-        <category>learning</category>
-        
-        <category>jekyll-theme</category>
-        
-      </item>
-    
-      <item>
-        <title>テーマの適用</title>
-        <description>&lt;h3 id=&quot;jekyllのサイト&quot;&gt;jekyllの「サイト」&lt;/h3&gt;
-
-&lt;p&gt;サイトはWebページのことで、_siteディレクトリに生成される一群のWebページのファイル群のこと&lt;/p&gt;
-
-&lt;p&gt;サイトは、jekyllコマンドをダイレクトに&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jekyll new portal
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;のように実行する。newコマンドのあとの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portal&lt;/code&gt;がサイト名となる&lt;/p&gt;
-
-&lt;p&gt;上の実行ではデフォルトで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;minima&lt;/code&gt;テーマが選ばれる&lt;/p&gt;
-
-&lt;h3 id=&quot;テーマの変更gemfile版&quot;&gt;テーマの変更(Gemfile版)&lt;/h3&gt;
-
-&lt;p&gt;Gemfile の &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem &quot;minima&quot;&lt;/code&gt; を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem &quot;jekyll-agency&lt;/code&gt; に変更&lt;/p&gt;
-
-&lt;p&gt;_config.yml の &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;theme: minima&lt;/code&gt; を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;theme: jekyll-agency&lt;/code&gt; に変更&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;portal
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;で jekyll-agench をインストールする&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;を実行して&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4000&lt;/code&gt;をwebブラウザでアクセスすると、jekyll-agencyテーマで home ページが現れる&lt;/p&gt;
-
-&lt;p&gt;この状態ではhomeページは空っぽでなんとも捉えようのない状態である&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Oct 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/jekyll-theme/2021/10/31/jekyll-themes.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll-theme/2021/10/31/jekyll-themes.html</guid>
         
         
         <category>learning</category>
