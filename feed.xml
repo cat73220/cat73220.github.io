@@ -6,9 +6,139 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Nov 2021 08:16:28 +0000</pubDate>
-    <lastBuildDate>Sun, 21 Nov 2021 08:16:28 +0000</lastBuildDate>
+    <pubDate>Mon, 22 Nov 2021 03:23:44 +0000</pubDate>
+    <lastBuildDate>Mon, 22 Nov 2021 03:23:44 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>履歴のスタイル(jekyllでスタイルのカスタマイズ)</title>
+        <description>&lt;p&gt;jekyllのスタイルのカスタマイズの知見が広がった… 結果にとても満足。&lt;/p&gt;
+
+&lt;p&gt;jekyll標準スタイルのカスタマイズも、jekyll-agencyスタイルのカスタマイズにしても、ドキュメントで基本を知った上でそれらの実装を直接読むことが近道だった…どのコンピュータフレームワークもソースを理解することが近道だ…と判っていたのにドキュメントと作業で見えている物だけしか見ていないと、フレームワークで定義した部分は見えてこない、と言うことを再確認できて、かつ、思い知った。…既に、そして、何度も思い知ったんだけどなぁ〜&lt;/p&gt;
+
+&lt;h4 id=&quot;_includedefaulthtmlと_layouts配下のhtml&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_include/default.html&lt;/code&gt;と&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts&lt;/code&gt;配下の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;html&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.md&lt;/code&gt;が&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.html&lt;/code&gt;に変換される過程で適用するファイルを示すと分かりやすいか&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume/*.md&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;冒頭の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;---&lt;/code&gt;区切り内&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layout:&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts&lt;/code&gt;のファイルが決まる&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume&lt;/code&gt;としているので&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume.html&lt;/code&gt;が選ばれる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/*.html&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;このhtmlに&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;liquid&lt;/code&gt;と共に直にhtmlで記述しても良いが&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;liquid&lt;/code&gt;が利用できるので&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include&lt;/code&gt;も可能なのだ&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes&lt;/code&gt;に自分で決めた単位で細切れにhtmlを記述しておけばlayout毎に配置(layout)が変えられるのだな&lt;/li&gt;
+      &lt;li&gt;このhtmlの冒頭の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;---&lt;/code&gt;セクション&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layout&lt;/code&gt;を指定すると&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes&lt;/code&gt;のhtmlを指し示すことになる&lt;/li&gt;
+      &lt;li&gt;ここのファイル名だけ異なる同じ内容のhtmlを記述すれば&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.md&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layout&lt;/code&gt;指定を違えていても、同じレイアウトにしてしまうことが出来る&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/*.html&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;htmlを記述する&lt;/li&gt;
+      &lt;li&gt;ファイル冒頭の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;---&lt;/code&gt;セクションは解釈されない。最終的なhtmlを記述する、ということだろう&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;liquid&lt;/code&gt;も利用できる。制限もなさそうだ&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;jekyll-agency-を追跡してみよう&quot;&gt;jekyll-agency を追跡してみよう&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;index.md&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layout: home&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;これしか記述されていない&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/home.html&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;ここに全てのセクションが並んでいる&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include&lt;/code&gt; が順番に並んでいるだけ&lt;/li&gt;
+      &lt;li&gt;html記述はない&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layout: default&lt;/code&gt;とある&lt;/li&gt;
+      &lt;li&gt;作業ディレクトリ生成時にはこのファイルも存在していなかったかも…過去にインストールディレクトリからコピーしてきたな&lt;/li&gt;
+      &lt;li&gt;無用なセクションをコメントアウトしてあるよ…以前はここで？？となったのだ。今日再度、冒頭の思い知りを経験してたんだ&lt;/li&gt;
+      &lt;li&gt;つまり、元は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;jekyll-agencyインストールディレクトリ&amp;gt;_layouts/home.hmtl&lt;/code&gt;が利用されていた&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes&lt;/code&gt;にdefault.htmlが無い
+    &lt;ul&gt;
+      &lt;li&gt;ここで？？となってしまった…ドキュメントの登場である&lt;/li&gt;
+      &lt;li&gt;「gemのインストールディレクトリ(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle infor jekyll-agency&lt;/code&gt;)のファイルが参照される」&lt;/li&gt;
+      &lt;li&gt;この場合、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts&lt;/code&gt;のファイルの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layout&lt;/code&gt;で指し示したので、インストールディレクトリ&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes&lt;/code&gt;のレイアウト名のファイル&lt;/li&gt;
+      &lt;li&gt;つまり、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;jekyll-agencyインストールディレクトリ&amp;gt;_includes/default.hmtl&lt;/code&gt;が利用される&lt;/li&gt;
+      &lt;li&gt;思い返せば、作業ディレクトリ生成時にはこのディレクトリ自体が無かったかも…以下同上同文&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;jekyll-agencyインストールディレクトリ&amp;gt;_includes/default.hmtl&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;htmlタグから始まる、ページ全体を記述する&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;liquid&lt;/code&gt;拡張されたhtmlファイルである&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;コンパイルで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.md&lt;/code&gt;で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;post&lt;/code&gt; や &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portfolio&lt;/code&gt; をレイアウトにしておくと「そんなレイアウトは無い」と警告される。&lt;/p&gt;
+
+&lt;p&gt;でも、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page&lt;/code&gt;レイアウトだけは警告されない。これはインストールディレクトリの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/page.html&lt;/code&gt;が存在してたからだった。&lt;/p&gt;
+
+&lt;p&gt;ドキュメントとbundlerで生成した作業ディレクトリには現れないことで、注意（視野）をフレームワークにまで広げないと理解できなかった。&lt;/p&gt;
+
+&lt;h4 id=&quot;ポータルでカスタマイズしたこと&quot;&gt;ポータルでカスタマイズしたこと&lt;/h4&gt;
+
+&lt;p&gt;発端はresumeをblogから移動して、そのスタイルを整えることだった&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume/css/resume.scss&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/resume.html&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;layoutをdefaultとして、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume/css/resume.css&lt;/code&gt;を読み込むようにした&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;これで、目的は果たされたけど、方法が判ったらblog側で追加した tableスタイルとか使いたいな〜とかblog側のpost/pageスタイルも流用したいな〜とか贅沢したくなる。&lt;/p&gt;
+
+&lt;p&gt;贅沢は学習の糧なので、ためらわずに取り掛かろう&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_sass&lt;/code&gt;にblogの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.scss&lt;/code&gt;をコピー&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/resume.html&lt;/code&gt;を&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/resume.html&lt;/code&gt;を利用するように変更
+    &lt;ul&gt;
+      &lt;li&gt;layout参照はdefault&lt;/li&gt;
+      &lt;li&gt;jekyll-agencyの恩恵も授かれるように&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/resume.html&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;ここで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume/css/resume.css&lt;/code&gt;を読み込むようにした&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resume.css&lt;/code&gt;は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog/css/main.scss&lt;/code&gt;と同じに&lt;/li&gt;
+      &lt;li&gt;同じにすることで_sassのスタイルを利用できるようにした&lt;/li&gt;
+      &lt;li&gt;これでblogのpage、post、table、hcol、mermaid、highlight-syntax、の恩恵を得られる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;これで今の所満足だ&quot;&gt;これで今の所満足だ&lt;/h4&gt;
+
+&lt;p&gt;更なるカスタマイズも可能になった&lt;/p&gt;
+
+&lt;p&gt;jekyllでWebサイト作る基礎が整ったかな&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/jekyll-scss/2021/11/22/portal-resume-style.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll-scss/2021/11/22/portal-resume-style.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>jekyll-scss</category>
+        
+      </item>
     
       <item>
         <title>履歴のスタイル</title>
@@ -677,50 +807,6 @@
         <category>githubio</category>
         
         <category>operation</category>
-        
-      </item>
-    
-      <item>
-        <title>Jekyllのサブコマンド</title>
-        <description>&lt;h3 id=&quot;jekyllのサブコマンド&quot;&gt;jekyllのサブコマンド&lt;/h3&gt;
-
-&lt;p&gt;サブコマンド s(serve)、b(build) 等に -s(–source)、-d(–destination) オプションを与えられる。&lt;/p&gt;
-
-&lt;h4 id=&quot;-ssourceオプション&quot;&gt;-s(–source)オプション&lt;/h4&gt;
-
-&lt;p&gt;jekyllソースディレクトリの指定。ソースディレクトリとは離れたディレクトリから上述のサブコマンドを実行できる&lt;/p&gt;
-
-&lt;h4 id=&quot;-ddestinationオプション&quot;&gt;-d(–destination)オプション&lt;/h4&gt;
-
-&lt;p&gt;生成先ディレクトリの指定。&lt;a href=&quot;/githubio/operation/2021/11/04/the-githubio-operation.html&quot;&gt;github.ioの運用&lt;/a&gt; で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;...&amp;gt;github.io&amp;lt;*&amp;gt;&lt;/code&gt; を与えれば、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar cf ...&lt;/code&gt;が省ける&lt;/p&gt;
-
-&lt;h4 id=&quot;実行例&quot;&gt;実行例&lt;/h4&gt;
-
-&lt;p&gt;-sと-dは一緒に使うことが多いでしょう。-sだけで使うと作業ディレクトリに _site ディレクトリが自動生成されてしまう。別に構わないか…&lt;/p&gt;
-
-&lt;p&gt;sサブコマンドであれば&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-blog
-..
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; blog &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; blog/_site
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;の様にソースディレクトリ内に_siteディレクトリを生成させて、作業ディレクトリを汚染しないようにしたほうが気持ちいいかな。&lt;/p&gt;
-
-&lt;p&gt;bサブコマンドでは&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll b &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; blog &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; ~/&amp;lt;...&amp;gt;githbu.io
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;の様に github.io 用のローカルレポジトリに生成させて、上述の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar cf ...&lt;/code&gt;を省くために使う。&lt;/p&gt;
-
-&lt;p&gt;何方のオプションもサブコマンドの後に記述しないとならない。jekyllの仕様である。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/jekyll-theme/2021/11/04/jekyll-subcommands.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll-theme/2021/11/04/jekyll-subcommands.html</guid>
-        
-        
-        <category>learning</category>
-        
-        <category>jekyll-theme</category>
         
       </item>
     
