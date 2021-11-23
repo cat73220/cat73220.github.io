@@ -1,0 +1,32 @@
+{% capture tritech_text %}
+
+Tritech
+-------
+
+1985 - 1988
+
+This company was founded by 3 people and moved several place such Shibuya, Setagaya and Machida for getting bigger number of employee. And, it then closed around 1990s.
+
+They were inventing a rom emulater, named ROMulater for reducing time of debugging their firmware instead of using EPROM avoiding using a UV eraser which was had a battery backed up Static-RAM, programmed by EPROM burner, used as a typical EPROM on circuits and sold in Akihabara and mail-order. When releasing into public in soon after, it was succeeded, but soon later, people copied and order was got reduced.
+
+So, ROMulater was just one of their project. The company mainly did ODM. For example, developping high acculate computerized timer for a TV station, Developping semi-automatic remote controling a road roller, Developping and manufacturing multi frequency generater for LEADER K.K. as industrial mesurement equipment manufacturer, e.t.c.
+
+As well as ODM companies, a project starts from researching, designing, making BOM, mass production, testing, releaseing and maintaining. This company did them as one-stop for the customers.
+
+Based on the above, I larned the most of knowledges about developping and manufacturing computer devices along their senior engineers.
+
+#### [audio digital filters of fisibility study for SEGA Corp.](tritech/tritech_04.html)
+
+#### [a NTSC I/F for plasma panel display of DIXY Corp](tritech/tritech_03.html)
+
+#### [a custom multi-peripheral board for early laundry shop POS of K.K. BIC](tritech/tritech_02.html)
+
+#### [a test jig for analog VHF/UHF tuner television set of Korean manufacturer](tritech/tritech_01.html)
+
+{% endcapture %}
+
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

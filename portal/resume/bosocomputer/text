@@ -1,0 +1,13 @@
+{% capture bosocomputer_text %}
+
+Boso Computer
+----------
+
+#### [Takarazuka starr fun site]()
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

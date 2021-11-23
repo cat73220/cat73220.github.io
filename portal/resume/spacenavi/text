@@ -1,0 +1,22 @@
+{% capture spacenavi_text %}
+Spacenavi
+----------
+
+The current client.
+
+#### [Supenavi]()
+
+#### [bizplace]()
+
+#### [TIME Sharing]()
+
+#### [bizplace wordpress]()
+
+#### [blog(feeeel)]()
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

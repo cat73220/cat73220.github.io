@@ -1,0 +1,36 @@
+{% capture nemesys_text %}
+
+Nemesys
+-------
+
+1992 - 2002
+
+Nemesys(close in 2018) is developing software company by 2D/3D computer graphics.
+
+They started to sell their own painting software on workstations, Neozoic at the first. They also helped to develop a custom 3D modeling by semi-meta objects software with Polygon pictures. They released their application by their knowledge of computer graphics to the many computer software sceanes.
+
+#### [a fabric cutting layout software for Toray on SGI/IRIS](nemesys/nemesys_09.html)
+
+#### [a plugin software for painting simulation of cars in Maya on SGI/IRIS](nemesys/nemesys_08.html)
+
+#### [a plugin software for manupilating skeletons as a human in 3D-Max on SGI/IRIS](nemesys/nemesys_07.html)
+
+#### [a cgi of decorated recycable one-time film camera on Netscape Navigator](nemesys/nemesys_06.html)
+
+#### [a GUI of DVD authoring software on Windows](nemesys/nemesys_05.html)
+
+#### [a custom 3D modeling software by semi-meta objects for Polygon pictures on SGI/IRIS](nemesys/nemesys_04.html)
+
+#### [a glasses shop software for customizing glasses on NEC/EWS4800](nemesys/nemesys_03.html)
+
+#### [a custom paint software for a TV station equipment on SONY/NEWS](nemesys/nemesys_02.html)
+
+#### [Neozoic paint on SGI/IRIS](nemesys/nemesys_01.html)
+
+{% endcapture %}
+
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

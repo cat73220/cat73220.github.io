@@ -1,0 +1,17 @@
+{% capture plusc_text %}
+
+Plus-C
+----------
+
+#### [running kanagawa web site]()
+
+#### [customer management web system]()
+
+#### [city facility management web system]()
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

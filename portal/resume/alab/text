@@ -1,0 +1,19 @@
+{% capture alab_text %}
+
+A Lab
+----------
+
+#### [Camera system by Android]()
+
+#### [Music player for Coca-cola campaign]()
+
+#### [Seismo meter renewal their original device]()
+
+#### [Linux migration for FPGA based CPU of Issiki-lab original ]()
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

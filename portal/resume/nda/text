@@ -1,0 +1,17 @@
+{% capture nda_text %}
+
+NDAs
+----------
+
+#### [Multi sensor monitor]()
+
+#### [a corporate web site]()
+
+#### [an advatise web site]()
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

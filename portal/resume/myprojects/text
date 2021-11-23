@@ -1,0 +1,31 @@
+{% capture myprojects_text %}
+
+My Projects
+----------
+
+#### [Wifi mesh]()
+
+#### [Wifi LED tape]()
+
+#### [Android Accessory Device]()
+
+#### [Learning binary number as an accessory]()
+
+#### [Printer port AC Power controller]()
+
+#### [MK4801 banner]()
+
+#### [Keyboard controller]()
+
+#### [Z80 Assembler migration to Macintosh System 7]()
+
+#### [PS/2  Keyboard converter to PC9801]()
+
+#### [Mouse(PC9801) ISA I/F]()
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

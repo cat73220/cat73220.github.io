@@ -1,0 +1,10 @@
+{% capture esmerteces_text %}
+Esmertec Enginnering Service
+----------
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

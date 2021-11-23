@@ -1,0 +1,10 @@
+{% capture evalley_text %}
+EValley
+----------
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

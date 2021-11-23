@@ -1,0 +1,10 @@
+{% capture adafruit_text %}
+Adafruit
+----------
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}
