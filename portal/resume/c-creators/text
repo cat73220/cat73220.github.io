@@ -5,13 +5,13 @@ Computer Creators
 
 1988 - 1992
 
-[Computer Creators](http://www.c-creators.co.jp) were started from 2 young people as nowaday's start-up. It was placed on Suginami Tokyo so many years. Now, it is existed in Nagoya by 1 person.
+[Computer Creators](http://www.c-creators.co.jp){:target="_blank"} were started from 2 young people as nowaday's start-up. It was placed on Suginami Tokyo so many years. Now, it is existed in Nagoya by the 1 person.
 
-This company mainly takes research and development as a job. They got consultant from customers and realized their idea into actual.
+This company mainly takes research and design systems as job. They got consultant from customers and realize their idea into real.
 
 The intresting project was a ISDN modem for Macintosh, named TimeLiner which was developed by this single company as their own project. And, then sold it to public as actual commercial product.
 
-They made many peripherals for several platforms. ex. Laser printe I/F for SUN3/4 for ASCII Corp. as hardware R&D, software R&D were a window syste for DTP on SPARDStation, a JPEG compression software using DSP for Mitsubishi corp., a renderer from 3D geometric data using OpenGL, a camera apps, TrigonScope and SFX Camera of iPhone Apps,
+They made many peripherals for several platforms. ex. Laser printer I/F for SUN3/4 for ASCII Corp. as hardware R&D, software R&D were a window syste for DTP on SPARC Station, a JPEG compression software using T400(Transputer) for Mitsubishi corp., a renderer from 3D geometric data using OpenGL, a camera apps, TrigonScope and SFX Camera of iPhone Apps,
 
 #### [a PCB BOM management software on emacs](c-creators/c-creators_05.html)
 
