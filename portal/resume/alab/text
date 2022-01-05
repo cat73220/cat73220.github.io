@@ -1,15 +1,62 @@
+{% capture alab_text_4_title %}Camera system for Android{% endcapture %}
+{% capture alab_text_4 %}
+#### _{{ alab_text_4_title }}_
+
+  **Tasks**
+  : 富士通ISP Milebeaut評価ボード上でAndroidを動作させました。このISPは ARM Coretex-A8デュアルコアで、私の分担のLinux/Androidのもう一方でμiTronがデジタルカメラ制御のために並行動作するものでした。
+  : AndroidはUI/UXフレームワークとして、また、インターネット環境との統合として利用しました。デジタルカメラで撮影した動画や静止画は大容量共有メモリで共有しました。制御のためにμiTronのプロセッサ間通信を利用しました。
+  : Android側のμiTron側との通信／メモリ共有のためにミドルウェアの設計・実装もしました。
+  : Android上のカメラUI/UXアプリは外注でした。
+
+  **Development Environment**
+  - GCC：クロスコンパイラー（Linux）
+  - Google Android開発支援環境
+{% endcapture %}
+
+{% capture alab_text_3_title %}Music player for Coca-cola campaign{% endcapture %}
+{% capture alab_text_3 %}
+#### _{{ alab_text_3_title }}_
+
+  **Tasks**
+  : 4cm✕6cmのシリンダ状キーホルダに富士通マイコン FM4+Bluetooth(MSP430)+USB I/F+SDカードリーダーを搭載した、メイン機能はMP3プレイヤーのコカコーラ社販売促進グッズの試作をしました。
+  : ハードウェア設計は担当の方にしていただき、ソフトウェアの設計と実装をしました。
+
+  **Development Environment**
+  - GCCクロスコンパイラー環境：ファームウェア生成
+  - FreeRTOS
+{% endcapture %}
+
+{% capture alab_text_2_title %}Seismo meter renewal their original device{% endcapture %}
+{% capture alab_text_2 %}
+#### _{{ alab_text_2_title }}_
+
+  **Tasks**
+  : aLab社独自設計の地震計のリニューアルに参加しました。eCosからFreeRTOSへの移植をしました。
+
+  **Development Environment**
+  - eCos
+  - FreeRTOS
+{% endcapture %}
+
+{% capture alab_text_1_title %}Linux migration for FPGA based CPU of Issiki-lab original{% endcapture %}
+{% capture alab_text_1 %}
+#### _{{ alab_text_1_title }}_
+
+  **Tasks**
+  : 東工大 一色教授が手がけた C言語 FPGAプログラミングシステム を利用して μcLinux を FPGA上で動作させました。
+
+  **Development Environment**
+  - GCCクロスコンパイラ（一色教授FPGA用 C言語コンパイラ）
+{% endcapture %}
+
 {% capture alab_text %}
 
-A Lab
+aLab
 ----------
 
-#### [Camera system by Android]()
+2011 - 2014
 
-#### [Music player for Coca-cola campaign]()
-
-#### [Seismo meter renewal their original device]()
-
-#### [Linux migration for FPGA based CPU of Issiki-lab original ]()
+独自の地震計の設計・製造・販売を手がける傍ら、受託の組込装置のODMもこなす one-stop の会社でした。
 
 {% endcapture %}
 {% comment %}
