@@ -79,25 +79,166 @@
 			
 <h2 id="my-projects">My Projects</h2>
 
-<h4 id="wifi-mesh"><a href="">Wifi mesh</a></h4>
+<p>サラリーマンの頃からマイコンDIYを続けてます。これらの成果が生業に活かされたり、その逆もあったり。これからも楽しみ続けます。</p>
 
-<h4 id="wifi-led-tape"><a href="">Wifi LED tape</a></h4>
+<h4 id="myprojects_1"><em>Wifi mesh</em></h4>
 
-<h4 id="android-accessory-device"><a href="">Android Accessory Device</a></h4>
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>ESP8266ベースでWifiメッシュシステムを構築しようとしています。電池駆動でソーラーパネルを備えて、ハードウェア面では不完全ながらもメンテナンスフリーのシステムを目論んでいます。</dd>
+</dl>
 
-<h4 id="learning-binary-number-as-an-accessory"><a href="">Learning binary number as an accessory</a></h4>
+<p><strong>Development Environment</strong></p>
 
-<h4 id="printer-port-ac-power-controller"><a href="">Printer port AC Power controller</a></h4>
+<ul>
+  <li>Makefileベース ファームウェア生成</li>
+  <li>GCCクロスコンパイラ</li>
+  <li>Expressif ESP8266ライブラリ</li>
+  <li>Lua</li>
+</ul>
 
-<h4 id="mk4801-banner"><a href="">MK4801 banner</a></h4>
+<h4 id="myprojects_2"><em>Wifi LED tape</em></h4>
 
-<h4 id="keyboard-controller"><a href="">Keyboard controller</a></h4>
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>独自ESP8266基板のパイロットプロジェクトです。久々の電子回路基板設計・工場発注と中国への部品発注を体験しました。製造は全て屋内制手工業です。</dd>
+  <dd>
+    <p>Wifi&amp;LAN上のESP8266-LEDテープコントローラーをWebsocketを介してformタグ上のUIコンポーネントでLEDの色、点滅パターンを制御します。</p>
+  </dd>
+</dl>
 
-<h4 id="z80-assembler-migration-to-macintosh-system-7"><a href="">Z80 Assembler migration to Macintosh System 7</a></h4>
+<p><strong>Development Environment</strong></p>
 
-<h4 id="ps2--keyboard-converter-to-pc9801"><a href="">PS/2  Keyboard converter to PC9801</a></h4>
+<ul>
+  <li>Makefileベース ファームウェア生成</li>
+  <li>GCCクロスコンパイラ</li>
+  <li>Expressif ESP8266ライブラリ</li>
+  <li>Lua</li>
+  <li>Websocket&amp;HTML form</li>
+</ul>
 
-<h4 id="mousepc9801-isa-if"><a href="">Mouse(PC9801) ISA I/F</a></h4>
+<h4 id="myprojects_3"><em>Android Accessory Device</em></h4>
+
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd><a href="http://accessories.android.com/demokit?hl=ja" target="_blank">Android Accessory Development Kit</a>準拠のUSBデバイスの試作をしました。</dd>
+</dl>
+
+<p><strong>Development Environment</strong></p>
+
+<ul>
+  <li>Android Accessory Development Kit</li>
+</ul>
+
+<h4 id="myprojects_4"><em>Learning binary number as an accessory</em></h4>
+
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>思いつきのおもちゃです。ブローチ状です。１６進数のダイヤル部品をジャンク屋で見つけて思いつきました。コイン電池とダイヤルとLED４つを繋げて４ビット・ビットパターンに点灯します。</dd>
+</dl>
+
+<h4 id="myprojects_5"><em>Printer port AC Power controller</em></h4>
+
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>昔のPCに必ず搭載されていた「セントロニクス・プリンターI/F」でON/OFFできるACタップです</dd>
+  <dd>
+    <p>プリンタポートに１バイト書き込みます。１バイト中のビットパターンがONかOFFを表します</p>
+  </dd>
+</dl>
+
+<p><strong>Development Environment</strong></p>
+
+<ul>
+  <li>MS-DOS</li>
+</ul>
+
+<h4 id="myprojects_6"><em>MK4801 banner</em></h4>
+
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>当時のハイパフォーマンスPC（ワークステーションと呼びました）のNV-ROMのハッキングツールです</dd>
+  <dd>
+    <p>RS232CでPCにつなげてターミナルソフトでやり取りします。MK4801のデータの読み書きができます。利用するターミナルソフトを選べばデータの保存・更新ができます。</p>
+  </dd>
+</dl>
+
+<p><strong>Development Environment</strong></p>
+
+<ul>
+  <li>MS-DOS</li>
+  <li>MASMv3.0(Microrg社制：PC98版を移植しました)</li>
+</ul>
+
+<h4 id="myprojects_7"><em>Keyboard controller</em></h4>
+
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>独自のキーボードです。ジャンク屋で見つけたかっこいいASCIIキーボードに１６セグメントLED ８つを接続して、タイプしたキーの文字が表示されるようにしました。</dd>
+  <dd>
+    <p>RTOSもどきを実装して、チャタリング除去とLED表示を実現しました。</p>
+  </dd>
+</dl>
+
+<p><strong>Development Environment</strong></p>
+
+<ul>
+  <li>Macintosh System 7</li>
+  <li>MASMv3.0 on System7</li>
+</ul>
+
+<h4 id="myprojects_8"><em>Z80 Assembler migration to Macintosh System 7</em></h4>
+
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>たまたま家にMacitosh LCがあり、一方、IBM PC/AT互換機は非常にパフォーマンスが悪くて、開発環境にMacintoshを選びました。より多くマイコンDIYしたいという情熱だけで作業しました。</dd>
+  <dd>
+    <p>知人の好意でApple社の一冊が百科事典みたいなドキュメントを何冊か貸してもらい、乏しい英語能力で作業しました。とても勉強になりました。</p>
+  </dd>
+</dl>
+
+<p><strong>Development Environment</strong></p>
+
+<ul>
+  <li>Macintosh System 7</li>
+  <li>MASMv3.0 PC9801専用 ソースコード</li>
+</ul>
+
+<h4 id="myprojects_9"><em>PS/2  Keyboard converter to PC9801</em></h4>
+
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>PS/2キーボードをPC9801に接続するためのコンバーターです。</dd>
+  <dd>
+    <p>当時から、市場には色々な使い心地、値段のPS/2キーボードが反乱していました。一方、日本でしか通用しないPC9801は、サードパーティのキーボードは無かったと記憶しています。</p>
+  </dd>
+  <dd>
+    <p>z80を使ったキーボードプロトコルコンバーターです。RTOSもどきを設計・実装しました。これのために Mircorg社 MASMv3.0 PC98版 z80アセンブラー を PC-DOS に移植しました。
+  <strong>Development Environment</strong></p>
+  </dd>
+</dl>
+
+<ul>
+  <li>PC-DOS</li>
+  <li>MASMv3.0 on PC-DOS(PC98版を移植しました)</li>
+</ul>
+
+<h4 id="myprojects_10"><em>Mouse(PC9801) ISA I/F</em></h4>
+
+<dl>
+  <dt><strong>Tasks</strong></dt>
+  <dd>比較的手頃なPC98用マウスの為にIBM PC/AT I/Fボードを作成して、繋げました。</dd>
+  <dd>
+    <p>当時、IBM PC/AT用のマウスは高額で、かつ輸入にもそれなりの費用がかかり手が出せませんでした（私はしませんでしたけど、皆が香港にPCパーツの買い出しに行っていた時代です）。</p>
+  </dd>
+</dl>
+
+<p><strong>Development Environment</strong></p>
+
+<ul>
+  <li>PC-DOS</li>
+  <li><a href="https://qiita.com/kaizen_nagoya/items/31542d281d16d135df66" target="_blank">debug</a>：PC-DOS付属のデバッガ：簡易ながらもアセンブラ入力できました</li>
+</ul>
 
 
 		</div>

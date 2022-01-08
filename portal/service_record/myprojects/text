@@ -1,27 +1,133 @@
+{% capture myprojects_text_1_title %}Wifi mesh{% endcapture %}
+{% capture myprojects_text_1 %}
+  **Tasks**
+  : ESP8266ベースでWifiメッシュシステムを構築しようとしています。電池駆動でソーラーパネルを備えて、ハードウェア面では不完全ながらもメンテナンスフリーのシステムを目論んでいます。
+
+  **Development Environment**
+  
+  - Makefileベース ファームウェア生成
+  - GCCクロスコンパイラ
+  - Expressif ESP8266ライブラリ
+  - Lua
+{% endcapture %}
+
+{% capture myprojects_text_2_title %}Wifi LED tape{% endcapture %}
+{% capture myprojects_text_2 %}
+  **Tasks**
+  : 独自ESP8266基板のパイロットプロジェクトです。久々の電子回路基板設計・工場発注と中国への部品発注を体験しました。製造は全て屋内制手工業です。
+
+  : Wifi&LAN上のESP8266-LEDテープコントローラーをWebsocketを介してformタグ上のUIコンポーネントでLEDの色、点滅パターンを制御します。
+
+  **Development Environment**
+  
+  - Makefileベース ファームウェア生成
+  - GCCクロスコンパイラ
+  - Expressif ESP8266ライブラリ
+  - Lua
+  - Websocket&HTML form
+{% endcapture %}
+
+{% capture myprojects_text_3_title %}Android Accessory Device{% endcapture %}
+{% capture myprojects_text_3 %}
+  **Tasks**
+  : [Android Accessory Development Kit](http://accessories.android.com/demokit?hl=ja){:target="_blank"}準拠のUSBデバイスの試作をしました。
+
+  **Development Environment**
+  
+  - Android Accessory Development Kit
+{% endcapture %}
+
+{% capture myprojects_text_4_title %}Learning binary number as an accessory{% endcapture %}
+{% capture myprojects_text_4 %}
+  **Tasks**
+  : 思いつきのおもちゃです。ブローチ状です。１６進数のダイヤル部品をジャンク屋で見つけて思いつきました。コイン電池とダイヤルとLED４つを繋げて４ビット・ビットパターンに点灯します。
+
+{% endcapture %}
+
+{% capture myprojects_text_5_title %}Printer port AC Power controller{% endcapture %}
+{% capture myprojects_text_5 %}
+  **Tasks**
+  : 昔のPCに必ず搭載されていた「セントロニクス・プリンターI/F」でON/OFFできるACタップです
+
+  : プリンタポートに１バイト書き込みます。１バイト中のビットパターンがONかOFFを表します
+
+  **Development Environment**
+  
+  - MS-DOS
+{% endcapture %}
+
+{% capture myprojects_text_6_title %}MK4801 banner{% endcapture %}
+{% capture myprojects_text_6 %}
+  **Tasks**
+  : 当時のハイパフォーマンスPC（ワークステーションと呼びました）のNV-ROMのハッキングツールです
+
+  : RS232CでPCにつなげてターミナルソフトでやり取りします。MK4801のデータの読み書きができます。利用するターミナルソフトを選べばデータの保存・更新ができます。
+
+  **Development Environment**
+  
+  - MS-DOS
+  - MASMv3.0(Microrg社制：PC98版を移植しました)
+{% endcapture %}
+
+{% capture myprojects_text_7_title %}Keyboard controller{% endcapture %}
+{% capture myprojects_text_7 %}
+  **Tasks**
+  : 独自のキーボードです。ジャンク屋で見つけたかっこいいASCIIキーボードに１６セグメントLED ８つを接続して、タイプしたキーの文字が表示されるようにしました。
+
+  : RTOSもどきを実装して、チャタリング除去とLED表示を実現しました。
+
+  **Development Environment**
+  
+  - Macintosh System 7
+  - MASMv3.0 on System7
+{% endcapture %}
+
+{% capture myprojects_text_8_title %}Z80 Assembler migration to Macintosh System 7{% endcapture %}
+{% capture myprojects_text_8 %}
+  **Tasks**
+  : たまたま家にMacitosh LCがあり、一方、IBM PC/AT互換機は非常にパフォーマンスが悪くて、開発環境にMacintoshを選びました。より多くマイコンDIYしたいという情熱だけで作業しました。
+
+  : 知人の好意でApple社の一冊が百科事典みたいなドキュメントを何冊か貸してもらい、乏しい英語能力で作業しました。とても勉強になりました。
+
+  **Development Environment**
+  
+  - Macintosh System 7
+  - MASMv3.0 PC9801専用 ソースコード
+{% endcapture %}
+
+{% capture myprojects_text_9_title %}PS/2  Keyboard converter to PC9801{% endcapture %}
+{% capture myprojects_text_9 %}
+  **Tasks**
+  : PS/2キーボードをPC9801に接続するためのコンバーターです。
+
+  : 当時から、市場には色々な使い心地、値段のPS/2キーボードが反乱していました。一方、日本でしか通用しないPC9801は、サードパーティのキーボードは無かったと記憶しています。
+
+  : z80を使ったキーボードプロトコルコンバーターです。RTOSもどきを設計・実装しました。これのために Mircorg社 MASMv3.0 PC98版 z80アセンブラー を PC-DOS に移植しました。
+  **Development Environment**
+  
+  - PC-DOS
+  - MASMv3.0 on PC-DOS(PC98版を移植しました)
+{% endcapture %}
+
+{% capture myprojects_text_10_title %}Mouse(PC9801) ISA I/F{% endcapture %}
+{% capture myprojects_text_10 %}
+  **Tasks**
+  : 比較的手頃なPC98用マウスの為にIBM PC/AT I/Fボードを作成して、繋げました。
+
+  : 当時、IBM PC/AT用のマウスは高額で、かつ輸入にもそれなりの費用がかかり手が出せませんでした（私はしませんでしたけど、皆が香港にPCパーツの買い出しに行っていた時代です）。
+
+  **Development Environment**
+  
+  - PC-DOS
+  - [debug](https://qiita.com/kaizen_nagoya/items/31542d281d16d135df66){:target="_blank"}：PC-DOS付属のデバッガ：簡易ながらもアセンブラ入力できました
+{% endcapture %}
+
 {% capture myprojects_text %}
 
 My Projects
 ----------
 
-#### [Wifi mesh]()
-
-#### [Wifi LED tape]()
-
-#### [Android Accessory Device]()
-
-#### [Learning binary number as an accessory]()
-
-#### [Printer port AC Power controller]()
-
-#### [MK4801 banner]()
-
-#### [Keyboard controller]()
-
-#### [Z80 Assembler migration to Macintosh System 7]()
-
-#### [PS/2  Keyboard converter to PC9801]()
-
-#### [Mouse(PC9801) ISA I/F]()
+サラリーマンの頃からマイコンDIYを続けてます。これらの成果が生業に活かされたり、その逆もあったり。これからも楽しみ続けます。
 
 {% endcapture %}
 {% comment %}
