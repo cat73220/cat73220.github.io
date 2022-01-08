@@ -1,0 +1,56 @@
+{% capture plusc_text_4_title %}不動産会社Webサイト{% endcapture %}
+{% capture plusc_text_4 %}
+  **Tasks**
+  : 既存のWebサイトの刷新をお手伝いしました。
+
+  **Development Environment**
+  - Wordpress
+  - Wordpressプラグイン
+{% endcapture %}
+
+{% capture plusc_text_3_title %}ランニング神奈川Webサイト{% endcapture %}
+{% capture plusc_text_3 %}
+  **Tasks**
+  : 年に３回、神奈川県内で行われるマラソン大会のWebサイトの保守をしています。
+  : 参加申込、支払い会社API通信、申込通知メール送信、参加者管理などを作業します
+
+  **Development Environment**
+  - Wordpress
+  - Wordpressプラグイン
+{% endcapture %}
+
+{% capture plusc_text_2_title %}Web顧客管理{% endcapture %}
+{% capture plusc_text_2 %}
+  **Tasks**
+  : MS AccessからWebベースUIの移植をしました。
+
+  **Development Environment**
+  - MS-SQL
+  - Wordpress
+{% endcapture %}
+
+{% capture plusc_text_1_title %}Web公共施設管理{% endcapture %}
+{% capture plusc_text_1 %}
+  **Tasks**
+  : 既存のWebサイトの刷新のお手伝いをしました。
+
+  **Development Environment**
+  - Wordpress
+{% endcapture %}
+
+{% capture plusc_text %}
+
+Plus-C
+----------
+
+2017 -
+
+町のIT関連支援全般とパソコン教室を運営している会社です。地方でコンピューター業務の支援をする良いお手本です。
+
+完全自営に切り替えた際に仕事をいただきとても励みになりました。
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

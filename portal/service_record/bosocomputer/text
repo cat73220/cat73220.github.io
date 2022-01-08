@@ -1,0 +1,28 @@
+{% capture bosocomputer_text_1_title %}宝塚スター ファンサイト{% endcapture %}
+{% capture bosocomputer_text_1 %}
+  **Tasks**
+  : 宝塚スター氏のファンの方々が運営するファンサイトの保守に参加しました。
+
+  **Development Environment**
+  
+  - CakePHP
+  - Javascript
+{% endcapture %}
+
+{% capture bosocomputer_text %}
+
+Boso Computer
+----------
+
+2018 -
+
+社長とソフトウェアエンジニアの二人で立ち上げて、安房地域の数々の商店やレストランのWebサイトを手がけています。地域支援IT会社として見習うことが沢山あり、参加させていただけることに感謝です！
+
+プロジェクトとしての参加は一つですが、他に相談を寄せていただいたり、発注には至りませんでしたが見積りをさせていただいてます。
+
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}

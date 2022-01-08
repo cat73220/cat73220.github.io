@@ -1,0 +1,57 @@
+{% capture nda_text_3_title %}Multi sensor monitor{% endcapture %}
+{% capture nda_text_3 %}
+#### _{{ nda_text_3_title }}_
+  2019
+
+  **Tasks**
+  : 複数のセンサーデバイスの読込・設定・ロギング・データダウンロード可能なハンディーターミナルのファームウェアを担当しました。AVRベースの装置です。
+
+  : ビットマップディスプレイ(モノクロLCD)で、接続されているセンサーの値を確認したり、設定値を変更したり、保存されているログのダウンロード操作ができます。
+  : センサー
+      - 雨量計
+      - 気圧計
+      - 気温計(PT100)
+
+  **Development Environment**
+
+  - Arduino IDE
+{% endcapture %}
+
+{% capture nda_text_2_title %}a corporate web site{% endcapture %}
+{% capture nda_text_2 %}
+#### _{{ nda_text_2_title }}_
+  2018
+
+  **Tasks**
+  : 企業イメージを元請会社デザイナーがWebページに直して、受け取ったAdobe XDをコーディングしました
+
+  **Development Environment**
+  - テキストエディタ
+  - ssh(コマンドライン)
+  - Fileziller
+{% endcapture %}
+
+{% capture nda_text_1_title %}an advatise web site{% endcapture %}
+{% capture nda_text_1 %}
+#### _{{ nda_text_1_title }}_
+  2019
+
+  **Tasks**
+  : 見積もりだけしました。このプロジェクトも元請会社デザイナーがAdobe XDからコーディングしました
+
+  **Development Environment**
+  - テキストエディタ
+{% endcapture %}
+
+{% capture nda_text %}
+
+NDAs
+----------
+
+社名や作業、成果物の詳細が開示不可能なプロジェクトにも携わりました。
+{% endcapture %}
+{% comment %}
+Local Variables:
+mode: Markdown
+End:
+{% endcomment %}
