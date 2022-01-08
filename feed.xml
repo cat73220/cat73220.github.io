@@ -6,9 +6,34 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 08 Jan 2022 07:16:09 +0000</pubDate>
-    <lastBuildDate>Sat, 08 Jan 2022 07:16:09 +0000</lastBuildDate>
+    <pubDate>Sat, 08 Jan 2022 08:33:28 +0000</pubDate>
+    <lastBuildDate>Sat, 08 Jan 2022 08:33:28 +0000</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>履歴改業務歴</title>
+        <description>&lt;p&gt;職歴をresumeと称していたが、どうもしっくり来ない…勤務歴で辞書を引くと service history, work record, service record などが現れた… service recordに目が止まったので、これに変更することにした。&lt;/p&gt;
+
+&lt;p&gt;resume(米国)、cv(欧州)なのだが、どちらも「学位」と それらの内容、論文とかかな、を一覧して、自分がどの様な専門知識を持っているかを表すんだな。&lt;/p&gt;
+
+&lt;p&gt;いままで、「resume」と称して書き溜めたものを見直してみると、専門知識を一覧したのではなく、どの会社でどのプロジェクトで働いていた一覧であり、かつ、自分の勤務歴と各々の会社の簡単な説明をしてしまっている。&lt;/p&gt;
+
+&lt;p&gt;と言うことで、「勤務歴(service record)」とリファクタリングした。おかげで、的を絞って書き加えていくことが出来た。名前付けは大事だ。的を得た命名をしていれば「すること」がはっきりする。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/learning/jekyll-scss/2021/11/21/portal-resumes.html&quot;&gt;履歴のスタイル&lt;/a&gt;で始めた「勤務歴のportal」への移動はservice_recordとして完了した。&lt;/p&gt;
+
+&lt;p&gt;ただし、この勤務歴はおおっぴらには公開しないことにした。あまりにも個人的すぎるからである。だが、これを完成したことで、自分がしてきたことがハッキリもした。これらは、このままおいておくこととする。&lt;/p&gt;
+
+&lt;p&gt;portalにはportfolioとして自分のスキルを示したいので、この勤務歴を元に、改めてresumeを作ることにする。スキルベースの判りやすい…マネージャークラスの人が見て…ものにしたい。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 08 Jan 2022 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/portfolio/2022/01/08/service-record.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/portfolio/2022/01/08/service-record.html</guid>
+        
+        
+        <category>portfolio</category>
+        
+      </item>
     
       <item>
         <title>履歴のスタイル(jekyllでスタイルのカスタマイズ)</title>
@@ -712,101 +737,6 @@
         <category>learning</category>
         
         <category>github</category>
-        
-      </item>
-    
-      <item>
-        <title>github.ioの運用</title>
-        <description>&lt;h3 id=&quot;githubioの運用&quot;&gt;github.ioの運用&lt;/h3&gt;
-
-&lt;p&gt;サブディレクトリ型URLで&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;github.io/直
-    &lt;ul&gt;
-      &lt;li&gt;ポータル&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;github.io/portfolio
-    &lt;ul&gt;
-      &lt;li&gt;スキル紹介ページ
-        &lt;ul&gt;
-          &lt;li&gt;組み込みスキルページ&lt;/li&gt;
-          &lt;li&gt;Webページ作成スキルページ&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;github.io/blog
-    &lt;ul&gt;
-      &lt;li&gt;ブログ&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;の様に構成してみよう。&lt;/p&gt;
-
-&lt;h3 id=&quot;githubioへのデプロイ&quot;&gt;github.ioへのデプロイ&lt;/h3&gt;
-
-&lt;p&gt;現状の手作業&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/&amp;lt;...&amp;gt;/&amp;lt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll b
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/&amp;lt;...&amp;gt;/_site
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;cv - &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; github.io &lt;span class=&quot;nt&quot;&gt;-xvf&lt;/span&gt; -
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/&amp;lt;...&amp;gt;/github.io/&amp;lt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;で、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;*&amp;gt;&lt;/code&gt; を それぞれ&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;直下&lt;/li&gt;
-  &lt;li&gt;/blog&lt;/li&gt;
-  &lt;li&gt;/portfolio&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;と三通りに分けて手動で実行しているのを&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/&amp;lt;...&amp;gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt;ビルドコマンド&amp;gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt;デプロイコマンド&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;の様に、ビルドコマンドとデプロイコマンドの２つに纏めよう。&lt;/p&gt;
-
-&lt;p&gt;現状の手作業は、手順が多すぎで、更新と更新の期間が開くとこの手順を順番ごと全て忘れるため。&lt;/p&gt;
-
-&lt;h3 id=&quot;開発ディレクトリの整理&quot;&gt;開発ディレクトリの整理&lt;/h3&gt;
-
-&lt;p&gt;ビルドコマンドとデプロイコマンドに纏めるために、開発ディレクトリも構成し直そう。&lt;/p&gt;
-
-&lt;p&gt;HW/blog、HW/blog/portfolioとHW/portalを&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;HW/portal&lt;/li&gt;
-  &lt;li&gt;HW/portfolio&lt;/li&gt;
-  &lt;li&gt;HW/blog&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;にして、既存の blog と portal は&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;HW/portal-by-2111&lt;/li&gt;
-  &lt;li&gt;HW/blog-by-2111&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;と名前変更して保持する。&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/githubio/operation/2021/11/04/the-githubio-operation.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/githubio/operation/2021/11/04/the-githubio-operation.html</guid>
-        
-        
-        <category>githubio</category>
-        
-        <category>operation</category>
         
       </item>
     

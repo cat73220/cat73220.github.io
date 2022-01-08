@@ -1,7 +1,20 @@
+{% capture adafruit_text_1_title %}Linuxデバイスドライバの刷新{% endcapture %}
+{% capture adafruit_text_1 %}
+  **Tasks**
+  : Linux v3.0のビットマップLCDディスプレイデバイスドライバを v5.0に刷新しました
+
+  **Development Environment**
+  - git
+  - gcc linux development
+  - raspberry pi
+{% endcapture %}
+
 {% capture adafruit_text %}
 Adafruit
 ----------
+2016
 
+懇意にしている知人にレディエイダを紹介してもらいました \\(^ ^)/　しかも、仕事になりました。感謝です！
 {% endcapture %}
 {% comment %}
 Local Variables:

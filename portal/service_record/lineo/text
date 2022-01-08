@@ -1,7 +1,19 @@
+{% capture lineo_text_1_title %}Linuxデバイスドライバの機能追加{% endcapture %}
+{% capture lineo_text_1 %}
+  **Tasks**
+  : 既存のLinuxデバイスドライバに機能を追加しました
+
+  **Development Environment**
+  - 評価ボード
+  - GCC クロスコンパイラ
+  - yact
+{% endcapture %}
 {% capture lineo_text %}
 Lineo
 ----------
+2018
 
+ご縁があって人事の方と知り合えて、さらに、お仕事に結びつきました。感謝です！
 {% endcapture %}
 {% comment %}
 Local Variables:

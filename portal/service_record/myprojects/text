@@ -56,7 +56,7 @@
   - MS-DOS
 {% endcapture %}
 
-{% capture myprojects_text_6_title %}MK4801 banner{% endcapture %}
+{% capture myprojects_text_6_title %}MK4801 burner{% endcapture %}
 {% capture myprojects_text_6 %}
   **Tasks**
   : 当時のハイパフォーマンスPC（ワークステーションと呼びました）のNV-ROMのハッキングツールです
