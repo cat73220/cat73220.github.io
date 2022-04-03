@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Liquidの探求</title>
-  <meta name="description" content="Liquidの使い方あれこれ">
+  <title>【備忘録】bundler/jekyllコマンドとgit actions</title>
+  <meta name="description" content="３ヶ月経つと何もかも忘れている…困ったものだ…効果的にメモを付けておかないと思い出すのも一苦労である。以下、HWgithubプロジェクトディレクトリで実行するコマンドである。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html">
+  <link rel="canonical" href="https://cat73220.github.io/learning/jekyll/2022/04/03/reminder-how-to-use-bunder-and-jekyll.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
 
@@ -70,32 +70,44 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Liquidの探求</h1>
-    <p class="post-meta">May 11, 2015</p>
+    <h1 class="post-title">【備忘録】bundler/jekyllコマンドとgit actions</h1>
+    <p class="post-meta">Apr 3, 2022</p>
   </header>
 
   <article class="post-content">
-    <h3 id="liquidの使い方あれこれ">Liquidの使い方あれこれ</h3>
+    <p>３ヶ月経つと何もかも忘れている…困ったものだ…効果的にメモを付けておかないと思い出すのも一苦労である。
+以下、<code class="language-plaintext highlighter-rouge">HW</code>githubプロジェクトディレクトリで実行するコマンドである。</p>
 
-<p>Hello = 2015-05-11 12:00:00 +0000</p>
+<h4 id="bundler-と-jekyll-コマンド"><strong>Bundler と Jekyll コマンド</strong></h4>
 
-<p>Update = 2015-05-11 12:00:00 +0000</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundler <span class="nb">exec </span>jekyll s <span class="nt">-wI</span> <span class="nt">-s</span> blog <span class="nt">-d</span> blog/_site
+</code></pre></div></div>
 
-<p>now = 2022-Apr-03 07:30:00</p>
+<p><code class="language-plaintext highlighter-rouge">bundler exec</code> は jekyll を起動する際の常套句で<code class="language-plaintext highlighter-rouge">bundlerでjekyllを実行する</code>ということはすぐに分かる。
+続く<code class="language-plaintext highlighter-rouge">jekyll s</code>の<code class="language-plaintext highlighter-rouge">s</code>は<code class="language-plaintext highlighter-rouge">serve</code>の略で、ローカルホスト<code class="language-plaintext highlighter-rouge">localhost:4000</code>でWebブラウザを待機するということ。
+続く<code class="language-plaintext highlighter-rouge">-wI</code>は<code class="language-plaintext highlighter-rouge">watch</code>モードと<code class="language-plaintext highlighter-rouge">incremental</code>モードの略で、それぞれ、「ソースコードの変更を監視してサイトの更新を行う」と「逐次、サイトの更新を行う」である。
+最後の<code class="language-plaintext highlighter-rouge">-s blog -d blog/_site</code>は、それぞれ、「ソースコードのソースディレクトリ」と「ビルドしたサイトの保存先ディレクトリ」を指している。
+このコマンドを実行したままで、別にコンソールを起動して</p>
 
-<p>comment = what is  <code class="language-plaintext highlighter-rouge">comment</code> ?</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundler <span class="nb">exec </span>jekyll b <span class="nt">-wI</span> <span class="nt">-s</span> portal <span class="nt">-d</span> blog/_site/portal
+</code></pre></div></div>
 
-<p>page.layout = post</p>
+<p>を実行するとローカルで<code class="language-plaintext highlighter-rouge">localhost:4000/portal/</code>のアクセスが可能になる。
+<code class="language-plaintext highlighter-rouge">jekyll b</code>だけ上↑のWebブラウザ待機と異なっていて、<code class="language-plaintext highlighter-rouge">-d</code>の<code class="language-plaintext highlighter-rouge">blog/_site/portal</code>ディレクトリに<code class="language-plaintext highlighter-rouge">-s</code>の<code class="language-plaintext highlighter-rouge">portal</code>を出力するだけ、つまり、<code class="language-plaintext highlighter-rouge">b</code>はサイトの「生成<code class="language-plaintext highlighter-rouge">build</code>」ということ。</p>
 
-<p>page.categories = LearningLucidGantt</p>
+<h4 id="ブログの投稿"><strong>ブログの投稿</strong></h4>
 
-<p>category = Learning</p>
+<p>blog/_postの他のファイルに倣って.mdファイルを同ディレクトリに作成すればよい。上↑の準備が整っていればローカルホストで即座に結果を確認できる。</p>
 
-<p>category = Lucid</p>
+<h4 id="git-actions"><strong>git actions</strong></h4>
 
-<p>category = Gantt</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin master
+</code></pre></div></div>
 
-<p>album =</p>
+<p>を実行することで<code class="language-plaintext highlighter-rouge">cat73220.github.io</code>サイトは自動的に最新の状態となる。git actionsの導入でgithub内でblogもportalも自動的にビルド＆デプロイされる。
+簡単にはlazygitでpushでよい。</p>
+
+<p><code class="language-plaintext highlighter-rouge">https://github.com/cat73220/HW/actions</code>でビルドの経過を細かに追跡できる。</p>
 
   </article>
 
