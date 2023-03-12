@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>LED Tape UX/UI</title>
-  <meta name="description" content="LED Tape UX/UI">
+  <title>favicon対応</title>
+  <meta name="description" content="faviconがなくてlocalhostサーバー起動でエラーを蛍光されていた。以前に作ったやること一覧にあった。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/specification/summary/2016/03/03/LEDTapeUxUi.html">
+  <link rel="canonical" href="https://cat73220.github.io/learning/jekyll/2023/03/12/favicon.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
   <link rel="icon" href="https://cat73220.github.io/favicon.ico">
 
@@ -71,65 +71,28 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">LED Tape UX/UI</h1>
-    <p class="post-meta">Mar 3, 2016</p>
+    <h1 class="post-title">favicon対応</h1>
+    <p class="post-meta">Mar 12, 2023</p>
   </header>
 
   <article class="post-content">
-    <h1 id="led-tape-uxui">LED Tape UX/UI</h1>
+    <p>faviconがなくてlocalhostサーバー起動でエラーを蛍光されていた。以前に作ったやること一覧にあった。</p>
 
-<h2 id="画面構成">画面構成</h2>
+<h4 id="github-pageかjekyllか"><strong>github-pageかjekyllか</strong></h4>
 
-<p>２ページで構成される。</p>
+<p>どちらの作法を踏襲すべきか迷った。github-pageを利用しているので、こちらから調べたが腑に落ちる説明は見当たらなかった。探そうと追求せずに、jekyllを調べたらすぐにヒットした。んー、検索で答えが得られると早いな。ボトムアップに調べることをしないから知識はつかないか・・・調べている亜ヂダに疲れたり、何を調べているか見失ったりするから、このやり方は考えものなのかもしれない。でも、手探りするのもいいのだが。</p>
 
-<p>各ページは画面全体を占めるように意匠する。</p>
+<p>_include/head.htmlにhtmlのhead節の記述がある。ここにrel=”icon”のlinkタグを追加する。srcにfaviocn.icoへのパスを記述する。だけだ。</p>
 
-<h2 id="ipアドレスページ">IPアドレスページ</h2>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/css/main.css"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"canonical"</span> <span class="na">href=</span><span class="s">"https://cat73220.github.io/learning/jekyll/2023/03/12/favicon.html"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">type=</span><span class="s">"application/rss+xml"</span> <span class="na">title=</span><span class="s">"Jumly integration"</span> <span class="na">href=</span><span class="s">"https://cat73220.github.io/feed.xml"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">href=</span><span class="s">"https://cat73220.github.io/favicon.ico"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-<p>１ページ目はESP装置のIPアドレス入力画面。</p>
+<p>四行目が追加した行。jekyllの作法で prepend でbaseurlやsite.urlで修飾してやれば、FQ-URL になって確実に favicon.ico がアクセスされる。</p>
 
-<p>IPv4アドレスを入力する、４数値入力欄と、決定ボタンで構成される。</p>
-
-<p>アドレス入力はキーボードまたはキーパッドによって行う。</p>
-
-<p>決定ボタンにより２ページ目に遷移する。
-決定ボタン押し下げによりESP装置との対話が行われ接続の合否を調べる。
-接続に成功すれば２ページ目に遷移する。
-失敗した場合はその旨を知らせて同画面に留まる。</p>
-
-<h2 id="ledテープアップデートページ">LEDテープアップデートページ</h2>
-
-<p>２ページ目はLEDテープ動作変更ページ。</p>
-
-<p>ページ上、上から３箇所に別れる。上から、色と輝度選択、点灯個数、移動速度。</p>
-
-<p>いずれの箇所も操作は横方向のスワイプまたはドラッグで値を決定する。なお、色と輝度選択は上下ドラッグまたはスワイプで輝度の設定となる。</p>
-
-<p>１ページ目から遷移してくると、つまり２ページ目が始まると、LEDはデフォルト値を用いて動作を開始する。</p>
-
-<p>LEDテープ動作中に３箇所の操作が可能で、LEDテープの動作を停止したり開始したりと行った操作はなく、上３箇所の操作が直ちにLEDテープに伝わり、動作が変更される。</p>
-
-<p>LEDテープの動作とは、点灯個数個の色と輝度のLEDをLEDテープ上で進行と逆行を繰り返すものである。</p>
-
-<ol>
-  <li>色と輝度選択
-    <ul>
-      <li>色：左から右に…彩度で変化？どうしよう…RGBの帯を作るか…三箇所別にスワイプは面倒だ…</li>
-      <li>輝度：上下に0~255を変更。下端が255で明るく、上端が0で真っ暗…逆がいいか？255だと明るすぎだが…たしか、15くらいで十分な輝度だったはず</li>
-    </ul>
-  </li>
-  <li>点灯個数
-    <ul>
-      <li>最低個数：1</li>
-      <li>最大個数：32</li>
-    </ul>
-  </li>
-  <li>移動速度
-    <ul>
-      <li>左が一番遅くて、右が一番早い</li>
-    </ul>
-  </li>
-</ol>
+<h4 id="faviconiconでエラーがなくなった"><strong>favicon.iconでエラーがなくなった</strong></h4>
 
   </article>
 

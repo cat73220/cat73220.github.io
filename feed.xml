@@ -6,9 +6,82 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Mar 2023 05:12:03 +0000</pubDate>
-    <lastBuildDate>Sun, 12 Mar 2023 05:12:03 +0000</lastBuildDate>
+    <pubDate>Sun, 12 Mar 2023 06:34:29 +0000</pubDate>
+    <lastBuildDate>Sun, 12 Mar 2023 06:34:29 +0000</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>GITHUBの警告メールを解決してみよう</title>
+        <description>&lt;p&gt;いつの頃からかGithubからセキュリティや依存関係に関する警告メールが届くようになった。調べてみて一番古い警告が 2021年7月14日だ。&lt;/p&gt;
+
+&lt;h4 id=&quot;a-security-advisoryの件&quot;&gt;&lt;strong&gt;A security advisory…の件&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;件名が自分のgithubアカウント名で始まって、続いて「A security advisory…」が、その警告メールだ。&lt;/p&gt;
+
+&lt;p&gt;メールはhtmlで表されていて、可愛らしいアイコンと警告内容の概略と、その詳細を記述したwebページに移動するボタンがその内容だ。デザイナーが監修してくれるとメール本文もお洒落だ。&lt;/p&gt;
+
+&lt;p&gt;最初のセキュリティ警告の概要は「Regular Expression Denial of Service in Addressable templates」だ。REGXPでDOSが可能らしい。すごい隙間を見つける人がいるな、世の中には。&lt;/p&gt;
+
+&lt;p&gt;詳細ボタンでgithubの詳細解説ページを読むと、RubyGemsのaddressableのバージョン 2.3.0 - 2.7.0 を利用していると、REGXP-DOS の危険性があるというものだ。&lt;/p&gt;
+
+&lt;p&gt;今日(2023年3月12日)まで、セキュリティ警告を６件受け取っていた。&lt;/p&gt;
+
+&lt;p&gt;古い順に&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;addressable：2021-7-14&lt;/li&gt;
+  &lt;li&gt;commonmarker：2022-3-4&lt;/li&gt;
+  &lt;li&gt;tzinfo：2022-7-22&lt;/li&gt;
+  &lt;li&gt;@xmldom/xmldom：2022-11-3&lt;/li&gt;
+  &lt;li&gt;json5：2023-1-10&lt;/li&gt;
+  &lt;li&gt;ua-parser-js：2023-1-28&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;全部異なる警告だ。過去の警告は重ねて警告しないようになっているのだろうか。&lt;/p&gt;
+
+&lt;h4 id=&quot;github-your-dependabot-alertsの件&quot;&gt;&lt;strong&gt;[GitHub] Your Dependabot alerts…の件&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;このように始まる警告メールの内容もhtmlで表されていてデザインも監修されている。内容はやはりセキュリティの危険性の警告で、利用中パッケージの名前と共に現在のバージョンと更新すべきバージョン、Githubで管理しているセキュリティ危険性の管理番号まで記されている。利用中のパッケージということで、危険なパッケージに依存している、という警告だ。先の「A security advisory…」との違いは、件名に、いつからいつまでに見つかった、とGithubが脆弱性を発見した期間が明記してあるところだろうか。先の「A security advisory…」は、何をきっかけに発見したのだろうか。ブログをコミットした日時とは合わない。Githubのセキュリティ危険性管理で世間の脆弱性を登録したときかもしれない。&lt;/p&gt;
+
+&lt;p&gt;詳細ボタンでgithubの詳細解説ページを読むと、利用中パッケージのリストで、一行にどこでどのような脆弱性かが一覧されている。全て expos/yarn.lock だった。最古のこの警告メールが2022年3月1日で、この頃にexpoを試したのを覚えている。&lt;/p&gt;
+
+&lt;h4 id=&quot;cat73220hw-your-repository-has-dependenciesの件&quot;&gt;&lt;strong&gt;[cat73220/HW] Your repository has dependencies…の件&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;これは、３通だけ届いている。最後のが今日(2023年3月12日)受け取ったメールだ。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2021-10-30&lt;/li&gt;
+  &lt;li&gt;2022-4-6&lt;/li&gt;
+  &lt;li&gt;2023-3-12&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;全て、githubにpushした日だと思う。今日のは確実にそうだ。&lt;/p&gt;
+
+&lt;p&gt;セキュリティ脆弱性について、あらゆるタイミングで報告していてくれたのだな。オープンソースのセキリティ脆弱性がここまで徹底して解析されて、世間に行き渡っているのが実感できる。安心を勝ち取る、ということだね。&lt;/p&gt;
+
+&lt;h4 id=&quot;解決&quot;&gt;&lt;strong&gt;解決&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;expoに関係する脆弱性は「yarn upgrade –emoji true」で解決だ。冒頭の「A security advisory…」の６件はjekyllに関するもので「bundle update」で解決した。&lt;/p&gt;
+
+&lt;p&gt;githubにデプロイしても「[cat73220/HW] Your repository has dependencies…」警告メールは受信しなかった。&lt;/p&gt;
+
+&lt;h4 id=&quot;gitubactionsdeployymlの実行で警告&quot;&gt;&lt;strong&gt;gitub/actions/deploy.ymlの実行で警告&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;注意が必要だったのはこの警告だ。メールで警告されたりはしない。actionsの実行が完了した時点で、そのページで警告された。「node12はもうじき利用不可能になるから、node16に換えるように」というものだ。&lt;/p&gt;
+
+&lt;p&gt;警告されていることはわかるのだが、見に覚えがないので当惑する。githubは警告の文が明確で親切だ。そのページの警告にどこのなにを参考にすればよいかまで記載されている。actionsの開発者向けと利用者向けに対応が別れていた。親切だ。actionsのymlを記述しているので開発者だと思い、文章を追うのだが意味をなさない。あれこれ考えたが、どうも直面してる警告からかけ離れている、違う、と頭の中で違和感を感じる。こおいうときはもう一方も念のためにみてみるべきだ。利用者側の文章に答えはあった。自分は利用者だったのだな。確かにactionsの機能を &lt;strong&gt;利用&lt;/strong&gt; している。「actions/checkout@v2」を「actions/checkout@v3」に変更してデプロイすると警告が現れなくなった。&lt;/p&gt;
+
+&lt;h4 id=&quot;githubのセキュリティ脆弱性がなくなった&quot;&gt;&lt;strong&gt;githubのセキュリティ脆弱性がなくなった。&lt;/strong&gt;&lt;/h4&gt;
+</description>
+        <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/github/2023/03/12/supress-github-warnings.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2023/03/12/supress-github-warnings.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>github</category>
+        
+      </item>
     
       <item>
         <title>【備忘録】jekyllでページを追加する</title>
@@ -33,6 +106,37 @@
         <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/learning/jekyll/2023/03/12/how-to-add-a-jekyll-page.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/12/how-to-add-a-jekyll-page.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+      <item>
+        <title>favicon対応</title>
+        <description>&lt;p&gt;faviconがなくてlocalhostサーバー起動でエラーを蛍光されていた。以前に作ったやること一覧にあった。&lt;/p&gt;
+
+&lt;h4 id=&quot;github-pageかjekyllか&quot;&gt;&lt;strong&gt;github-pageかjekyllか&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;どちらの作法を踏襲すべきか迷った。github-pageを利用しているので、こちらから調べたが腑に落ちる説明は見当たらなかった。探そうと追求せずに、jekyllを調べたらすぐにヒットした。んー、検索で答えが得られると早いな。ボトムアップに調べることをしないから知識はつかないか・・・調べている亜ヂダに疲れたり、何を調べているか見失ったりするから、このやり方は考えものなのかもしれない。でも、手探りするのもいいのだが。&lt;/p&gt;
+
+&lt;p&gt;_include/head.htmlにhtmlのhead節の記述がある。ここにrel=”icon”のlinkタグを追加する。srcにfaviocn.icoへのパスを記述する。だけだ。&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/css/main.css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;canonical&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/learning/jekyll/2023/03/12/favicon.html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;alternate&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/rss+xml&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Jumly integration&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/feed.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;icon&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/favicon.ico&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;四行目が追加した行。jekyllの作法で prepend でbaseurlやsite.urlで修飾してやれば、FQ-URL になって確実に favicon.ico がアクセスされる。&lt;/p&gt;
+
+&lt;h4 id=&quot;faviconiconでエラーがなくなった&quot;&gt;&lt;strong&gt;favicon.iconでエラーがなくなった&lt;/strong&gt;&lt;/h4&gt;
+</description>
+        <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/jekyll/2023/03/12/favicon.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/12/favicon.html</guid>
         
         
         <category>learning</category>
@@ -582,115 +686,6 @@
         <category>remind</category>
         
         <category>mymind</category>
-        
-      </item>
-    
-      <item>
-        <title>ポータルとポートフォリオの見通し</title>
-        <description>&lt;p&gt;git push→github.ioデプロイ の自動化が済んだ。以前よりも使い心地が良くなったので、気軽に、このWebサイトを全体的に再構成しよう。&lt;/p&gt;
-
-&lt;p&gt;サイトタイトルの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jumly integration&lt;/code&gt;は…はて、なんだったんだろ〜…この辺りから整理・整頓していこう。&lt;/p&gt;
-
-&lt;h3 id=&quot;タイトルjumly-integrationを思い出す&quot;&gt;タイトル「Jumly integration」を思い出す&lt;/h3&gt;
-
-&lt;p&gt;思い出した&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;UMLダイアグラムを埋め込むjavascriptライブラリだった&lt;/li&gt;
-  &lt;li&gt;mermaid 採用の前に jumly.js を見つけて、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include/head.html&lt;/code&gt; に直に記述して利用してたのだ&lt;/li&gt;
-  &lt;li&gt;配布元の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jumly.tmtk.net&lt;/code&gt;が閉鎖されたのと、これに必要な&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;coffee-script.js&lt;/code&gt;へのURLが変更？閉鎖？されたことで使えなくなったのだな&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jumly.tmtk.net&lt;/code&gt;でGooglingしたら&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog.tmtk.net&lt;/code&gt;に作者を見つけた。2013年くらいまではJumlyをメンテしてたけど、その後、一切触れなくなった。やめちゃったかな…Twitter@tmtk75で尋ねてみようか…&lt;/li&gt;
-  &lt;li&gt;タイトルを変更しよう→考える&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;githubioの構成&quot;&gt;github.ioの構成&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;github.io&lt;/strong&gt;：root：ここは現portalとする
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;blog&lt;/strong&gt;：ここに今のルートを配置&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;portfolio&lt;/strong&gt;：ポートフォリオ:blogリポジトリからportalリポジトリに引っ越しだ
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;resume&lt;/strong&gt;：現resumeを配置。最近のものもここに追加：これも引っ越し&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;portfolioの整理&quot;&gt;portfolioの整理&lt;/h3&gt;
-
-&lt;p&gt;portalのportfolioに合わせて整理しよう&lt;/p&gt;
-
-&lt;p&gt;_portfolioディレクトリに一件ごとのマークダウンファイルを作成…多いな&lt;/p&gt;
-
-&lt;p&gt;ポータルに並ぶポートフォリオを&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/portfolio_grid.html&lt;/code&gt;で選んで表示されるようにする&lt;/p&gt;
-
-&lt;p&gt;どこかに全ポートフォリオをアクセスできるように、一覧ページを作る、かな&lt;/p&gt;
-
-&lt;h3 id=&quot;雑多なこと&quot;&gt;雑多なこと&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;favicon.ico&lt;/code&gt;が&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;not found&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;portal用にフォントを選ぶか&lt;/li&gt;
-  &lt;li&gt;フッターや水平段組みした時、偶数個、奇数個、でセンタリングするようにしたい&lt;/li&gt;
-  &lt;li&gt;kramdownの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inline code&lt;/code&gt;と&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;code block&lt;/code&gt;は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;highlight&lt;/code&gt;タグのほうが良いか？ → 使い分ける…highlightを常用するようにしたほうがいいかな
-    &lt;ul&gt;
-      &lt;li&gt;highlightの書式指定サフィックス&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{ruby, html, etc}&lt;/code&gt;がどれくらい揃っているか、に依るか&lt;/li&gt;
-      &lt;li&gt;…違った
-        &lt;ul&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;code block&lt;/code&gt;記述は htmlを直書きしたとき 途中で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;code block&lt;/code&gt;にできない&lt;/li&gt;
-          &lt;li&gt;highlightはhtml直書き中でも code block にできる&lt;/li&gt;
-          &lt;li&gt;書式指定は何方も同じものが使えて、同じ様に色付けされる←気にしないでいいね&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Sat, 13 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/remind/mymind/2021/11/13/resolution-for-portal-and-portfolios.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/remind/mymind/2021/11/13/resolution-for-portal-and-portfolios.html</guid>
-        
-        
-        <category>remind</category>
-        
-        <category>mymind</category>
-        
-      </item>
-    
-      <item>
-        <title>Github actions 完了</title>
-        <description>&lt;h3 id=&quot;エディタの構文検証機能は大事だ&quot;&gt;エディタの構文検証機能は大事だ&lt;/h3&gt;
-
-&lt;p&gt;gitコマンド実行でssh通信にシークレットを渡すシェルスクリプトには直ぐに行きあたれたのだが、いざ、Github Actionsで実行するとエラーが生じる。&lt;/p&gt;
-
-&lt;p&gt;手元で実行しても問題ないが、Github Actionsは追加した行で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Invalid workflow file&lt;/code&gt;をエラーを起こす… yamlファイル構文でインデント文字の統一 に気がつくのに思いの外時間を費やしてしまった。&lt;/p&gt;
-
-&lt;p&gt;エディタで意識せずにタブキーを使っていたのと構文検証機能を yamlファイル に設定していなかったため、気にも停めていなかったことだった。追加の２行のインデントがタブ文字だったため、Github Actionsでエラーとなっていた（泣）。&lt;/p&gt;
-
-&lt;h3 id=&quot;ssh--i-の与え方など&quot;&gt;ssh -i の与え方など&lt;/h3&gt;
-
-&lt;p&gt;どの git サブコマンド が ssh通信するのか、よく調べていないのと、git -cをgitコマンド毎に記述するのは可読性が落ちることとが大きな理由で、デプロイ(commit/push)のステップでは環境変数(GIT_SSH_COMMAND)にした。&lt;/p&gt;
-
-&lt;p&gt;手元でローカルに clone するのと少し違っているみたいで、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remote.origin.url&lt;/code&gt; が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.git/config&lt;/code&gt; に記録されなかった。 …まだ、調べたりないな… 毎回 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config retmote...&lt;/code&gt; を実行するようにした。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pull/push&lt;/code&gt; のタイミングと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;commit&lt;/code&gt; の仕方に手を入れたら、最後まで通るようになった。&lt;/p&gt;
-
-&lt;p&gt;このポストが、公開ページで見られたら、一応、完成ってことだな。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;追記&lt;/strong&gt; 完成したよ！&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 12 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/github/2021/11/12/github-action-succeeded.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2021/11/12/github-action-succeeded.html</guid>
-        
-        
-        <category>learning</category>
-        
-        <category>github</category>
         
       </item>
     
