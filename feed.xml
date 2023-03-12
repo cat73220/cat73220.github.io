@@ -6,9 +6,40 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 Apr 2022 08:42:39 +0000</pubDate>
-    <lastBuildDate>Sun, 10 Apr 2022 08:42:39 +0000</lastBuildDate>
-    <generator>Jekyll v3.9.0</generator>
+    <pubDate>Sun, 12 Mar 2023 03:01:41 +0000</pubDate>
+    <lastBuildDate>Sun, 12 Mar 2023 03:01:41 +0000</lastBuildDate>
+    <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>【備忘録】jekyllでページを追加する</title>
+        <description>&lt;p&gt;１年ぶりである・・・忙しさを理由にできるし、興味の対象が変わったのも事実だし、後付の説明は幾らでもできるので、このあたりにしておこう。&lt;/p&gt;
+
+&lt;h4 id=&quot;ページを追加したくなった&quot;&gt;&lt;strong&gt;ページを追加したくなった&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;jekyll-agencyテーマを利用しているが、これが通常のjekyllの作法から大幅に外れた作りとなっている。これの作者はランディングページ作成用に、この方法が合っていると判断したのだろう。jekyll-agencyのポリシーを読み取ろうとしてみたが旨く行かなかったので、jekyllの基本に返ってみることにした。&lt;/p&gt;
+
+&lt;p&gt;曰く「ページはコンテンツを構成する最も基本的なブロックです。スタンドアローンのコンテンツの為にあります。日付に基づかないコンテンツ、またはスタッフ紹介やレシピなどのグループコンテンツでないものです」&lt;/p&gt;
+
+&lt;p&gt;追加したページは一つ以上のページを束ねたもの、で、これを一人以上のスタッフの紹介を束ねた「スタッフ紹介」に似ている捉えると「スタッフ紹介」に近いかもしれない。&lt;/p&gt;
+
+&lt;p&gt;その構成として、はじめに一覧ページを設けて、その一覧中の一つをクリックするとそのページに移動する。この「はじめの一覧ページ」をjekyllの「ページ」にしてみようと考えている。クリックされて移動する先は数あるが「グループコンテンツ」とは捉えないことにする。&lt;/p&gt;
+
+&lt;p&gt;改めて &lt;a href=&quot;https://jekyllrb.com/docs/pages/&quot;&gt;Pages&lt;/a&gt; を読み返してみた。&lt;/p&gt;
+
+&lt;p&gt;「複数のページを整理するためにディレクトリを設けるとよい」とある。追加しようとしたページのディレクトリは既に存在していて、その中にはクリック先のページがマークダウンファイルでディレクトリ構造を持って整理されていた。&lt;/p&gt;
+
+&lt;p&gt;１年前に既に思ったように作業したのだった。忘れていただけである。解説にある通りURLを入力すると、今日思った通りの一覧が現れた。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/jekyll/2023/03/12/how-to-add-a-jekyll-page.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/12/how-to-add-a-jekyll-page.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>jekyll</category>
+        
+      </item>
     
       <item>
         <title>【備忘録】bundler/jekyllコマンドとgit actions</title>
@@ -655,80 +686,6 @@
         <pubDate>Fri, 12 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/learning/github/2021/11/12/github-action-succeeded.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/learning/github/2021/11/12/github-action-succeeded.html</guid>
-        
-        
-        <category>learning</category>
-        
-        <category>github</category>
-        
-      </item>
-    
-      <item>
-        <title>Github actionsを試めしてみた</title>
-        <description>&lt;h3 id=&quot;ほとんどこのガイドの１章目だけでできてしまうのだな&quot;&gt;ほとんど、この&lt;a href=&quot;https://docs.github.com/ja/actions/learn-github-actions/understanding-github-actions&quot;&gt;ガイドの１章目&lt;/a&gt;だけで、できてしまうのだな&lt;/h3&gt;
-
-&lt;p&gt;test.ymlを&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HW/.github/workflows&lt;/code&gt;に作って、pullした空の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;github.io&lt;/code&gt;リポジトリGITHUBIOディレクトリに&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog&lt;/code&gt;を生成して、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls -l&lt;/code&gt;と&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls -laF GITHBUIO&lt;/code&gt;を実行する&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Test&lt;/code&gt;アクションを作ってみた。&lt;/p&gt;
-
-&lt;p&gt;pushすると、GithubのHW・Actionsページの左ペーンに、作ったばかりの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Test&lt;/code&gt;アクションの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name:&lt;/code&gt;欄が&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;All workflows&lt;/code&gt;の下に表示された。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;All workflows&lt;/code&gt;がデフォルトで、全てのアクションの実行結果がコミットを１単位として行で並ぶ。TestアクションをクリックするとTestアクションの実行結果だけに絞られる。&lt;/p&gt;
-
-&lt;p&gt;実行結果の行をクリックすると、まんまですね。実行結果がアクション図のアクティビティ単位で確認できた。いわゆるデバックプリントが得られた。&lt;/p&gt;
-
-&lt;p&gt;Testアクションの不備、些細なタイポや確認ミス、等を直してコミットし直すと、実行結果行のコミット名左のアイコンが赤バツか緑チェックに変わる。&lt;/p&gt;
-
-&lt;p&gt;lsくらいならさっさとできてしまった。cloneと生成は問題なく実行できた。まんま、Dockerでshellプログラミングしてるのと同じだ。&lt;/p&gt;
-
-&lt;p&gt;あまりのあっけなさに、感動した&lt;/p&gt;
-
-&lt;p&gt;…次に進むために頭を冷やさねば&lt;/p&gt;
-
-&lt;h3 id=&quot;デプロイをしてみる&quot;&gt;デプロイをしてみる&lt;/h3&gt;
-
-&lt;p&gt;頭も冷めないまま、deploy.ymlを作成しpushした。&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 1 Run &lt;span class=&quot;nv&quot;&gt;SOURCE_COMMIT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;%an: %B&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GITHUB_SHA&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-20 remote: Permission to cat73220/cat73220.github.io.git denied to github-actions[bot].
-21 fatal: unable to access &lt;span class=&quot;s1&quot;&gt;'https://github.com/cat73220/cat73220.github.io.git/'&lt;/span&gt;: The requested URL returned error: 403
-22 Error: Process completed with &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;code 128.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;エラーが出ました。 &lt;strong&gt;github.ioにコミットするための権限がありません&lt;/strong&gt; だそうな。&lt;/p&gt;
-
-&lt;p&gt;さて。&lt;/p&gt;
-
-&lt;p&gt;Googling by 「githubアクション 他のレポジトリにpushするための権限」&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://3nan3.github.io/post/2019122201_github_actions/&quot; target=&quot;_blank&quot;&gt;GitHub Actions で別のリポジトリに git push する&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://qiita.com/HeRo/items/935d5e268208d411ab5a&quot; target=&quot;_blank&quot;&gt;Github Actionsの使い方メモ - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;沢山、ヒットした中から 上２リンク を選択。 …初めから読んでみるか…&lt;/p&gt;
-
-&lt;p&gt;1で当たりっぽい。 tl;dr にしたいことが書いてあるね&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;tldr&quot;&gt;tl;dr&lt;/h3&gt;
-
-  &lt;ul&gt;
-    &lt;li&gt;push先のレポジトリで、Settingsから Deploy keys （公開鍵）を登録&lt;/li&gt;
-    &lt;li&gt;GitHub Actionsを設定するレポジトリで、Settingsの Secrets にDeploy keysに対応するの秘密鍵を登録&lt;/li&gt;
-    &lt;li&gt;GitHub Actions用のymlをいい感じに書いてpushする&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;心配してたこともここで解消された。２行目「Actions…Settings…秘密鍵を登録」。これで、大丈夫でしょう。…一応、全部に目を通してみた。&lt;/p&gt;
-
-&lt;p&gt;別リポジトリの権限周りが 想定外に複雑に実装されている。リポジトリ指定に登録した秘密鍵環境変数を渡すだけで良さそうな気が…&lt;/p&gt;
-
-&lt;p&gt;… 環境変数名をリポジトリURLに当てはめるだけじゃダメだった… 環境変数名がシークレットに直接置き換わってリポジトリURLとしてエラーになってしまう。&lt;/p&gt;
-
-&lt;p&gt;1の実装のように、gitを実行する際のsshでシークレットを参照するようにしないと、みたい。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 11 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/github/2021/11/11/testing-github-action.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2021/11/11/testing-github-action.html</guid>
         
         
         <category>learning</category>

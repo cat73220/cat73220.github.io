@@ -1,30 +1,21 @@
-{% capture spacenavi_text_1_title %}Supenavi{% endcapture %}
+{% capture spacenavi_text_1_title %}Office Ticket Work{% endcapture %}
 {% capture spacenavi_text_1 %}
   **Tasks**
-  : 保守と新機能の追加をしています。
-
-  **Development Environment**
-  - Symhony/Silex
-  - Twig
-  - react.js
-{% endcapture %}
-
-{% capture spacenavi_text_2_title %}bizplace{% endcapture %}
-{% capture spacenavi_text_2 %}
-  **Tasks**
-  : 保守と新機能の追加をしています。
+  : 保守と新機能の追加をしていました。
 
   **Development Environment**
   - GraphQL
   - Phonix server
   - react.js
   - react-native
+  - iOS
+  - elixir
 {% endcapture %}
 
-{% capture spacenavi_text_3_title %}Time Sharing{% endcapture %}
-{% capture spacenavi_text_3 %}
+{% capture spacenavi_text_2_title %}Supenavi{% endcapture %}
+{% capture spacenavi_text_2 %}
   **Tasks**
-  : 保守と新機能の追加をしています。
+  : 保守と新機能の追加をしていました。
 
   **Development Environment**
   - Symhony/Silex
@@ -32,8 +23,33 @@
   - react.js
 {% endcapture %}
 
-{% capture spacenavi_text_4_title %}bizplace wordpress{% endcapture %}
+{% capture spacenavi_text_3_title %}bizplace{% endcapture %}
+{% capture spacenavi_text_3 %}
+  **Tasks**
+  : 保守と新機能の追加をしていました。
+
+  **Development Environment**
+  - GraphQL
+  - Phonix server
+  - react.js
+  - react-native
+  - iOS
+  - elixir
+{% endcapture %}
+
+{% capture spacenavi_text_4_title %}Time Sharing{% endcapture %}
 {% capture spacenavi_text_4 %}
+  **Tasks**
+  : 保守と新機能の追加をしていました。
+
+  **Development Environment**
+  - Symhony/Silex
+  - Twig
+  - react.js
+{% endcapture %}
+
+{% capture spacenavi_text_5_title %}bizplace wordpress{% endcapture %}
+{% capture spacenavi_text_5 %}
   **Tasks**
   : サイト立ち上げました
 
@@ -41,8 +57,8 @@
   - wordpress
 {% endcapture %}
 
-{% capture spacenavi_text_5_title %}blog(feeeel){% endcapture %}
-{% capture spacenavi_text_5 %}
+{% capture spacenavi_text_6_title %}blog(feeeel){% endcapture %}
+{% capture spacenavi_text_6 %}
   **Tasks**
   : 保守をしました
 
@@ -54,9 +70,9 @@
 Spacenavi
 ----------
 
-2016 -
+2016 - 2023
 
-得意先です。Webシステムのあらゆることを学ばさせてもらっています。
+得意先です。Webシステムのあらゆることを学ばさせてもらっていました。
 
 {% endcapture %}
 

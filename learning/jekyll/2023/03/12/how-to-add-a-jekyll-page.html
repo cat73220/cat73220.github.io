@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Thumbnail Test</title>
-  <meta name="description" content="">
+  <title>【備忘録】jekyllでページを追加する</title>
+  <meta name="description" content="１年ぶりである・・・忙しさを理由にできるし、興味の対象が変わったのも事実だし、後付の説明は幾らでもできるので、このあたりにしておこう。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/2015/05/15/thumbnail-test.html">
+  <link rel="canonical" href="https://cat73220.github.io/learning/jekyll/2023/03/12/how-to-add-a-jekyll-page.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
 
 
@@ -70,65 +70,28 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Thumbnail Test</h1>
-    <p class="post-meta">May 15, 2015</p>
+    <h1 class="post-title">【備忘録】jekyllでページを追加する</h1>
+    <p class="post-meta">Mar 12, 2023</p>
   </header>
 
   <article class="post-content">
-    <div class="image-set">
-<div class="post-col-split4">
-<img src="/images/IMAG0033-ADK.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMAG0031-ADK.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/papipo.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/hatsuga-genmai-wp13589_01-300x200.jpg" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/bizplace-logo.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/musican1.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/logo_gary_converted.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_225103.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/picdemo_adk.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_3.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/bizplace-app.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/musican.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_2.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_224847-40percent.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/IMG_15062014_225132-30percent.png" class="image" />
-</div>
-<div class="post-col-split4">
-<img src="/images/android_porting_1.png" class="image" />
-</div>
-</div>
+    <p>１年ぶりである・・・忙しさを理由にできるし、興味の対象が変わったのも事実だし、後付の説明は幾らでもできるので、このあたりにしておこう。</p>
 
+<h4 id="ページを追加したくなった"><strong>ページを追加したくなった</strong></h4>
+
+<p>jekyll-agencyテーマを利用しているが、これが通常のjekyllの作法から大幅に外れた作りとなっている。これの作者はランディングページ作成用に、この方法が合っていると判断したのだろう。jekyll-agencyのポリシーを読み取ろうとしてみたが旨く行かなかったので、jekyllの基本に返ってみることにした。</p>
+
+<p>曰く「ページはコンテンツを構成する最も基本的なブロックです。スタンドアローンのコンテンツの為にあります。日付に基づかないコンテンツ、またはスタッフ紹介やレシピなどのグループコンテンツでないものです」</p>
+
+<p>追加したページは一つ以上のページを束ねたもの、で、これを一人以上のスタッフの紹介を束ねた「スタッフ紹介」に似ている捉えると「スタッフ紹介」に近いかもしれない。</p>
+
+<p>その構成として、はじめに一覧ページを設けて、その一覧中の一つをクリックするとそのページに移動する。この「はじめの一覧ページ」をjekyllの「ページ」にしてみようと考えている。クリックされて移動する先は数あるが「グループコンテンツ」とは捉えないことにする。</p>
+
+<p>改めて <a href="https://jekyllrb.com/docs/pages/">Pages</a> を読み返してみた。</p>
+
+<p>「複数のページを整理するためにディレクトリを設けるとよい」とある。追加しようとしたページのディレクトリは既に存在していて、その中にはクリック先のページがマークダウンファイルでディレクトリ構造を持って整理されていた。</p>
+
+<p>１年前に既に思ったように作業したのだった。忘れていただけである。解説にある通りURLを入力すると、今日思った通りの一覧が現れた。</p>
 
   </article>
 
