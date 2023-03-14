@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ランディングページ(旧ポータル)の整備</title>
+  <meta name="description" content="呼称をポータルからランディングページに変えた。その他、諸々整備したことを書き連ねる">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://cat73220.github.io/learning/jekyll/2023/03/14/9-landing-page-service.html">
+  <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
+  <link rel="icon" href="https://cat73220.github.io/favicon.ico">
+
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Jumly integration</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+		  Markdown <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank"> Syntax </a>/
+		  <a href="https://michelf.ca/projects/php-markdown/extra/" target="_blank">Extras</a>
+        
+          
+          <a class="page-link" href="/portfolio/150521a.html">Portfolios 2015a</a>
+          
+        
+          
+          <a class="page-link" href="/portfolio/211030a.html">Portfolios 2021a</a>
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">ランディングページ(旧ポータル)の整備</h1>
+    <p class="post-meta">Mar 14, 2023</p>
+  </header>
+
+  <article class="post-content">
+    <p>呼称をポータルからランディングページに変えた。その他、諸々整備したことを書き連ねる</p>
+
+<h4 id="水平並び複数アイテムの自動中央寄せ"><strong>水平並び複数アイテムの自動中央寄せ</strong></h4>
+
+<p>teamセクション(タイトルAuthor)には複数人分のプロファイルを並べることができるが３人に固定されていた。sitetext.ymlのteam.peopleで一人文の表示にすることは可能だが左寄りになってしまっていた。</p>
+
+<p>同じように、servicesセクションも3サービスに固定でsitetext.ymlのservices.listの項目を減らすと左寄りになってしまう。</p>
+
+<p>htmlテンプレートを読むとそれぞれ、col-sm-4、col-md-4、となっていた。bootstrapのGridクラスで、水平方向に 4/12 の幅にするクラスだ。この 4 の部分をそれぞれのエントリ数に対応した数にすれば良い。</p>
+
+<p>servicesセクションの変更を例示する。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% assign service_col_ratio = 12 | divided_by: site.data.sitetext[site.locale].services.list.size %}
+:
+{% for ...
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-{{ service_col_ratio }}"</span> <span class="err">...</span>
+</code></pre></div></div>
+
+<p>Liquidのオブジェクト(表示対象のこと{{}}の部分)、変数タグ({% assing … %})、divided_byフィルタ(オブジェクトかタグで | で接続する)、で実装した。</p>
+
+<p>冒頭の{% assign…で変数service_col_ratioを宣言かつ 12 / services.list.size で初期化。 ‘/’と表現した部分は | devided_by: に置き換える。この変数をservice_col_ratioをdivタグのクラスcol-md-{{ service_col_ratio }}と表してservices.listのエントリ数を反映させた。</p>
+
+<p>Liquidは他のテンプレートエンジンと異なり、一般的な算術演算子を組み込まずに一貫してフィルターで計算するポリシーだ。慣れれば構わないのだが、敷居が高い。</p>
+
+<h4 id="portfolioのサムネール画像"><strong>portfolioのサムネール画像</strong></h4>
+
+<p>portfolioセクションのサムネール画像と、クリックして現れるportfolio_modal内の画像のサイズが固定されている。それぞれ、400x300と <width>x875、だ。サムネールは幅も高さも左の値に固定で、portfolio_modal内画像は高さを875が必須だ。レイアウトが崩れる。</width></p>
+
+<p>不可解な箇所もある。_portfolioディレクトリ下portfolio_modal中文章.mdファイルのthumbnail、ここにはサムネイル画像を与えるのだが、ランディングページ上で当該portfolioグリッドの画像で利用されるのは、同ファイル中のimageに与えた画像だ。無用と判断してエントリを取り除くと、当該portfolioグリッドの画像がなくなる。試しに、imageで与えた画像をthumbnailに与えると当該portfolioグリッドのサイズが崩れる。thubmail画像のサイズだけが利用さているかのような挙動だ。あまり深追いしないことにした。</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Jumly integration</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Jumly integration</li>
+          <li><a href="mailto:nabe1112@mail.goo.ne.jp">nabe1112@mail.goo.ne.jp</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Attempting jumly.js integration into jekyll.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

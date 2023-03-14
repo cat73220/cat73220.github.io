@@ -6,9 +6,83 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 13 Mar 2023 08:13:03 +0000</pubDate>
-    <lastBuildDate>Mon, 13 Mar 2023 08:13:03 +0000</lastBuildDate>
+    <pubDate>Tue, 14 Mar 2023 08:33:08 +0000</pubDate>
+    <lastBuildDate>Tue, 14 Mar 2023 08:33:08 +0000</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>ランディングページ(旧ポータル)の整備</title>
+        <description>&lt;p&gt;呼称をポータルからランディングページに変えた。その他、諸々整備したことを書き連ねる&lt;/p&gt;
+
+&lt;h4 id=&quot;水平並び複数アイテムの自動中央寄せ&quot;&gt;&lt;strong&gt;水平並び複数アイテムの自動中央寄せ&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;teamセクション(タイトルAuthor)には複数人分のプロファイルを並べることができるが３人に固定されていた。sitetext.ymlのteam.peopleで一人文の表示にすることは可能だが左寄りになってしまっていた。&lt;/p&gt;
+
+&lt;p&gt;同じように、servicesセクションも3サービスに固定でsitetext.ymlのservices.listの項目を減らすと左寄りになってしまう。&lt;/p&gt;
+
+&lt;p&gt;htmlテンプレートを読むとそれぞれ、col-sm-4、col-md-4、となっていた。bootstrapのGridクラスで、水平方向に 4/12 の幅にするクラスだ。この 4 の部分をそれぞれのエントリ数に対応した数にすれば良い。&lt;/p&gt;
+
+&lt;p&gt;servicesセクションの変更を例示する。&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{% assign service_col_ratio = 12 | divided_by: site.data.sitetext[site.locale].services.list.size %}
+:
+{% for ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;col-md-{{ service_col_ratio }}&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Liquidのオブジェクト(表示対象のこと{{}}の部分)、変数タグ({% assing … %})、divided_byフィルタ(オブジェクトかタグで | で接続する)、で実装した。&lt;/p&gt;
+
+&lt;p&gt;冒頭の{% assign…で変数service_col_ratioを宣言かつ 12 / services.list.size で初期化。 ‘/’と表現した部分は | devided_by: に置き換える。この変数をservice_col_ratioをdivタグのクラスcol-md-{{ service_col_ratio }}と表してservices.listのエントリ数を反映させた。&lt;/p&gt;
+
+&lt;p&gt;Liquidは他のテンプレートエンジンと異なり、一般的な算術演算子を組み込まずに一貫してフィルターで計算するポリシーだ。慣れれば構わないのだが、敷居が高い。&lt;/p&gt;
+
+&lt;h4 id=&quot;portfolioのサムネール画像&quot;&gt;&lt;strong&gt;portfolioのサムネール画像&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;portfolioセクションのサムネール画像と、クリックして現れるportfolio_modal内の画像のサイズが固定されている。それぞれ、400x300と &lt;width&gt;x875、だ。サムネールは幅も高さも左の値に固定で、portfolio_modal内画像は高さを875が必須だ。レイアウトが崩れる。&lt;/width&gt;&lt;/p&gt;
+
+&lt;p&gt;不可解な箇所もある。_portfolioディレクトリ下portfolio_modal中文章.mdファイルのthumbnail、ここにはサムネイル画像を与えるのだが、ランディングページ上で当該portfolioグリッドの画像で利用されるのは、同ファイル中のimageに与えた画像だ。無用と判断してエントリを取り除くと、当該portfolioグリッドの画像がなくなる。試しに、imageで与えた画像をthumbnailに与えると当該portfolioグリッドのサイズが崩れる。thubmail画像のサイズだけが利用さているかのような挙動だ。あまり深追いしないことにした。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/jekyll/2023/03/14/9-landing-page-service.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/14/9-landing-page-service.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+      <item>
+        <title>favicon対応</title>
+        <description>&lt;p&gt;faviconがなくてlocalhostサーバー起動でエラーを蛍光されていた。以前に作ったやること一覧にあった。&lt;/p&gt;
+
+&lt;h4 id=&quot;github-pageかjekyllか&quot;&gt;&lt;strong&gt;github-pageかjekyllか&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;どちらの作法を踏襲すべきか迷った。github-pageを利用しているので、こちらから調べたが腑に落ちる説明は見当たらなかった。探そうと追求せずに、jekyllを調べたらすぐにヒットした。んー、検索で答えが得られると早いな。ボトムアップに調べることをしないから知識はつかないか・・・調べている亜ヂダに疲れたり、何を調べているか見失ったりするから、このやり方は考えものなのかもしれない。でも、手探りするのもいいのだが。&lt;/p&gt;
+
+&lt;p&gt;_include/head.htmlにhtmlのhead節の記述がある。ここにrel=”icon”のlinkタグを追加する。srcにfaviocn.icoへのパスを記述する。だけだ。&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/css/main.css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;canonical&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/learning/jekyll/2023/03/12/Z-favicon.html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;alternate&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/rss+xml&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Jumly integration&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/feed.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;icon&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/favicon.ico&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;四行目が追加した行。jekyllの作法で prepend でbaseurlやsite.urlで修飾してやれば、FQ-URL になって確実に favicon.ico がアクセスされる。&lt;/p&gt;
+
+&lt;h4 id=&quot;faviconiconでエラーがなくなった&quot;&gt;&lt;strong&gt;favicon.iconでエラーがなくなった&lt;/strong&gt;&lt;/h4&gt;
+</description>
+        <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/jekyll/2023/03/12/Z-favicon.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/12/Z-favicon.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>jekyll</category>
+        
+      </item>
     
       <item>
         <title>GITHUBの警告メールを解決してみよう</title>
@@ -73,8 +147,8 @@
 &lt;h4 id=&quot;githubのセキュリティ脆弱性がなくなった&quot;&gt;&lt;strong&gt;githubのセキュリティ脆弱性がなくなった。&lt;/strong&gt;&lt;/h4&gt;
 </description>
         <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/github/2023/03/12/supress-github-warnings.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2023/03/12/supress-github-warnings.html</guid>
+        <link>https://cat73220.github.io/learning/github/2023/03/12/Y-supress-github-warnings.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2023/03/12/Y-supress-github-warnings.html</guid>
         
         
         <category>learning</category>
@@ -104,39 +178,8 @@
 &lt;p&gt;１年前に既に思ったように作業したのだった。忘れていただけである。解説にある通りURLを入力すると、今日思った通りの一覧が現れた。&lt;/p&gt;
 </description>
         <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/jekyll/2023/03/12/how-to-add-a-jekyll-page.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/12/how-to-add-a-jekyll-page.html</guid>
-        
-        
-        <category>learning</category>
-        
-        <category>jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>favicon対応</title>
-        <description>&lt;p&gt;faviconがなくてlocalhostサーバー起動でエラーを蛍光されていた。以前に作ったやること一覧にあった。&lt;/p&gt;
-
-&lt;h4 id=&quot;github-pageかjekyllか&quot;&gt;&lt;strong&gt;github-pageかjekyllか&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;どちらの作法を踏襲すべきか迷った。github-pageを利用しているので、こちらから調べたが腑に落ちる説明は見当たらなかった。探そうと追求せずに、jekyllを調べたらすぐにヒットした。んー、検索で答えが得られると早いな。ボトムアップに調べることをしないから知識はつかないか・・・調べている亜ヂダに疲れたり、何を調べているか見失ったりするから、このやり方は考えものなのかもしれない。でも、手探りするのもいいのだが。&lt;/p&gt;
-
-&lt;p&gt;_include/head.htmlにhtmlのhead節の記述がある。ここにrel=”icon”のlinkタグを追加する。srcにfaviocn.icoへのパスを記述する。だけだ。&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/css/main.css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;canonical&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/learning/jekyll/2023/03/12/favicon.html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;alternate&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/rss+xml&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Jumly integration&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/feed.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;icon&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/favicon.ico&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;四行目が追加した行。jekyllの作法で prepend でbaseurlやsite.urlで修飾してやれば、FQ-URL になって確実に favicon.ico がアクセスされる。&lt;/p&gt;
-
-&lt;h4 id=&quot;faviconiconでエラーがなくなった&quot;&gt;&lt;strong&gt;favicon.iconでエラーがなくなった&lt;/strong&gt;&lt;/h4&gt;
-</description>
-        <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/jekyll/2023/03/12/favicon.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/12/favicon.html</guid>
+        <link>https://cat73220.github.io/learning/jekyll/2023/03/12/X-how-to-add-a-jekyll-page.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/12/X-how-to-add-a-jekyll-page.html</guid>
         
         
         <category>learning</category>
@@ -529,163 +572,6 @@
         <category>learning</category>
         
         <category>jekyll-scss</category>
-        
-      </item>
-    
-      <item>
-        <title>ポータルの文章</title>
-        <description>&lt;p&gt;ポータルに載せる文章を考えてみよう…取り掛かってみたら、直ぐに文章は浮かんでこず…方針を立てることにした。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_data/sitetext.yml&lt;/code&gt;の対応セクションを順に書き込んでいく。&lt;/p&gt;
-
-&lt;p&gt;尚、このファイル&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_data&lt;/code&gt;ディレクトリ配下のためか&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.yml&lt;/code&gt;のため(こっちだな：設定ファイルだからだ)か、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--incremental --watch&lt;/code&gt;で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll&lt;/code&gt;を動作させても、自動ビルドされない。都度、コマンドラインでビルドすることにする。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;header.title &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Welcome to our Studio!&lt;/code&gt;→&lt;/li&gt;
-  &lt;li&gt;header.text &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;It's nice to meet you&lt;/code&gt;→&lt;/li&gt;
-  &lt;li&gt;header.button &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tell me more&lt;/code&gt;→
-    &lt;ul&gt;
-      &lt;li&gt;link先は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Services&lt;/code&gt;セクション→このままでいいな。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Services&lt;/code&gt;セクションに導く文章にしよう&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;services.title &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Services&lt;/code&gt;→
-    &lt;ul&gt;
-      &lt;li&gt;興味を持ってくれた人（クライアント…だけど、この言葉はあまり好きじゃないな）に、提供できるスキル…知識…とか、そお言う言葉だな&lt;/li&gt;
-      &lt;li&gt;「クライアント」は「お客様」だよな…つまり &lt;strong&gt;必ず&lt;/strong&gt; お金のやり取りが生じると思うのだが… 受け取る対価はお金だけじゃないことを伝えたいな&lt;/li&gt;
-      &lt;li&gt;日本語の他の言葉より&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;サービス&lt;/code&gt;の方が伝わりやすいのか…&lt;/li&gt;
-      &lt;li&gt;大半の日本人の「サービス」の意味するところは「無料でXXを受けられる」と解釈することが多いような気がする…&lt;/li&gt;
-      &lt;li&gt;対価はいただきたいので「サービス」は使いたくないかも&lt;/li&gt;
-      &lt;li&gt;このセクションに、それらを並べるので、並べてから「題」を付けるのがいいかな…&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;services.text &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Lorem ipsum&lt;/code&gt;→
-    &lt;ul&gt;
-      &lt;li&gt;上述の通り、ごちゃごちゃ考えたことを纏めた文章かな&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;services.list[0].&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;E-Commerce&lt;/code&gt;→ワンストップ試作
-    &lt;ul&gt;
-      &lt;li&gt;WebサービスもIoT装置も、左両方を組み合わせても、全てカバーします…みたいな&lt;/li&gt;
-      &lt;li&gt;フルスタックを試作…かな&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;services.list[1].&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Responsive Design&lt;/code&gt;→
-    &lt;ul&gt;
-      &lt;li&gt;「E-Commerce」も「Responsive Design」も具体的な気もするけど「フルスタック試作」とかよりは抽象的か…&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;services.list[2].&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Markdown(へのリンク)&lt;/code&gt;→
-    &lt;ul&gt;
-      &lt;li&gt;これは技術語だな…あまり気にしなくていいかも&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;services.list[*].icon&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fa fa-xxx&lt;/code&gt;→
-    &lt;ul&gt;
-      &lt;li&gt;Fontawesomeで対応する言葉を探すのもありだね&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;内容を考えていくのはこのまま続ければいいけど何時までも文章が決まらないな…　トップダウンだと具体的なものにし辛いか…　ゴールが遠く感じるのは作業を続けられなくなるので避けねば。&lt;/p&gt;
-
-&lt;h4 id=&quot;具体的に挙げられるスキルを並べてみるか&quot;&gt;具体的に挙げられるスキルを並べてみるか…&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;職歴からボトムアップに整えたほうが具体性を保てるな…
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;table&gt;
-          &lt;thead&gt;
-            &lt;tr&gt;
-              &lt;th&gt;&lt;strong&gt;社名&lt;/strong&gt;&lt;/th&gt;
-              &lt;th&gt; &lt;/th&gt;
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody&gt;
-            &lt;tr&gt;
-              &lt;td&gt;トライテック&lt;/td&gt;
-              &lt;td&gt;組み込み&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;コンピュータークリエーターズ&lt;/td&gt;
-              &lt;td&gt;基礎研究・保守・3DCG&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;ネメシス&lt;/td&gt;
-              &lt;td&gt;Unixアプリケーション・3DCG&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;eValley&lt;/td&gt;
-              &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;エスマテックエンジニアリング&lt;/td&gt;
-              &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;eFlow&lt;/td&gt;
-              &lt;td&gt;携帯電話 OS・スマフォ ソフトウェア全般&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;aLab&lt;/td&gt;
-              &lt;td&gt;組み込み&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;esp8266&lt;/td&gt;
-              &lt;td&gt;IoT&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;Adafruits&lt;/td&gt;
-              &lt;td&gt;Unixデバイスドライバ&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;スペナビ&lt;/td&gt;
-              &lt;td&gt;Webシステム&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;Linero&lt;/td&gt;
-              &lt;td&gt;Unixデバイスドライバ&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;Plus-C&lt;/td&gt;
-              &lt;td&gt;Webシステム&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;Delarco&lt;/td&gt;
-              &lt;td&gt;組み込み&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;ImageMill&lt;/td&gt;
-              &lt;td&gt;Webシステム&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;bizplace&lt;/td&gt;
-              &lt;td&gt;Webシステム&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;3D着せ替え&lt;/td&gt;
-              &lt;td&gt;Webシステム・3DCG&lt;/td&gt;
-            &lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/li&gt;
-      &lt;li&gt;トライテック、コンピュータークリエーターズ、ネメシス、eValley、エスマテックエンジニアリング、eFlow、aLab、esp8266、Adafruits、スペナビ、Linero、Plus-C、Delarco、ImageMill、bizplace、3D着せ替え&lt;/li&gt;
-      &lt;li&gt;これらの&lt;strong&gt;担当作業&lt;/strong&gt;と、 &lt;strong&gt;コンピュータースキル&lt;/strong&gt;にブレークダウンする&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;担当作業&lt;/strong&gt;から、提供可能サービスを概略出来るかな…方向性を幾つかに絞れば&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;serices.list[*].title&lt;/code&gt;にできそうだ&lt;/li&gt;
-      &lt;li&gt;ここで整理したことはそのまま、portfolioやresumeに出来るな…というか、resume→portfolioの順に作ればいいね&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;resumeportfolioの順につくろう&quot;&gt;resume→portfolioの順につくろう&lt;/h4&gt;
-</description>
-        <pubDate>Sat, 20 Nov 2021 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/remind/mymind/2021/11/20/portal-senteces.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/remind/mymind/2021/11/20/portal-senteces.html</guid>
-        
-        
-        <category>remind</category>
-        
-        <category>mymind</category>
         
       </item>
     

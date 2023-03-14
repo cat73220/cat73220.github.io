@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>GITHUBの警告メールを解決してみよう</title>
+  <meta name="description" content="いつの頃からかGithubからセキュリティや依存関係に関する警告メールが届くようになった。調べてみて一番古い警告が 2021年7月14日だ。">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://cat73220.github.io/learning/github/2023/03/12/Y-supress-github-warnings.html">
+  <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
+  <link rel="icon" href="https://cat73220.github.io/favicon.ico">
+
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Jumly integration</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+		  Markdown <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank"> Syntax </a>/
+		  <a href="https://michelf.ca/projects/php-markdown/extra/" target="_blank">Extras</a>
+        
+          
+          <a class="page-link" href="/portfolio/150521a.html">Portfolios 2015a</a>
+          
+        
+          
+          <a class="page-link" href="/portfolio/211030a.html">Portfolios 2021a</a>
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">GITHUBの警告メールを解決してみよう</h1>
+    <p class="post-meta">Mar 12, 2023</p>
+  </header>
+
+  <article class="post-content">
+    <p>いつの頃からかGithubからセキュリティや依存関係に関する警告メールが届くようになった。調べてみて一番古い警告が 2021年7月14日だ。</p>
+
+<h4 id="a-security-advisoryの件"><strong>A security advisory…の件</strong></h4>
+
+<p>件名が自分のgithubアカウント名で始まって、続いて「A security advisory…」が、その警告メールだ。</p>
+
+<p>メールはhtmlで表されていて、可愛らしいアイコンと警告内容の概略と、その詳細を記述したwebページに移動するボタンがその内容だ。デザイナーが監修してくれるとメール本文もお洒落だ。</p>
+
+<p>最初のセキュリティ警告の概要は「Regular Expression Denial of Service in Addressable templates」だ。REGXPでDOSが可能らしい。すごい隙間を見つける人がいるな、世の中には。</p>
+
+<p>詳細ボタンでgithubの詳細解説ページを読むと、RubyGemsのaddressableのバージョン 2.3.0 - 2.7.0 を利用していると、REGXP-DOS の危険性があるというものだ。</p>
+
+<p>今日(2023年3月12日)まで、セキュリティ警告を６件受け取っていた。</p>
+
+<p>古い順に</p>
+<ul>
+  <li>addressable：2021-7-14</li>
+  <li>commonmarker：2022-3-4</li>
+  <li>tzinfo：2022-7-22</li>
+  <li>@xmldom/xmldom：2022-11-3</li>
+  <li>json5：2023-1-10</li>
+  <li>ua-parser-js：2023-1-28</li>
+</ul>
+
+<p>全部異なる警告だ。過去の警告は重ねて警告しないようになっているのだろうか。</p>
+
+<h4 id="github-your-dependabot-alertsの件"><strong>[GitHub] Your Dependabot alerts…の件</strong></h4>
+
+<p>このように始まる警告メールの内容もhtmlで表されていてデザインも監修されている。内容はやはりセキュリティの危険性の警告で、利用中パッケージの名前と共に現在のバージョンと更新すべきバージョン、Githubで管理しているセキュリティ危険性の管理番号まで記されている。利用中のパッケージということで、危険なパッケージに依存している、という警告だ。先の「A security advisory…」との違いは、件名に、いつからいつまでに見つかった、とGithubが脆弱性を発見した期間が明記してあるところだろうか。先の「A security advisory…」は、何をきっかけに発見したのだろうか。ブログをコミットした日時とは合わない。Githubのセキュリティ危険性管理で世間の脆弱性を登録したときかもしれない。</p>
+
+<p>詳細ボタンでgithubの詳細解説ページを読むと、利用中パッケージのリストで、一行にどこでどのような脆弱性かが一覧されている。全て expos/yarn.lock だった。最古のこの警告メールが2022年3月1日で、この頃にexpoを試したのを覚えている。</p>
+
+<h4 id="cat73220hw-your-repository-has-dependenciesの件"><strong>[cat73220/HW] Your repository has dependencies…の件</strong></h4>
+
+<p>これは、３通だけ届いている。最後のが今日(2023年3月12日)受け取ったメールだ。</p>
+
+<ul>
+  <li>2021-10-30</li>
+  <li>2022-4-6</li>
+  <li>2023-3-12</li>
+</ul>
+
+<p>全て、githubにpushした日だと思う。今日のは確実にそうだ。</p>
+
+<p>セキュリティ脆弱性について、あらゆるタイミングで報告していてくれたのだな。オープンソースのセキリティ脆弱性がここまで徹底して解析されて、世間に行き渡っているのが実感できる。安心を勝ち取る、ということだね。</p>
+
+<h4 id="解決"><strong>解決</strong></h4>
+
+<p>expoに関係する脆弱性は「yarn upgrade –emoji true」で解決だ。冒頭の「A security advisory…」の６件はjekyllに関するもので「bundle update」で解決した。</p>
+
+<p>githubにデプロイしても「[cat73220/HW] Your repository has dependencies…」警告メールは受信しなかった。</p>
+
+<h4 id="gitubactionsdeployymlの実行で警告"><strong>gitub/actions/deploy.ymlの実行で警告</strong></h4>
+
+<p>注意が必要だったのはこの警告だ。メールで警告されたりはしない。actionsの実行が完了した時点で、そのページで警告された。「node12はもうじき利用不可能になるから、node16に換えるように」というものだ。</p>
+
+<p>警告されていることはわかるのだが、見に覚えがないので当惑する。githubは警告の文が明確で親切だ。そのページの警告にどこのなにを参考にすればよいかまで記載されている。actionsの開発者向けと利用者向けに対応が別れていた。親切だ。actionsのymlを記述しているので開発者だと思い、文章を追うのだが意味をなさない。あれこれ考えたが、どうも直面してる警告からかけ離れている、違う、と頭の中で違和感を感じる。こおいうときはもう一方も念のためにみてみるべきだ。利用者側の文章に答えはあった。自分は利用者だったのだな。確かにactionsの機能を <strong>利用</strong> している。「actions/checkout@v2」を「actions/checkout@v3」に変更してデプロイすると警告が現れなくなった。</p>
+
+<h4 id="githubのセキュリティ脆弱性がなくなった"><strong>githubのセキュリティ脆弱性がなくなった。</strong></h4>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Jumly integration</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Jumly integration</li>
+          <li><a href="mailto:nabe1112@mail.goo.ne.jp">nabe1112@mail.goo.ne.jp</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Attempting jumly.js integration into jekyll.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

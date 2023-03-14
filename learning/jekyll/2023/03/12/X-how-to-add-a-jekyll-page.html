@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>【備忘録】jekyllでページを追加する</title>
+  <meta name="description" content="１年ぶりである・・・忙しさを理由にできるし、興味の対象が変わったのも事実だし、後付の説明は幾らでもできるので、このあたりにしておこう。">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://cat73220.github.io/learning/jekyll/2023/03/12/X-how-to-add-a-jekyll-page.html">
+  <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
+  <link rel="icon" href="https://cat73220.github.io/favicon.ico">
+
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Jumly integration</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+		  Markdown <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank"> Syntax </a>/
+		  <a href="https://michelf.ca/projects/php-markdown/extra/" target="_blank">Extras</a>
+        
+          
+          <a class="page-link" href="/portfolio/150521a.html">Portfolios 2015a</a>
+          
+        
+          
+          <a class="page-link" href="/portfolio/211030a.html">Portfolios 2021a</a>
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">【備忘録】jekyllでページを追加する</h1>
+    <p class="post-meta">Mar 12, 2023</p>
+  </header>
+
+  <article class="post-content">
+    <p>１年ぶりである・・・忙しさを理由にできるし、興味の対象が変わったのも事実だし、後付の説明は幾らでもできるので、このあたりにしておこう。</p>
+
+<h4 id="ページを追加したくなった"><strong>ページを追加したくなった</strong></h4>
+
+<p>jekyll-agencyテーマを利用しているが、これが通常のjekyllの作法から大幅に外れた作りとなっている。これの作者はランディングページ作成用に、この方法が合っていると判断したのだろう。jekyll-agencyのポリシーを読み取ろうとしてみたが旨く行かなかったので、jekyllの基本に返ってみることにした。</p>
+
+<p>曰く「ページはコンテンツを構成する最も基本的なブロックです。スタンドアローンのコンテンツの為にあります。日付に基づかないコンテンツ、またはスタッフ紹介やレシピなどのグループコンテンツでないものです」</p>
+
+<p>追加したページは一つ以上のページを束ねたもの、で、これを一人以上のスタッフの紹介を束ねた「スタッフ紹介」に似ている捉えると「スタッフ紹介」に近いかもしれない。</p>
+
+<p>その構成として、はじめに一覧ページを設けて、その一覧中の一つをクリックするとそのページに移動する。この「はじめの一覧ページ」をjekyllの「ページ」にしてみようと考えている。クリックされて移動する先は数あるが「グループコンテンツ」とは捉えないことにする。</p>
+
+<p>改めて <a href="https://jekyllrb.com/docs/pages/">Pages</a> を読み返してみた。</p>
+
+<p>「複数のページを整理するためにディレクトリを設けるとよい」とある。追加しようとしたページのディレクトリは既に存在していて、その中にはクリック先のページがマークダウンファイルでディレクトリ構造を持って整理されていた。</p>
+
+<p>１年前に既に思ったように作業したのだった。忘れていただけである。解説にある通りURLを入力すると、今日思った通りの一覧が現れた。</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Jumly integration</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Jumly integration</li>
+          <li><a href="mailto:nabe1112@mail.goo.ne.jp">nabe1112@mail.goo.ne.jp</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Attempting jumly.js integration into jekyll.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
