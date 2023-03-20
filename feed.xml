@@ -6,9 +6,34 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Mar 2023 02:38:46 +0000</pubDate>
-    <lastBuildDate>Mon, 20 Mar 2023 02:38:46 +0000</lastBuildDate>
+    <pubDate>Mon, 20 Mar 2023 03:00:17 +0000</pubDate>
+    <lastBuildDate>Mon, 20 Mar 2023 03:00:17 +0000</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>CNAMEファイル：github-pagesのカスタムdomain化</title>
+        <description>&lt;p&gt;Actionsでデプロイすると &lt;strong&gt;リポジトリのカスタムドメイン設定&lt;/strong&gt; が無効になった・・・薄々気がついていたのだけど&lt;/p&gt;
+
+&lt;h4 id=&quot;cnameファイルgithub-pagesサイトのカスタムdomain&quot;&gt;&lt;strong&gt;CNAMEファイル：github-pagesサイトのカスタムdomain&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;デプロイ直後に cat73220.github.io リポジトリを確認すると、案の定、CNAMEファイルが消失していた。同リポジトリの Setting - pages - カスタムドメイン 設定も空欄となっていた。デプロイすると消えるよなと予感はあった。&lt;/p&gt;
+
+&lt;p&gt;改めて、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HW/.github/workflow/deploy.xml&lt;/code&gt; を読み下してみた。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat73220.github.io.git&lt;/code&gt; をcloneする前後で期待は裏切られていた。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm -rf&lt;/code&gt; で github-pagesサイトはまっさらにされ、次の &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clone --no-checkout &lt;/code&gt; は、オプションの通りファイルは何もチェックアウトしない。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.git&lt;/code&gt;ディレクトリだけチェックアウトする。そう、直前までに完了していた&lt;strong&gt;リポジトリの Setting - pages - カスタムドメイン 設定&lt;/strong&gt;は消し去られるのだ。&lt;/p&gt;
+
+&lt;p&gt;読み進めると、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll・・・&lt;/code&gt;辺りで、何かできればいいかな、と。試しにlocalhostでblog/CNAMEを追加して、_site/CNAMEが現れるか試してみた。localhostでは想定通りにCNAMEファイルは出来上がる。deploy.xmlに戻って、_siteディレクトリが&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat73220.github.io&lt;/code&gt;であることを再確認し、デプロイしてみた。&lt;/p&gt;
+
+&lt;h4 id=&quot;大丈夫だった&quot;&gt;&lt;strong&gt;大丈夫だった&lt;/strong&gt;&lt;/h4&gt;
+</description>
+        <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/github/2023/03/20/2-github-custome-domain.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2023/03/20/2-github-custome-domain.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>github</category>
+        
+      </item>
     
       <item>
         <title>github-pagesのカスタムdomain化</title>
@@ -33,8 +58,8 @@
 &lt;p&gt;間抜けに合わせて極めて詳細に、とは言わない。が、ヒントを交えつつ十分には書けると思う。書くように心がけねば。&lt;/p&gt;
 </description>
         <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/github/2023/03/20/9-github-custome-domain.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2023/03/20/9-github-custome-domain.html</guid>
+        <link>https://cat73220.github.io/learning/github/2023/03/20/1-github-custome-domain.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2023/03/20/1-github-custome-domain.html</guid>
         
         
         <category>learning</category>
@@ -463,31 +488,6 @@
         
         
         <category>dietary</category>
-        
-      </item>
-    
-      <item>
-        <title>履歴改業務歴</title>
-        <description>&lt;p&gt;職歴をresumeと称していたが、どうもしっくり来ない…勤務歴で辞書を引くと service history, work record, service record などが現れた… service recordに目が止まったので、これに変更することにした。&lt;/p&gt;
-
-&lt;p&gt;resume(米国)、cv(欧州)なのだが、どちらも「学位」と それらの内容、論文とかかな、を一覧して、自分がどの様な専門知識を持っているかを表すんだな。&lt;/p&gt;
-
-&lt;p&gt;いままで、「resume」と称して書き溜めたものを見直してみると、専門知識を一覧したのではなく、どの会社でどのプロジェクトで働いていた一覧であり、かつ、自分の勤務歴と各々の会社の簡単な説明をしてしまっている。&lt;/p&gt;
-
-&lt;p&gt;と言うことで、「勤務歴(service record)」とリファクタリングした。おかげで、的を絞って書き加えていくことが出来た。名前付けは大事だ。的を得た命名をしていれば「すること」がはっきりする。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/learning/jekyll-scss/2021/11/21/portal-resumes.html&quot;&gt;履歴のスタイル&lt;/a&gt;で始めた「勤務歴のportal」への移動はservice_recordとして完了した。&lt;/p&gt;
-
-&lt;p&gt;ただし、この勤務歴はおおっぴらには公開しないことにした。あまりにも個人的すぎるからである。だが、これを完成したことで、自分がしてきたことがハッキリもした。これらは、このままおいておくこととする。&lt;/p&gt;
-
-&lt;p&gt;portalにはportfolioとして自分のスキルを示したいので、この勤務歴を元に、改めてresumeを作ることにする。スキルベースの判りやすい…マネージャークラスの人が見て…ものにしたい。&lt;/p&gt;
-</description>
-        <pubDate>Sat, 08 Jan 2022 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/portfolio/2022/01/08/service-record.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/portfolio/2022/01/08/service-record.html</guid>
-        
-        
-        <category>portfolio</category>
         
       </item>
     

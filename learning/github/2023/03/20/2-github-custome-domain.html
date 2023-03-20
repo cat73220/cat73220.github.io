@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Liquidの探求</title>
-  <meta name="description" content="Liquidの使い方あれこれ">
+  <title>CNAMEファイル：github-pagesのカスタムdomain化</title>
+  <meta name="description" content="Actionsでデプロイすると リポジトリのカスタムドメイン設定 が無効になった・・・薄々気がついていたのだけど">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://cat73220.github.io/learning/lucid/gantt/2015/05/11/liquid.html">
+  <link rel="canonical" href="https://cat73220.github.io/learning/github/2023/03/20/2-github-custome-domain.html">
   <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
   <link rel="icon" href="https://cat73220.github.io/favicon.ico">
 
@@ -71,32 +71,22 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Liquidの探求</h1>
-    <p class="post-meta">May 11, 2015</p>
+    <h1 class="post-title">CNAMEファイル：github-pagesのカスタムdomain化</h1>
+    <p class="post-meta">Mar 20, 2023</p>
   </header>
 
   <article class="post-content">
-    <h3 id="liquidの使い方あれこれ">Liquidの使い方あれこれ</h3>
+    <p>Actionsでデプロイすると <strong>リポジトリのカスタムドメイン設定</strong> が無効になった・・・薄々気がついていたのだけど</p>
 
-<p>Hello = 2015-05-11 12:00:00 +0000</p>
+<h4 id="cnameファイルgithub-pagesサイトのカスタムdomain"><strong>CNAMEファイル：github-pagesサイトのカスタムdomain</strong></h4>
 
-<p>Update = 2015-05-11 12:00:00 +0000</p>
+<p>デプロイ直後に cat73220.github.io リポジトリを確認すると、案の定、CNAMEファイルが消失していた。同リポジトリの Setting - pages - カスタムドメイン 設定も空欄となっていた。デプロイすると消えるよなと予感はあった。</p>
 
-<p>now = 2023-Mar-20 03:00:18</p>
+<p>改めて、<code class="language-plaintext highlighter-rouge">HW/.github/workflow/deploy.xml</code> を読み下してみた。<code class="language-plaintext highlighter-rouge">cat73220.github.io.git</code> をcloneする前後で期待は裏切られていた。<code class="language-plaintext highlighter-rouge">rm -rf</code> で github-pagesサイトはまっさらにされ、次の <code class="language-plaintext highlighter-rouge">git clone --no-checkout </code> は、オプションの通りファイルは何もチェックアウトしない。<code class="language-plaintext highlighter-rouge">.git</code>ディレクトリだけチェックアウトする。そう、直前までに完了していた<strong>リポジトリの Setting - pages - カスタムドメイン 設定</strong>は消し去られるのだ。</p>
 
-<p>comment = what is  <code class="language-plaintext highlighter-rouge">comment</code> ?</p>
+<p>読み進めると、<code class="language-plaintext highlighter-rouge">bundle exec jekyll・・・</code>辺りで、何かできればいいかな、と。試しにlocalhostでblog/CNAMEを追加して、_site/CNAMEが現れるか試してみた。localhostでは想定通りにCNAMEファイルは出来上がる。deploy.xmlに戻って、_siteディレクトリが<code class="language-plaintext highlighter-rouge">cat73220.github.io</code>であることを再確認し、デプロイしてみた。</p>
 
-<p>page.layout = post</p>
-
-<p>page.categories = LearningLucidGantt</p>
-
-<p>category = Learning</p>
-
-<p>category = Lucid</p>
-
-<p>category = Gantt</p>
-
-<p>album =</p>
+<h4 id="大丈夫だった"><strong>大丈夫だった</strong></h4>
 
   </article>
 
