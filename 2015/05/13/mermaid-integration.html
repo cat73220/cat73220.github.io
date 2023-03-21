@@ -78,20 +78,22 @@
   <article class="post-content">
     <h4 id="flowchart">Flowchart</h4>
 
-<script src="/plugins/mermaid.full.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.js"></script>
 <div class="mermaid">
-graph LR
-    A[Start] -- note for a line --&gt; B((a path))
+flowchart LR
+	A[Start] -- note for a line --&gt; B((a path))
 	A --&gt; C(The other path)
 	B --&gt; D{END}
 	C --&gt; D
+
 </div>
 
 <h4 id="sequence">Sequence</h4>
 
-<script src="/plugins/mermaid.full.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.js"></script>
 <div class="mermaid">
 sequenceDiagram
+
     participant Alice
 	participant Bob
 	Alice-&gt;&gt;John: Hello John, how are you?
