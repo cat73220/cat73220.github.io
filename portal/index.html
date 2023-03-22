@@ -280,7 +280,7 @@
                 <p class="item-intro text-muted">マイコンスキルを駆使します</p>
                 <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/02-full.jpg" alt="automation_computerization">
 				<p><div class="mermaid">
-graph LR
+flowchart LR
 	A[Start] -- note for a line --&gt; B((a path))
 	A --&gt; C(The other path)
 	B --&gt; D{END}
@@ -633,7 +633,8 @@ graph LR
 
 	  <script src="/portal/shikumi.js"></script>
 <script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+ mermaid.initialize({flowchart:{width: 400, height: 400}});
 </script>
   </body>
 </html>
