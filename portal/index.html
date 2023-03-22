@@ -148,7 +148,7 @@
       </div>
 	
       <div class="col-md-4 col-sm-6 portfolio-item">
-        <a class="portfolio-link" data-toggle="modal" href="#project-name">
+        <a class="portfolio-link" data-toggle="modal" href="#automation-computerization">
           <div class="portfolio-hover">
             <div class="portfolio-hover-content">
               <i class="fas fa-plus fa-3x"></i>
@@ -263,7 +263,7 @@
     </div>
   </div>
 
-  <div class="portfolio-modal modal fade" id="project-name" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="portfolio-modal modal fade" id="automation-computerization" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
@@ -279,7 +279,7 @@
                 <h2 class="text-uppercase">機械化／自動化</h2>
                 <p class="item-intro text-muted">マイコンスキルを駆使します</p>
                 <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/02-full.jpg" alt="automation_computerization">
-				<p><div class="mermaid">
+				<p><div id="project2-mermaid">
 flowchart LR
 	A[Start] -- note for a line --&gt; B((a path))
 	A --&gt; C(The other path)
@@ -584,6 +584,19 @@ flowchart LR
 	</div>
   </div>
 </div>
+<div id="team-mermaid">
+flowchart LR
+	A[Start] -- note for a line --> B((a path))
+	A --> C(The other path)
+	B --> D{END}
+	C --> D
+</div>
+	<!--
+		 devtool/consoleで mermaid.init('team-mermaid') と実行すると描画される：遅延描画
+		 この section はページアクセスと同時に mermaid.init('team-mermaid') を実行すればよいだろう
+		 portfolio_modal は モーダルが開かれたときに mermaid.init('...') を実行するようにしよう
+		 portfolio_modalで幅高さが想定通りに計算されなかったのはこのページアクセス時に描画を試みるがモーダルが閉じていたため描画範囲が決定していなかったため
+	-->
 </section>
 <!-- End Team -->
 
@@ -632,9 +645,13 @@ flowchart LR
 	  <script src="/portal/assets/js/agency.min.js"></script>
 
 	  <script src="/portal/shikumi.js"></script>
-<script type="module">
- import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
- mermaid.initialize({flowchart:{width: 400, height: 400}});
-</script>
+	  <script src="/portal/mermaid.js"></script>
+	  <script>
+	   mermaid.initialize({startOnLoad: false});
+	   $('.modal#automation-computerization').on('shown.bs.modal', function() {
+		   mermaid.init('#project2-mermaid');
+	   });
+	   mermaid.init('#team-mermaid');
+	  </script>
   </body>
 </html>
