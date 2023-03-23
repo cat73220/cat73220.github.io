@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>埋め込みについて諸々：Mermaid</title>
+  <meta name="description" content="Mermaid integrationから８年経った。隆盛を極めるインターネット業界でも良いものは残る。Mermaidもバージョンを重ねて、その地位を不動のものとして残っていた。">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://cat73220.github.io/learning/mermaid/2023/03/23/0-mermaid-integration.html">
+  <link rel="alternate" type="application/rss+xml" title="Jumly integration" href="https://cat73220.github.io/feed.xml" />
+  <link rel="icon" href="https://cat73220.github.io/favicon.ico">
+
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Jumly integration</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+		  Markdown <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank"> Syntax </a>/
+		  <a href="https://michelf.ca/projects/php-markdown/extra/" target="_blank">Extras</a>
+        
+          
+          <a class="page-link" href="/portfolio/150521a.html">Portfolios 2015a</a>
+          
+        
+          
+          <a class="page-link" href="/portfolio/211030a.html">Portfolios 2021a</a>
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">埋め込みについて諸々：Mermaid</h1>
+    <p class="post-meta">Mar 23, 2023</p>
+  </header>
+
+  <article class="post-content">
+    <p><a href="/2015/05/13/mermaid-integration.html">Mermaid integration</a>から８年経った。隆盛を極めるインターネット業界でも良いものは残る。Mermaidもバージョンを重ねて、その地位を不動のものとして残っていた。</p>
+
+<h3 id="モジュール-javascript"><strong>モジュール javascript</strong></h3>
+
+<p>いつの頃からか、Mermaidで作ったフローチャートの線が消えていた。設定や組み込み方の問題を疑って色々調べたが見当たらないので、バージョンアップを試した。結果、バージョンアップで線は出るようになった。</p>
+
+<p>この対応の途中で気づいたのだが、バージョンがかなり進んでいる。8.0.0へのバージョンアップで用は足りたのだが、なるべく最新版を使いたい。一方、問題がでたものはに<code class="language-plaintext highlighter-rouge">mermaid.full.js</code>を直にこのブログに組み込んでいて、一見してバージョンが判らない。中を見ても判然としなかった。<code class="language-plaintext highlighter-rouge">github.com /mermaid-js/mermaid</code>を辿ると、バージョン0.4.0辺りのようだった。mermaidを組み込んだブログの日付で判断した。今や、開発バージョンが10であり、８年ほど経っている。古すぎ。</p>
+
+<p>８年ほど前とはHTMLの仕様も変わっていて、scriptタグに module なぞというオプションも与えられるようになっていて、面白い。対応するものが<code class="language-plaintext highlighter-rouge">.esm.mjs</code>なる拡張子だ。<code class="language-plaintext highlighter-rouge">ECMA Script Module . Module Java Script</code>かな。javascriptの仕様自体に全部コミコミのモジュールという機能を拡張したようだ。色々調べてみた。<code class="language-plaintext highlighter-rouge">.esm</code>は拡張子じゃない。ファイル名の一部で、<code class="language-plaintext highlighter-rouge">ECMA Script Module(EC Module)</code>であることを明確にしているに過ぎず、mermaid-jsチームが慣例的に採用している命名方法にすぎない。<code class="language-plaintext highlighter-rouge">.mjs</code>は想像通り<code class="language-plaintext highlighter-rouge">Module Java Script</code>の略だ。<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules">このページ</a>に詳しく書かれている。想像が行き過ぎていたのは「モジュールがこの８年の間に拡張された仕様」と思ってしまった辺りだ。2015年より以前から<code class="language-plaintext highlighter-rouge">.js</code>であってもモジュール扱いしていた。この８年の間に、<code class="language-plaintext highlighter-rouge">m</code>を接頭してモジュールであることをより明確にしょう、となったに過ぎない。</p>
+
+<p>これで、バージョン8の中盤辺りから採用され始めた<code class="language-plaintext highlighter-rouge">.mjs</code>が何なのか大体の解釈がついたので、安心して利用可能だ。何らかの新フォーマットと誤認し不安を覚えたことが払拭できた。ために、中を覗いてみたらアグリファイされた常日頃利用している、scriptタグのsrcプロパティに与える<code class="language-plaintext highlighter-rouge">.js</code>等と同じであった。</p>
+
+<h3 id="組み込み"><strong>組み込み</strong></h3>
+
+<p>投稿などで利用するための設定に幾通りかある。</p>
+
+<h4 id="_configymlliquidタグjekyll-mermaid"><strong>_config.yml＋Liquidタグ（jekyll-mermaid）</strong></h4>
+
+<p><code class="language-plaintext highlighter-rouge">jekyll-mermaid</code>プラグインをインストールして、_config.ymlで利用を宣言＆設定する方法。</p>
+
+<p>文中では{% mermaid %}…<mermaid syntax="">...{% endmermaid %}で利用する。Liquidタグ囲う。jekyllを利用するに当たり自然な感じだ。</mermaid></p>
+
+<p>_config.ymlのmermaidセクション・srcにmermaid.jsへのURLを与える。導入当初の経緯は忘れたが、<code class="language-plaintext highlighter-rouge">/plugins/mermaid.full.js</code>を与えていた。インストールも<code class="language-plaintext highlighter-rouge">/plugins</code>に<code class="language-plaintext highlighter-rouge">mermaid.full.js</code>をコピーした。この設定で、jekyll-mermaidプラグインが{% mermaid %}タグを適宜htmlタグ、<code class="language-plaintext highlighter-rouge">mermaid.full.js</code>の<code class="language-plaintext highlighter-rouge">script</code>タグへ置き換える。</p>
+
+<h4 id="bodyの直後にscriptタグhtmlタグその１"><strong>&lt;/body&gt;の直後にscriptタグ＋htmlタグその１</strong></h4>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code>の記述がある<code class="language-plaintext highlighter-rouge">layout</code>か、<code class="language-plaintext highlighter-rouge">include</code>配下の<code class="language-plaintext highlighter-rouge">.html</code>ファイルにscriptタグを追加してmermaidを読み込む。利用は直にdivタグやpreタグを記載してタグの<code class="language-plaintext highlighter-rouge">class</code>を<code class="language-plaintext highlighter-rouge">mermaid</code>とする。そのタグ内にmermaidシンタックスで図を記載する。</p>
+
+<p><code class="language-plaintext highlighter-rouge">jekyll-mermaid</code>プラグインがLiquidタグを置き換えてくれることを手動で行うわけだ。</p>
+
+<p>scriptタグの設置は<code class="language-plaintext highlighter-rouge">_layouts/default.html</code>で</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cat73220.github.io/mermaid.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="nx">mermaid</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>投稿中</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% mermaid %}
+flowchart LR
+    A[Start] -- note for a line --&gt; B((a path))
+    A --&gt; C(The other path)
+    B --&gt; D{END}
+    C --&gt; D
+{% endmermaid %}
+</code></pre></div></div>
+
+<h4 id="bodyの直後にscriptタグhtmlタグその２"><strong>&lt;/body&gt;の直後にscriptタグ＋htmlタグその２</strong></h4>
+
+<p>上述の２方法は、blogの投稿(post)中では問題ない。しかし、portalのportfolio・projectX.mdでは旨く行かない。初めてmermaidをproject2.mdに記載したときには表示されず当惑した。調査すると、mermaid自体はhtml内に存在していて当該箇所(divタグに置き換わる)のサイズが１６ピクセル四方になり小さすぎて視認できなかった。試しに、portfolio本体側に記載すると問題なく現れる。サイズの計算を追跡し始めて、しばらくしたところで閃いた。portfolio＋projectX.mdはbootstrap・modalで実装されている。portalページが画面に写った際、表示されていない。portfolioセクションのプロジェクトをクリックすると現れる、bootstrap・modalだ。一方、mermaidはportalページが一番はじめに画面に写ったときにhtmlタグ・クラスが<code class="language-plaintext highlighter-rouge">mermaid</code>のhtmlタグをグラフ描画する。projectX.mdはこタイミングでサイズ０なので計算結果もサイズ０となり紆余曲折あって１６ピクセル四方の極小さい範囲の描画になってしまう。</p>
+
+<p>bootstrap・modalのイベントに’show.bs.modal’がある。表示<strong>される</strong>ときに実行されるイベントだ。このコールバックで<code class="language-plaintext highlighter-rouge">mermaind.init()</code>を実行してみることにした。強調したように表示<em>される</em>ときでは、まだ尚早だ。<code class="language-plaintext highlighter-rouge">shonw.bs.modal</code>もある。表示が<strong>完了</strong>で実行される。旨く行った。だが、まだ足りない。project2.mdだけならばこれで良いのだが、別のproject3.mdとかproject6.mdでも利用したい。個別のhtmlタグにだけ<code class="language-plaintext highlighter-rouge">mermaid.init</code>の実行を制限したい。ソースを追跡すると「引数にjQueryスタイルのセレクタを記述できる」とある。指定タグだけに制限する方法は判った。ページが表示されたときにmermaidの置き換えが起きないようにするには<code class="language-plaintext highlighter-rouge">mermaid.initialize</code>の引数に<code class="language-plaintext highlighter-rouge">{startOnLoad: false}</code>を与えればよい。「起動時に変換」を無効に。</p>
+
+<p>文中は</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"project2-mermaid"</span><span class="nt">&gt;</span>
+flowchart LR
+    A[Start] -- note for a line --&gt; B((a path))
+    A --&gt; C(The other path)
+    B --&gt; D{END}
+    C --&gt; D
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+<p>mermaid変換を実行するためにdivタグのidを<code class="language-plaintext highlighter-rouge">project2-mermaid</code>とした。<code class="language-plaintext highlighter-rouge">portal/portofolio/projectX.md</code>等はファイル中冒頭に<code class="language-plaintext highlighter-rouge">link</code>属性があり、これがmodalのidとなる。</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal ..."</span> <span class="na">id=</span><span class="s">"&lt;linkの文字列&gt;"</span>
+<span class="err">　　：</span>
+</code></pre></div></div>
+
+<p>scriptタグの設置は同様に<code class="language-plaintext highlighter-rouge">_layouts/default.html</code>で</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cat73220.github.io/mermaid.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="nx">mermaid</span><span class="p">.</span><span class="nx">initialize</span><span class="p">({</span><span class="na">startOnLoad</span><span class="p">:</span> <span class="kc">false</span><span class="p">});</span>
+    <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.modal#automation-computerization</span><span class="dl">'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">shown.bs.modal</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	  <span class="nx">mermaid</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="dl">'</span><span class="s1">#project2-mermaid</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="nx">mermaid</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="dl">'</span><span class="s1">#team-mermaid</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>思うように動作するようになった。これをjekyllプラグインで埋め込みを自動化したい。</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Jumly integration</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Jumly integration</li>
+          <li><a href="mailto:nabe1112@mail.goo.ne.jp">nabe1112@mail.goo.ne.jp</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Attempting jumly.js integration into jekyll.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

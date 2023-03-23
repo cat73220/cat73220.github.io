@@ -6,9 +6,106 @@
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 22 Mar 2023 08:10:20 +0000</pubDate>
-    <lastBuildDate>Wed, 22 Mar 2023 08:10:20 +0000</lastBuildDate>
+    <pubDate>Thu, 23 Mar 2023 06:56:03 +0000</pubDate>
+    <lastBuildDate>Thu, 23 Mar 2023 06:56:03 +0000</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>埋め込みについて諸々：Mermaid</title>
+        <description>&lt;p&gt;&lt;a href=&quot;/2015/05/13/mermaid-integration.html&quot;&gt;Mermaid integration&lt;/a&gt;から８年経った。隆盛を極めるインターネット業界でも良いものは残る。Mermaidもバージョンを重ねて、その地位を不動のものとして残っていた。&lt;/p&gt;
+
+&lt;h3 id=&quot;モジュール-javascript&quot;&gt;&lt;strong&gt;モジュール javascript&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;いつの頃からか、Mermaidで作ったフローチャートの線が消えていた。設定や組み込み方の問題を疑って色々調べたが見当たらないので、バージョンアップを試した。結果、バージョンアップで線は出るようになった。&lt;/p&gt;
+
+&lt;p&gt;この対応の途中で気づいたのだが、バージョンがかなり進んでいる。8.0.0へのバージョンアップで用は足りたのだが、なるべく最新版を使いたい。一方、問題がでたものはに&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mermaid.full.js&lt;/code&gt;を直にこのブログに組み込んでいて、一見してバージョンが判らない。中を見ても判然としなかった。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;github.com /mermaid-js/mermaid&lt;/code&gt;を辿ると、バージョン0.4.0辺りのようだった。mermaidを組み込んだブログの日付で判断した。今や、開発バージョンが10であり、８年ほど経っている。古すぎ。&lt;/p&gt;
+
+&lt;p&gt;８年ほど前とはHTMLの仕様も変わっていて、scriptタグに module なぞというオプションも与えられるようになっていて、面白い。対応するものが&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.esm.mjs&lt;/code&gt;なる拡張子だ。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ECMA Script Module . Module Java Script&lt;/code&gt;かな。javascriptの仕様自体に全部コミコミのモジュールという機能を拡張したようだ。色々調べてみた。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.esm&lt;/code&gt;は拡張子じゃない。ファイル名の一部で、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ECMA Script Module(EC Module)&lt;/code&gt;であることを明確にしているに過ぎず、mermaid-jsチームが慣例的に採用している命名方法にすぎない。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.mjs&lt;/code&gt;は想像通り&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Module Java Script&lt;/code&gt;の略だ。&lt;a href=&quot;https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules&quot;&gt;このページ&lt;/a&gt;に詳しく書かれている。想像が行き過ぎていたのは「モジュールがこの８年の間に拡張された仕様」と思ってしまった辺りだ。2015年より以前から&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt;であってもモジュール扱いしていた。この８年の間に、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m&lt;/code&gt;を接頭してモジュールであることをより明確にしょう、となったに過ぎない。&lt;/p&gt;
+
+&lt;p&gt;これで、バージョン8の中盤辺りから採用され始めた&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.mjs&lt;/code&gt;が何なのか大体の解釈がついたので、安心して利用可能だ。何らかの新フォーマットと誤認し不安を覚えたことが払拭できた。ために、中を覗いてみたらアグリファイされた常日頃利用している、scriptタグのsrcプロパティに与える&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.js&lt;/code&gt;等と同じであった。&lt;/p&gt;
+
+&lt;h3 id=&quot;組み込み&quot;&gt;&lt;strong&gt;組み込み&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;投稿などで利用するための設定に幾通りかある。&lt;/p&gt;
+
+&lt;h4 id=&quot;_configymlliquidタグjekyll-mermaid&quot;&gt;&lt;strong&gt;_config.yml＋Liquidタグ（jekyll-mermaid）&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll-mermaid&lt;/code&gt;プラグインをインストールして、_config.ymlで利用を宣言＆設定する方法。&lt;/p&gt;
+
+&lt;p&gt;文中では{% mermaid %}…&lt;mermaid syntax=&quot;&quot;&gt;...{% endmermaid %}で利用する。Liquidタグ囲う。jekyllを利用するに当たり自然な感じだ。&lt;/mermaid&gt;&lt;/p&gt;
+
+&lt;p&gt;_config.ymlのmermaidセクション・srcにmermaid.jsへのURLを与える。導入当初の経緯は忘れたが、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/plugins/mermaid.full.js&lt;/code&gt;を与えていた。インストールも&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/plugins&lt;/code&gt;に&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mermaid.full.js&lt;/code&gt;をコピーした。この設定で、jekyll-mermaidプラグインが{% mermaid %}タグを適宜htmlタグ、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mermaid.full.js&lt;/code&gt;の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;script&lt;/code&gt;タグへ置き換える。&lt;/p&gt;
+
+&lt;h4 id=&quot;bodyの直後にscriptタグhtmlタグその１&quot;&gt;&lt;strong&gt;&amp;lt;/body&amp;gt;の直後にscriptタグ＋htmlタグその１&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt;の記述がある&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layout&lt;/code&gt;か、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include&lt;/code&gt;配下の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.html&lt;/code&gt;ファイルにscriptタグを追加してmermaidを読み込む。利用は直にdivタグやpreタグを記載してタグの&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class&lt;/code&gt;を&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mermaid&lt;/code&gt;とする。そのタグ内にmermaidシンタックスで図を記載する。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll-mermaid&lt;/code&gt;プラグインがLiquidタグを置き換えてくれることを手動で行うわけだ。&lt;/p&gt;
+
+&lt;p&gt;scriptタグの設置は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt;で&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/mermaid.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;mermaid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;投稿中&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{% mermaid %}
+flowchart LR
+    A[Start] -- note for a line --&amp;gt; B((a path))
+    A --&amp;gt; C(The other path)
+    B --&amp;gt; D{END}
+    C --&amp;gt; D
+{% endmermaid %}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;bodyの直後にscriptタグhtmlタグその２&quot;&gt;&lt;strong&gt;&amp;lt;/body&amp;gt;の直後にscriptタグ＋htmlタグその２&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;上述の２方法は、blogの投稿(post)中では問題ない。しかし、portalのportfolio・projectX.mdでは旨く行かない。初めてmermaidをproject2.mdに記載したときには表示されず当惑した。調査すると、mermaid自体はhtml内に存在していて当該箇所(divタグに置き換わる)のサイズが１６ピクセル四方になり小さすぎて視認できなかった。試しに、portfolio本体側に記載すると問題なく現れる。サイズの計算を追跡し始めて、しばらくしたところで閃いた。portfolio＋projectX.mdはbootstrap・modalで実装されている。portalページが画面に写った際、表示されていない。portfolioセクションのプロジェクトをクリックすると現れる、bootstrap・modalだ。一方、mermaidはportalページが一番はじめに画面に写ったときにhtmlタグ・クラスが&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mermaid&lt;/code&gt;のhtmlタグをグラフ描画する。projectX.mdはこタイミングでサイズ０なので計算結果もサイズ０となり紆余曲折あって１６ピクセル四方の極小さい範囲の描画になってしまう。&lt;/p&gt;
+
+&lt;p&gt;bootstrap・modalのイベントに’show.bs.modal’がある。表示&lt;strong&gt;される&lt;/strong&gt;ときに実行されるイベントだ。このコールバックで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mermaind.init()&lt;/code&gt;を実行してみることにした。強調したように表示&lt;em&gt;される&lt;/em&gt;ときでは、まだ尚早だ。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shonw.bs.modal&lt;/code&gt;もある。表示が&lt;strong&gt;完了&lt;/strong&gt;で実行される。旨く行った。だが、まだ足りない。project2.mdだけならばこれで良いのだが、別のproject3.mdとかproject6.mdでも利用したい。個別のhtmlタグにだけ&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mermaid.init&lt;/code&gt;の実行を制限したい。ソースを追跡すると「引数にjQueryスタイルのセレクタを記述できる」とある。指定タグだけに制限する方法は判った。ページが表示されたときにmermaidの置き換えが起きないようにするには&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mermaid.initialize&lt;/code&gt;の引数に&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{startOnLoad: false}&lt;/code&gt;を与えればよい。「起動時に変換」を無効に。&lt;/p&gt;
+
+&lt;p&gt;文中は&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;project2-mermaid&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+flowchart LR
+    A[Start] -- note for a line --&amp;gt; B((a path))
+    A --&amp;gt; C(The other path)
+    B --&amp;gt; D{END}
+    C --&amp;gt; D
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;mermaid変換を実行するためにdivタグのidを&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;project2-mermaid&lt;/code&gt;とした。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portal/portofolio/projectX.md&lt;/code&gt;等はファイル中冒頭に&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;link&lt;/code&gt;属性があり、これがmodalのidとなる。&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;modal ...&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;linkの文字列&amp;gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　：&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;scriptタグの設置は同様に&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt;で&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/mermaid.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;mermaid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startOnLoad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.modal#automation-computerization&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;shown.bs.modal&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	  &lt;span class=&quot;nx&quot;&gt;mermaid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;#project2-mermaid&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;mermaid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;#team-mermaid&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;思うように動作するようになった。これをjekyllプラグインで埋め込みを自動化したい。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 23 Mar 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/mermaid/2023/03/23/0-mermaid-integration.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/mermaid/2023/03/23/0-mermaid-integration.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>mermaid</category>
+        
+      </item>
     
       <item>
         <title>CNAMEファイル：github-pagesのカスタムdomain化</title>
@@ -404,90 +501,6 @@
         
         
         <category>portfolio</category>
-        
-      </item>
-    
-      <item>
-        <title>発芽酵素玄米</title>
-        <description>&lt;p&gt;仲吉京子さんが「無毒の玄米ご飯を炊く」内容でFBに投稿していて、気になっていた。&lt;/p&gt;
-
-&lt;p&gt;玄米は人に有害な物質を持っていて、炊飯してもそれらは保持され、経口すれば、体に影響が出るのは知っていた。冷え性もその影響の一つと改めて知ったのだが、おしっこ近いのはこれのせいか？&lt;/p&gt;
-
-&lt;p&gt;幸せな生活を送るのが基本なので、毒を経口し続けるのはダメだね。おしっこに行く回数が多いのもダメだね。&lt;/p&gt;
-
-&lt;p&gt;さて、仲吉京子さん投稿、彼女はWSで玄米の解毒方法を伝えてくれると言うのだ…WSに参加したい！と思ったけど火曜日なので行きづらく、なんとなく諦めた。&lt;/p&gt;
-
-&lt;p&gt;さてさて、ではGoogって見ようではないか、と、「玄米炊飯 無毒化」で検索すると沢山の結果が…中でもこの２つが要領を得ていて&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://kawashima-ya.jp/contents/?p=6564&quot; target=&quot;_blank&quot;&gt;玄米のデメリット『毒』と言われる原因と、無毒化する炊き方&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://kawashima-ya.jp/contents/?p=438&quot; target=&quot;_blank&quot;&gt;酵素玄米の作り方｜炊飯器でもっちり美味しく作るコツ【管理栄養士監修】&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;対応方法がわかった\(^ ^)/&lt;/p&gt;
-
-&lt;p&gt;無毒化には２通りあって&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;玄米 → 発芽玄米&lt;/p&gt;
-
-    &lt;p&gt;玄米を常温で１２時間以上、水につけて「発芽」させる。「発芽」の過程で玄米自身から発せられる物質で毒素を無くすそうな。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;玄米 → ＋小豆 → 炊飯 → ３〜４日保温 → 酵素玄米&lt;/p&gt;
-
-    &lt;p&gt;小豆と一緒に研いで、電子ジャーの玄米モードで炊飯し、そのまま３〜４日保温すると、小豆の酵素で毒素が無くなるそうな。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;1は知らなかった。2も無毒化されるって知らなかった…けど、酵素玄米の炊き方はしていた。「３〜４日保温する」は意識してなかったな。&lt;/p&gt;
-
-&lt;p&gt;さて、Amazonで「発芽酵素玄米」と称した商品が売られている。この商品は1と2が料理過程なのだな。そして、いま、両方の料理方法を知った。自分でやらないと。&lt;/p&gt;
-
-&lt;p&gt;生活ペースを崩さずに導入しないと続かない。1と2で何がハードルか考えてみよう。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;発芽玄米&lt;/p&gt;
-
-    &lt;p&gt;ハードルは、「料理する前日から仕込む」、ことかな。まぁ、それほどのハードルではないかな。&lt;/p&gt;
-
-    &lt;p&gt;「ご飯が尽きる」と警戒する量を増やせばいいね。つまり、残ってるご飯の量を見て「炊こう」と思う日を繰り上げればいいね。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;酵素玄米&lt;/p&gt;
-
-    &lt;p&gt;「３〜４日保温」だな。他は既に生活に取り入れられていてハードルじゃない。&lt;/p&gt;
-
-    &lt;p&gt;食べるご飯と、酵素養生中のご飯と、２通り用意すればできると思う。&lt;/p&gt;
-
-    &lt;p&gt;も一つは、1と組み合わせて「ご飯が尽きる」警戒日を「５〜６日手前」に修正する、かな。&lt;/p&gt;
-
-    &lt;p&gt;酵素養生のための電子ジャーを買うか…Amazonで保温専用 電子ジャーというのがあるけど、容量が１升もあるし高額だな。炊飯電子ジャーだとピンきりで４０００円位から５合炊きがあるね、こっちだね。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;「発芽酵素玄米」にかえたら３ヶ月様子見でおしっこに行く回数の減りが感じられるか、で効果を計るのだな。&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;【追記】&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;1、2と同時に実行するのは、辛いか… 1だけならタイミングを変えるのと時間をかけるだけだね。…「発芽玄米」から始めるか。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://kawashima-ya.jp/contents/?p=42652&quot; target=&quot;_blank&quot;&gt;この記事によると&lt;/a&gt;「3. 玄米の胚芽部分がぷっくりと膨らんできたら発芽玄米の完成です」のようだ。これを目指そう。
-&lt;img src=&quot;/images/hatsuga-genmai-wp13589_01-300x200.jpg&quot; alt=&quot;発芽玄米&quot; title=&quot;発芽してる玄米&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/dietary/2022/01/09/hatsuga-kouso-genmai.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/dietary/2022/01/09/hatsuga-kouso-genmai.html</guid>
-        
-        
-        <category>dietary</category>
         
       </item>
     

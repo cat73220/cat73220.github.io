@@ -279,7 +279,15 @@
                 <h2 class="text-uppercase">機械化／自動化</h2>
                 <p class="item-intro text-muted">マイコンスキルを駆使します</p>
                 <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/02-full.jpg" alt="automation_computerization">
-				<p><div id="project2-mermaid">
+				<p><div class="project2-mermaid">
+flowchart LR
+	A[Start] -- note for a line --&gt; B((a path))
+	A --&gt; C(The other path)
+	B --&gt; D{END}
+	C --&gt; D
+</div>
+
+<div class="project2-mermaid">
 flowchart LR
 	A[Start] -- note for a line --&gt; B((a path))
 	A --&gt; C(The other path)
@@ -649,7 +657,7 @@ flowchart LR
 	  <script>
 	   mermaid.initialize({startOnLoad: false});
 	   $('.modal#automation-computerization').on('shown.bs.modal', function() {
-		   mermaid.init('#project2-mermaid');
+		   mermaid.init('.project2-mermaid');
 	   });
 	   mermaid.init('#team-mermaid');
 	  </script>
