@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Github RSAホストキー更新への対応</title>
+  <meta name="description" content="週末、Githubリポジトリにアクセスしない間になにか起きたようだ・・・">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://cat73220.github.io/learning/github/2023/03/28/0-correspond-update-github-rsa-host-key.html">
+  <link rel="alternate" type="application/rss+xml" title="Shikumi hack" href="https://cat73220.github.io/feed.xml" />
+  <link rel="icon" href="https://cat73220.github.io/favicon.ico">
+
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Shikumi hack</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+		  Markdown <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank"> Syntax </a>/
+		  <a href="https://michelf.ca/projects/php-markdown/extra/" target="_blank">Extras</a>
+        
+          
+          <a class="page-link" href="/portfolio/150521a.html">Portfolios 2015a</a>
+          
+        
+          
+          <a class="page-link" href="/portfolio/211030a.html">Portfolios 2021a</a>
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Github RSAホストキー更新への対応</h1>
+    <p class="post-meta">Mar 28, 2023</p>
+  </header>
+
+  <article class="post-content">
+    <p>週末、Githubリポジトリにアクセスしない間になにか起きたようだ・・・</p>
+
+<p><img src="/images/20230328-github-fingerprint-changed.png" alt="" /></p>
+
+<p>最初の大文字の行が恐ろしい・・・「誰かが、なにか、たちの悪いことをしている可能性がある！」・・・ゾッとした。</p>
+
+<h4 id="we-updated-our-rsa-ssh-host-key"><strong>「<a href="https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/">We updated our RSA SSH host key</a>」</strong></h4>
+
+<p>この手の警告を己に受けるとフリーズする。思考停止だ。着目してしまった文だけが頭の中をめぐる。落ち着くのに５分近くかかっただろうか。早急な対応はせずに・・・RSAキーを再生成して更新するとか、主に後戻りできなくなること・・・は思いとどまるよう自分に言い聞かせて、落ち着いたのを感じてから全文を読んだ。「誰かが「接続の間に入る　攻撃」を eavesdropping してるかもしれない」まだ、頭の中が澄み渡りきっていないので「eavesdropping」を訳する余裕がない。「ホストキーが更新された可能性もある」！？？あれ？ここで我が目を疑い始める。読み進めると、ホストキー更新への具体的対応が書いてある。自分のリポジトリは先週最後と同じバージョンであることを確認して、アカウントの改変も見当たらない。大丈夫かと、いまだ疑心をもったまま、提供された対応を取りアクセスすると警告は出なくなった。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh-keygen <span class="nt">-f</span> ~/.ssh/known_hosts <span class="nt">-R</span> <span class="s2">"github.com"</span>
+<span class="c"># Host github.com found: line 12</span>
+~/.ssh/known_hosts updated.
+Original contents retained as /home/nabe/.ssh/known_hosts.old
+<span class="nv">$ </span>ssh <span class="nt">-T</span> ...github.com
+</code></pre></div></div>
+
+<p>操作はあっけない。これが昨日のこと。</p>
+
+<p>今日、別のPCでも同じように警告を受け、やっと検索した。「<a href="https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/">We updated our RSA SSH host key</a>」だそうだ。ちょうど、先週週末直前にRSAホストキーが更新されていた。戦慄して自分を見失っていないで、さっさと検索していればもっと確証を持って対応できたのに。どーも、他人のせいで今の自分が迷惑を被っている、と考えるのが後回しになる。自分を先に疑う。疑い責めてフリーズする。このような順序で思考停止に陥る。いつでも余裕がほしいな。</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Shikumi hack</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Shikumi hack</li>
+          <li><a href="mailto:nabe1112@mail.goo.ne.jp">nabe1112@mail.goo.ne.jp</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">仕組みをハック(楽しく探求・研究し達成感を味わうこと)します ※多くのメディアで誤って、しかし、一般化された「電子的窃盗・迷惑行為」は"クラック"と言います
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

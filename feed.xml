@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jumly integration</title>
-    <description>Attempting jumly.js integration into jekyll.
+    <title>Shikumi hack</title>
+    <description>仕組みをハック(楽しく探求・研究し達成感を味わうこと)します ※多くのメディアで誤って、しかし、一般化された「電子的窃盗・迷惑行為」は&quot;クラック&quot;と言います
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Mar 2023 07:58:32 +0000</pubDate>
-    <lastBuildDate>Mon, 27 Mar 2023 07:58:32 +0000</lastBuildDate>
+    <pubDate>Tue, 28 Mar 2023 01:50:40 +0000</pubDate>
+    <lastBuildDate>Tue, 28 Mar 2023 01:50:40 +0000</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>Github RSAホストキー更新への対応</title>
+        <description>&lt;p&gt;週末、Githubリポジトリにアクセスしない間になにか起きたようだ・・・&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/20230328-github-fingerprint-changed.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最初の大文字の行が恐ろしい・・・「誰かが、なにか、たちの悪いことをしている可能性がある！」・・・ゾッとした。&lt;/p&gt;
+
+&lt;h4 id=&quot;we-updated-our-rsa-ssh-host-key&quot;&gt;&lt;strong&gt;「&lt;a href=&quot;https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/&quot;&gt;We updated our RSA SSH host key&lt;/a&gt;」&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;この手の警告を己に受けるとフリーズする。思考停止だ。着目してしまった文だけが頭の中をめぐる。落ち着くのに５分近くかかっただろうか。早急な対応はせずに・・・RSAキーを再生成して更新するとか、主に後戻りできなくなること・・・は思いとどまるよう自分に言い聞かせて、落ち着いたのを感じてから全文を読んだ。「誰かが「接続の間に入る　攻撃」を eavesdropping してるかもしれない」まだ、頭の中が澄み渡りきっていないので「eavesdropping」を訳する余裕がない。「ホストキーが更新された可能性もある」！？？あれ？ここで我が目を疑い始める。読み進めると、ホストキー更新への具体的対応が書いてある。自分のリポジトリは先週最後と同じバージョンであることを確認して、アカウントの改変も見当たらない。大丈夫かと、いまだ疑心をもったまま、提供された対応を取りアクセスすると警告は出なくなった。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh-keygen &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; ~/.ssh/known_hosts &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;github.com&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Host github.com found: line 12&lt;/span&gt;
+~/.ssh/known_hosts updated.
+Original contents retained as /home/nabe/.ssh/known_hosts.old
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh &lt;span class=&quot;nt&quot;&gt;-T&lt;/span&gt; ...github.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;操作はあっけない。これが昨日のこと。&lt;/p&gt;
+
+&lt;p&gt;今日、別のPCでも同じように警告を受け、やっと検索した。「&lt;a href=&quot;https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/&quot;&gt;We updated our RSA SSH host key&lt;/a&gt;」だそうだ。ちょうど、先週週末直前にRSAホストキーが更新されていた。戦慄して自分を見失っていないで、さっさと検索していればもっと確証を持って対応できたのに。どーも、他人のせいで今の自分が迷惑を被っている、と考えるのが後回しになる。自分を先に疑う。疑い責めてフリーズする。このような順序で思考停止に陥る。いつでも余裕がほしいな。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/learning/github/2023/03/28/0-correspond-update-github-rsa-host-key.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/learning/github/2023/03/28/0-correspond-update-github-rsa-host-key.html</guid>
+        
+        
+        <category>learning</category>
+        
+        <category>github</category>
+        
+      </item>
     
       <item>
         <title>埋め込みについて諸々：Mermaid</title>
@@ -287,7 +321,7 @@ flowchart LR
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/css/main.css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;canonical&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/learning/jekyll/2023/03/12/Z-favicon.html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;alternate&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/rss+xml&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Jumly integration&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/feed.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;alternate&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/rss+xml&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Shikumi hack&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/feed.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;icon&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cat73220.github.io/favicon.ico&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -454,53 +488,6 @@ flowchart LR
         <category>learning</category>
         
         <category>jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>再考、履歴改スキルセット</title>
-        <description>&lt;p&gt;&lt;a href=&quot;/portfolio/2022/01/08/service-record.html&quot;&gt;履歴改業務歴&lt;/a&gt;で「スキルベースの判りやすい…マネージャークラスの人が見て…」が、「スキルセット」の目指すところ。&lt;/p&gt;
-
-&lt;p&gt;何を伝えたいか？&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;提供できるスキル&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;それらのスキルでできること&lt;/p&gt;
-
-    &lt;p&gt;経験上（思い込みかもしれないが）、多くの人たちは私が示す「スキル」を見ても、それで何ができるのか想像できない。たとえ、作業風景や作業内容を直に見せたとしても、何が起きてるのか、何が起きたのか、どちらも分からないのだ。分からない、伝わらない、を前提に作っておけば、分かってもらえる、伝わる、可能性が高くなるか…&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;「できること」は「事業」とか「改善案」とかの形がわかりやすいのでは？と思う&lt;/p&gt;
-
-    &lt;p&gt;「できること」を専門用語で示しても、上述の繰り返しとなり伝わらない&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ボトムダウンの専門用語から説明を始めるより、具体的ではあるがより「世間的な」表現の説明が良いのだとおもう&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;就活で示す「スキルセット」 は専門用語寄りでいいか&lt;/p&gt;
-
-    &lt;p&gt;就活用「スキルセット」と、世間に伝えたい「自分のしたいこと／できること」は分けて示した方がいいか&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;業務歴を元に、就活用「スキルセット」と世間宛「自分のしたいこと／できること」の２つを作る&lt;/strong&gt;…かな&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;就活はこの先あまり積極的にやりたいと思わない…お金を稼ぐのではなく「自給」に切り替える&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;「自給」方法の一つとして自分のスキルを役立てたいので、世間宛の自分のしたいこと／できること、を作る…かな&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/portfolio/2022/01/09/rethink-about-resume.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/portfolio/2022/01/09/rethink-about-resume.html</guid>
-        
-        
-        <category>portfolio</category>
         
       </item>
     
