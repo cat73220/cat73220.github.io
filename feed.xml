@@ -2,13 +2,62 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shikumi hack</title>
-    <description>仕組みをハック(楽しく探求・研究し達成感を味わうこと)します ※多くのメディアで誤って、しかし、一般化された「電子的窃盗・迷惑行為」は&quot;クラック&quot;と言います
+    <description>仕組みをハック(楽しく探求・研究し達成感を味わうこと)します ※ほとんどのメディアで誤って、しかし、一般化された「電子的窃盗・迷惑行為」は&quot;クラック&quot;と言います
 </description>
     <link>https://cat73220.github.io/</link>
     <atom:link href="https://cat73220.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Mar 2023 06:59:31 +0000</pubDate>
-    <lastBuildDate>Wed, 29 Mar 2023 06:59:31 +0000</lastBuildDate>
+    <pubDate>Sat, 08 Apr 2023 02:36:24 +0000</pubDate>
+    <lastBuildDate>Sat, 08 Apr 2023 02:36:24 +0000</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>なんでもやります…は、違う</title>
+        <description>&lt;p&gt;ポータルの「services・自己紹介」を読み直していると自分が目指していることと違うのでは…と感じる&lt;/p&gt;
+
+&lt;h4 id=&quot;違和感と不安感&quot;&gt;&lt;strong&gt;違和感と不安感&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;できることを並べていて、実際、やればできることばかりを並べているのだが、多岐に渡っていることを誇示しているだけだ。&lt;/p&gt;
+
+&lt;p&gt;過去に「なんでもできる」＝「なにもできない」と考えていたこともあった。これもまた間違っていない。…他人目線（思い込みだ）で読んだときに「なにもできない」のではないか？と思われるのが不安だ。&lt;/p&gt;
+
+&lt;p&gt;も一つ、他人目線で誤解される不安は、軽率に依頼をしてきて「できない」と返事した際に怒りを買うかもしれない。だ。&lt;/p&gt;
+
+&lt;p&gt;依頼者との関係を築き、問題点を一緒に解決したい。字面がいいな…関係を築くなんて大変なことだ、と不安になる。一緒に解決するなんて虫が良くて甘い考えか、と思う。&lt;/p&gt;
+
+&lt;p&gt;志を誠実に記せば、いいのだろうか…　人となりを記すと、読んだものに「自分」が伝わり、安心した人は依頼してくれる…かな。&lt;/p&gt;
+
+&lt;h4 id=&quot;安堵感&quot;&gt;&lt;strong&gt;安堵感&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;不安ばかり並べていると不安が強まる…安堵したことを連ねてみよう。&lt;/p&gt;
+
+&lt;p&gt;ポートフォリオとして「portalはjekyllで作成されていて今見ているページです」としたことには安堵感がある。嘘がなく、実際に提示できているからだろう。&lt;/p&gt;
+
+&lt;p&gt;機械化／自動化は、文やマインドマップには不安があるが、サムネール画像やタイトル「機械化／自動化」、キャッチ文「マイコンスキルを駆使します」には安堵感がある。サムネール画像は何故か達成感を感じる。タイトルやキャッチ文はできること／したいことが現れているからだろう。&lt;/p&gt;
+
+&lt;p&gt;ITエンジニアリングも、タイトル「ITエンジニアリング」とキャッチ文「インターネット」に安堵感がある。嘘なくできることを表しているからだろう。&lt;/p&gt;
+
+&lt;p&gt;一から作り上げたportalには後悔と嘘がないのが良い。経験を積んできたことはできることなので嘘がなくて良い。&lt;/p&gt;
+
+&lt;p&gt;不安が含まれることには「自分への不信感」がつきまとう。&lt;/p&gt;
+
+&lt;p&gt;依頼者と関係を築くことで「伝わる」「判る」安心感が得られる。伝わり判り合えるのなら「一緒に」できる。一緒にすると「できないこと」も受け入れてもらえる（もらえる、が引っかかる）。&lt;/p&gt;
+
+&lt;h4 id=&quot;改めて何をしたいのか&quot;&gt;&lt;strong&gt;改めて何をしたいのか&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;大変で、虫が良くて、甘い考え、ではあるが、依頼者との関係を築き、問題点を一緒に解決したい。&lt;/p&gt;
+
+&lt;p&gt;作品を自信を持って提示したい。提示は自信がある作品にしたい。…自信を持って提示した作品に「自分」の志が現れるだろうか…&lt;/p&gt;
+</description>
+        <pubDate>Sat, 08 Apr 2023 00:00:00 +0000</pubDate>
+        <link>https://cat73220.github.io/remind/mymind/2023/04/08/0-changing-mind.html</link>
+        <guid isPermaLink="true">https://cat73220.github.io/remind/mymind/2023/04/08/0-changing-mind.html</guid>
+        
+        
+        <category>remind</category>
+        
+        <category>mymind</category>
+        
+      </item>
     
       <item>
         <title>Github RSAホストキー更新への対応</title>
@@ -436,53 +485,6 @@ flowchart LR
         <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
         <link>https://cat73220.github.io/learning/jekyll/2023/03/12/X-how-to-add-a-jekyll-page.html</link>
         <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2023/03/12/X-how-to-add-a-jekyll-page.html</guid>
-        
-        
-        <category>learning</category>
-        
-        <category>jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>【備忘録】bundler/jekyllコマンドとgit actions</title>
-        <description>&lt;p&gt;３ヶ月経つと何もかも忘れている…困ったものだ…効果的にメモを付けておかないと思い出すのも一苦労である。
-以下、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HW&lt;/code&gt;githubプロジェクトディレクトリで実行するコマンドである。&lt;/p&gt;
-
-&lt;h4 id=&quot;bundler-と-jekyll-コマンド&quot;&gt;&lt;strong&gt;Bundler と Jekyll コマンド&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundler &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s &lt;span class=&quot;nt&quot;&gt;-wI&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; blog &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; blog/_site
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundler exec&lt;/code&gt; は jekyll を起動する際の常套句で&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundlerでjekyllを実行する&lt;/code&gt;ということはすぐに分かる。
-続く&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll s&lt;/code&gt;の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s&lt;/code&gt;は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;serve&lt;/code&gt;の略で、ローカルホスト&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4000&lt;/code&gt;でWebブラウザを待機するということ。
-続く&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-wI&lt;/code&gt;は&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;watch&lt;/code&gt;モードと&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;incremental&lt;/code&gt;モードの略で、それぞれ、「ソースコードの変更を監視してサイトの更新を行う」と「逐次、サイトの更新を行う」である。
-最後の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-s blog -d blog/_site&lt;/code&gt;は、それぞれ、「ソースコードのソースディレクトリ」と「ビルドしたサイトの保存先ディレクトリ」を指している。
-このコマンドを実行したままで、別にコンソールを起動して&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundler &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll b &lt;span class=&quot;nt&quot;&gt;-wI&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; portal &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; blog/_site/portal
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;を実行するとローカルで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4000/portal/&lt;/code&gt;のアクセスが可能になる。
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll b&lt;/code&gt;だけ上↑のWebブラウザ待機と異なっていて、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt;の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog/_site/portal&lt;/code&gt;ディレクトリに&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-s&lt;/code&gt;の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portal&lt;/code&gt;を出力するだけ、つまり、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt;はサイトの「生成&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;build&lt;/code&gt;」ということ。&lt;/p&gt;
-
-&lt;h4 id=&quot;ブログの投稿&quot;&gt;&lt;strong&gt;ブログの投稿&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;blog/_postの他のファイルに倣って.mdファイルを同ディレクトリに作成すればよい。上↑の準備が整っていればローカルホストで即座に結果を確認できる。&lt;/p&gt;
-
-&lt;h4 id=&quot;git-actions&quot;&gt;&lt;strong&gt;git actions&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;を実行することで&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat73220.github.io&lt;/code&gt;サイトは自動的に最新の状態となる。git actionsの導入でgithub内でblogもportalも自動的にビルド＆デプロイされる。
-簡単にはlazygitでpushでよい。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/cat73220/HW/actions&lt;/code&gt;でビルドの経過を細かに追跡できる。&lt;/p&gt;
-</description>
-        <pubDate>Sun, 03 Apr 2022 00:00:00 +0000</pubDate>
-        <link>https://cat73220.github.io/learning/jekyll/2022/04/03/reminder-how-to-use-bunder-and-jekyll.html</link>
-        <guid isPermaLink="true">https://cat73220.github.io/learning/jekyll/2022/04/03/reminder-how-to-use-bunder-and-jekyll.html</guid>
         
         
         <category>learning</category>
